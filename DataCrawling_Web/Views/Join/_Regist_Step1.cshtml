@@ -1,0 +1,145 @@
+﻿<script type="text/javascript">
+    $(window).ready(function () {
+        // 체크박스 초기화
+        $('.inp_choice').prop("checked", false);
+
+        // 전체선택
+        $('#checkboox-check_all').change(function () {
+            $('.list_agree .inp_choice').prop("checked",
+                $("input:checkbox[id='checkboox-check_all']").is(":checked"));
+
+            if ($("input:checkbox[id='checkboox-terms_age_over_14']").is(":checked") &&
+                $("input:checkbox[id='terms_TERM_ACCOUNT']").is(":checked") &&
+                $("input:checkbox[id='terms_PR_PEC_1904']").is(":checked")) {
+                $('.btn_g.highlight').prop("disabled", false);
+            } else {
+                $('.btn_g.highlight').prop("disabled", true);
+            }
+        });
+
+        // 약관동의 값 변경체크
+        $('.list_agree .inp_choice').change(function () {
+            if ($("input:checkbox[id='checkboox-check_all']").is(":checked") &&
+                !$(this).is(":checked")) {
+                $('#checkboox-check_all').prop("checked", false);
+            }
+
+            var checkall = true;
+            for (var i = 0; i < $('.list_agree .inp_choice').length; i++) {
+                if (!$('.list_agree .inp_choice').eq(i).is(":checked")) {
+                    checkall = false;
+                    break;
+                }
+            }
+            if (checkall && !$("input:checkbox[id='checkboox-check_all']").is(":checked")) {
+                $('#checkboox-check_all').prop("checked", true);
+            }
+
+            if ($("input:checkbox[id='checkboox-terms_age_over_14']").is(":checked") &&
+                $("input:checkbox[id='terms_TERM_ACCOUNT']").is(":checked") &&
+                $("input:checkbox[id='terms_PR_PEC_1904']").is(":checked")) {
+                $('.btn_g.highlight').prop("disabled", false);
+            } else {
+                $('.btn_g.highlight').prop("disabled", true);
+            }
+        });
+
+        // 약관동의
+        $('.btn_g.highlight').click(function () {
+            var agree = $("input:checkbox[id='terms_AP_GB_1904']").is(":checked");
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '/Join/Terms',
+                data: {
+                    accept: agree,
+                },
+                success: function (data) {
+                    $('#tas').val(data.Code);
+                    stepView(data.Step);
+                },
+                error: function (response) {
+                    alert(response);
+                }
+            });
+        });
+    });
+</script>
+
+<article id="mainContent" class="content-article">
+    <div class="cont_sign">
+        <strong class="blind">가입하기 진행순서</strong>
+        <div class="navigation_wrap">
+            <strong class="blind">가입하기 진행률</strong>
+            <div class="bar_navigation" style="width: 25%;">25%</div>
+        </div>
+        <h2 class="tit_g">
+            마이플랫폼
+            <br>서비스 약관에 동의해 주세요.
+        </h2>
+        <form>
+            <div class="frm-body">
+                <div class="check_all">
+                    <div class="item_choice" aria-checked="true" role="checkbox">
+                        <input type="checkbox" id="checkboox-check_all" class="inp_choice" name="check_all" value="true" checked="">
+                        <label class="lab_choice" for="checkboox-check_all">
+                            <span class="ico_comm ico_check">
+                            </span>모두 동의합니다.
+                        </label>
+                    </div>
+                    <p class="txt_info">
+                        전체 동의는 필수 및 선택정보에 대한 동의도 포함되어 있으며, 개별적으로도 동의를 선택하실 수 있습니다.
+                        <br class="rw_hide">선택항목에 대한 동의를 거부하시는 경우에도 서비스는 이용이 가능합니다.
+                    </p>
+                </div>
+                <strong class="blind">동의 항목</strong>
+                <ul class="list_agree">
+                    <li>
+                        <div class="item_choice" aria-checked="true" role="checkbox">
+                            <input type="checkbox" id="checkboox-terms_age_over_14" class="inp_choice" name="terms_age_over_14" value="true" checked="">
+                            <label class="lab_choice" for="checkboox-terms_age_over_14">
+                                <span class="ico_comm ico_check"></span>만 14세 이상입니다.
+                            </label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item_choice" aria-checked="true" role="checkbox">
+                            <input type="checkbox" id="terms_TERM_ACCOUNT" class="inp_choice" name="term[1]" value="TERM_ACCOUNT" checked="">
+                            <label class="lab_choice" for="terms_TERM_ACCOUNT">
+                                <span class="ico_comm ico_check"></span>[필수] 마이플랫폼 약관
+                            </label>
+                        </div>
+                        <a class="link_arr" href="/Policy/Terms?type=1" target='_blank'>
+                            <span class="ico_comm ico_arr">자세히 보기</span>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="item_choice" aria-checked="true" role="checkbox">
+                            <input type="checkbox" id="terms_PR_PEC_1904" class="inp_choice" name="term[3]" value="PR_PEC_1904" checked="">
+                            <label class="lab_choice" for="terms_PR_PEC_1904">
+                                <span class="ico_comm ico_check"></span>[필수] 개인정보 수집 및 이용 동의
+                            </label>
+                        </div>
+                        <a class="link_arr" href="/Policy/Terms?type=2" target='_blank'>
+                            <span class="ico_comm ico_arr">자세히 보기</span>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="item_choice" aria-checked="true" role="checkbox">
+                            <input type="checkbox" id="terms_AP_GB_1904" class="inp_choice" name="term[5]" value="AP_GB_1904" checked="">
+                            <label class="lab_choice" for="terms_AP_GB_1904">
+                                <span class="ico_comm ico_check"></span>[선택] 프로필정보 추가 수집 동의
+                            </label>
+                        </div>
+                        <a class="link_arr" href="/Policy/Terms?type=3" target='_blank'>
+                            <span class="ico_comm ico_arr">자세히 보기</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="confirm_btn">
+                <button type="button" class="btn_g highlight submit" disabled>동의</button>
+            </div>
+        </form>
+    </div>
+</article>

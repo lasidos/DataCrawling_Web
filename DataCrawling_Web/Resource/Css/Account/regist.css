@@ -1,0 +1,442 @@
+﻿#wrap {
+    background: #fff;
+}
+
+.container_wrap {
+    margin-bottom: 50px;
+}
+
+.container-doc {
+    display: table;
+    table-layout: fixed;
+    width: 580px;
+    min-height: 100%;
+    padding: 0;
+    margin: 0 auto;
+}
+
+    .container-doc .inner_container {
+        display: table-cell;
+        height: 100%;
+        padding: 50px 0 0;
+        vertical-align: middle;
+    }
+
+.doc-header {
+    margin-bottom: 40px;
+}
+
+    .doc-header .tit_service .logo_mpk {
+        display: block;
+        height: 27px;
+        margin: 0 auto;
+        background-size: 100px 80px;
+        font-size: 35px;
+        line-height: 27px;
+        text-align: center;
+        vertical-align: top;
+    }
+
+.doc-main {
+    padding: 0 69px;
+    min-height: 597px;
+}
+
+.content-article {
+    height: 100%;
+}
+
+.cont_sign {
+    padding: 55px 0 0;
+}
+
+    .cont_sign .tit_g {
+        padding-bottom: 40px;
+        letter-spacing: -0.03em;
+    }
+
+.tit_g {
+    display: block;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 34px;
+    color: #191919;
+    letter-spacing: -0.03em;
+}
+
+.btn_g:disabled {
+    color: #b2b2b2;
+    background-color: #FAFAFA;
+    pointer-events: none;
+    cursor: default;
+}
+
+.btn_g {
+    border: 0 none;
+    display: block;
+    width: 100%;
+    height: 50px;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 51px;
+    color: #ffffff;
+    background-color: #87c1fa;
+    font-family: 'Noto Sans KR';
+    cursor: pointer;
+}
+
+    .btn_g + .btn_g {
+        margin-left: 10px;
+    }
+
+.navigation_wrap {
+    width: 60px;
+    height: 4px;
+    margin-bottom: 32px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.08);
+}
+
+    .navigation_wrap .bar_navigation {
+        height: 4px;
+        border-radius: 4px;
+        background: #4C4C4C;
+        text-indent: -9999px;
+    }
+
+.cont_sign .check_all {
+    padding: 0 0 19px 28px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+    .cont_sign .check_all .item_choice, .cont_agree .list_agree .item_choice {
+        margin-left: -28px;
+    }
+
+.cont_sign .item_choice {
+    display: block;
+}
+
+.item_choice {
+    display: inline-flex;
+    position: relative;
+    vertical-align: top;
+}
+
+input:checked[type='checkbox'] {
+    background-color: #666;
+    -webkit-appearance: checkbox;
+}
+
+.item_choice .inp_choice {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 0 none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0 none;
+    opacity: 0.001;
+    cursor: pointer;
+}
+
+.cont_sign .check_all .lab_choice {
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.os_windows .item_choice .lab_choice {
+    line-height: 20px;
+}
+
+.item_choice .lab_choice {
+    display: block;
+    position: relative;
+    padding-left: 33px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #191919;
+    cursor: pointer;
+}
+
+.os_windows .cont_sign .check_all .lab_choice .ico_check {
+    margin-top: 2px;
+}
+
+.item_choice .lab_choice .ico_comm {
+    position: absolute;
+    top: 0.5px;
+    left: 0;
+    width: 23px;
+    height: 23px;
+    margin-right: 8px;
+}
+
+.ico_comm {
+    display: inline-block;
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -9999px;
+    vertical-align: top;
+}
+
+.item_choice .lab_choice .ico_check {
+    background-size: 23px !important;
+    background: url('../../image/account/incheck.png') 0 0 no-repeat;
+}
+
+.item_choice .inp_choice:checked + .lab_choice .ico_check {
+    background-size: 23px !important;
+    background: url('../../image/account/check.png') 0 0 no-repeat;
+}
+
+.cont_sign .check_all .txt_info {
+    padding-top: 9px;
+    padding-left: 5px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.txt_info {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    color: #999;
+}
+
+.cont_sign .list_agree {
+    padding-top: 22px;
+}
+
+    .cont_sign .list_agree li {
+        position: relative;
+        margin-top: 20px;
+        padding: 0 16px 0 28px;
+    }
+
+        .cont_sign .list_agree li:first-child {
+            margin-top: 0;
+        }
+
+    .cont_sign .list_agree .item_choice {
+        margin-left: -28px;
+    }
+
+    .cont_sign .list_agree .link_arr {
+        position: absolute;
+        right: -10px;
+        top: -5px;
+        cursor: pointer;
+    }
+
+.link_arr .ico_arr {
+    width: 20px;
+    height: 20px;
+    margin: 8px 10px 8px 11px;
+    background-size: 20px !important;
+    background: url(../../Images/Common/right_arrow.png) 0 0 no-repeat;
+}
+
+.cont_sign .list_agree + .confirm_btn {
+    padding-top: 38px;
+}
+
+/*이메일인증*/
+
+.box_tf {
+    position: relative;
+    padding-bottom: 3px;
+}
+
+    .box_tf .tf_g {
+        width: 100%;
+        height: 47px;
+        padding: 10px 0 8px;
+        border: solid #cccccca6;
+        border-width: 0 0 2px;
+        font-size: 17px;
+        line-height: 25px;
+        color: #191919;
+        background-color: transparent;
+        letter-spacing: 0;
+        box-sizing: border-box;
+        outline: 0 none;
+        caret-color: #191919;
+        opacity: 1;
+    }
+
+    .box_tf .util_tf {
+        position: absolute;
+        right: 0;
+        top: 2px;
+        min-width: 55px;
+        height: 43px;
+        font-size: 0;
+        text-align: right;
+    }
+
+    .box_tf .btn_round {
+        margin: 7px 0 0 7px;
+    }
+
+    .box_tf .btn_round {
+        display: inline-block;
+        height: 30px;
+        padding: 0 13px;
+        border: 1px solid rgba(0,0,0,0.2);
+        border-radius: 32px;
+        font-size: 14px;
+        line-height: 29px;
+        color: #191919;
+        vertical-align: top;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .box_tf.error .tf_g {
+        border-color: #e65f3e;
+    }
+
+.cont_sign .box_tf + .box_tf {
+    margin-top: 8px;
+}
+
+.cont_sign .box_tf .txt_info {
+    display: none;
+}
+
+.cont_sign .box_tf.error .txt_info {
+    padding-bottom: 4px;
+    color: #E65F3E;
+    letter-spacing: -0.05em;
+    display: block;
+    margin-bottom: -3px;
+    padding-top: 11px;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.cont_sign .list_notice {
+    padding-top: 20px;
+}
+
+    .cont_sign .list_notice li {
+        position: relative;
+        margin-top: 6px;
+        padding-left: 7px;
+        font-size: 12px;
+        line-height: 15px;
+        color: #999;
+        letter-spacing: -0.03em;
+    }
+
+        .cont_sign .list_notice li:after {
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 2px;
+            height: 2px;
+            border-radius: 2px;
+            background-color: #999;
+            content: '';
+        }
+
+.cont_sign .frm-body {
+    height: 310px;
+}
+
+.cont_sign .confirm_btn {
+    padding-top: 50px;
+    display: flex;
+}
+
+.account-email {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+    .account-email span:first-child {
+        font-size: 12px;
+        color: gray;
+    }
+
+    .account-email span:last-child {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .account-email span + span {
+        margin-top: 10px;
+    }
+
+.account-pw {
+    margin-top: 30px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: gray;
+}
+
+.gender {
+    margin-top: 50px;
+}
+
+    .gender ul {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+        .gender ul li + li {
+            margin-left: 50px;
+        }
+
+.confirm_btn.userProfile {
+    padding-top: 45px;
+}
+
+.tit_m {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.tit_s {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 30px;
+    color: #a1a1a1;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 70px 0;
+    color: #3c3c3c;
+}
+
+    .profile-info img {
+        width: 60px;
+        border-radius: 20px;
+        margin-bottom: 15px;
+    }
+
+    .profile-info .user-name {
+        font-size: 14px;
+        margin-top: 3px;
+    }
+
+.confirm_btn.completed {
+    padding-top: 30px;
+}
+
+.btn_g.back {
+    background: #ccc;
+}

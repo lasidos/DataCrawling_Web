@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "로그인";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Content{
+    <input type="hidden" id="redirect" value="@ViewBag.redirect" />
+
+    <div class="container">
+        <div class="login-img">
+            <img src="~/Resource/Image/Account/login-img.png" />
+        </div>
+        <div class="login-area">
+            <div class="title">
+                <h1>MyPlatform</h1>
+            </div>
+            <div class="frm-login">
+                <div class="loginAccountField">
+                    <input type="text" name="account" class="account" value="" placeholder="마이플랫폼 계정 (이메일)" />
+                </div>
+                <div class="loginPasswordField">
+                    <input type="password" name="password" class="password" value="" placeholder="비밀번호" />
+                </div>
+                <div class="info-user">
+                    <div>
+                        <a href="/Account/create_account">
+                            <span>회원가입</span>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="/Account/find_account">
+                            <span>계정 찾기</span>
+                        </a>
+                        <a href="/Account/find_password">
+                            <span>비밀번호 찾기</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="wrap_btn">
+                    <button class="btn_g btn_confirm submit" type="button">로그인</button>
+                </div>
+            </div>
+            <span class="line_or">
+                <span class="txt_or">또는</span>
+            </span>
+            <div class="social-login">
+                <div class="naver-login">
+                    <img src="~/Resource/Image/Account/naver.png" />
+                    <span>네이버로그인</span>
+                </div>
+                <div class="kakao-login">
+                    <img src="~/Resource/Image/Account/kakaolink_btn_small.png" />
+                    <span>카카오로그인</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Resource/Js/Account/login.js?version=@DateTime.Now.ToString("MMddHHmmss")"></script>
+    <link href="~/Resource/Css/Account/login.css" rel="stylesheet" />
+}

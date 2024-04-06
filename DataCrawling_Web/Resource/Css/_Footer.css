@@ -1,0 +1,154 @@
+﻿#footer {
+    margin-top: 0 !important;
+}
+
+#footer {
+    width: 100%;
+    padding-bottom: 50px;
+    margin-top: 60px;
+    border-top: 2px solid #a8a8a8;
+    background: #fff;
+    font-style: normal;
+}
+
+    #footer .inner {
+        position: relative;
+        width: 1250px;
+        margin: 0 auto;
+    }
+
+    #footer .jkLogo {
+        float: left;
+        margin-top: 25px;
+    }
+
+    #footer .footerWrap {
+        padding-left: 210px;
+    }
+
+    #footer .footerCont {
+        height: 71px;
+        padding-top: 26px;
+        border-bottom: 1px solid #efefef;
+        box-sizing: border-box;
+    }
+
+    #footer .jkNotice {
+        float: right;
+        overflow: hidden;
+        font-size: 14px;
+        letter-spacing: 0px;
+    }
+
+        #footer .jkNotice h3, #footer .jkNotice p {
+            display: inline-block;
+            white-space: nowrap;
+            vertical-align: top;
+        }
+
+            #footer .jkNotice h3 a {
+                color: #000;
+                font-weight: bold;
+            }
+
+        #footer .jkNotice p {
+            position: relative;
+            margin-left: 4px;
+        }
+
+            #footer .jkNotice p a {
+                overflow: hidden;
+                display: inline-block;
+                color: #333;
+                max-width: 271px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            #footer .jkNotice p em {
+                position: absolute;
+                top: 0;
+                right: 0;
+                display: inline-block;
+                color: #888;
+                margin: 1px 0 0 5px;
+                vertical-align: top;
+            }
+
+    #footer .jkPolicy {
+        float: left;
+        font-size: 14px;
+        letter-spacing: 0px;
+        text-align: center;
+    }
+
+        #footer .jkPolicy li {
+            display: inline-block;
+        }
+
+            #footer .jkPolicy li + li {
+                margin-left: 18px;
+            }
+
+            #footer .jkPolicy li a {
+                color: #000;
+            }
+
+    #footer .jkHelp {
+        color: #888;
+        margin-top: 27px;
+    }
+
+        #footer .jkHelp dl, #footer .jkHelp dt, #footer .jkHelp dd {
+            display: inline-block;
+        }
+
+            #footer .jkHelp dl:before {
+                content: "l";
+                display: inline-block;
+                color: #ccc;
+                margin: 0 7px;
+            }
+
+            #footer .jkHelp dl.first:before {
+                display: none;
+            }
+
+            #footer .jkHelp dt:after {
+                content: ":";
+                display: inline-block;
+                margin-left: 3px;
+            }
+
+    #footer .copyright {
+        padding: 0;
+        width: auto;
+    }
+
+        #footer .copyright, #footer .copyright a {
+            color: #888;
+        }
+
+    #footer .copyright {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        font-size: 11px;
+        letter-spacing: 0px;
+        margin: 0;
+        text-align: center;
+    }
+
+        #footer .copyright a {
+            display: inline;
+        }
+
+.skip, .blind, legend {
+    position: absolute !important;
+    top: -5000em;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    line-height: 0;
+    font-size: 0;
+}

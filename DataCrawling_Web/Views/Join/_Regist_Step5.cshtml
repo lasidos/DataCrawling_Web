@@ -1,0 +1,33 @@
+﻿<script type="text/javascript">
+    $(window).ready(function () {
+        // 가입하기 완료
+        $('.confirm_btn.completed .btn_g').click(function () {
+            location.href = "/Account/login";
+        });
+    });
+</script>
+
+<article id="mainContent" class="content-article">
+    <div class="cont_sign">
+        <strong class="blind">가입하기 완료</strong>
+        <h2 class="tit_m">
+            환영합니다!
+        </h2>
+        <div class="tit_s">
+            <span>계정 가입이 완료되었습니다.</span>
+            <span>계정 하나로 다양한 서비스를 편리하게 이용해보세요!</span>
+        </div>
+        <form class="sign-completed">
+            <div class="frm-body">
+                <div class="profile-info">
+                    <img src="~/Resource/Images/Common/userProfile.jpg" />
+                    <span>@ViewBag.Email</span>
+                    <span class="user-name">@ViewBag.Name</span>
+                </div>
+            </div>
+            <div class="confirm_btn completed">
+                <button type="button" class="btn_g">시작하기</button>
+            </div>
+        </form>
+    </div>
+</article>

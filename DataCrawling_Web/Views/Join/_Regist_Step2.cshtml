@@ -1,0 +1,160 @@
+﻿@{
+    string error = "";
+    if (ViewBag.error != null)
+    {
+        error = ViewBag.error["Message"].ToString();
+    }
+}
+
+<script type="text/javascript">
+    if ('@error' != '') {
+        alert('@error');
+        stepView(1);
+    }
+
+    var view = '@ViewBag.PassCode' == '' ? false : true;
+    $(function () {
+        if (view) {
+            $('.box_tf:nth-child(2)').css('display', 'block');
+            checkValid();
+        } else {
+            $('.box_tf:nth-child(2)').css('display', 'none');
+        }
+
+        $('#input-email').off("propertychange change keyup paste input").on("propertychange change keyup paste input", function () {
+            checkValid();
+        });
+
+        $('#input-email_passcode').off("propertychange change keyup paste input").on("propertychange change keyup paste input", function () {
+            checkValid();
+        });
+
+        // 이메일 발송
+        $('.util_tf .btn_round').click(function () {
+            if ($('.txt_info').css("display") != "none") {
+                return;
+            }
+
+            $('.modal').addClass('active');
+            var email = $('#input-email').val();
+
+            setTimeout(function () {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: '/Join/PushCode',
+                    data: {
+                        email: email
+                    },
+                    success: function (data) {
+                        if (data.resultCode == '0') {
+                            $('.box_tf:nth-child(2)').css('display', 'block');
+                            alert('인증메일이 정상적으로 발송되었습니다.');
+                            $('.modal').removeClass('active');
+                        } else {
+                            alert(data.Message);
+                            $('.modal').removeClass('active');
+                        }
+                    },
+                    error: function (response) {
+                        alert(response);
+                        $('.modal').removeClass('active');
+                    }
+                });
+            }, 0);
+        });
+
+        // 이메일 인증
+        $('.confirm_btn.requestVerifyEmail .btn_g.next').click(function (e) {
+            e.preventDefault();
+            var email = $('#input-email').val();
+            var passCode = $('#input-email_passcode').val();
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '/Join/CheckCode',
+                data: {
+                    email: email,
+                    passCode: passCode
+                },
+                success: function (data) {
+                    if (data.resultCode == '-1') {
+                        alert(data.Message);
+                        return;
+                    }
+
+                    stepView(data.Message);
+                },
+                error: function (response) {
+                    alert(response);
+                }
+            });
+        });
+    });
+
+    // 이메일 유효성 검사
+    function isValidEmailAddress(emailAddress) {
+        var pattern = new RegExp(/^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/);
+        return pattern.test(emailAddress);
+    }
+
+    function checkValid() {
+        $('.confirm_btn .btn_g').prop("disabled", true);
+
+        if (isValidEmailAddress($('#input-email').val())) {
+            $('.box_tf').removeClass('error');
+        } else {
+            $('.box_tf').addClass('error');
+            return;
+        }
+
+        if ($('#input-email_passcode').val().length == 8) {
+            $('.confirm_btn .btn_g').prop("disabled", false);
+        } else {
+            $('.confirm_btn .btn_g').prop("disabled", true);
+            return;
+        }
+
+        $('.confirm_btn .btn_g').prop("disabled", false);
+    }
+</script>
+
+<article id="mainContent" class="content-article">
+    <div class="cont_sign">
+        <strong class="blind">가입하기 진행순서</strong>
+        <div class="navigation_wrap">
+            <strong class="blind">가입하기 진행률</strong>
+            <div class="bar_navigation" style="width: 50%;">50%</div>
+        </div>
+        <h2 class="tit_g">
+            계정으로 사용할
+            <br>이메일 주소를 입력해 주세요.
+        </h2>
+        <form>
+            <div class="frm-body">
+                <div class="box_tf error">
+                    <label class="blind" for="input-email">입력</label>
+                    <input type="email" name="email" placeholder="이메일 주소 입력" autocomplete="off" class="tf_g" id="input-email" value="@ViewBag.Email">
+                    <div class="util_tf">
+                        <button type="button" class="btn_round">인증요청</button>
+                    </div>
+                    <p class="txt_info">계정으로 사용할 이메일을 입력해 주세요.<br></p>
+                </div>
+                <div class="box_tf">
+                    <label class="blind" for="input-email_passcode">입력</label>
+                    <input type="tel" maxlength="8" name="email_passcode" placeholder="이메일로 발송된 8자리 인증번호를 입력해 주세요." class="tf_g" id="input-email_passcode" value="@ViewBag.PassCode">
+                    <div class="util_tf"></div>
+                </div>
+                <strong class="blind">안내사항</strong>
+                <ul class="list_notice">
+                    <li>입력한 이메일 주소로 인증번호가 발송됩니다.</li>
+                    <li>인증메일을 받을 수 있도록 자주 쓰는 이메일 주소를 입력해 주세요.</li>
+                </ul>
+            </div>
+            <div class="confirm_btn requestVerifyEmail">
+                <button type="button" class="btn_g back">이전</button>
+                <button type="button" class="btn_g next" disabled>다음</button>
+            </div>
+        </form>
+    </div>
+</article>

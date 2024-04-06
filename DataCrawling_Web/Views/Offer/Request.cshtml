@@ -1,0 +1,204 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    @RenderPage("~/Views/Shared/_Header.cshtml", Model)
+    <link href="~/Resource/Css/Offer/Terms.css" rel="stylesheet" />
+    <link href="~/Resource/Css/Offer/Request.css" rel="stylesheet" />
+    <script src="~/Resource/Js/Offer/Terms.js"></script>
+    <script src="~/Resource/Js/Offer/Request.js"></script>
+}
+
+@section Notice{
+    @RenderPage("~/Views/Shared/_Notice.cshtml")
+}
+
+@section Content{
+    <div id="container">
+        <div id="content">
+            <div class="term_resist">
+                <h3 class="resist_hd_3 blind">신규 의뢰 등록</h3>
+                <div class="resist_step ">
+                    <ol>
+                        <li class="sp_resist_a"><span>1. 약관동의</span></li>
+                        <li class="sp_resist_m is_active"><span>2. 의뢰서 작성</span></li>
+                        <li class="sp_resist_b"><span>3. 등록비 결제</span></li>
+                    </ol>
+                </div>
+                <div class="regist_notice">
+                    <ul>
+                        <li>* 동일 포지션인 경우에만 동일 의뢰서로 1명 이상 진행 가능 합니다.</li>
+                        <li>* 포지션이 다른 경우에는 의뢰서를 새로 등록 해 주세요.</li>
+                        <li>* 고용형태는 정규직, 위촉직, 계약직 중에서 선택 할 수 있으며, 합격 수수료는 서치펌에서 수수료율 또는 수수료 금액으로 제시 할 수 있습니다.</li>
+                    </ul>
+                </div>
+                <div class="resist_content">
+                    <div class="resist_request">
+                        <h4 class="resist_hd_4 blind">02 의뢰서 작성</h4>
+                        <form action="/" method="post">
+                            <fieldset>
+                                <input type="hidden" id="hidCorpId" name="" value="r-gi25" readonly="">
+                                <div class="request_position">
+                                    <h5 class="resist_hd_5">기본정보</h5>
+                                    <div class="request_form">
+                                        <div class="form_row">
+                                            <div class="col_title">기획 단계</div>
+                                            <div class="form_col job_type">
+                                                <div id="dvJobType" class="elWrap devElWrap">
+                                                    <div class="selType devCombo">
+                                                        <button type="button" id="btnJobType" class="btnSelType mtcBtnA">
+                                                            <span class="txCate">제작상태<span class="point">*</span></span>
+                                                            <span id="snJobType" class="txResult devTxResult"></span>
+                                                        </button>
+                                                        <input type="hidden" id="hidJobType" name="hidJobType" value="0">
+                                                        <div id="dvLyrJobType" class="lyElBx devLyElBx">
+                                                            <ul class="selTypeList">
+                                                                <li id="idJobType" data-type="1" class="devCoTypeItem">
+                                                                    <button type="button">신규제작</button>
+                                                                </li>
+                                                                <li id="idJobType" data-type="2" class="devCoTypeItem">
+                                                                    <button type="button">유지보수</button>
+                                                                </li>
+                                                                <li id="idJobType" data-type="10" class="devCoTypeItem">
+                                                                    <button type="button">리뉴얼</button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form_col job_type">
+                                                <div id="dvJobType" class="elWrap devElWrap">
+                                                    <div class="selType devCombo">
+                                                        <button type="button" id="btnJobType" class="btnSelType mtcBtnA">
+                                                            <span class="txCate">기획상황<span class="point">*</span></span>
+                                                            <span id="snJobType" class="txResult devTxResult"></span>
+                                                        </button>
+                                                        <input type="hidden" id="hidJobType" name="hidJobType" value="0">
+                                                        <div id="dvLyrJobType" class="lyElBx devLyElBx">
+                                                            <ul class="selTypeList">
+                                                                <li id="idJobType" data-type="1" class="devCoTypeItem">
+                                                                    <button type="button">아이디어</button>
+                                                                </li>
+                                                                <li id="idJobType" data-type="2" class="devCoTypeItem">
+                                                                    <button type="button">내용정리</button>
+                                                                </li>
+                                                                <li id="idJobType" data-type="10" class="devCoTypeItem">
+                                                                    <button type="button">상세기획문서</button>
+                                                                </li>
+                                                                <li id="idJobType" data-type="10" class="devCoTypeItem">
+                                                                    <button type="button">레이아웃, 디자인 구성완료</button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form_col job_type">
+                                                <div id="dvJobType" class="elWrap devElWrap">
+                                                    <div class="selType devCombo">
+                                                        <button type="button" id="btnJobType" class="btnSelType mtcBtnA">
+                                                            <span class="txCate">납기희망일<span class="point">*</span></span>
+                                                            <span id="snJobType" class="txResult devTxResult"></span>
+                                                        </button>
+                                                        <input type="hidden" id="hidJobType" name="hidJobType" value="0">
+                                                        <div id="dvLyrJobType" class="lyElBx devLyElBx">
+                                                            <ul class="selTypeList">
+                                                                <li id="idJobType" data-type="1" class="devCoTypeItem">
+                                                                    <button type="button">협의가능</button>
+                                                                </li>
+                                                                <li id="idJobType" data-type="2" class="devCoTypeItem">
+                                                                    <button type="button">한달이내</button>
+                                                                </li>
+                                                                <li id="idJobType" data-type="10" class="devCoTypeItem">
+                                                                    <button type="button">지정일</button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="col_title"></div>
+                                            <div class="form_col reason">
+                                                <div class="elWrap devElWrap">
+                                                    <div class="schInpType">
+                                                        <label for="lb_reason" class="ph">현재 운영 서비스 URL 또는 참고 서비스</label>
+                                                        <input type="text" name="" id="lb_reason" class="inpDefault devText">
+                                                    </div>
+                                                    <div class="errorBx">
+                                                        <p>채용사유가 입력되지 않았습니다.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="request_detail">
+                                    <h5 class="resist_hd_5">
+                                        상세정보
+                                    </h5>
+                                    <div class="request_form">
+                                        <div class="form_row">
+                                            <div class="form_col spec_add">
+                                                <div class="mtcTxaType">
+                                                    <span id="snContent" class="ph devTxAreaExam" style="display:block"></span>
+                                                    <textarea rows="3" cols="80" id="txtaContent" name="" class="txArea" title="추가 요구 내용 작성">
+- 납기희망일 : 
+- 상세기획 : </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="request_file">
+                                    <h5 class="resist_hd_5">
+                                        파일첨부
+                                    </h5>
+                                    <div class="request_form">
+                                        <div class="form_row">
+                                            <div class="form_col spec_add">
+                                                <p class="virusCheck">개인정보보호를 위해 개인정보가 포함된 파일은 사전동의 없이&nbsp;&nbsp;삭제될 수 있습니다.</p>
+                                                <button type="button" class="button buttonAddUrl is-event is-popup-visible" id="btnMyPCAdd2"><span>파일추가</span></button>
+                                                <div class="list fileList" style="display: block;">
+                                                    <div class="dropdown dropdown-portfolio is-label">
+                                                        <input type="hidden" name="File_Type" value="0">
+                                                        <div class="validation hidden" aria-hidden="true"></div>
+                                                    </div>
+                                                    <div class="filename">C:\fakepath\lamp-1344993_1280.png</div>
+                                                    <input type="hidden" id="idx_c1158" value="0">
+                                                    <input type="hidden" id="FileUpStat_c1158" value="1">
+                                                    <button type="button" class="button buttonDelete">삭제</button>
+                                                    <input type="file" id="file_c1158" name="File_Co_Name" style="display:none;">
+                                                </div>
+                                                <input type="file" id="uploadPortfolioFile" name="File_Co_Name" style="display:none;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="request_etc">
+                                    <h5 class="resist_hd_5">
+                                        기타사항
+                                    </h5>
+                                    <div class="request_form">
+                                        <div class="form_row">
+                                            <div class="form_col spec_add">
+                                                <div class="mtcTxaType">
+                                                    <span id="snContent" class="ph devTxAreaExam" style="display:block">추가 내용을 자유롭게 기재 해 주세요.</span>
+                                                    <textarea rows="3" cols="80" id="txtfContent" name="" class="txArea" title="추가 요구 내용 작성"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <form method="post" enctype="multipart/form-data" action="/TextUser/FileAttachAjax" id="portfolioUploadFrm"></form>
+            </div>
+        </div>
+    </div>
+}

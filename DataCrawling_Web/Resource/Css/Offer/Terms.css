@@ -1,0 +1,363 @@
+﻿#container {
+    width: 1250px;
+    position: relative;
+    margin: 0 auto;
+}
+
+#content {
+    width: 1040px;
+    float: none;
+    border: 1px solid #e1e5eb;
+    background: #fff;
+    box-sizing: border-box;
+    margin-top: 36px;
+}
+
+#floatingMenu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+}
+
+.resist_step {
+    width: 960px;
+    margin: 39px 39px;
+}
+
+    .resist_step ol {
+        overflow: hidden;
+        display: table;
+        width: 100%;
+        border: 1px solid #e1e5eb;
+        background-color: #fff;
+    }
+
+    .resist_step li {
+        position: relative;
+        display: table-cell;
+        font-size: 18px;
+        letter-spacing: 0px;
+        width: 33.3%;
+        height: 63px;
+        background-color: #fff;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+        .resist_step li > span {
+            display: block;
+            line-height: 1;
+        }
+
+    .resist_step .is_active {
+        color: #fff;
+        background-color: #39f;
+    }
+
+    .resist_step li:first-child {
+        width: 33.2%;
+    }
+
+    .resist_step .is_active.sp_resist_a:after {
+        background-position: -40px 0;
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 31px;
+        height: 63px;
+    }
+
+    .resist_step .sp_resist_a:after, .resist_step .sp_resist_m:before, .resist_step .sp_resist_m:after, .resist_step .is_active.sp_resist_b:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 31px;
+        height: 63px;
+        background-position: 0 0;
+    }
+
+.sp_resist, .sp_resist_a:after, .sp_resist_b:before, .sp_resist_m:after, .sp_resist_m:before, .regModal .btnModalClose:after, .pay_taxinvoice .btnPay_1, .pay_taxinvoice .btnPayS_6, .lyPayType .lyArr:after, .secInfo dd a:after, .secInfo dd button:after, .popPayGuide .dwn li a:after, .yctrPop_1 .close button:after, .popPayEdge .tit dt:before, .popPayFail .tit dt:before {
+    display: inline-block;
+    background: url(../../image/commons/sp_resist.png) no-repeat;
+    vertical-align: middle;
+}
+
+.resist_step .is_active.sp_resist_m:before {
+    right: auto;
+    left: -31px;
+    background-position: -80px 0;
+}
+
+.resist_step .is_active.sp_resist_m:after {
+    background-position: -40px 0;
+}
+
+.resist_step .is_active.sp_resist_b:before {
+    right: auto;
+    left: -31px;
+    background-position: -80px 0;
+}
+
+.resist_content {
+    padding: 50px 40px 50px 40px;
+}
+
+.resist_terms {
+    margin-top: 25px;
+}
+
+    .resist_terms .terms_text {
+        font-size: 30px;
+        letter-spacing: -1px;
+        color: #333;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+        .resist_terms .terms_text em {
+            color: #39f;
+        }
+
+.terms_box {
+    margin-top: 90px;
+    width: 764px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.resist_content .terms_agree-all {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.mtcChkBx {
+    position: relative;
+    display: inline-block;
+}
+
+    .mtcChkBx input {
+        position: absolute;
+        left: -9999px;
+        width: 13px;
+        height: 13px;
+        opacity: 0;
+        filter: alpha(opacity = 0);
+    }
+
+.resist_content .terms_agree-all .mtcChkBx .bxIpt {
+    margin-top: 0px;
+    font-size: 16px;
+    letter-spacing: 0px;
+    font-weight: bold;
+    color: #000;
+    background-position: 0 -328px;
+}
+
+    .resist_content .terms_agree-all .mtcChkBx .bxIpt.new {
+        background: none;
+        padding-left: 0;
+        display: flex;
+        align-items: center;
+    }
+
+        .resist_content .terms_agree-all .mtcChkBx .bxIpt.new::before {
+            content: "";
+            display: block;
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            background-image: url('../../image/commons/check_type1.svg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+
+.resist_content .terms_agree-all .mtcChkBx .devCheckbox:checked + .bxIpt.new::before {
+    background-image: url('../../image/commons/check_type1_checked.svg');
+}
+
+.terms_agree {
+    padding-top: 15px;
+    position: relative;
+}
+
+    .terms_agree .agree_check .mtcChkBx .bxIpt.new_small {
+        background: none;
+        padding-left: 0;
+        display: flex;
+        align-items: center;
+    }
+
+        .terms_agree .agree_check .mtcChkBx .bxIpt.new_small::before {
+            content: "";
+            display: block;
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            background-image: url('../../image/commons/check_type2.svg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+
+    .terms_agree .toggle-button ~ label::before {
+        content: "";
+    }
+
+    .terms_agree .toggle-button ~ label .ico-arrow {
+        display: inline-block;
+        margin-left: 4px;
+        width: 24px;
+        height: 24px;
+        background: url('../../image/commons/arrow_down.svg') center no-repeat;
+        transform: unset;
+        transition: 0.3s ease-in-out;
+    }
+
+    .terms_agree .agree_check .mtcChkBx .devCheckbox:checked + .bxIpt.new_small::before {
+        background-image: url('../../image/commons/check_type2_checked.svg');
+    }
+.agree_check {
+    display: block;
+}
+
+.mtcChkBx {
+    position: relative;
+    display: inline-block;
+}
+
+    .mtcChkBx input {
+        position: absolute;
+        left: -9999px;
+        width: 13px;
+        height: 13px;
+        opacity: 0;
+        filter: alpha(opacity = 0);
+    }
+
+.toggle-button {
+    display: none;
+}
+
+    .toggle-button ~ label {
+        position: absolute;
+        top: 15px;
+        right: 3px;
+        color: #3399ff;
+        font-size: 12px;
+        letter-spacing: 0px;
+    }
+
+    .toggle-button:checked ~ label .ico-arrow {
+        transform: rotate(180deg);
+    }
+
+.terms_agree .pvsSec {
+    overflow-y: auto;
+    height: 165px;
+    padding: 0 24px;
+    margin-top: 13px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    box-sizing: border-box;
+}
+
+.pvsSec:before {
+    content: "";
+    display: block;
+    padding: 22px 0 0 0;
+}
+
+.pvsSec li {
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #888;
+    line-height: 17px;
+}
+
+    .pvsSec li + li {
+        margin-top: 15px;
+    }
+
+    .pvsSec li table {
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+        margin-top: 20px;
+    }
+
+        .pvsSec li table col {
+            width: 33.33%;
+        }
+
+    .pvsSec li th {
+        border: 1px solid #ddd;
+        padding: 7px 16px 6px;
+        background-color: #f7f7f7;
+        color: #888888;
+        font-size: 13px;
+        letter-spacing: 0px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .pvsSec li td {
+        border: 1px solid #ddd;
+        padding: 16px;
+        background-color: #fff;
+        color: #888888;
+        font-size: 13px;
+        letter-spacing: 0px;
+    }
+
+        .pvsSec li td.underline {
+            text-decoration: underline;
+        }
+
+    .pvsSec li ol li {
+        margin-top: 5px;
+    }
+
+.pvsSec dt + dd {
+    margin-top: 10px;
+}
+
+.pvsSec dd > ol {
+    padding-left: 0px;
+}
+
+    .pvsSec dd > ol > li {
+        text-indent: -15px;
+        padding-left: 15px;
+    }
+
+.pvsSec:after {
+    content: "";
+    display: block;
+    padding: 0 0 22px 0;
+}
+
+
+.btn_regist {
+    margin-top: 48px;
+    text-align: center;
+}
+
+    .btn_regist button {
+        font-size: 17px;
+        letter-spacing: 0px;
+        color: #fff;
+        font-weight: bold;
+        width: 211px;
+        height: 64px;
+        line-height: 62px;
+        background-color: #39f;
+        border-radius: 4px;
+        box-sizing: border-box;
+        outline: none;
+    }
+
+        .btn_regist button span {
+            position: relative;
+        }

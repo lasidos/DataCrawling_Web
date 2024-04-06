@@ -1,0 +1,89 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isFooter = false;
+}
+
+@section Content{
+    <div class="container_wrap">
+        <div class="container-doc">
+            <div class="inner_container">
+                <header class="doc-header">
+                    <div class="inner_header">
+                        <h1 class="tit_service">
+                            <span class="logo_mpk">
+                                <span class="ir_wa">
+                                    <a href="/">Myplatform</a>
+                                </span>
+                            </span>
+                        </h1>
+                    </div>
+                </header>
+                <main class="doc-main">
+                    @RenderPage("_Regist_Step1.cshtml")
+                </main>
+                <input type="hidden" id="tas" value="" />
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+}
+
+@section PageStyles{
+    <link href="~/Resource/Css/Account/regist.css" rel="stylesheet" />
+    <link href="~/Resource/Css/Account/_AccountLayout.css" rel="stylesheet" />
+}
+@section HeadScripts{
+    <script type="text/javascript">
+        $(window).ready(function () {
+            $('.modal').removeClass('active');
+            $('.container_wrap').css("height", $(window).height() - checkFootet() - 2);
+
+            $(window).off('resize').on("resize", function () {
+                $('.container_wrap').css("height", $(window).height() - checkFootet() - 2);
+            });
+
+            $(document).off('click').on('click', '.btn_g.back', function () {
+                console.log('back');
+                BackStep();
+            });
+        });
+
+        $(window).off('popstate').on('popstate', function (event) {
+            BackStep();
+        });
+
+        function checkFootet() {
+            var _footer = 0;
+            console.log($(window).height());
+            @isFooter = $(window).height() > 900 ? true : false;
+            if (@isFooter) {
+                $('#footer').css('display', 'block');
+                _footer = $('#footer').outerHeight();
+            } else {
+                $('#footer').css('display', 'none');
+            }
+            return _footer;
+        }
+
+        function stepView(step) {
+            history.pushState(null, null, "");
+            $('.doc-main').load("/Join/Step",
+                {
+                    Step: step
+                });
+        }
+
+        function BackStep() {
+            $('.doc-main').load("/Account/M_Regist",
+                {
+                    Step: "back"
+                });
+        }
+
+    </script>
+}
+
+@section MoalLoding{
+    @RenderPage("~/Views/Shared/_MoalLoding.cshtml")
+}

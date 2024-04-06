@@ -1,0 +1,116 @@
+﻿@{
+    string error = "";
+    if (ViewBag.error != null)
+    {
+        error = ViewBag.error["Message"].ToString();
+    }
+}
+
+<script type="text/javascript">
+    if ('@error' != '') {
+        alert('@error');
+        stepView(1);
+    }
+
+    $(window).ready(function () {
+        $('#input-password').on("propertychange change keyup paste input", function () {
+            CheckPasswords();
+        });
+        $('#input-repassword').on("propertychange change keyup paste input", function () {
+            CheckPasswords();
+        });
+        $('.confirm_btn.userPw .btn_g.next').click(function () {
+            var password = $('#input-password').val();
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '/Join/UserPassword',
+                data: {
+                    pw: password
+                },
+                success: function (data) {
+                    if (data.resultCode == '0') {
+                        stepView(data.Message);
+                    }
+                },
+                error: function (response) {
+                    alert(response);
+                }
+            });
+        });
+    });
+
+    // 비밀번호 정규식
+    function checkPassword(pw) {
+        var regexPw = /^(?=.*[a-zA-Z])(?=.*[!@@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+        if (!regexPw.test(pw)) {
+            return false;
+        }
+        return true;
+    }
+
+    // 비밀번호 유효성 검사
+    function CheckPasswords() {
+        var verification = true;
+        if ($('#input-password').val().length > 7 && checkPassword($('#input-password').val())) {
+            $('.box_tf.password').removeClass('error');
+        } else {
+            $('.box_tf.password').addClass('error');
+            verification = false;
+        }
+        if ($('#input-password').val() == $('#input-repassword').val()) {
+            $('.box_tf.repassword').removeClass('error');
+        } else {
+            $('.box_tf.repassword').addClass('error');
+            verification = false;
+        }
+
+        if (verification) {
+            $('.confirm_btn.userPw .btn_g').prop("disabled", false);
+        } else {
+            $('.confirm_btn.userPw .btn_g').prop("disabled", true);
+        }
+    }
+</script>
+
+<article id="mainContent" class="content-article">
+    <div class="cont_sign">
+        <strong class="blind">가입하기 진행순서</strong>
+        <div class="navigation_wrap">
+            <strong class="blind">가입하기 진행률</strong>
+            <div class="bar_navigation" style="width: 75%;">75%</div>
+        </div>
+        <h2 class="tit_g">
+            계정 로그인에 사용할
+            <br> 비밀번호를 등록해 주세요.
+        </h2>
+        <form>
+            <div class="frm-body">
+                <div class="blind">
+                    <span>비밀번호</span>
+                </div>
+                <div class="box_tf password error">
+                    <label class="blind" for="input-password">입력</label>
+                    <input type="password" maxlength="20" name="email_passcode" placeholder="비밀번호 입력 (8~20자리)" class="tf_g" id="input-password" value="">
+                    <div class="util_tf"></div>
+                    <p class="txt_info">8~20자리의 영문, 숫자, 특수문자를 조합하여 설정해 주세요.<br></p>
+                </div>
+                <div class="box_tf repassword error">
+                    <label class="blind" for="input-repassword">입력</label>
+                    <input type="password" maxlength="20" name="email_repasscode" placeholder="비밀번호 재입력" class="tf_g" id="input-repassword" value="">
+                    <div class="util_tf"></div>
+                    <p class="txt_info">비밀번호와 일치하지 않습니다.<br></p>
+                </div>
+                <ul class="list_notice">
+                    <li>비밀번호는 8~20자리의 영문, 숫자, 특수문자를 조합하여 설정해 주세요.</li>
+                    <li>다른 사이트에서 사용하는 것과 동일하거나 쉬운 비밀번호는 사용하지 마세요.</li>
+                    <li>안정한 계정 사용을 위해 비밀번호는 주기적으로 변경해주세요.</li>
+                </ul>
+            </div>
+            <div class="confirm_btn userPw">
+                <button type="button" class="btn_g back">이전</button>
+                <button type="button" class="btn_g next" disabled>다음</button>
+            </div>
+        </form>
+    </div>
+</article>
