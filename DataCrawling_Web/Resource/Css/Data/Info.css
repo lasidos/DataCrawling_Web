@@ -1,0 +1,198 @@
+﻿#container {
+    width: 1260px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.info-Content {
+    padding: 35px 39px;
+    margin-top: 36px;
+    border: 1px solid #e1e5eb;
+    background: #fff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.topHdWrap {
+    position: relative;
+}
+
+.info-Content .topHdWrap .lug_hd_2 {
+    float: left;
+    font-size: 22px;
+    font-weight: normal;
+    letter-spacing: -0.5px;
+    color: #000;
+}
+
+.info-Content .topHdWrap fieldset {
+    float: right;
+    margin-top: -6px;
+}
+
+.searchBarItem {
+    width: 248px;
+    border: 1px solid #ddd;
+    position: relative;
+    box-sizing: border-box;
+    padding-right: 35px;
+}
+
+    .searchBarItem .phTx {
+        position: absolute;
+        left: 10px;
+        top: 9px;
+        font-size: 13px;
+        letter-spacing: 0px;
+        color: #bbb;
+    }
+
+    .searchBarItem .mtcSchInp {
+        display: block;
+        width: 100%;
+        height: 34px;
+        box-sizing: border-box;
+        line-height: 34px;
+        font-size: 12px;
+        letter-spacing: 0px;
+        border: none;
+        padding: 0 10px;
+        color: #666;
+    }
+
+    .searchBarItem .mtcSchBtn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 35px;
+        height: 34px;
+        background-color: #fff;
+    }
+
+        .searchBarItem .mtcSchBtn:before {
+            position: relative;
+            content: "";
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            background: url(../../image/commons/mtc_sp_btn.png) no-repeat;
+            background-position: -248px -21px;
+            box-sizing: border-box;
+        }
+
+.searchResultText {
+    padding-bottom: 16px;
+    margin-top: 40px;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #666;
+    border-bottom: 1px solid #edeef0;
+}
+
+    .searchResultText strong {
+        color: #333;
+    }
+
+    .searchResultText span {
+        color: #ff6600;
+    }
+
+.tabSearchList {
+    border-bottom: 1px solid #edeef0;
+    position: relative;
+}
+
+    .tabSearchList li:first-child {
+        border: 0;
+    }
+
+    .tabSearchList li .tabSearchListTitle {
+        display: block;
+        width: 100%;
+        padding: 30px 20px 31px 21px;
+        font-size: 16px;
+        letter-spacing: 0px;
+        color: #000;
+        text-align: left;
+        box-sizing: border-box;
+        word-break: break-word;
+        word-wrap: break-word;
+        border-bottom: 1px solid #edeef0;
+        position: relative;
+    }
+
+.tabSearchListTitle:after {
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    width: 15px;
+    height: 9px;
+    display: inline-block;
+    background: url(../../image/commons/lug_sp_btn.png) no-repeat;
+    vertical-align: middle;
+    box-sizing: border-box;
+    background-position: -220px 0;
+}
+
+.tabSearchList li.on .tabSearchListTitle {
+    white-space: normal;
+    display: block;
+    width: 100%;
+    padding: 30px 20px 31px 21px;
+    font-size: 16px;
+    letter-spacing: 0px;
+    color: #000;
+    text-align: left;
+    box-sizing: border-box;
+    word-break: break-word;
+    word-wrap: break-word;
+    position: relative;
+    border-bottom: none;
+}
+
+.tabSearchList li.on .tabSearchListTitleWrap {
+    font-weight: bold;
+    text-overflow: inherit;
+    white-space: inherit;
+    display: inline-block;
+    width: 870px;
+    overflow: hidden;
+}
+
+.tabSearchListTitle .cl3399ff {
+    color: #39f;
+    margin-right: 5px;
+}
+
+.tabSearchList li .searchListData {
+    display: none;
+    padding: 20px 25px 23px;
+    background: #fafafa;
+    font-size: 14px;
+    letter-spacing: 0px;
+    line-height: 30px;
+    border-top: 1px solid #edeef0;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+.tabSearchList li.on .lugBtnMore:after {
+    content: "";
+    display: inline-block;
+    background: url(../../image/commons/lug_sp_btn.png) no-repeat;
+    vertical-align: middle;
+    box-sizing: border-box;
+    background-position: -240px 0;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    width: 15px;
+    height: 9px;
+}
+
+.tabSearchList li.on .searchListData {
+    display: block;
+    margin-bottom: 20px;
+}

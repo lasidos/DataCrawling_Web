@@ -1,0 +1,271 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    @RenderPage("~/Views/Shared/_Header.cshtml", Model)
+    <link href="~/Resource/Css/Offer/Terms.css" rel="stylesheet" />
+    <script src="~/Resource/Js/Offer/Terms.js"></script>
+}
+
+@section Notice{
+    @RenderPage("~/Views/Shared/_Notice.cshtml")
+}
+
+@section Content{
+    <div id="container">
+        <div id="content">
+            <div class="term_resist">
+                <h3 class="resist_hd_3 blind">신규 의뢰 등록</h3>
+                <div class="resist_step ">
+                    <ol>
+                        <li class="sp_resist_a is_active"><span>1. 약관동의</span></li>
+                        <li class="sp_resist_m"><span>2. 의뢰서 작성</span></li>
+                        <li class="sp_resist_b"><span>3. 등록비 결제</span></li>
+                    </ol>
+                </div>
+                <div class="resist_content">
+                    <div class="resist_terms">
+                        <h4 class="resist_hd_4 blind">01 약관동의</h4>
+                        <p class="terms_text">
+                            100여개의 엄선된 헤드헌팅회사에게
+                            <br>
+                            <em>딱! 맞는 후보자를 추천</em> 받아보세요.
+                        </p>
+                    </div>
+                    <form name="InForm" id="InForm" method="post" action="/corp/offer/request">
+                        <input type="hidden" name="REQ_TYPE_CODE" value="Normal">
+                        <div class="terms_box">
+                            <h5 class="resist_hd_5 blind">헤드헌팅 의뢰 서비스 이용약관</h5>
+                            <div class="terms_agree-all">
+                                <span class="mtcChkBx">
+                                    <input type="checkbox" class="devCheckbox" id="lb_agree_check-all" name="Agree_Check" value="1">
+                                    <label for="lb_agree_check-all" class="bxIpt new"><strong disabled>헤드헌팅 의뢰 서비스 이용약관과 개인정보 수집 및 이용에 모두 동의합니다.</strong></label>
+                                </span>
+                            </div>
+                            <div class="terms_agree">
+                                <p class="agree_check">
+                                    <span class="mtcChkBx">
+                                        <input type="checkbox" class="devCheckbox" id="lb_agree_check-request" name="lb_agree">
+                                        <label for="lb_agree_check-request" class="bxIpt new_small">[필수] 헤드헌팅 의뢰 서비스 이용약관 동의</label>
+                                    </span>
+                                </p>
+                                <input type="checkbox" id="provision_toggle-request" class="toggle-button">
+                                <label for="provision_toggle-request"><i class="ico-arrow"></i></label>
+                                <div class="pvsSec pvsCntTp">
+                                    <ol>
+                                        <li>
+                                            <dl>
+                                                <dt><a name="gg01" id="gg01"></a><strong>제 1 조 (목적)</strong></dt>
+                                                <dd>본 약관은 잡코리아 유한책임회사 (이하 “회사”)가 운영하는 헤드헌팅 의뢰 서비스를 이용함에 있어 “회사”와 “구인기업”간의 이용 조건 및 제반 절차, 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 한다.</dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><a name="gg02" id="gg02"></a><strong>제 2 조 (용어의 정의)</strong></dt>
+                                                <dd>
+                                                    이 약관에서 사용하는 용어의 정의는 아래와 같다.
+                                                    <ol>
+                                                        <li>①	“헤드헌팅 의뢰 서비스”라 함은 “회사”가 운영하는 사이트 내에서 “구인기업”이 구인하고자 하는 직원의 조건을 “의뢰서”에 작성하여 “회사”가 승인한 “헤드헌팅 회사”로부터 적합한 후보자를 추천 받는 유료 서비스이다. </li>
+                                                        <li>②	“구인기업”이라 함은 “회사”가 운영하는 사이트의 기업회원으로서 “회사”로부터 부여 받은 계정을 이용하여 직원 채용을 목적으로 “헤드헌팅 의뢰 서비스”를 이용하는 자를 말한다. </li>
+                                                        <li>③	“헤드헌팅 회사”라 함은 “회사”가 승인한 “구인기업”의 “의뢰서”를 확인하고 “후보자”를 추천할 수 있는 자격이 있는 자로서 “회사”의 서비스 이용 승인을 득한 자를 말한다. </li>
+                                                        <li>④	“후보자”라 함은 “헤드헌팅 회사”가 “의뢰서”에 적합하다고 판단하여 기업에 추천하는 구직자를 말한다. </li>
+                                                        <li>⑤	“의뢰서”라 함은 “회사”에서 “헤드헌팅 회사”에 공개하기 위해 “구인기업”에 요청하는 구인자, 기업정보, 인사담당자 정보들을 말한다.</li>
+                                                        <li>⑥	“소개비”라 함은 “구인기업”이 “헤드헌팅 회사”에서 추천한 “후보자”를 채용하기 위해 “헤드헌팅 회사”에 지불하는 비용을 말한다.</li>
+                                                        <li>⑦	“헤드헌팅 의뢰 이용료”라 함은 “헤드헌팅 의뢰 서비스”를 이용하기 위해 “구인기업”이 “회사”에 지불하는 비용을 말한다.</li>
+                                                    </ol>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><a name="gg03" id="gg03"></a><strong>제 3 조 (이용계약의 성립)</strong></dt>
+                                                <dd>구인기업이 “헤드헌팅 의뢰 서비스”를 이용하고자 “의뢰서” 작성 단계에서 본 약관을 읽고 “동의” 버튼을 누르고 “의뢰서” 작성을 완료한 경우, 본 약관에 동의한 것으로 간주한다.</dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><a name="gg04" id="gg04"></a><strong>제 4 조 (이용신청의 승낙과 제한)</strong></dt>
+                                                <dd>
+                                                    <ol>
+                                                        <li>①	“회사”는 전조의 규정에 의한 이용신청 고객에 대하여 업무수행상 또는 기술상 지장이 없는 경우 원칙적으로 서비스 이용을 승낙한다. </li>
+                                                        <li>②	의뢰서의 내용을 허위로 기재하거나 “회사”가 제시하는 내용을 기재하지 않은 경우 서비스 이용신청을 승낙하지 아니한다.</li>
+                                                        <li>③	“회사”는 “구인기업”이 “의뢰서” 내용에 “헤드헌팅 회사”가 후보자를 추천하기에 부족함이 있을 경우, “의뢰서” 내용이 수정될 때까지 승낙을 유보할 수 있다. </li>
+                                                        <li>④	“회사”는 “구인기업”이 기업 직원이 아닌 개인을 위해 “헤드헌팅 의뢰 서비스”를 이용하는 경우, 승낙을 유보할 수 있다. </li>
+                                                    </ol>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><a name="gg05" id="gg05"></a><strong>제 5 조 (서비스의 내용)</strong></dt>
+                                                <dd>
+                                                    <ol>
+                                                        <li>
+                                                            ① “회사”는 “구인기업”에게 제2조 제1항의 “헤드헌팅 의뢰 서비스”를 다음 각 호와 같이 제공한다.
+                                                            <ol>
+                                                                <li>1. “구인기업”은 회사의 “헤드헌팅 의뢰 서비스” 페이지에서 직원채용을 위해 의뢰서를 작성하여 서비스 의뢰를 신청한다.</li>
+                                                                <li>2. “의뢰서”는 “회사” 검토완료 후, 노출일 기준 14일(2주)간 노출되어 “헤드헌팅 회사”로부터 “후보자”를 추천 받을 수 있다.</li>
+                                                            </ol>
+                                                        </li>
+                                                        <li>② “헤드헌팅 의뢰 서비스”는 “후보자” 추천을 반드시 보장하지는 않으며, “헤드헌팅 회사”에 추천을 강요할 의무 또한 없다. </li>
+                                                        <li>③“회사”는 본 서비스의 원활한 진행을 위해 “구인기업”이 의뢰기간 내에 추천된 “후보자”에 대한 피드백을 남겨주도록 권장한다. </li>
+                                                    </ol>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><a name="gg06" id="gg06"></a><strong>제 6 조 (서비스의 요금)</strong></dt>
+                                                <dd>
+                                                    <ol>
+                                                        <li>①	“구인기업”은 “의뢰서” 작성 시, “헤드헌팅 의뢰 이용료”를 “회사”에 지불한다.</li>
+                                                        <li>②	“의뢰서”를 작성한 “구인기업”이 “헤드헌팅 회사”로부터 “후보자”를 추천 받아 면접을 진행하는 과정에서는 별도의 비용이 발생하지 않는다. </li>
+                                                        <li>③	“구인기업”이 “헤드헌팅 회사”로부터 추천된 “후보자”를 채용하고자 하는 경우, 대상 “후보자”를 추천한 “헤드헌팅 회사”와 “구인기업” 간에 별도 계약을 체결하여 이후 절차를 진행하게 된다.</li>
+                                                        <li>
+                                                            ④	“구인기업”은 “헤드헌팅 회사”와 체결한 계약에 따라 다음 각 호와 같이 “소개비”지급 의무가 발생한다. “헤드헌팅 회사”에서 부과하는 소개비는 다음 각 호와 같이 책정된다.
+                                                            <ol>
+                                                                <li>1. 채용확정 된 후보자의 연봉과 추천당시 헤드헌팅 회사에서 제시한 수수료율 또는 수수료 금액으로 소개비가 책정된다. </li>
+                                                                <li>2. 헤드헌팅 회사의 수수료율을 평균적으로 15% 내외에서 제시되며, 보증기간은 평균적으로 약 90일 (3개월) 적용된다. </li>
+                                                                <li>3. 헤드헌팅 회사의 수수료 금액은 헤드헌팅 회사 내부 기준에 의해 제시된다. </li>
+                                                                <li>4. 수수료율은 후보자의 직급/직책, 연봉수준, 경력 등을 고려하여 산정되기 때문에 15%이상이 제시될 수도 있다. </li>
+                                                            </ol>
+                                                        </li>
+                                                        <li>⑤	추천된 “후보자”가 동시에 진행중인 공고에 지원한 경우, 이력서 열람/검토 시간과 “후보자” 열람/검토 시간을 체크하여 “소개비” 지불 여부가 결정된다.  </li>
+                                                        <li>
+                                                            ⑥	“구인기업”은 헤드헌팅 의뢰 서비스로 추천된 이력이 있는 후보자가 다른 경로를 통해 입사하여도 다음 각 호의 경우에 한해 “헤드헌팅 회사”에 지급해야 하는 소개비가 발생한다. 본 항의 소개비는 “구인기업”에서 이력서 확인 (열람/검토) 후 1년 이내로 한정하여 후보자를 추천한 “헤드헌팅 회사”에 지불하게 된다.
+                                                            <ol>
+                                                                <li>1. 추천된 후보자의 이력서를 확인 (열람/검토)한 경우에 한한다.</li>
+                                                                <li>2. 후보자가 구인기업의 동일/다른 채용공고에 입사지원, 지인추천 등 기타의 방법으로 입사하였더라도 이에 해당한다.</li>
+                                                            </ol>
+                                                        </li>
+                                                        <li>⑦	“구인기업”은 본 조 제4항 내지 제6항의 소개비가 “구인기업”과 “헤드헌팅 회사”간의 발생하는 소개비로 “회사”와는 무관함을 인지하고, 동의한다.</li>
+                                                    </ol>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><a name="gg07" id="gg07"></a><strong>제 7 조 (서비스 요금의 환불)</strong></dt>
+                                                <dd>
+                                                    <ol>
+                                                        <li>①	“회사”는 “의뢰서”를 “헤드헌팅 회사”에 공유 전, “구인기업”이 요청하거나 “의뢰서”의 내용이 서비스 내용에 적합하지 않다고 판단되는 경우 “헤드헌팅 의뢰 이용료”를 100% 환불한다. </li>
+                                                        <li>
+                                                            ②	“회사”는 “의뢰서” 마감 시점에 후보자가 0명일 경우, “구인기업”의 요청에 따라 1회 재 진행 또는 100% 환불한다. <br>
+                                                            단, 이미 1회 재 진행된 “의뢰서”나 “회사”에 의해 무료로 등록된 “의뢰서”는 제외한다.
+                                                        </li>
+                                                        <li>③	후보자가 1명 이상일 경우, “회사”와 “구인기업”간 협의를 통해 “의뢰서”에 적합하지 않은 후보자가 추천되었다고 판단되는 경우, 1회 재 진행 또는 100% 환불한다.</li>
+                                                        <li>④	“회사”는 “구인기업”과 “헤드헌팅 회사”와의 별도 계약으로 진행된 합격자 “소개비”에 대해 환불 책임을 지지 않는다.</li>
+                                                    </ol>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><a name="gg08" id="gg08"></a><strong>제 8 조 (“회사”의 의무)</strong></dt>
+                                                <dd>
+                                                    <ol>
+                                                        <li>①	“회사”는 “구인기업”이 “헤드헌팅 의뢰 서비스”를 이용함에 불편함이 없도록 서비스를 주기적으로 관리 및 업데이트 한다. </li>
+                                                        <li>②	“회사”는 “구인기업”에게 “헤드헌팅 의뢰 서비스”의 프로세스에 대해 메일, 전화 등의 추가적인 운영 시스템을 제공하여 서비스를 설명하고 이해를 돕는다. </li>
+                                                    </ol>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><a name="gg09" id="gg09"></a><strong>제 9 조 (“구인기업”의 의무)</strong></dt>
+                                                <dd>
+                                                    <ol>
+                                                        <li>①	“구인기업”은 본 약관의 규정 및 기타 “회사”가 통지하는 사항을 준수하여야 한다. </li>
+                                                        <li>②	“구인기업”은 “회사”가 제공하는 의뢰서 양식에 맞춰서 직원 채용에 필요한 정보를 기재하여야 한다. </li>
+                                                    </ol>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><a name="gg10" id="gg10"></a><strong>제 10 조 (서비스 제공의 중지)</strong></dt>
+                                                <dd>
+                                                    <ol>
+                                                        <li>
+                                                            ① 다음 각 호에 해당하는 경우 “회사”는 사전 동의없이 의뢰서 마감이나 비 노출 조치, 헤드헌팅 의뢰 서비스 이용 제한 조치를 취할 수 있다.
+                                                            <ol>
+                                                                <li>1. “구인기업”이 고의적, 지속적으로 “헤드헌팅 회사”와 “소개비” 지급 문제로 분쟁을 일으킬 경우</li>
+                                                                <li>2. “구인기업”이 의뢰서의 내용과 일치하지 않는 업무를 주어 구직자에게 손해를 일으킨 점이 밝혀 진 경우</li>
+                                                            </ol>
+                                                        </li>
+                                                        <li>② <a href="/service/ProvisionGI#gg20" class="policy-link" target="_blank">기업회원 이용약관 제20조(“회원”의 가입해지/서비스중지/자료삭제)</a>에 위반되는 행위를 한 경우</li>
+                                                    </ol>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><a name="gg11" id="gg11"></a><strong>제 11 조 (약관의 해석)</strong></dt>
+                                                <dd>본 약관에서 규정하지 않는 사항은 <a href="/service/ProvisionGI#gi20" class="policy-link" target="_blank">기업회원 이용약관</a>에서 정하는 바에 따른다. </dd>
+                                            </dl>
+                                        </li>
+                                        <li class="etc">
+                                            <dl class="nobg">
+                                                <dt><strong>부칙</strong></dt>
+                                                <dd>
+                                                    <ul>
+                                                        <li>- 이 약관은 2021년 11월 22일부터 시행한다</li>
+                                                        <li>- <a href="/service/ProvisionGI" target="_blank">이전 회원 이용약관 보기 (2017년 09월 28일 시행)</a></li>
+                                                    </ul>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="terms_agree">
+                                <p class="agree_check">
+                                    <span class="mtcChkBx">
+                                        <input type="checkbox" class="devCheckbox" id="lb_agree_check-personal" name="lb_agree">
+                                        <label for="lb_agree_check-personal" class="bxIpt new_small">[필수] 개인정보 수집 및 이용동의</label>
+                                    </span>
+                                </p>
+                                <input type="checkbox" id="provision_toggle-personal" class="toggle-button">
+                                <label for="provision_toggle-personal"><i class="ico-arrow"></i></label>
+                                <div class="pvsSec pvsCntTp">
+                                    <ol>
+                                        <li>
+                                            <p>헤드헌팅 의뢰서 등록을 위해 아래와 같이 개인정보를 수집 및 이용합니다.<br>동의를 거부할 권리가 있으며, 동의 거부 시 헤드헌팅 의뢰서 등록 서비스 이용이 불가합니다.</p>
+                                            <table>
+                                                <colgroup>
+                                                    <col>
+                                                    <col>
+                                                    <col>
+                                                </colgroup>
+                                                <thead>
+                                                    <tr>
+                                                        <th>목적</th>
+                                                        <th>항목</th>
+                                                        <th>보유 및 이용기간</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>의뢰에 대한 담당자 연락 및 안내를 위함. 각종 맞춤형 서비스 제공</td>
+                                                        <td>이름, 전화번호, 휴대폰번호, 이메일, 부서명, 직책</td>
+                                                        <td class="underline">회원 탈퇴 시 즉시 파기</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <p class="btn_regist devRequest"><button type="button"><span>의뢰서 등록 단계로</span></button></p>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="floatingMenu">
+
+        </div>
+    </div>
+}

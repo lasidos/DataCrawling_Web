@@ -1,0 +1,104 @@
+﻿.modal {
+    display: none;
+}
+
+    .modal.active {
+        display: block;
+    }
+
+    .modal .dimmed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, .5);
+        opacity: 1;
+        z-index: 501;
+    }
+
+    .modal .modal_lader {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 258px;
+        margin: 0 auto;
+        padding: 40px 40px 60px;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        -webkit-box-shadow: 2px 5px 15px 0 rgba(0,0,0,.1490196078);
+        box-shadow: 2px 5px 15px 0 rgba(0,0,0,.1490196078);
+        background-color: #fff;
+        border-radius: 8px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 502;
+    }
+
+        .modal .modal_lader .lader-layer .loading {
+            text-align: center;
+        }
+
+        .modal .modal_lader .lader-layer .loading-wrapper {
+            margin-top: 28px;
+        }
+
+        .modal .modal_lader .lader-layer .loading span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            -webkit-animation: loading 1.5s linear infinite;
+            -moz-animation: loading 1.5s linear infinite;
+            animation: loading 1.5s linear infinite;
+            background-color: #002aff;
+            border-radius: 50%;
+        }
+
+            .modal .modal_lader .lader-layer .loading span:first-child {
+                -webkit-animation-delay: .4s;
+                -moz-animation-delay: .4s;
+                animation-delay: .4s;
+            }
+
+            .modal .modal_lader .lader-layer .loading span:nth-child(2) {
+                margin: 0 16px;
+                -webkit-animation-delay: .6s;
+                -moz-animation-delay: .6s;
+                animation-delay: .6s;
+            }
+
+            .modal .modal_lader .lader-layer .loading span:nth-child(3) {
+                -webkit-animation-delay: .8s;
+                -moz-animation-delay: .8s;
+                animation-delay: .8s;
+            }
+
+        .modal .modal_lader .lader-layer .loading p {
+            font-size: 20px;
+            font-weight: 700;
+            color: #171717;
+            line-height: 28px;
+            letter-spacing: -.5px;
+        }
+
+@keyframes loading {
+    0%,100% {
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -o-transform: scale(0.8);
+        transform: scale(0.8);
+        opacity: 1
+    }
+
+    50% {
+        -webkit-transform: scale(1.5);
+        -moz-transform: scale(1.5);
+        -o-transform: scale(1.5);
+        transform: scale(1.5);
+        opacity: 1
+    }
+}

@@ -1,0 +1,29 @@
+﻿#footer, .footer {
+    margin-top: 0 !important;
+    border-top: 0;
+    padding-top: 0;
+}
+
+    .footer, .footer .inner {
+        background: #fff;
+    }
+
+        .footer .inner {
+            padding: 20px 0;
+            -webkit-box-shadow: unset;
+            box-shadow: unset;
+        }
+
+        .footer, .footer .inner {
+            background: #fff;
+        }
+
+            .footer .copyright {
+                font-weight: 400;
+                color: #aaa;
+                line-height: 16px;
+                text-align: center;
+                font-style: normal;
+                font-size: 12px;
+                letter-spacing: 0;
+            }

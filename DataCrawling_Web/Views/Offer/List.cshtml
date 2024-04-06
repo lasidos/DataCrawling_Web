@@ -1,0 +1,132 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    @RenderPage("~/Views/Shared/_Header.cshtml", Model)
+    <link href="~/Resource/Css/Offer/List.css" rel="stylesheet" />
+    <script src="~/Resource/Js/Offer/List.js"></script>
+}
+
+@section Notice{
+    @RenderPage("~/Views/Shared/_Notice.cshtml")
+}
+
+@section Content{
+    <div id="container">
+        <div class="List Content">
+            <div class="topHdWrap blind">
+                <h2 class="req_hd_2">의뢰 리스트</h2>
+            </div>
+            <div class="secRequestList">
+                <div class="artJobProcess">
+                    <h3 class="req_hd_3">@ViewBag.Subject 의뢰절차</h3>
+                    <div class="jobProcess">
+                        <ol>
+                            <li class="sp_resist_m step_1">의뢰서<br><em>작성</em> 및 <em>결제</em></li>
+                            <li class="sp_resist_m step_2">헤드헌팅 서비스 부서<br><em>검토</em> / <em>승인</em></li>
+                            <li class="sp_resist_m step_3">헤드헌팅 회사에서<br><em>후보자 추천</em></li>
+                            <li class="sp_resist_m step_4">추천받은 후보자<br><em>검토</em> / <em>면접</em></li>
+                            <li class="sp_resist_m step_5"><em>채용 확정</em><br>(수수료 정산)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="dvReqAuth">
+                <div class="btnWrap">
+                    <a href="/Offer/Terms" onclick="GA_Event('인적성검사_PC','신청하기','신청하기_인성역량검사');Job_DB_window_Scroll(this.href, '700', '650'); return false;" target="_self" title="새창 열림" class="btnType01">신청하기</a>
+                </div>
+            </div>
+            <div class="artRequestList">
+                <h3 class="req_hd_3">의뢰 목록</h3>
+                <div class="mtcTplTab">
+                    <ul class="tabItems">
+                        <li value="0" class="on"><a href="javascript:;">전체</a></li>
+                        <li value="1" class=""><a href="javascript:;">접수대기</a></li>
+                        <li value="2" class=""><a href="javascript:;">진행중</a></li>
+                        <li value="3" class=""><a href="javascript:;">마감</a></li>
+                        <li value="4" class=""><a href="javascript:;">종료</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="headerWrap">
+                <h3 class="numBx"> <span>총 <b class="num">27</b>건</span></h3>
+                <ul class="sort-list">
+                    <li class="sort-list-item">
+                        <button type="button" class="sort-list-btn qnaSpB devBtnOrderType on" data-ordertype="1">최신순</button>
+                    </li>
+                    <li class="sort-list-item">
+                        <button type="button" class="sort-list-btn qnaSpB devBtnOrderType " data-ordertype="3">인기순</button>
+                    </li>
+                    <li class="sort-list-item">
+                        <button type="button" class="sort-list-btn qnaSpB devBtnOrderType " data-ordertype="2">좋아요</button>
+                    </li>
+                    <li class="sort-list-item">
+                        <button type="button" class="sort-list-btn qnaSpB devBtnOrderType " data-ordertype="4">댓글순</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="listWrap">
+                <ul>
+                    @for (int i = 0; i < 10; i++)
+                    {
+                        <li>
+                            <div class="coWrap">
+                                <p class="tit">인성역량검사</p>
+                            </div>
+                            <div class="titWrap">
+                                <p class="desc">성격, 흥미, 역량, 가치관, 진로성숙도를 심층 분석하여, 적합한 직업 및 적성을 선택할 수 있게 하는 검사</p>
+                                <div class="etc">
+                                    <span>153문항/20분</span><span>모바일 시행 가능</span><span class="highlight">잡코리아 입사지원 시 첨부 가능</span>
+                                </div>
+                            </div>
+                            <div class="priceWrap">
+                                <em>@(new Random().Next(0, 100) % 2 ==0 ? "접수대기":"진행중")</em>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            @*<div class="art-no-data">
+                    <p>리스트가 없습니다.</p>
+                </div>*@
+        </div>
+        <div class="testNotice">
+            <h5 class="hdTit">검사 유의사항</h5>
+            <ul>
+                <li>모든 검사 실시는 결제일로부터 한 달까지 유효합니다. (이벤트성 검사 예외)</li>
+                <li>검사 결과는 검사 완료일로부터 1년 까지 열람 가능하며, 1년 후에는 결과가 삭제 됩니다.</li>
+                <li>입사지원시 인성역량검사만 첨부 가능합니다. (온라인 입사지원 시 가능)</li>
+            </ul>
+
+            <h5 class="hdTit">검사 실시 요령</h5>
+            <ul>
+                <li>안정된 분위기에서 긴장을 풀고 정직하게 검사를 실시하세요.</li>
+                <li>모든 검사는 시간을 준수하여야 하며, 종료된 검사는 재검사가 되지 않습니다.</li>
+                <li>찍는 식의 답안처리는 도움이 되지 않을 뿐 아니라, 자신을 정확하게 분석할 수 없습니다.</li>
+                <li>제출완료된 전 단계 답안은 수정이 불가능하오니, 신중하게 답안을 선택하세요.</li>
+                <li>검사창이 열리지 않을 경우, 아래 방법을 확인해 보세요. <br>(브라우저의 도구 열기 -&gt; 인터넷 옵션 -&gt; 고급탭의 '타사의 브라우저 확장 기능 사용' 체크 해제)</li>
+            </ul>
+
+        </div>
+        <div class="testContactWrap">
+            <div class="stTopWrap">
+                <h4 class="hd"><span>문의 및 결제방법</span></h4>
+            </div>
+            <dl>
+                <dt>문의전화</dt>
+                <dd><span class="tel">1588-9350</span><a href="mailto:helpdesk@jobkorea.co.kr">helpdesk@jobkorea.co.kr</a></dd>
+                <dt>결제방법</dt>
+                <dd>신용카드 결제, 간편결제, 휴대폰 결제</dd>
+            </dl>
+        </div>
+    </div>
+}
+
+@section MoalLoding{
+    @RenderPage("~/Views/Shared/_MoalLoding.cshtml")
+}
+
+@section Footer{
+    @RenderPage("~/Views/Shared/_Footer_Type2.cshtml")
+}

@@ -1,0 +1,87 @@
+﻿@using DataCrawling_Web.BSL.Authentication
+
+<link href="~/Resource/Css/_Header.css" rel="stylesheet" />
+
+<div class="corporate-header">
+    <div class="inner">
+        <div class="top-menu clearfix">
+            <h1><a href="/"></a></h1>
+            <ul class="top-menu-list clearfix">
+                @if (!string.IsNullOrEmpty(AuthUser.M_ID))
+                {
+                    <li>
+                        <a href="javascript:;" class="top-menu-modal-button">@(Model.Name)님</a>
+                        <div class="top-menu-modal management-modal">
+                            <ul>
+                                <li><div class="id">@Model.UserID</div></li>
+                                <li><a href="/Recruit/Co_Read/C/12378789" target="_blank">기업정보보기</a></li>
+                                <li><a href="/Corp/Info/Company">기업정보관리</a></li>
+                                <li><a href="/Corp/Info/Member">회원정보관리</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="/Help/Corporation">고객센터</a></li>
+                    <li><a href="/Login/Logout.asp">로그아웃</a></li>
+                }
+                else
+                {
+                    <li><a href="/Join/Regist">회원가입</a></li>
+                    <li><a href="/Help/Corporation">고객센터</a></li>
+                    <li class="devGoLogin"><a href="/Login/Nid_Login">로그인</a></li>
+                }
+            </ul>
+        </div>
+        <div class="navigation clearfix" style="display:block;">
+            <div class="left-menu">
+                <ul class="left-menu-list clearfix">
+                    <li><a href="javascript:;" class="button-all-menu"><i></i></a></li>
+                    <li class="home active"><a href="/">홈</a></li>
+                    <li class="devRecruit">
+                        <a href="/Data/ApiList" data-access-verification-required="true">데이터 API</a>
+                        <div class="sub-nav">
+                            <div class="category">
+                                <ul>
+                                    <li><a href="/Data/ApiList?PubType=1">공공 API</a></li>
+                                    <li><a href="/Data/ApiList?PubType=2">마이플랫폼 API</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="devApplicant">
+                        <a href="/Corp/GiMng/List">데이터 관리</a>
+                        <div class="sub-nav">
+                            <div class="category">
+                                <ul>
+                                    <li><a href="/Corp/GIMng/List">스크랩 데이터 관리</a></li>
+                                    <li><a href="/Corp/Applicant/List">웹 자동화 관리</a></li>
+                                    <li><a href="/Corp/Calendar/Month">업무 자동화 관리</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    @*<li class="devRecruit"><a href="/Corp/Recruit/Regist" data-access-verification-required="true">웹 개발·수정</a></li>*@
+                    <li>
+                        <a href="/Offer/List?menu=scrap">스크랩핑 의뢰 <span class="bubble">자동화의 시작</span></a>
+                    </li>
+                    <li class="devRecruit">
+                        <a href="/Offer/List?menu=prs" data-access-verification-required="true">웹·업무 자동화 의뢰</a>
+                        <div class="sub-nav">
+                            <div class="category">
+                                <ul>
+                                    <li><a href="/Corp/Offer/List">웹 자동화 의뢰</a></li>
+                                    <li class="devGoLogin"><a href="/Corp/Offer/Terms">업무 자동화 의뢰</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-menu">
+                <ul class="right-menu-list clearfix">
+                    <li><a href="/Help/Index?sc=History">유료 이용내역</a></li>
+                    <li><a href="/Help/Index?sc=Option">서비스 상품안내</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

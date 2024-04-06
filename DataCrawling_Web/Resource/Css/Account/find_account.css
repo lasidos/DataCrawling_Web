@@ -1,0 +1,146 @@
+﻿.find-info {
+    margin-top: 75px;
+}
+
+.box_find {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    letter-spacing: 0;
+}
+
+    .box_find .link_prove {
+        display: block;
+        position: relative;
+        padding-right: 30px;
+        font-size: 13px;
+        text-decoration: none;
+    }
+
+        .box_find .link_prove .tit_prove {
+            font-weight: normal;
+            font-size: 18px;
+            color: #191919;
+        }
+
+        .box_find .link_prove .desc_prove {
+            padding-top: 6px;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .box_find .link_prove .ico_arr {
+            position: absolute;
+            right: 0;
+            top: 30%;
+            width: 20px;
+            height: 20px;
+            background-size: contain;
+        }
+
+.ico_account {
+    display: inline-block;
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -9999px;
+    vertical-align: top;
+    background: url('../../Images/Common/right_arrow.png');
+}
+
+.txt_info {
+    font-weight: 400;
+    line-height: 25px;
+    color: #999;
+    letter-spacing: -0.03em;
+}
+
+.box_tf {
+    position: relative;
+    padding-bottom: 3px;
+}
+
+    .box_tf .tf_g {
+        width: 100%;
+        height: 47px;
+        padding: 10px 0 5px;
+        border: solid #ccc;
+        border-width: 0 0 2px;
+        font-size: 15px;
+        line-height: 25px;
+        color: #191919;
+        background-color: transparent;
+        letter-spacing: 0;
+        box-sizing: border-box;
+        outline: 0 none;
+        caret-color: #191919;
+        opacity: 1;
+    }
+
+    .box_tf .util_tf {
+        position: absolute;
+        right: 0;
+        top: 2px;
+        min-width: 55px;
+        height: 43px;
+        font-size: 0;
+        text-align: right;
+    }
+
+    .box_tf .btn_round {
+        margin: 7px 0 0 7px;
+    }
+
+    .box_tf .btn_round {
+        display: inline-block;
+        height: 30px;
+        padding: 0 13px;
+        border: 1px solid rgba(0,0,0,0.2);
+        border-radius: 32px;
+        font-size: 14px;
+        line-height: 29px;
+        color: #191919;
+        vertical-align: top;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .box_tf.error .tf_g {
+        border-color: #ccc;
+    }
+
+    .box_tf:nth-child(2) {
+    }
+
+    .box_tf .box_ti {
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+.find-info .box_tf + .box_tf, .find-cont .box_tf + .box_tf {
+    margin-top: 35px;
+}
+
+.confirm_btn {
+    margin-top: 65px;
+}
+
+.find-cont {
+    margin-top: 55px;
+}
+
+.find-completed {
+    margin-top: 85px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .find-completed a {
+        text-decoration: underline;
+        color: #2c88de;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+
+.confirm_btn.find-btn {
+    margin-top: 105px;
+}

@@ -1,0 +1,492 @@
+﻿#wrap #container {
+    width: 1260px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.sort-select-box {
+    position: relative;
+    z-index: 4;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    justify-content: space-between;
+    border-bottom: 1px solid #ebebeb;
+}
+
+    .sort-select-box .drop-down-box {
+        margin-top: 6px;
+        margin-left: 12px;
+    }
+
+        .sort-select-box .drop-down-box .button-box {
+            position: relative;
+            float: left;
+        }
+
+            .sort-select-box .drop-down-box .button-box .sort-button {
+                display: block;
+                padding-right: 20px;
+                text-align: left;
+                min-width: 82px;
+                font-size: 13px;
+                letter-spacing: 0;
+                line-height: 20px;
+                background: url(../../image/commons/arrow_14x20.png) no-repeat 100%;
+            }
+
+            .sort-select-box .drop-down-box .button-box .sort-select-modal.check-version {
+                left: -14px;
+            }
+
+            .sort-select-box .drop-down-box .button-box .sort-select-modal {
+                min-width: 100%;
+                margin-top: 12px;
+            }
+
+            .sort-select-box .drop-down-box .button-box:nth-child(n+2) {
+                margin-left: 20px;
+            }
+
+    .sort-select-box .search-box {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: flex;
+        width: auto;
+        margin-right: 0;
+    }
+
+        .sort-select-box .search-box input {
+            width: 220px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 4px 33px 4px 6px;
+            border-radius: 4px;
+            border: 1px solid #d7d7d7;
+            display: inline-block;
+            height: 32px;
+            margin-left: 20px;
+        }
+
+    .sort-select-box .search-button {
+        position: absolute;
+        top: 0;
+        right: 5px;
+        display: block;
+        width: 28px;
+        height: 30px;
+        background: url(../../image/commons/icon_search.png) no-repeat 50%;
+    }
+
+
+.mtcSubNotice .noticeContent {
+    padding: 30px;
+    border-radius: 15px;
+    background: #fff;
+    margin-top: 36px;
+}
+
+.mtcSubNotice div.topArea {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    justify-content: space-between;
+    border-bottom: none;
+    padding-bottom: 15px;
+    margin-bottom: -1px;
+}
+
+.noticeContent .topArea h2.subTits {
+    font-weight: 700;
+}
+
+.noticeContent .topArea .subTits {
+    float: left;
+}
+
+.subTits {
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    color: #000;
+}
+
+.noticeContent .topArea:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.mtcSubNotice .mtcTplTab {
+    margin-top: 0;
+}
+
+.mtcTplTab {
+    margin-top: 10px;
+    padding-left: 1px;
+}
+
+    .mtcTplTab .tabItems {
+        table-layout: fixed;
+        width: 100%;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+        -moz-box-orient: horizontal;
+        -moz-box-direction: normal;
+        flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        border-bottom: 1px solid #ebebeb;
+    }
+
+        .mtcTplTab .tabItems li {
+            display: table-cell;
+        }
+
+    .mtcTplTab ul.tabItems li {
+        min-width: 100px;
+        padding: 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+        .mtcTplTab ul.tabItems li:first-child {
+            padding-left: 0;
+        }
+
+        .mtcTplTab ul.tabItems li a {
+            display: block;
+            text-align: center;
+            font-size: 15px;
+            letter-spacing: -1px;
+            color: #333;
+            height: 34px;
+            line-height: 34px;
+            border: none;
+            padding: 0 20px;
+            background: #fff;
+        }
+
+        .mtcTplTab ul.tabItems li.on a {
+            border: none;
+            border-bottom: 3px solid #39f;
+            color: #39f;
+            z-index: 2;
+            background-color: #fff;
+            font-weight: 500;
+        }
+
+        .mtcTplTab ul.tabItems li a .verdana {
+            font-size: 16px;
+            letter-spacing: 0;
+            margin-left: 6px;
+            vertical-align: inherit;
+        }
+
+        .mtcTplTab ul.tabItems li.on a .verdana {
+            font-weight: 700;
+        }
+
+/*리스트*/
+.giListRow {
+    border-bottom: 1px solid #ebebeb;
+}
+
+    .giListRow .inner {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+        .giListRow .inner .rowWrap {
+            display: flex;
+            justify-content: space-between;
+            padding: 40px 12px;
+        }
+
+    .giListRow .state {
+        display: block;
+        font-size: 16px;
+        letter-spacing: 0;
+        line-height: 24px;
+        padding-bottom: 9px;
+        color: #666;
+    }
+
+    .giListRow .tit {
+        font-weight: 700;
+        overflow: hidden;
+        display: inline-block;
+        font-size: 20px;
+        letter-spacing: -0.5px;
+        color: #000;
+        max-width: 606px;
+        padding-right: 2px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        letter-spacing: -1px;
+        margin-top: 20px;
+    }
+
+    .giListRow .apyStatusBoard {
+        margin-top: 15px;
+        display: block;
+        width: 100%;
+        vertical-align: top;
+        color: #333;
+        padding: 0 20px 0 0;
+        vertical-align: top;
+        font-size: 13px;
+        letter-spacing: 0px;
+    }
+
+        .giListRow .apyStatusBoard span:not(:first-child):before {
+            content: "";
+            display: inline-block;
+            font-size: 10px;
+            letter-spacing: 0px;
+            width: 1px;
+            height: 10px;
+            background-color: #ccc;
+            margin: -2px 9px 0 8px;
+            vertical-align: middle;
+        }
+
+    .giListRow .btnFunc {
+        position: static;
+        margin: 40px 0 0;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -moz-box-align: center;
+        align-items: center;
+    }
+
+        .giListRow .btnFunc .btn_Tp_1 {
+            vertical-align: top;
+            display: inline-block;
+            font-size: 13px;
+            letter-spacing: 0;
+            width: auto;
+            height: 32px;
+            padding: 6px 15px;
+            line-height: 20px;
+            border: 1px solid #d7d7d7;
+            color: #333;
+            text-align: center;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+            .giListRow .btnFunc .btn_Tp_1 + .btn_Tp_1 {
+                margin-left: 10px;
+            }
+
+    .giListRow .inner-right {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+        .giListRow .inner-right .process-state {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+    .giListRow .process-state .procItem {
+        display: flex;
+        align-items: center;
+    }
+
+        .giListRow .process-state .procItem:not(:first-child):before {
+            content: "";
+            display: inline-block;
+            width: 16px;
+            height: 24px;
+            color: #d9d9d9;
+            top: 2px;
+            margin: 0 10px;
+            font-size: 15px;
+            letter-spacing: 0px;
+            position: relative;
+            background: url(../../image/commons/icon_arrow_right.png) 100% 100% no-repeat;
+        }
+
+        .giListRow .process-state .procItem input {
+            display: none;
+        }
+
+            .giListRow .process-state .procItem input + label .chkIcn {
+                background-color: #d9d9d9;
+                border-color: #d9d9d9;
+                display: inline-block;
+                position: relative;
+                top: 3px;
+                margin-right: 8px;
+                width: 18px;
+                height: 18px;
+                box-sizing: border-box;
+                border: 1px solid #dcdcdc;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                border-radius: 50%;
+            }
+
+                .giListRow .process-state .procItem input + label .chkIcn:before {
+                    content: "";
+                    width: 10px;
+                    height: 7px;
+                    display: inline-block;
+                    position: absolute;
+                    top: 5px;
+                    left: 3px;
+                    background: url(../../image/commons/mtc_sp_btn.png) no-repeat;
+                    background-position: -207px -54px;
+                }
+
+            .giListRow .process-state .procItem input:checked + label {
+                color: #333;
+                opacity: 1;
+                font-weight: bold;
+            }
+
+                .giListRow .process-state .procItem input:checked + label .chkIcn {
+                    border: 1px solid #333;
+                    background-color: #333;
+                    margin-right: 8px;
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    position: relative;
+                    box-sizing: border-box;
+                    -webkit-border-radius: 50%;
+                    -moz-border-radius: 50%;
+                    border-radius: 50%;
+                }
+
+                    .giListRow .process-state .procItem input:checked + label .chkIcn:before {
+                        content: '';
+                        width: 10px;
+                        height: 7px;
+                        display: inline-block;
+                        position: absolute;
+                        top: 5px;
+                        left: 3px;
+                        background: url(../../image/commons/mtc_sp_btn.png) no-repeat;
+                        background-position: -207px -54px;
+                    }
+
+        .giListRow .process-state .procItem label {
+            font-size: 14px;
+            letter-spacing: 0;
+            color: #424242;
+            opacity: .4;
+        }
+
+    .giListRow .tbStatus {
+        margin-top: 15px;
+        width: auto;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+        .giListRow .tbStatus .boardItem {
+            display: flex;
+            align-items: center;
+            margin-right: -22px;
+        }
+
+            .giListRow .tbStatus .boardItem li {
+                min-width: 95px;
+                text-align: center;
+                position: relative;
+            }
+
+                .giListRow .tbStatus .boardItem li:not(:first-child):before {
+                    background: #eee;
+                    content: "";
+                    display: block;
+                    width: 1px;
+                    height: 46px;
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    margin-top: -22px;
+                }
+
+                .giListRow .tbStatus .boardItem li .stepTit {
+                    font-size: 14px;
+                    letter-spacing: 0;
+                    color: #333;
+                    display: block;
+                    padding-bottom: 7px;
+                    font-weight: normal;
+                }
+
+                .giListRow .tbStatus .boardItem li .itemNum {
+                    font-size: 30px;
+                    letter-spacing: -.5px;
+                    line-height: 40px;
+                    color: #666;
+                }
+
+                    .giListRow .tbStatus .boardItem li .itemNum.none {
+                        color: #c3c3c3;
+                    }
+
+    .giListRow .statusBtm {
+        padding: 20px;
+        min-height: 22px;
+        max-height: 82px;
+        background-color: #f9fbfc;
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .giListRow .statusBtm .PaidSvc {
+        }
+
+        .giListRow .statusBtm .btmLink {
+            display: flex;
+            align-items: center;
+        }
+
+            .giListRow .statusBtm .btmLink li {
+                position: relative;
+                display: flex;
+            }
+
+                .giListRow .statusBtm .btmLink li + li:before {
+                    content: "";
+                    display: inline-block;
+                    width: 1px;
+                    height: 10px;
+                    background-color: #dfe0e0;
+                    margin: 0 9px 0 10px;
+                    vertical-align: middle;
+                    margin-top: 2px;
+                }

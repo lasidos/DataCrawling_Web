@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+
+    @* Meta Text 검색엔진 크롤링 페이지별 섹션 *@
+    @RenderSection("Meta", false)
+    <title>@ViewBag.Title - WEMEET</title>
+
+    @* CSS영역 *@
+    @*-----------------------------------------------------------------------------*@
+    @RenderPage("~/Views/Base/_Styles.cshtml")
+    @RenderSection("PageStyles", required: false)
+
+    @* JS 영역 *@
+    @*-----------------------------------------------------------------------------*@
+    @RenderPage("~/Views/Base/_CommonJS.cshtml")
+    @RenderSection("HeadScripts", required: false)
+</head>
+<body class="@ViewBag.BodyClass">
+    <div id="wrap">
+        @* Html 영역 *@
+        @*-----------------------------------------------------------------------------*@
+        @RenderSection("Header", required: false)
+        @RenderSection("Notice", required: false)
+        @RenderSection("Left", required: false)
+        @RenderSection("BeforeContent", required: false)
+        @RenderSection("Content")
+        @RenderSection("Right", required: false)
+        @RenderSection("AfterContent", required: false)
+        @RenderSection("Footer", required: false)
+        @RenderSection("MoalLoding", required:false)
+        @* 공통 히든값 *@
+        <!--@RenderPage("~/Views/Base/_HiddenValue.cshtml")-->
+        @* JS 영역 *@
+        @*-----------------------------------------------------------------------------*@
+        @RenderSection("PageScripts", required: false)
+    </div>
+</body>
+</html>
