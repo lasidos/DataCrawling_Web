@@ -104,9 +104,15 @@ namespace DataCrawling_Web.DSL.Account
             }
         }
 
-        public string CheckExist(string email)
+        public IEnumerable<UserInfo> CheckExist(string email)
         {
-            return null;
+            var param = new DynamicParameters();
+            param.Add("@EMAIL", email, DbType.String, size: 100);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                return conn.Query<UserInfo>(param: param, commandType: CommandType.StoredProcedure
+                    , sql: "DBO.USP_AuthUser_CHECK_S");
+            }
         }
 
         public IEnumerable<UserInfo> RegisterMember(UserInfo user)

@@ -1,17 +1,10 @@
-﻿using DataCrawling_Web.BSL.Common;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using DataCrawling_Web.BSL.Authentication;
+using DataCrawling_Web.BSL.Common;
+using DataCrawling_Web.BSL.Extentions;
 using DataCrawling_Web.BSL.Smtp;
 using DataCrawling_Web.DSL.Account;
-using DataCrawling_Web.BSL.Extentions;
-using System.Linq;
-using System.Runtime.Remoting;
-using DataCrawling_Web.BSL.Authentication;
 using System;
+using System.Web.Mvc;
 
 namespace DataCrawling_Web.Controllers
 {
@@ -72,8 +65,13 @@ namespace DataCrawling_Web.Controllers
         // 이메일 발송
         public JsonResult PushCode(string email)
         {
-            // 기존 회원인지 체크
+            string resultCode = "", Message = "";
 
+            // 기존 회원인지 체크
+            if (new Account().CheckExist(Utility.Encrypt_AES(email)).IsAny())
+            {
+                return Json(new { resultCode = "-1", Message = "이미 가입된 이메일 계쩡입니다.\n비밀번호 찾기를 이용해주세요." });
+            }
 
             // 인증코드 생성
             string passCode = Utility.RndString8();
@@ -83,7 +81,7 @@ namespace DataCrawling_Web.Controllers
             string content = string.Join("\n", Utility.ReadAllText(Server.MapPath("~/Resource/Text/PassCode.txt")));
             content = string.Format(content, email, passCode);
 
-            string resultCode = "", Message = "";
+
             string result = new Smtp().SendMail(title, content, email);
             if (result == "ok")
             {
