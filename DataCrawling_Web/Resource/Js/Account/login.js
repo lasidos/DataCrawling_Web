@@ -25,7 +25,7 @@ function AccountLogin() {
             alert('유효하지 않은 이메일 주소입니다.');
             $('.account').focus();
             return;
-        }
+    }
     }
     if (password == "") {
         alert('비밀번호가 입력되지 않았습니다.');
@@ -36,6 +36,7 @@ function AccountLogin() {
     $.ajax({
         type: 'POST',
         async: false,
+        type: 'post',
         url: '/Login/UserLogin',
         data: {
             email: email,
@@ -51,7 +52,7 @@ function AccountLogin() {
             }
         },
         error: function (response) {
-            alert(response);
+            alert(response.responseText);
         }
     });
 }

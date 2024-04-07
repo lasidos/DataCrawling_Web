@@ -272,6 +272,40 @@ namespace DataCrawling_Web.Controllers
             }
         }
 
+        public string UserPassword(string pw)
+        {
+            userPw = pw;
+            return "ok";
+        }
+
+        public string UserProfile(string name, string tel, string gender)
+        {
+            userName = name;
+            if (gender == "Male") gender = "남성";
+            else if (gender == "Female") gender = "여성";
+            else gender = "선택안함";
+
+            string result = new Account().RegisterMember(
+                                        AuthUser.Encrypt_AES(certEmail)
+                                        , AuthUser.Encrypt_SHA(userPw)
+                                        , AuthUser.Encrypt_AES(name)
+                                        , AuthUser.Encrypt_AES(tel)
+                                        , AuthUser.Encrypt_AES(gender)
+                                        , AuthUser.Encrypt_AES(acceptConditions)
+                                        , AuthUser.Encrypt_AES("0"));
+            if (result.Split('|')[0] == "0")
+            {
+                JArray jarr = JArray.Parse(result.Split('|')[1]);
+                if (Convert.ToInt32(jarr[0]["Cnt"].ToString()) > 0) return "ok";
+                else return "not exist";
+            }
+            else
+            {
+                if (result.Split('|').Length > 1) return string.Format("-1|{0}", result.Split('|')[1]);
+                else return string.Format("-1|{0}", result);
+            }
+        }
+
         #endregion
     }
 }

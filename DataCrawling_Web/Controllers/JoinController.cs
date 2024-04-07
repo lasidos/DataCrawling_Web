@@ -2,6 +2,8 @@
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using DataCrawling_Web.BSL.Smtp;
 using DataCrawling_Web.DSL.Account;
