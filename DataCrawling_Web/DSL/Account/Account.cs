@@ -120,7 +120,7 @@ namespace DataCrawling_Web.DSL.Account
             param.Add("@TermAgree", Utility.Encrypt_AES(user.TermAgree.ToString()));
             param.Add("@MemberType", Utility.Encrypt_AES(user.MemberType));
             using (IDbConnection conn = new SqlConnection(CONN_STR))
-            {
+        {
                 return conn.Query<UserInfo>(param: param, commandType: CommandType.StoredProcedure
                     , sql: "DBO.USP_AuthUser_I");
             }

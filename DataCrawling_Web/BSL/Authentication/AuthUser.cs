@@ -271,7 +271,7 @@ namespace DataCrawling_Web.BSL.Authentication
             HttpContext objContext = HttpContext.Current;
             HttpCookie objCookie = objContext.Response.Cookies["MK%5FUser"];
             objCookie.Domain = redirect;
-
+            
             objContext.Response.Cookies["MK%5FUser"]["M%5ID"] = Utility.Encrypt_AES(Mem_Id).Trim();
             objContext.Response.Cookies["MK%5FUser"]["Mem%5Type%5Code"] = Utility.Encrypt_AES(Mem_Type_Code).Trim();
             if (!String.IsNullOrEmpty(Token)) objContext.Response.Cookies["MK%5FUser"]["Mem%5DI"] = Utility.Encrypt_AES(Token).Trim();
