@@ -103,48 +103,49 @@ namespace DataCrawling_Web.Controllers
         public string findPassword(string email)
         {
             int cnt = 0;
-            string result = new Account().CheckExist(AuthUser.Encrypt_AES(email));
-            if (result.Split('|')[0] == "0")
-            {
-                JArray jarr = JArray.Parse(result.Split('|')[1]);
-                foreach (JObject jobj in jarr)
-                {
-                    cnt = Convert.ToInt32(jobj["cnt"].ToString());
-                }
+            //string result = new Account().CheckExist(AuthUser.Encrypt_AES(email));
+            //if (result.Split('|')[0] == "0")
+            //{
+            //    JArray jarr = JArray.Parse(result.Split('|')[1]);
+            //    foreach (JObject jobj in jarr)
+            //    {
+            //        cnt = Convert.ToInt32(jobj["cnt"].ToString());
+            //    }
 
-                if (cnt > 0)
-                {
-                    string passCode = null;
-                    for (int i = 0; i < 8; i++)
-                    {
-                        passCode += Utility.GetRandomNumber(0, 9);
-                    }
+            //    if (cnt > 0)
+            //    {
+            //        string passCode = null;
+            //        for (int i = 0; i < 8; i++)
+            //        {
+            //            passCode += Utility.GetRandomNumber(0, 9);
+            //        }
 
-                    //발신자 및 수신자 메일 설정
-                    string title = "MyPlatform 인증메일입니다.";
-                    string content = string.Join("\n", Utility.ReadAllText(Server.MapPath("~/Resource/Text/Account/PassCode.txt")));
-                    content = string.Format(content, email, passCode);
+            //        //발신자 및 수신자 메일 설정
+            //        string title = "MyPlatform 인증메일입니다.";
+            //        string content = string.Join("\n", Utility.ReadAllText(Server.MapPath("~/Resource/Text/Account/PassCode.txt")));
+            //        content = string.Format(content, email, passCode);
 
-                    result = new Account().PushPasscode(AuthUser.Encrypt_AES(title), AuthUser.Encrypt_AES(content),
-                        AuthUser.Encrypt_AES(email), AuthUser.Encrypt_AES(passCode));
-                    if (result.Split('|')[0] == "0")
-                    {
-                        findEmail = email;
-                        return "ok";
-                    }
-                    else
-                    {
-                        if (result.Split('|').Length > 1) return string.Format("-1|{0}", result.Split('|')[1]);
-                        else return string.Format("-1|{0}", result);
-                    }
-                }
-                else return "fail";
-            }
-            else
-            {
-                if (result.Split('|').Length > 1) return string.Format("-1|{0}", result.Split('|')[1]);
-                else return string.Format("-1|{0}", result);
-            }
+            //        result = new Account().PushPasscode(AuthUser.Encrypt_AES(title), AuthUser.Encrypt_AES(content),
+            //            AuthUser.Encrypt_AES(email), AuthUser.Encrypt_AES(passCode));
+            //        if (result.Split('|')[0] == "0")
+            //        {
+            //            findEmail = email;
+            //            return "ok";
+            //        }
+            //        else
+            //        {
+            //            if (result.Split('|').Length > 1) return string.Format("-1|{0}", result.Split('|')[1]);
+            //            else return string.Format("-1|{0}", result);
+            //        }
+            //    }
+            //    else return "fail";
+            //}
+            //else
+            //{
+            //    if (result.Split('|').Length > 1) return string.Format("-1|{0}", result.Split('|')[1]);
+            //    else return string.Format("-1|{0}", result);
+            //}
+            return null;
         }
 
         public string ChangePassword(string pw)
@@ -229,13 +230,14 @@ namespace DataCrawling_Web.Controllers
 
         public string CheckExist(string email)
         {
-            string result = new Account().CheckExist(AuthUser.Encrypt_AES(email));
-            if (result.Split('|')[0] == "0") return string.Format("0|{0}", result.Split('|')[1]);
-            else
-            {
-                if (result.Split('|').Length > 1) return string.Format("-1|{0}", result.Split('|')[1]);
-                else return string.Format("-1|{0}", result);
-            }
+            //string result = new Account().CheckExist(AuthUser.Encrypt_AES(email));
+            //if (result.Split('|')[0] == "0") return string.Format("0|{0}", result.Split('|')[1]);
+            //else
+            //{
+            //    if (result.Split('|').Length > 1) return string.Format("-1|{0}", result.Split('|')[1]);
+            //    else return string.Format("-1|{0}", result);
+            //}
+            return null;
         }
 
         public string PushPasscode(string email)
