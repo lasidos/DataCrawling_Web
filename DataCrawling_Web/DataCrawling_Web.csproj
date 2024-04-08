@@ -155,8 +155,8 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\JoinController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\Auth\JoinController.cs" />
+    <Compile Include="Controllers\Auth\LoginController.cs" />
     <Compile Include="Controllers\OfferController.cs" />
     <Compile Include="Controllers\TextUserController.cs" />
     <Compile Include="DSL\Files\GGRpSvc.cs" />
@@ -212,6 +212,7 @@
     <Content Include="Resource\Image\Account\kakaolink_btn_small.png" />
     <Content Include="Resource\Image\Account\login-img.png" />
     <Content Include="Resource\Image\Account\naver.png" />
+    <Content Include="Resource\Image\Commons\userProfile.jpg" />
     <Content Include="Resource\Js\Account\create_account.js" />
     <Content Include="Resource\Js\Account\find_account.js" />
     <Content Include="Resource\Js\Account\find_password.js" />
@@ -326,16 +327,16 @@
     <Content Include="Views\Offer\Terms.cshtml" />
     <Content Include="Views\Offer\Request.cshtml" />
     <Content Include="Scripts\underscore.min.map" />
-    <Content Include="Views\Login\Nid_Login.cshtml" />
-    <Content Include="Views\Join\Regist.cshtml" />
+    <Content Include="Views\Auth\Login\Nid_Login.cshtml" />
+    <Content Include="Views\Auth\Join\Regist.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\Help\History.cshtml" />
     <Content Include="Views\Help\Corporation.cshtml" />
-    <Content Include="Views\Join\_Regist_Step1.cshtml" />
-    <Content Include="Views\Join\_Regist_Step2.cshtml" />
-    <Content Include="Views\Join\_Regist_Step3.cshtml" />
-    <Content Include="Views\Join\_Regist_Step4.cshtml" />
-    <Content Include="Views\Join\_Regist_Step5.cshtml" />
+    <Content Include="Views\Auth\Join\_Regist_Step1.cshtml" />
+    <Content Include="Views\Auth\Join\_Regist_Step2.cshtml" />
+    <Content Include="Views\Auth\Join\_Regist_Step3.cshtml" />
+    <Content Include="Views\Auth\Join\_Regist_Step4.cshtml" />
+    <Content Include="Views\Auth\Join\_Regist_Step5.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

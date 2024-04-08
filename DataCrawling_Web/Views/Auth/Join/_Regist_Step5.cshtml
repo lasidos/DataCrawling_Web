@@ -1,8 +1,8 @@
 ﻿<script type="text/javascript">
-    $(window).ready(function () {
+    $(function () {
         // 가입하기 완료
         $('.confirm_btn.completed .btn_g').click(function () {
-            location.href = "/Account/login";
+            location.href = "/Auth/Login/Nid_Login";
         });
     });
 </script>
@@ -20,7 +20,7 @@
         <form class="sign-completed">
             <div class="frm-body">
                 <div class="profile-info">
-                    <img src="~/Resource/Images/Common/userProfile.jpg" />
+                    <img src="~/Resource/Image/Commons/userProfile.jpg" />
                     <span>@ViewBag.Email</span>
                     <span class="user-name">@ViewBag.Name</span>
                 </div>

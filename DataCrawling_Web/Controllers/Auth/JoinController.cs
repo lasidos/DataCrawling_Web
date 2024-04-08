@@ -4,16 +4,16 @@ using DataCrawling_Web.BSL.Extentions;
 using DataCrawling_Web.BSL.Smtp;
 using DataCrawling_Web.DSL.Account;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 
-namespace DataCrawling_Web.Controllers
+namespace DataCrawling_Web.Controllers.Auth
 {
     public class JoinController : Controller
     {
-        // GET: Join
         public ActionResult Regist()
         {
-            return View();
+            return View("~/Views/Auth/Join/Regist.cshtml");
         }
 
         public ActionResult Step(string Step)
@@ -23,23 +23,26 @@ namespace DataCrawling_Web.Controllers
             {
                 case "1":
                     title = "약관동의";
-                    page = "_Regist_Step1";
+                    page = "~/Views/Auth/Join/_Regist_Step1.cshtml";
                     break;
                 case "2":
                     title = "이메일 인증";
-                    page = "_Regist_Step2";
+                    page = "~/Views/Auth/Join/_Regist_Step2.cshtml";
                     break;
                 case "3":
                     title = "비밀번호 설정";
-                    page = "_Regist_Step3";
+                    page = "~/Views/Auth/Join/_Regist_Step3.cshtml";
                     break;
                 case "4":
                     title = "프로필 설정";
-                    page = "_Regist_Step4";
+                    page = "~/Views/Auth/Join/_Regist_Step4.cshtml";
                     break;
                 case "5":
                     title = "가입하기 완료";
-                    page = "_Regist_Step5";
+                    page = "~/Views/Auth/Join/_Regist_Step5.cshtml";
+                    ViewBag.Email = AuthUser.JoinMember.User_ID;
+                    ViewBag.Name = AuthUser.JoinMember.User_Name;
+                    AuthUser.JoinMember = null;
                     break;
             }
             ViewBag.Title = title;
@@ -134,6 +137,7 @@ namespace DataCrawling_Web.Controllers
         [HttpPost]
         public JsonResult UserProfile(string name, string tel, string gender)
         {
+            string resultCode = "", Message = "";
             AuthUser.JoinMember.User_Name = name;
             AuthUser.JoinMember.Phone = tel;
             AuthUser.JoinMember.Gender = gender;
@@ -143,12 +147,16 @@ namespace DataCrawling_Web.Controllers
             var result = new Account().RegisterMember(AuthUser.JoinMember);
             if (result.IsAny())
             {
-                AuthUser.JoinMember = null;
+                resultCode = "0";
+                Message = "5";
+            }
+            else
+            {
+                resultCode = "-1";
+                Message = "회원가입에 실패하였습니다.\n문제가 지속될시 관리자에게 문의바랍니다.";
             }
 
-            ViewBag.Email = AuthUser.JoinMember.User_ID;
-            ViewBag.Name = AuthUser.JoinMember.User_Name;
-            return Json(new { resultCode = "0", Message = "5" });
+            return Json(new { resultCode, Message });
         }
 
         #endregion

@@ -430,7 +430,7 @@ input:checked[type='checkbox'] {
 
     .profile-info .user-name {
         font-size: 14px;
-        margin-top: 3px;
+        margin-top: 10px;
     }
 
 .confirm_btn.completed {

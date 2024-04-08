@@ -5,10 +5,6 @@
 }
 
 @section Content{
-    <input type="hidden" id="redirect" value="@ViewBag.redirect" />
-}
-
-@section Content{
     <div class="container">
         <div class="login-img">
             <img src="~/Resource/Image/Account/login-img.png" />
@@ -26,7 +22,7 @@
                 </div>
                 <div class="info-user">
                     <div>
-                        <a href="/Account/create_account">
+                        <a href="/Auth/Join/Regist">
                             <span>회원가입</span>
                         </a>
                     </div>
@@ -60,4 +56,7 @@
     </div>
 
     <link href="~/Resource/Css/Account/login.css" rel="stylesheet" />
+    <script src="~/Resource/Js/Account/login.js"></script>
+
+    <input type="hidden" id="redirect" value="@ViewBag.redirect" />
 }

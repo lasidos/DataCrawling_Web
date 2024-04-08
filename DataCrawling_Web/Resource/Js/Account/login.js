@@ -25,8 +25,9 @@ function AccountLogin() {
             alert('유효하지 않은 이메일 주소입니다.');
             $('.account').focus();
             return;
+        }
     }
-    }
+
     if (password == "") {
         alert('비밀번호가 입력되지 않았습니다.');
         $('.password').focus();
@@ -44,7 +45,7 @@ function AccountLogin() {
             redirect: $('#redirect').val()
         },
         success: function (data) {
-            if (data.msg == "0k") {
+            if (data.msg == "OK") {
                 location.href = data.redirect;
             } else {
                 var msg = data.msg.replace("\\n", "\n");

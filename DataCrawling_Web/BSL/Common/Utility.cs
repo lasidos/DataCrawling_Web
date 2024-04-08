@@ -272,7 +272,7 @@ namespace DataCrawling_Web.BSL.Common
         /// </summary>
         public static string RndString8()
         {
-            return rd.Next(0, 99999999).ToString("D5");
+            return rd.Next(10000000, 99999999).ToString("D5");
 
         }
         #endregion

@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using System.Web.Mvc;
 
-namespace DataCrawling_Web.Controllers
+namespace DataCrawling_Web.Controllers.Auth
 {
     public class LoginController : BaseController
     {
@@ -21,10 +21,10 @@ namespace DataCrawling_Web.Controllers
 
         #region 로그인
 
-        public ActionResult Nid_Login(string redirectUrl = "https://www.myplatformkorea.com")
+        public ActionResult Nid_Login(string redirectUrl = "/")
         {
             ViewBag.redirect = redirectUrl;
-            return View();
+            return View("~/Views/Auth/Login/Nid_Login.cshtml");
         }
 
         [HttpPost]

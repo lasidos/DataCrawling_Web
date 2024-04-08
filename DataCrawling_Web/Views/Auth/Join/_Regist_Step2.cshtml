@@ -12,8 +12,11 @@
         stepView(1);
     }
 
+    var sending = false;
     var view = '@ViewBag.PassCode' == '' ? false : true;
     $(function () {
+        $('#step').val('2');
+
         if (view) {
             $('.box_tf:nth-child(2)').css('display', 'block');
             checkValid();
@@ -29,39 +32,24 @@
             checkValid();
         });
 
+        $(".util_tf .btn_round").keydown(function (e) {
+            e.preventDefault();
+            if (e.keyCode && e.keyCode == 13) {
+                setTimeout(function () {
+                    $('.modal').addClass('active');
+                    pushCode();
+                }, 0);
+            }
+        });
+
         // 이메일 발송
-        $('.util_tf .btn_round').click(function () {
+        $('.util_tf .btn_round').click(function (e) {
+            e.preventDefault();
             if ($('.txt_info').css("display") != "none") {
                 return;
             }
-
             $('.modal').addClass('active');
-            var email = $('#input-email').val();
-
-            setTimeout(function () {
-                $.ajax({
-                    type: "POST",
-                    async: false,
-                    url: '/Join/PushCode',
-                    data: {
-                        email: email
-                    },
-                    success: function (data) {
-                        if (data.resultCode == '0') {
-                            $('.box_tf:nth-child(2)').css('display', 'block');
-                            alert('인증메일이 정상적으로 발송되었습니다.');
-                            $('.modal').removeClass('active');
-                        } else {
-                            alert(data.Message.replace("\\n", "\n"));
-                            $('.modal').removeClass('active');
-                        }
-                    },
-                    error: function (response) {
-                        alert(response);
-                        $('.modal').removeClass('active');
-                    }
-                });
-            }, 0);
+            pushCode();
         });
 
         // 이메일 인증
@@ -79,7 +67,7 @@
                 },
                 success: function (data) {
                     if (data.resultCode == '-1') {
-                        alert(data.Message);
+                        alert(data.Message.replace("\\n", "\n"));
                         return;
                     }
 
@@ -90,12 +78,50 @@
                 }
             });
         });
+
+        $('.btn_g.back').click(function (e) {
+            e.preventDefault();
+            stepView(Number($('#step').val()) - 1);
+        });
     });
 
     // 이메일 유효성 검사
     function isValidEmailAddress(emailAddress) {
         var pattern = new RegExp(/^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/);
         return pattern.test(emailAddress);
+    }
+
+    function pushCode() {
+        var email = $('#input-email').val();
+
+        setTimeout(function () {
+            sending = true;
+
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '/Join/PushCode',
+                data: {
+                    email: email
+                },
+                success: function (data) {
+                    if (data.resultCode == '0') {
+                        $('.box_tf:nth-child(2)').css('display', 'block');
+                        alert('인증메일이 정상적으로 발송되었습니다.');
+                        $('.modal').removeClass('active');
+                    } else {
+                        alert(data.Message.replace("\\n", "\n"));
+                        $('.modal').removeClass('active');
+                    }
+                },
+                error: function (response) {
+                    alert(response);
+                    $('.modal').removeClass('active');
+                }
+            });
+
+            sending = false;
+        }, 0);
     }
 
     function checkValid() {

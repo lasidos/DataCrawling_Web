@@ -23,6 +23,7 @@
                     @RenderPage("_Regist_Step1.cshtml")
                 </main>
                 <input type="hidden" id="tas" value="" />
+                <input type="hidden" id="step" value="" />
             </div>
         </div>
     </div>
@@ -35,27 +36,17 @@
 }
 @section HeadScripts{
     <script type="text/javascript">
-        $(window).ready(function () {
+        $(function () {
             $('.modal').removeClass('active');
             $('.container_wrap').css("height", $(window).height() - checkFootet() - 2);
 
             $(window).off('resize').on("resize", function () {
                 $('.container_wrap').css("height", $(window).height() - checkFootet() - 2);
             });
-
-            $(document).off('click').on('click', '.btn_g.back', function () {
-                console.log('back');
-                BackStep();
-            });
-        });
-
-        $(window).off('popstate').on('popstate', function (event) {
-            BackStep();
         });
 
         function checkFootet() {
             var _footer = 0;
-            console.log($(window).height());
             @isFooter = $(window).height() > 900 ? true : false;
             if (@isFooter) {
                 $('#footer').css('display', 'block');
@@ -72,18 +63,11 @@
                 {
                     Step: step
                 });
-}
-
-        function BackStep() {
-            $('.doc-main').load("/Account/M_Regist",
-                {
-                    Step: "back"
-                });
         }
 
     </script>
 }
-    
+
 @section MoalLoding{
     @RenderPage("~/Views/Shared/_MoalLoding.cshtml")
 }

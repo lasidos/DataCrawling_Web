@@ -12,13 +12,17 @@
         stepView(1);
     }
 
-    $(window).ready(function () {
+    $(function () {
+        $('#step').val('3');
+
         $('#input-password').on("propertychange change keyup paste input", function () {
             CheckPasswords();
         });
+
         $('#input-repassword').on("propertychange change keyup paste input", function () {
             CheckPasswords();
         });
+
         $('.confirm_btn.userPw .btn_g.next').click(function () {
             var password = $('#input-password').val();
             $.ajax({
@@ -29,14 +33,22 @@
                     pw: password
                 },
                 success: function (data) {
-                    if (data.resultCode == '0') {
-                        stepView(data.Message);
+                    if (data.resultCode == '-1') {
+                        alert(data.Message.replace("\\n", "\n"));
+                        return;
                     }
+
+                    stepView(data.Message);
                 },
                 error: function (response) {
                     alert(response);
                 }
             });
+        });
+
+        $('.btn_g.back').click(function (e) {
+            e.preventDefault();
+            stepView(Number($('#step').val()) - 1);
         });
     });
 
