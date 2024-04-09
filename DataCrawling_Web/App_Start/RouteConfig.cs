@@ -38,7 +38,7 @@ namespace DataCrawling_Web
             //);
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapMvcAttributeRoutes();
             routes.MapRoute(
                 name: "Auth",
                 url: "Auth/{controller}/{action}/{id}",

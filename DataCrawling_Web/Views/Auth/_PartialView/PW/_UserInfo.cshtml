@@ -1,0 +1,100 @@
+﻿<header class="doc-header">
+    <div class="inner_header">
+        <h1 class="tit_service">
+            <span class="logo_mpk">
+                <span class="ir_wa">
+                    <a href="/">Myplatform</a>
+                </span>
+            </span>
+        </h1>
+    </div>
+</header>
+<main class="doc-main">
+    <div class="cont_sign">
+        <h2 class="tit_g">
+            마이플랫폼 계정
+            <br>비밀번호를 재설정합니다.
+        </h2>
+        <p class="txt_info">
+            비밀번호를 재설정할
+            <br class="rw_hide">계정 이메일을 입력해주세요.
+        </p>
+        <form class="user-account">
+            <div class="screen_out">
+                <span>비밀번호 찾기</span>
+            </div>
+            <div class="box_tf user_account">
+                <span class="box_ti">마이플랫폼 계정</span>
+                <label class="screen_out" for="input-user_account">입력</label>
+                <input type="text" maxlength="50" name="user_account" placeholder="계정 (이메일)" class="tf_g" id="input-user_account" value="">
+                <div class="util_tf"></div>
+            </div>
+            <div class="confirm_btn find-password">
+                <button type="button" class="btn_g" disabled>비밀번호 찾기</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $(function () {
+        $('#input-user_account').on("propertychange change keyup paste input", function () {
+            CheckVerification();
+        });
+
+        $('#input-user_account').on("keyup", function (key) {
+            if (key.keyCode == 13) {
+                if ($('#input-user_account').val() != "") {
+                    CheckEmail();
+                }
+            }
+        });
+
+        $('.confirm_btn.find-password').click(function () {
+            CheckEmail();
+        });
+    });
+
+    function CheckVerification() {
+        if ($('#input-user_account').val() != "") {
+            if (isValidEmailAddress($('#input-user_account').val())) {
+                $('.confirm_btn.find-password .btn_g').prop("disabled", false);
+            }
+        } else {
+            $('.confirm_btn.find-password .btn_g').prop("disabled", true);
+        }
+    }
+
+    function CheckEmail() {
+        var email = $('#input-user_account').val();
+        if (email == "") {
+            alert('이메일 또는 전화번호가 입력되지 않았습니다.');
+        }
+
+        $('.modal').addClass('active');
+
+        setTimeout(function () {
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '/Auth/CheckEmail',
+                data: {
+                    email: email
+                },
+                success: function (data) {
+                    $('.modal').removeClass('active');
+                    if (data.resultCode == '-1') {
+                        alert(data.Message.replace("\\n", "\n"));
+                        return;
+                    }
+
+                    stepView(data.Message);
+                },
+                error: function (response) {
+                    $('.modal').removeClass('active');
+                    alert(response);
+                }
+            });
+        }, 0);
+    }
+</script>

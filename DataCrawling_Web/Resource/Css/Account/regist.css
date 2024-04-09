@@ -238,7 +238,7 @@ input:checked[type='checkbox'] {
     height: 20px;
     margin: 8px 10px 8px 11px;
     background-size: 20px !important;
-    background: url(../../Images/Common/right_arrow.png) 0 0 no-repeat;
+    background: url(../../Image/Commons/right_arrow.png) 0 0 no-repeat;
 }
 
 .cont_sign .list_agree + .confirm_btn {

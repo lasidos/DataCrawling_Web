@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "계정 찾기";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Content{
+    <div class="container-doc">
+        <div class="inner_container">
+            <header class="doc-header">
+                <div class="inner_header">
+                    <h1 class="tit_service">
+                        <span class="logo_mpk">
+                            <span class="ir_wa">
+                                <a href="/">Myplatform</a>
+                            </span>
+                        </span>
+                    </h1>
+                </div>
+            </header>
+            <main class="doc-main">
+                @RenderPage("~/Views/Auth/_PartialView/Account/_FindWay.cshtml")
+            </main>
+        </div>
+    </div>
+}
+
+@section PageStyles{
+    <link href="~/Resource/Css/_CommonStyle.css" rel="stylesheet" />
+    <link href="~/Resource/Css/Account/Find_Id.css" rel="stylesheet" />
+}
+
+@section HeadScripts{
+    <script type="text/javascript">
+        $(window).off('popstate').on('popstate', function (event) {
+            goback();
+        });
+
+        function stepView(step) {
+            history.pushState(null, null, "");
+            $('.doc-main').load("/Auth/Step",
+                {
+                    Step: step
+                });
+        }
+
+        function goback() {
+            $('.doc-main').load("/Auth/Step",
+                {
+                    Step: "back"
+                });
+        }
+
+    </script>
+}

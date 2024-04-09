@@ -1,0 +1,126 @@
+﻿@{ 
+    int a = 0;
+}
+<script type="text/javascript">
+    $(function () {
+        $('#input-user_name').on("propertychange change keyup paste input", function () {
+            checkVerification();
+        });
+        $('#input-user_contact').on("propertychange change keyup paste input", function () {
+            this.value = phoneNumber($('#input-user_contact').val());
+            checkVerification();
+        });
+
+        $('#input-user_contact').on("keyup", function (key) {
+            if (key.keyCode == 13) {
+                if ($('#input-user_contact').val() != "") {
+                    findAccount();
+                }
+            }
+        });
+
+        $('.confirm_btn.find-info').click(function () {
+            findAccount();
+        });
+
+        $('.confirm_btn.find-btn').click(function () {
+            location.href = "/Account/login";
+        });
+    });
+
+    function findAccount() {
+        var name = $('#input-user_name').val();
+        var contact = $('#input-user_contact').val();
+
+        if (name == "") {
+            alert('닉네임 또는 이름이 입력되지 않았습니다.');
+        }
+        if (contact == "") {
+            alert('연락처가 입력되지 않았습니다.');
+        }
+
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: '/Auth/FindID_Info',
+            data: {
+                name: name,
+                contact: contact,
+            },
+            success: function (data) {
+                if (data.resultCode == '-1') {
+                    alert(data.Message.replace("\\n", "\n"));
+                    return;
+                }
+
+                stepView(3);
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+    function checkVerification() {
+        var name = $('#input-user_name').val();
+        var tel = $('#input-user_contact').val();
+
+        if (name != "" && name.length > 2) {
+            $('.box_tf.user_name ').removeClass('error');
+        } else {
+            $('.box_tf.user_name ').addClass('error');
+            return;
+        }
+
+        if (tel != "") {
+            var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+            if (regPhone.test(tel)) {
+                $('.box_tf.user_contact').removeClass('error');
+            } else {
+                $('.box_tf.user_contact').addClass('error');
+                return;
+            }
+        }
+
+        if (name != "" && tel != "") {
+            $('.confirm_btn.find-info .btn_g').prop("disabled", false);
+        } else {
+            $('.confirm_btn.find-info .btn_g').prop("disabled", true);
+        }
+    }
+
+
+</script>
+
+<div class="cont_sign">
+    <h2 class="tit_g">
+        사용자 이름, 전화번호로
+        <br>계정을 찾습니다.
+    </h2>
+    <p class="txt_info">
+        회원가입에 등록한 사용자 이름 및 계정의
+        <br class="rw_hide">전화번호로 계정을 찾습니다.
+    </p>
+    <form class="find-cont">
+        <div class="blind">
+            <span>계정찾기</span>
+        </div>
+        <div class="box_tf user_name error">
+            <span class="box_ti">사용자 이름</span>
+            <label class="blind" for="input-user_name">입력</label>
+            <input type="text" maxlength="50" name="user_name" placeholder="사용자 이름을 입력해주세요." class="tf_g" id="input-user_name" value="">
+            <div class="util_tf"></div>
+            <p class="txt_info">사용자 이름을 입력해주세요.<br></p>
+        </div>
+        <div class="box_tf user_contact error">
+            <span class="box_ti">연락처 전화번호</span>
+            <label class="blind" for="input-user_contact">입력</label>
+            <input type="text" maxlength="50" name="user_contact" placeholder="전화번호를 입력해주세요." class="tf_g" id="input-user_contact" value="">
+            <div class="util_tf"></div>
+            <p class="txt_info">전화번호를 입력해주세요.<br></p>
+        </div>
+        <div class="confirm_btn find-info">
+            <button type="button" class="btn_g" disabled>계정 찾기</button>
+        </div>
+    </form>
+</div>

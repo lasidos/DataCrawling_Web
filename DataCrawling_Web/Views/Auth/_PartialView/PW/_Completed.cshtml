@@ -1,0 +1,38 @@
+﻿<header class="doc-header">
+    <div class="inner_header">
+        <h1 class="tit_service">
+            <span class="logo_mpk">
+                <span class="ir_wa">
+                    <a href="/">Myplatform</a>
+                </span>
+            </span>
+        </h1>
+    </div>
+</header>
+<main class="doc-main">
+    <div class="cont_sign">
+        <h2 class="tit_g">
+            새로운 비밀번호로
+            <br> 변경이 완료되었습니다.
+        </h2>
+        <div class="completed-info">
+            <img src="~/Resource/Image/Account/changepw_Completed.png" />
+            <p class="txt_info">
+                변경된 비밀번호로 다시 로그인하시기 바랍니다.
+            </p>
+        </div>
+        <form class="find-completed">
+            <div class="confirm_btn find-compl">
+                <button type="button" class="btn_g">로그인</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $(function () {
+        $('.confirm_btn.find-compl').click(function () {
+            location.href = "/Login/Nid_Login";
+        });
+    });
+</script>

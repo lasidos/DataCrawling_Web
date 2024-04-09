@@ -40,9 +40,16 @@ namespace DataCrawling_Web.DSL.Account
 
         #region 계정정보 찾기
 
-        public string FindAccount(string name, string contact)
+        public IEnumerable<UserInfo> FindAccount(string name, string contact)
         {
-            return null;
+            var param = new DynamicParameters();
+            param.Add("@Name", name, DbType.String, size: 100);
+            param.Add("@Phone", contact, DbType.String, size: 100);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                return conn.Query<UserInfo>(param: param, commandType: CommandType.StoredProcedure
+                    , sql: "DBO.USP_AuthUser_Find");
+            }
         }
 
         public string ChangePassword(string findEmail, string pw)
@@ -52,16 +59,18 @@ namespace DataCrawling_Web.DSL.Account
 
         #endregion
 
-        #region 비밀번호 찾기
+        #region 비밀번호 변경
 
-        public string PushPasscode(string title, string content, string email, string passCode)
+        public IEnumerable<CertModel> ConfirmPasscode(string email, string pw)
         {
-            return null;
-        }
-
-        public string ConfirmPasscode(string email)
-        {
-            return null;
+            var param = new DynamicParameters();
+            param.Add("@EMAIL", email, DbType.String, size: 100);
+            param.Add("@Pw", pw, DbType.String, size: 100);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                return conn.Query<CertModel>(param: param, commandType: CommandType.StoredProcedure
+                    , sql: "DBO.USP_AuthUser_PW_U");
+            }
         }
 
         #endregion

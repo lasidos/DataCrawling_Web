@@ -95,12 +95,12 @@ input:checked[type='checkbox'] {
 
 .item_choice .lab_choice .ico_check {
     background-size: 23px !important;
-    background: url(../../Images/Common/incheck.png) 0 0 no-repeat;
+    background: url(../../Image/Commons/incheck.png) 0 0 no-repeat;
 }
 
 .item_choice .inp_choice:checked + .lab_choice .ico_check {
     background-size: 23px !important;
-    background: url(../../Images/Common/check.png) 0 0 no-repeat;
+    background: url(../../Image/Commons/check.png) 0 0 no-repeat;
 }
 
 .cont_sign .check_all .txt_info {
@@ -147,7 +147,7 @@ input:checked[type='checkbox'] {
     height: 20px;
     margin: 8px 10px 8px 11px;
     background-size: 20px !important;
-    background: url(../../Images/Common/right_arrow.png) 0 0 no-repeat;
+    background: url(../../Image/Commons/right_arrow.png) 0 0 no-repeat;
 }
 
 .cont_sign .list_agree + .confirm_btn {

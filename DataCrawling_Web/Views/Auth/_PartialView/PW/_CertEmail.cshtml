@@ -1,0 +1,76 @@
+﻿@using DataCrawling_Web.BSL.Authentication
+
+<header class="doc-header">
+    <div class="inner_header">
+        <h1 class="tit_service">
+            <span class="logo_mpk">
+                <span class="ir_wa">
+                    <a href="/">Myplatform</a>
+                </span>
+            </span>
+        </h1>
+    </div>
+</header>
+<main class="doc-main">
+    <div class="cont_sign">
+        <h2 class="tit_g">
+            비밀번호 재설정을 위해
+            <br>사용자 확인을 진행합니다.
+        </h2>
+        <form class="cert-email">
+            <div class="blind">
+                <span>이메일 인증</span>
+            </div>
+            <div class="profile-info">
+                <img src="~/Resource/Image/Commons/userProfile.jpg" />
+                <span class="userEmail">@AuthUser.JoinMember.User_ID</span>
+            </div>
+            <div class="box_tf">
+                <span class="box_ti">이메일 인증코드</span>
+                <label class="blind" for="input-email_passcode">입력</label>
+                <input type="tel" maxlength="8" name="email_passcode" placeholder="이메일로 발송된 8자리 인증번호를 입력해 주세요." class="tf_g" id="input-email_passcode" value="">
+                <div class="util_tf"></div>
+            </div>
+            <div class="confirm_btn certEmail">
+                <button type="button" class="btn_g" disabled>다음</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $(function () {
+        $('#input-email_passcode').on("propertychange change keyup paste input", function () {
+            if ($('#input-email_passcode').val().length == 8) {
+                $('.confirm_btn.certEmail .btn_g').prop("disabled", false);
+            } else {
+                $('.confirm_btn.certEmail .btn_g').prop("disabled", true);
+            }
+        });
+
+        $('.confirm_btn.certEmail .btn_g').click(function () {
+            var email = $('.userEmail').text();
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '/Auth/CheckCode',
+                data: {
+                    email: email,
+                    passCode: $('#input-email_passcode').val()
+                },
+                success: function (data) {
+                    if (data.resultCode == '-1') {
+                        alert(data.Message.replace("\\n", "\n"));
+                        return;
+                    }
+
+                    stepView(data.Message);
+                },
+                error: function (response) {
+                    alert(response);
+                }
+            });
+        });
+    });
+
+</script>

@@ -1,0 +1,106 @@
+﻿@using DataCrawling_Web.BSL.Authentication
+
+<header class="doc-header">
+    <div class="inner_header">
+        <h1 class="tit_service">
+            <span class="logo_mpk">
+                <span class="ir_wa">
+                    <a href="/">Myplatform</a>
+                </span>
+            </span>
+        </h1>
+    </div>
+</header>
+<main class="doc-main">
+    <div class="cont_sign">
+        <h2 class="tit_g">
+            계정 로그인에 사용할
+            <br> 새로운 비밀번호를 등록해 주세요.
+        </h2>
+        <form class="cert-email">
+            <div class="account-email">
+                <span>myplatform 계정</span>
+                <span>@AuthUser.JoinMember.User_ID</span>
+            </div>
+            <div class="screen_out">
+                <span>비밀번호</span>
+            </div>
+            <div class="box_tf password error">
+                <label class="screen_out" for="input-password">입력</label>
+                <input type="password" maxlength="20" name="email_passcode" placeholder="비밀번호 입력 (8~20자리)" class="tf_g" id="input-password" value="">
+                <div class="util_tf"></div>
+                <p class="txt_info">8~20자리의 영문, 숫자, 특수문자를 조합하여 설정해 주세요.<br></p>
+            </div>
+            <div class="box_tf repassword error">
+                <label class="screen_out" for="input-repassword">입력</label>
+                <input type="password" maxlength="20" name="email_repasscode" placeholder="비밀번호 재입력" class="tf_g" id="input-repassword" value="">
+                <div class="util_tf"></div>
+                <p class="txt_info">비밀번호와 일치하지 않습니다.<br></p>
+            </div>
+            <ul class="list_notice">
+                <li>비밀번호는 8~20자리의 영문, 숫자, 특수문자를 조합하여 설정해 주세요.</li>
+                <li>다른 사이트에서 사용하는 것과 동일하거나 쉬운 비밀번호는 사용하지 마세요.</li>
+                <li>안정한 계정 사용을 위해 비밀번호는 주기적으로 변경해주세요.</li>
+            </ul>
+            <div class="confirm_btn userPw">
+                <button type="button" class="btn_g" disabled>다음</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $(function () {
+        $('#input-password').on("propertychange change keyup paste input", function () {
+            CheckPasswords();
+        });
+        $('#input-repassword').on("propertychange change keyup paste input", function () {
+            CheckPasswords();
+        }); 
+
+        $('.confirm_btn.userPw .btn_g').click(function () {
+            var password = $('#input-password').val();
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '/Auth/ChangePassword',
+                data: {
+                    pw: password
+                },
+                success: function (data) {
+                    if (data.resultCode == '-1') {
+                        alert(data.Message.replace("\\n", "\n"));
+                        return;
+                    }
+
+                    stepView(data.Message);
+                },
+                error: function (response) {
+                    alert(response);
+                }
+            });
+        });
+    });
+
+    function CheckPasswords() {
+        var verification = true;
+        if ($('#input-password').val().length > 7 && checkPassword($('#input-password').val())) {
+            $('.box_tf.password').removeClass('error');
+        } else {
+            $('.box_tf.password').addClass('error');
+            verification = false;
+        }
+        if ($('#input-password').val() == $('#input-repassword').val()) {
+            $('.box_tf.repassword').removeClass('error');
+        } else {
+            $('.box_tf.repassword').addClass('error');
+            verification = false;
+        }
+
+        if (verification) {
+            $('.confirm_btn.userPw .btn_g').prop("disabled", false);
+        } else {
+            $('.confirm_btn.userPw .btn_g').prop("disabled", true);
+        }
+    }
+</script>

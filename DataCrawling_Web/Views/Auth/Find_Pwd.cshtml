@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "비밀번호 찾기";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Content{
+    <div class="container-doc">
+        <div class="inner_container">
+            @RenderPage("~/Views/Auth/_PartialView/PW/_UserInfo.cshtml")
+        </div>
+    </div>
+}
+
+@section PageStyles{
+    <link href="~/Resource/Css/_CommonStyle.css" rel="stylesheet" />
+    <link href="~/Resource/Css/Account/Find_Pwd.css" rel="stylesheet" />
+}
+
+@section PageScripts{
+    <script type="text/javascript">
+        $(function () {
+            $('.modal').removeClass('active');
+        });
+
+        function stepView(step) {
+            $('.inner_container').load("/Auth/PwdStep",
+                {
+                    Step: step
+                });
+        }
+    </script>
+}
+
+@section MoalLoding{
+    @RenderPage("~/Views/Shared/_MoalLoding.cshtml")
+}

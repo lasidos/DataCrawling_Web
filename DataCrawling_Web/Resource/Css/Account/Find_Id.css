@@ -1,4 +1,8 @@
-﻿.find-info {
+﻿body, #wrap {
+    background: #fff;
+}
+
+.find-info {
     margin-top: 75px;
 }
 
@@ -44,7 +48,7 @@
     line-height: 0;
     text-indent: -9999px;
     vertical-align: top;
-    background: url('../../Images/Common/right_arrow.png');
+    background: url('../../Image/Commons/right_arrow.png');
 }
 
 .txt_info {
@@ -52,6 +56,7 @@
     line-height: 25px;
     color: #999;
     letter-spacing: -0.03em;
+    font-size: 16px;
 }
 
 .box_tf {
@@ -147,6 +152,7 @@
     margin-top: 85px;
     display: flex;
     flex-direction: column;
+    font-size: 16px;
 }
 
     .find-completed a {

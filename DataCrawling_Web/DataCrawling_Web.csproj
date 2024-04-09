@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BSL\Core\SimpleCookie.cs" />
     <Compile Include="BSL\Smtp\Smtp.cs" />
+    <Compile Include="Controllers\Auth\AuthController.cs" />
     <Compile Include="DSL\Account\Account.cs" />
     <Compile Include="BSL\Authentication\AuthUser.cs" />
     <Compile Include="BSL\Authentication\ClsJWT.cs" />
@@ -203,6 +204,7 @@
     <Content Include="Resource\Css\Offer\Request.css" />
     <Content Include="Resource\Css\Offer\Terms.css" />
     <Content Include="Resource\Css\_CommonModal.css" />
+    <Content Include="Resource\Css\_CommonStyle.css" />
     <Content Include="Resource\Css\_Footer.css" />
     <Content Include="Resource\Css\_Header.css" />
     <Content Include="Resource\Css\_Layout.css" />
@@ -215,8 +217,10 @@
     <Content Include="Resource\Image\Commons\userProfile.jpg" />
     <Content Include="Resource\Js\Account\create_account.js" />
     <Content Include="Resource\Js\Account\find_account.js" />
+    <Content Include="Resource\Js\Account\Find_Id.js" />
     <Content Include="Resource\Js\Account\find_password.js" />
     <Content Include="Resource\Js\Account\login.js" />
+    <Content Include="Resource\Js\Account\Search_Pwd.js" />
     <Content Include="Resource\Text\PassCode.txt" />
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\backbone.min.js" />
@@ -337,6 +341,16 @@
     <Content Include="Views\Auth\Join\_Regist_Step3.cshtml" />
     <Content Include="Views\Auth\Join\_Regist_Step4.cshtml" />
     <Content Include="Views\Auth\Join\_Regist_Step5.cshtml" />
+    <Content Include="Views\Auth\Login\Logout.cshtml" />
+    <Content Include="Views\Auth\Find_Id.cshtml" />
+    <Content Include="Views\Auth\Find_Pwd.cshtml" />
+    <Content Include="Views\Auth\_PartialView\PW\_UserInfo.cshtml" />
+    <Content Include="Views\Auth\_PartialView\PW\_CertEmail.cshtml" />
+    <Content Include="Views\Auth\_PartialView\PW\_SubmitPw.cshtml" />
+    <Content Include="Views\Auth\_PartialView\PW\_Completed.cshtml" />
+    <Content Include="Views\Auth\_PartialView\Account\_FindWay.cshtml" />
+    <Content Include="Views\Auth\_PartialView\Account\_UserInfo.cshtml" />
+    <Content Include="Views\Auth\_PartialView\Account\_Completed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
