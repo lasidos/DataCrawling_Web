@@ -140,6 +140,7 @@
     <Compile Include="BSL\Core\SimpleCookie.cs" />
     <Compile Include="BSL\Smtp\Smtp.cs" />
     <Compile Include="Controllers\Auth\AuthController.cs" />
+    <Compile Include="Controllers\Auth\PolicyController.cs" />
     <Compile Include="DSL\Account\Account.cs" />
     <Compile Include="BSL\Authentication\AuthUser.cs" />
     <Compile Include="BSL\Authentication\ClsJWT.cs" />
@@ -221,6 +222,8 @@
     <Content Include="Resource\Js\Account\find_password.js" />
     <Content Include="Resource\Js\Account\login.js" />
     <Content Include="Resource\Text\PassCode.txt" />
+    <Content Include="Resource\Text\privacy.txt" />
+    <Content Include="Resource\Text\Termsofservice.txt" />
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\backbone.min.js" />
     <Content Include="Scripts\backbone.min.map" />
@@ -350,6 +353,7 @@
     <Content Include="Views\Auth\_PartialView\Account\_FindWay.cshtml" />
     <Content Include="Views\Auth\_PartialView\Account\_UserInfo.cshtml" />
     <Content Include="Views\Auth\_PartialView\Account\_Completed.cshtml" />
+    <Content Include="Views\Auth\Policy\Terms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
