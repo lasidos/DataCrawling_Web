@@ -158,8 +158,8 @@
     .find-completed a {
         text-decoration: underline;
         color: #2c88de;
-        font-size: 12px;
-        margin-top: 10px;
+        font-size: 14px;
+        margin-top: 15px;
     }
 
 .confirm_btn.find-btn {

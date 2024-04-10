@@ -9,43 +9,39 @@ using System.Web.Mvc;
 
 namespace DataCrawling_Web.Controllers.Auth
 {
-    public class JoinController : Controller
+    public class JoinController : BaseController
     {
         public ActionResult Regist()
         {
+            ViewBag.Title = "회원가입";
             return View("~/Views/Auth/Join/Regist.cshtml");
         }
 
         public ActionResult Step(string Step)
         {
-            string page = string.Empty, title = string.Empty;
+            string page = string.Empty;
             switch (Step)
             {
                 case "1":
-                    title = "약관동의";
                     page = "~/Views/Auth/Join/_Regist_Step1.cshtml";
                     break;
                 case "2":
-                    title = "이메일 인증";
                     page = "~/Views/Auth/Join/_Regist_Step2.cshtml";
                     break;
                 case "3":
-                    title = "비밀번호 설정";
                     page = "~/Views/Auth/Join/_Regist_Step3.cshtml";
                     break;
                 case "4":
-                    title = "프로필 설정";
                     page = "~/Views/Auth/Join/_Regist_Step4.cshtml";
                     break;
                 case "5":
-                    title = "가입하기 완료";
                     page = "~/Views/Auth/Join/_Regist_Step5.cshtml";
                     ViewBag.Email = AuthUser.JoinMember.User_ID;
                     ViewBag.Name = AuthUser.JoinMember.User_Name;
                     AuthUser.JoinMember = null;
                     break;
             }
-            ViewBag.Title = title;
+            ViewBag.Step = Step;
             return PartialView(page);
         }
 
@@ -64,6 +60,7 @@ namespace DataCrawling_Web.Controllers.Auth
         #endregion
 
         #region Step_2 - 이메일 인증
+
         [HttpPost]
         // 이메일 발송
         public JsonResult PushCode(string email)
@@ -83,7 +80,6 @@ namespace DataCrawling_Web.Controllers.Auth
             string title = "마이플랫폼 | 회원가입";
             string content = string.Join("\n", Utility.ReadAllText(Server.MapPath("~/Resource/Text/PassCode.txt")));
             content = string.Format(content, email, passCode);
-
 
             string result = new Smtp().SendMail(title, content, email);
             if (result == "ok")

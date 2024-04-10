@@ -1,13 +1,4 @@
-﻿<script type="text/javascript">
-    $(function () {
-        // 가입하기 완료
-        $('.confirm_btn.completed .btn_g').click(function () {
-            location.href = "/Auth/Login/Nid_Login";
-        });
-    });
-</script>
-
-<article id="mainContent" class="content-article">
+﻿<article id="mainContent" class="content-article">
     <div class="cont_sign">
         <strong class="blind">가입하기 완료</strong>
         <h2 class="tit_m">
@@ -31,3 +22,14 @@
         </form>
     </div>
 </article>
+
+<script type="text/javascript">
+    $(function () {
+        $('#step').val('@ViewBag.Step');
+
+        // 가입하기 완료
+        $('.confirm_btn.completed .btn_g').click(function () {
+            location.href = "/Auth/Login/Nid_Login";
+        });
+    });
+</script>

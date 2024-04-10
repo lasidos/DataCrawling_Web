@@ -220,7 +220,6 @@
     <Content Include="Resource\Js\Account\Find_Id.js" />
     <Content Include="Resource\Js\Account\find_password.js" />
     <Content Include="Resource\Js\Account\login.js" />
-    <Content Include="Resource\Js\Account\Search_Pwd.js" />
     <Content Include="Resource\Text\PassCode.txt" />
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\backbone.min.js" />

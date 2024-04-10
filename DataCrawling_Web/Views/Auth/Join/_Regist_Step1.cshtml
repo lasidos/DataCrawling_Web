@@ -1,74 +1,4 @@
-﻿<script type="text/javascript">
-    $(window).ready(function () {
-        $('#step').val('1');
-
-        // 체크박스 초기화
-        $('.inp_choice').prop("checked", false);
-
-        // 전체선택
-        $('#checkboox-check_all').change(function () {
-            $('.list_agree .inp_choice').prop("checked",
-                $("input:checkbox[id='checkboox-check_all']").is(":checked"));
-
-            if ($("input:checkbox[id='checkboox-terms_age_over_14']").is(":checked") &&
-                $("input:checkbox[id='terms_TERM_ACCOUNT']").is(":checked") &&
-                $("input:checkbox[id='terms_PR_PEC_1904']").is(":checked")) {
-                $('.btn_g.highlight').prop("disabled", false);
-            } else {
-                $('.btn_g.highlight').prop("disabled", true);
-            }
-        });
-
-        // 약관동의 값 변경체크
-        $('.list_agree .inp_choice').change(function () {
-            if ($("input:checkbox[id='checkboox-check_all']").is(":checked") &&
-                !$(this).is(":checked")) {
-                $('#checkboox-check_all').prop("checked", false);
-            }
-
-            var checkall = true;
-            for (var i = 0; i < $('.list_agree .inp_choice').length; i++) {
-                if (!$('.list_agree .inp_choice').eq(i).is(":checked")) {
-                    checkall = false;
-                    break;
-                }
-            }
-            if (checkall && !$("input:checkbox[id='checkboox-check_all']").is(":checked")) {
-                $('#checkboox-check_all').prop("checked", true);
-            }
-
-            if ($("input:checkbox[id='checkboox-terms_age_over_14']").is(":checked") &&
-                $("input:checkbox[id='terms_TERM_ACCOUNT']").is(":checked") &&
-                $("input:checkbox[id='terms_PR_PEC_1904']").is(":checked")) {
-                $('.btn_g.highlight').prop("disabled", false);
-            } else {
-                $('.btn_g.highlight').prop("disabled", true);
-            }
-        });
-
-        // 약관동의
-        $('.btn_g.highlight').click(function () {
-            var agree = $("input:checkbox[id='terms_AP_GB_1904']").is(":checked");
-            $.ajax({
-                type: "POST",
-                async: false,
-                url: '/Join/Terms',
-                data: {
-                    accept: agree,
-                },
-                success: function (data) {
-                    $('#tas').val(data.Code);
-                    stepView(data.Step);
-                },
-                error: function (response) {
-                    alert(response);
-                }
-            });
-        });
-    });
-</script>
-
-<article id="mainContent" class="content-article">
+﻿<article id="mainContent" class="content-article">
     <div class="cont_sign">
         <strong class="blind">가입하기 진행순서</strong>
         <div class="navigation_wrap">
@@ -145,3 +75,73 @@
         </form>
     </div>
 </article>
+
+<script type="text/javascript">
+    $(function () {
+        $('#step').val('@ViewBag.Step');
+
+        // 체크박스 초기화
+        $('.inp_choice').prop("checked", false);
+
+        // 전체선택
+        $('#checkboox-check_all').change(function () {
+            $('.list_agree .inp_choice').prop("checked",
+                $("input:checkbox[id='checkboox-check_all']").is(":checked"));
+
+            if ($("input:checkbox[id='checkboox-terms_age_over_14']").is(":checked") &&
+                $("input:checkbox[id='terms_TERM_ACCOUNT']").is(":checked") &&
+                $("input:checkbox[id='terms_PR_PEC_1904']").is(":checked")) {
+                $('.btn_g.highlight').prop("disabled", false);
+            } else {
+                $('.btn_g.highlight').prop("disabled", true);
+            }
+        });
+
+        // 약관동의 값 변경체크
+        $('.list_agree .inp_choice').change(function () {
+            if ($("input:checkbox[id='checkboox-check_all']").is(":checked") &&
+                !$(this).is(":checked")) {
+                $('#checkboox-check_all').prop("checked", false);
+            }
+
+            var checkall = true;
+            for (var i = 0; i < $('.list_agree .inp_choice').length; i++) {
+                if (!$('.list_agree .inp_choice').eq(i).is(":checked")) {
+                    checkall = false;
+                    break;
+                }
+            }
+            if (checkall && !$("input:checkbox[id='checkboox-check_all']").is(":checked")) {
+                $('#checkboox-check_all').prop("checked", true);
+            }
+
+            if ($("input:checkbox[id='checkboox-terms_age_over_14']").is(":checked") &&
+                $("input:checkbox[id='terms_TERM_ACCOUNT']").is(":checked") &&
+                $("input:checkbox[id='terms_PR_PEC_1904']").is(":checked")) {
+                $('.btn_g.highlight').prop("disabled", false);
+            } else {
+                $('.btn_g.highlight').prop("disabled", true);
+            }
+        });
+
+        // 약관동의
+        $('.btn_g.highlight').click(function () {
+            var agree = $("input:checkbox[id='terms_AP_GB_1904']").is(":checked");
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '/Join/Terms',
+                data: {
+                    accept: agree,
+                },
+                success: function (data) {
+                    $('#tas').val(data.Code);
+                    stepView(data.Step);
+                },
+                error: function (response) {
+                    alert(response);
+                }
+            });
+        });
+    });
+</script>

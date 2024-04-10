@@ -23,12 +23,12 @@ namespace DataCrawling_Web.Service
                 return _cmSvc;
             }
         }
-        
+
         #endregion
 
         #region Repository Service Area 
 
-        
+
         #endregion
 
         #region Util Area

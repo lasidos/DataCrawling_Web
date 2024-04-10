@@ -1,19 +1,71 @@
-﻿@{
-    string error = "";
-    if (ViewBag.error != null)
-    {
-        error = ViewBag.error["Message"].ToString();
-    }
-}
+﻿<article id="mainContent" class="content-article">
+    <div class="cont_sign">
+        <strong class="blind">가입하기 진행순서</strong>
+        <div class="navigation_wrap">
+            <strong class="blind">가입하기 진행률</strong>
+            <div class="bar_navigation" style="width: 90%;">90%</div>
+        </div>
+        <h2 class="tit_g">
+            계정 프로필을
+            <br>설정해 주세요.
+        </h2>
+        <form class="user-profile">
+            <div class="frm-body">
+                <div class="blind"></div>
+                <div class="blind">
+                    <span>프로필</span>
+                </div>
+                <div class="box_tf userName error">
+                    <label class="blind" for="input-name">입력</label>
+                    <input type="text" maxlength="10" name="name" placeholder="이름을 입력해주세요." class="tf_g" id="input-name" value="">
+                    <div class="util_tf"></div>
+                    <p class="txt_info">이름을 입력해주세요.<br></p>
+                </div>
+                <div class="box_tf contact error">
+                    <label class="blind" for="input-tel">입력</label>
+                    <input type="tel" maxlength="13" name="tel" placeholder="연락처 입력" class="tf_g" id="input-tel" value="">
+                    <div class="util_tf"></div>
+                    <p class="txt_info">연락처를 입력해주세요.<br></p>
+                </div>
+                <div class="gender">
+                    <ul>
+                        <li>
+                            <div class="item_choice" aria-checked="true" role="checkbox">
+                                <input type="checkbox" id="terms_Male" class="inp_choice" name="term[1]" value="Male" checked="">
+                                <label class="lab_choice" for="terms_Male">
+                                    <span class="ico_comm ico_check"></span>남성
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item_choice" aria-checked="true" role="checkbox">
+                                <input type="checkbox" id="terms_Female" class="inp_choice" name="term[3]" value="Female" checked="">
+                                <label class="lab_choice" for="terms_Female">
+                                    <span class="ico_comm ico_check"></span>여성
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item_choice" aria-checked="true" role="checkbox">
+                                <input type="checkbox" id="terms_NoneGender" class="inp_choice" name="term[5]" value="None" checked="">
+                                <label class="lab_choice" for="terms_NoneGender">
+                                    <span class="ico_comm ico_check"></span>선택안함
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="confirm_btn userProfile">
+                <button type="button" class="btn_g" disabled>다음</button>
+            </div>
+        </form>
+    </div>
+</article>
 
 <script type="text/javascript">
-    if ('@error' != '') {
-        alert('@error');
-        stepView(1);
-    }
-
     $(function () {
-        $('#step').val('4');
+        $('#step').val('@ViewBag.Step');
 
         $('.inp_choice').prop("checked", false);
 
@@ -99,68 +151,3 @@
         }
     }
 </script>
-
-<article id="mainContent" class="content-article">
-    <div class="cont_sign">
-        <strong class="blind">가입하기 진행순서</strong>
-        <div class="navigation_wrap">
-            <strong class="blind">가입하기 진행률</strong>
-            <div class="bar_navigation" style="width: 90%;">90%</div>
-        </div>
-        <h2 class="tit_g">
-            계정 프로필을
-            <br>설정해 주세요.
-        </h2>
-        <form class="user-profile">
-            <div class="frm-body">
-                <div class="blind"></div>
-                <div class="blind">
-                    <span>프로필</span>
-                </div>
-                <div class="box_tf userName error">
-                    <label class="blind" for="input-name">입력</label>
-                    <input type="text" maxlength="10" name="name" placeholder="이름을 입력해주세요." class="tf_g" id="input-name" value="">
-                    <div class="util_tf"></div>
-                    <p class="txt_info">이름을 입력해주세요.<br></p>
-                </div>
-                <div class="box_tf contact error">
-                    <label class="blind" for="input-tel">입력</label>
-                    <input type="tel" maxlength="13" name="tel" placeholder="연락처 입력" class="tf_g" id="input-tel" value="">
-                    <div class="util_tf"></div>
-                    <p class="txt_info">연락처를 입력해주세요.<br></p>
-                </div>
-                <div class="gender">
-                    <ul>
-                        <li>
-                            <div class="item_choice" aria-checked="true" role="checkbox">
-                                <input type="checkbox" id="terms_Male" class="inp_choice" name="term[1]" value="Male" checked="">
-                                <label class="lab_choice" for="terms_Male">
-                                    <span class="ico_comm ico_check"></span>남성
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item_choice" aria-checked="true" role="checkbox">
-                                <input type="checkbox" id="terms_Female" class="inp_choice" name="term[3]" value="Female" checked="">
-                                <label class="lab_choice" for="terms_Female">
-                                    <span class="ico_comm ico_check"></span>여성
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item_choice" aria-checked="true" role="checkbox">
-                                <input type="checkbox" id="terms_NoneGender" class="inp_choice" name="term[5]" value="None" checked="">
-                                <label class="lab_choice" for="terms_NoneGender">
-                                    <span class="ico_comm ico_check"></span>선택안함
-                                </label>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="confirm_btn userProfile">
-                <button type="button" class="btn_g" disabled>다음</button>
-            </div>
-        </form>
-    </div>
-</article>
