@@ -141,6 +141,10 @@
     <Compile Include="BSL\Smtp\Smtp.cs" />
     <Compile Include="Controllers\Auth\AuthController.cs" />
     <Compile Include="Controllers\Auth\PolicyController.cs" />
+    <Compile Include="Controllers\Help\CorpController.cs" />
+    <Compile Include="Controllers\Help\FaqController.cs" />
+    <Compile Include="Controllers\Help\InquiryController.cs" />
+    <Compile Include="Controllers\Help\PurchaseController.cs" />
     <Compile Include="DSL\Account\Account.cs" />
     <Compile Include="BSL\Authentication\AuthUser.cs" />
     <Compile Include="BSL\Authentication\ClsJWT.cs" />
@@ -155,7 +159,7 @@
     <Compile Include="BSL\File\Code.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DataController.cs" />
-    <Compile Include="Controllers\HelpController.cs" />
+    <Compile Include="Controllers\Help\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Auth\JoinController.cs" />
     <Compile Include="Controllers\Auth\LoginController.cs" />
@@ -335,9 +339,9 @@
     <Content Include="Scripts\underscore.min.map" />
     <Content Include="Views\Auth\Login\Nid_Login.cshtml" />
     <Content Include="Views\Auth\Join\Regist.cshtml" />
-    <Content Include="Views\Help\Index.cshtml" />
-    <Content Include="Views\Help\History.cshtml" />
-    <Content Include="Views\Help\Corporation.cshtml" />
+    <Content Include="Views\Help\Inquiry\Index.cshtml" />
+    <Content Include="Views\Help\Purchase\History.cshtml" />
+    <Content Include="Views\Help\Faq\Corporation.cshtml" />
     <Content Include="Views\Auth\Join\_Regist_Step1.cshtml" />
     <Content Include="Views\Auth\Join\_Regist_Step2.cshtml" />
     <Content Include="Views\Auth\Join\_Regist_Step3.cshtml" />
@@ -354,11 +358,11 @@
     <Content Include="Views\Auth\_PartialView\Account\_UserInfo.cshtml" />
     <Content Include="Views\Auth\_PartialView\Account\_Completed.cshtml" />
     <Content Include="Views\Auth\Policy\Terms.cshtml" />
+    <Content Include="Views\Help\Purchase\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Default\" />
-    <Folder Include="Views\History\" />
+    <Folder Include="Views\Corp\" />
     <Folder Include="Views\TextUser\" />
   </ItemGroup>
   <ItemGroup>
