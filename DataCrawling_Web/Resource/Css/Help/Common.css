@@ -1,0 +1,223 @@
+﻿#wrap {
+    background-color: #fff;
+}
+
+#content {
+    position: relative;
+    width: 100%;
+    margin: 25px auto 0 auto;
+    text-align: left;
+    zoom: 1;
+}
+
+.container {
+    position: relative;
+    width: 1260px;
+    margin: 0 auto;
+    zoom: 1;
+}
+
+.content-article {
+    position: relative;
+    width: auto;
+    padding-left: 220px;
+    padding-bottom: 80px;
+    min-height: 700px;
+}
+
+.top-notice-section {
+    -webkit-box-shadow: 2px 2px 10px rgba(0,0,0,.0784313725);
+    box-shadow: 2px 2px 10px rgba(0,0,0,.0784313725);
+}
+
+.loungeContent .topHdWrap {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lug_hd_2 {
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    color: #000;
+    float: left;
+    font-weight: normal;
+}
+
+.searchBarItem {
+    width: 330px;
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+    .searchBarItem .phTx {
+        position: absolute;
+        left: 10px;
+        top: 9px;
+        font-size: 13px;
+        letter-spacing: 0px;
+        color: #bbb;
+    }
+
+    .searchBarItem .mtcSchInp {
+        width: 100%;
+        height: 34px;
+        box-sizing: border-box;
+        line-height: 34px;
+        font-size: 13px;
+        letter-spacing: 0px;
+        border: none;
+        padding: 0 40px 0 10px;
+    }
+
+    .searchBarItem .mtcSchBtn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 35px;
+        height: 34px;
+    }
+
+        .searchBarItem .mtcSchBtn:before {
+            width: 16px;
+            height: 16px;
+            content: "";
+            display: inline-block;
+            background: url(../../image/commons/mtc_sp_btn.png) no-repeat;
+            background-position: -248px -21px;
+            vertical-align: middle;
+            box-sizing: border-box;
+        }
+
+.mtcTplTab {
+    margin-top: 15px;
+    padding-left: 1px;
+}
+
+    .mtcTplTab .tabItems {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+        .mtcTplTab .tabItems li {
+            display: table-cell;
+        }
+
+            .mtcTplTab .tabItems li a {
+                display: block;
+                height: 43px;
+                line-height: 43px;
+                margin-left: -1px;
+                border: 1px solid #e5e6e8;
+                border-bottom: 1px solid #858c99;
+                background-color: #fafafa;
+                position: relative;
+                font-size: 14px;
+                letter-spacing: 0px;
+                color: #999;
+                text-align: center;
+            }
+
+            .mtcTplTab .tabItems li.on a {
+                border: 1px solid #858c99;
+                border-bottom: 1px solid #fff;
+                z-index: 2;
+                background-color: #fff;
+                font-weight: bold;
+                color: #333;
+            }
+
+.tabSearchList {
+    margin-top: 15px;
+    border-bottom: 1px solid #edeef0;
+}
+
+    .tabSearchList li {
+        border-top: 1px solid #edeef0;
+    }
+
+        .tabSearchList li:first-child {
+            border: 0;
+        }
+
+.tabSearchListTitle {
+    display: block;
+    width: 100%;
+    padding: 25px 20px;
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #000;
+    text-align: left;
+    box-sizing: border-box;
+    word-break: break-word;
+    word-wrap: break-word;
+    position: relative;
+}
+
+    .tabSearchListTitle .tabSearchListTitleWrap {
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 650px;
+    }
+
+    .tabSearchListTitle .cl3399ff {
+        color: #39f;
+        margin-right: 5px;
+    }
+
+.lugBtnMore:after {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    width: 15px;
+    height: 9px;
+    content: "";
+    display: inline-block;
+    background: url(../../image/commons/lug_sp_btn.png) no-repeat;
+    background-position: -220px 0;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.tabSearchList li .searchListData {
+    display: none;
+    padding: 20px 25px 23px;
+    background: #fafafa;
+    font-size: 14px;
+    letter-spacing: 0px;
+    line-height: 30px;
+    border-top: 1px solid #edeef0;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+.tabSearchList li.on .tabSearchListTitleWrap {
+    font-weight: bold;
+    text-overflow: inherit;
+    white-space: inherit;
+}
+
+.tabSearchList li.on .searchListData {
+    display: block;
+}
+
+.tabSearchListTitle:after {
+    content: "";
+    width: 15px;
+    height: 9px;
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    display: inline-block;
+    background: url(../../image/commons/lug_sp_btn.png) no-repeat;
+    background-position: -220px 0;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.tabSearchList li.on .lugBtnMore:after {
+    background-position: -240px 0;
+}

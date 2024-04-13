@@ -1,17 +1,24 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.BodyClass = "mtcSubNotice";
 }
 
-<!DOCTYPE html>
+@section Header{
+    @RenderPage("~/Views/Shared/_Header.cshtml", Model)
+    <link href="~/Resource/Css/Help/Common.css" rel="stylesheet" />
+    <link href="~/Resource/Css/Help/_Help.css" rel="stylesheet" />
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>History</title>
-</head>
-<body>
-    <div> 
+@section Notice{
+    @RenderPage("~/Views/Shared/_Notice.cshtml")
+}
+
+@section Content{
+    <div id="content">
+        <div class="container">
+            <div class="content-article">
+                @RenderPage("~/Views/Shared/Left/_Help.cshtml")
+            </div>
+        </div>
     </div>
-</body>
-</html>
+}

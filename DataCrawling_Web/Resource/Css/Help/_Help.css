@@ -1,0 +1,45 @@
+﻿.secLnb {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0 20px;
+    width: 190px;
+    border-top: 1px solid #4a5470;
+    border-left: 1px solid #dce1eb;
+    border-right: 1px solid #dce1eb;
+    border-bottom: 1px solid #dce1eb;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+    .secLnb .lnbTit {
+        display: block;
+        margin-top: 12px;
+        padding: 14px 0;
+        font-size: 18px;
+        letter-spacing: 0px;
+        font-weight: normal;
+        color: #000;
+    }
+
+    .secLnb .lnbGroup {
+        padding: 15px 0 18px;
+        border-top: 1px solid #eeeef0;
+    }
+
+        .secLnb .lnbGroup li {
+            font-size: 13px;
+            letter-spacing: 0px;
+            color: #000;
+            line-height: 2.3;
+        }
+
+        .secLnb .lnbGroup .lnbTwoDep li {
+            padding-left: 7px;
+            background: url(/content/images/ver_1/help/dot_lnb_2x2.gif) no-repeat 0 50%;
+        }
+
+        .secLnb .lnbGroup li a:hover, .secLnb .lnbGroup li a.on {
+            color: #39f;
+        }

@@ -8,9 +8,9 @@ namespace DataCrawling_Web.Controllers.Help
 {
     public class FaqController : Controller
     {
-        public ActionResult Corporation()
+        public ActionResult Index()
         {
-            return View("~/Views/Help/Faq/Corporation.cshtml");
+            return View("~/Views/Help/Faq/Index.cshtml");
         }
     }
 }

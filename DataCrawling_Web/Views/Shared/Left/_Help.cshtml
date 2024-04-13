@@ -1,0 +1,47 @@
+﻿@using DataCrawling_Web.BSL.Authentication
+@helper ActiveMenu(string href, string menuName)
+{
+    if (HttpContext.Current.Request.Url.AbsolutePath.Contains(href))
+    {
+        <a href="@href" class="on">@menuName</a>
+    }
+    else
+    {
+        <a href="@href">@menuName</a>
+    }
+}
+
+<section class="secLnb">
+    <h1>
+        <span class="skip">고객센터 메뉴 - </span>
+        <a class="lnbTit" href="/Help/Faq/Index">고객센터</a>
+    </h1>
+    <div class="lnbGroup">
+        <ul>
+            <li>
+                @ActiveMenu("/Help/Faq/Index", "FAQ")
+            </li>
+        </ul>
+    </div>
+    <div class="lnbGroup">
+        <ul>
+            <li> @ActiveMenu("/Help/Inquiry/Index", "문의∙신고")</li>
+        </ul>
+    </div>
+    <div class="lnbGroup">
+        <ul>
+            <li>@ActiveMenu("/Help/Notice", "공지사항")</li>
+            <li>@ActiveMenu("/Help/Event", "이벤트∙혜택")</li>
+        </ul>
+    </div>
+    <div class="lnbGroup">
+        <ul>
+            @if (!string.IsNullOrEmpty(AuthUser.M_ID))
+            {
+                <li>@ActiveMenu("/Help/Purchase/History", "유료 이용내역")</li>
+            }
+            <li>@ActiveMenu("/Help/Purchase/Product", "서비스 상품안내")</li>
+        </ul>
+    </div>
+</section>
+

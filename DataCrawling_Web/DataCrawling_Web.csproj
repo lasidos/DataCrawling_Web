@@ -202,6 +202,8 @@
     <Content Include="Resource\Css\Data\ApiList.css" />
     <Content Include="Resource\Css\Data\Info.css" />
     <Content Include="Resource\Css\Footer\Footer_Type2.css" />
+    <Content Include="Resource\Css\Help\Common.css" />
+    <Content Include="Resource\Css\Help\_Help.css" />
     <Content Include="Resource\Css\Main\Index.css" />
     <Content Include="Resource\Css\ModalLoding.css" />
     <Content Include="Resource\Css\Offer\List.css" />
@@ -358,6 +360,15 @@
     <Content Include="Views\Auth\_PartialView\Account\_Completed.cshtml" />
     <Content Include="Views\Auth\Policy\Terms.cshtml" />
     <Content Include="Views\Help\Purchase\Product.cshtml" />
+    <Content Include="Views\Help\Faq\Index.cshtml" />
+    <Content Include="Views\Shared\Left\_Help.cshtml" />
+    <Content Include="Views\Help\Notice.cshtml" />
+    <Content Include="Views\Help\Event.cshtml" />
+    <Content Include="Views\Help\_PartialView\Help\_tab1.cshtml" />
+    <Content Include="Views\Help\_PartialView\Help\_tab2.cshtml" />
+    <Content Include="Views\Help\_PartialView\Help\_tab3.cshtml" />
+    <Content Include="Views\Help\_PartialView\Help\_tab4.cshtml" />
+    <Content Include="Views\Help\_PartialView\Help\_tab5.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
