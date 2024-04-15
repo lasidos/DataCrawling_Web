@@ -141,6 +141,7 @@
     <Compile Include="BSL\Smtp\Smtp.cs" />
     <Compile Include="Controllers\Auth\AuthController.cs" />
     <Compile Include="Controllers\Auth\PolicyController.cs" />
+    <Compile Include="Controllers\Data\ApiMngController.cs" />
     <Compile Include="Controllers\Help\FaqController.cs" />
     <Compile Include="Controllers\Help\InquiryController.cs" />
     <Compile Include="Controllers\Help\PurchaseController.cs" />
@@ -369,6 +370,10 @@
     <Content Include="Views\Help\_PartialView\Help\_tab3.cshtml" />
     <Content Include="Views\Help\_PartialView\Help\_tab4.cshtml" />
     <Content Include="Views\Help\_PartialView\Help\_tab5.cshtml" />
+    <Content Include="Views\Data\ApiMng\Scrap.cshtml" />
+    <Content Include="Views\Data\ApiMng\AutoWeb.cshtml" />
+    <Content Include="Views\Data\ApiMng\AutoWork.cshtml" />
+    <Content Include="Views\Data\ApiMng\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,7 +18,60 @@
         <div class="container">
             <div class="content-article">
                 @RenderPage("~/Views/Shared/Left/_Help.cshtml")
+                <div class="loungeContent">
+                    <div class="topHdWrap clear">
+                        <h2 class="lug_hd_2">FAQ</h2>
+                        <form action="#">
+                            <fieldset>
+                                <legend>키워드 검색</legend>
+                                <div class="searchBarItem mtcPlaceholder">
+                                    <!-- input 포커스시 .phTx hide -->
+                                    <span class="phTx">키워드 검색</span>
+                                    <input type="text" id="lb_sch" class="mtcSchInp" title="검색어 입력">
+                                    <button type="button" class="mtcBtnB mtcSchBtn"><span class="skip">검색</span></button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="faqWrap">
+                        <div class="mtcTplTab">
+                            <ul class="tabItems">
+                                <li class="on" data-tab="1"><a href="javascript:;">전체</a></li>
+                                <li class="" data-tab="2"><a href="javascript:;">일반 공지</a></li>
+                                <li class="" data-tab="3"><a href="javascript:;">서비스 오픈</a></li>
+                            </ul>
+                        </div>
+                        <div class="tabSearchList">
+                            @RenderPage("~/Views/Help/_PartialView/Help/_tab1.cshtml")
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $(function () {
+            $('.mtcTplTab .tabItems li').click(function () {
+                $('.mtcTplTab .tabItems li').removeClass('on');
+                $(this).addClass('on');
+                $('.tabSearchList').load("/Help/GetFaqData", {
+                    tab: $(this).data('tab')
+                });
+            });
+
+            $('.tabSearchList li').click(function () {
+                if ($(this).hasClass('on')) {
+                    $(this).removeClass('on');
+                } else {
+                    $('.tabSearchList li').removeClass('on');
+                    $(this).addClass('on');
+                }
+            });
+        });
+    </script>
+}
+
+@section Footer{
+    @RenderPage("~/Views/Shared/_Footer_Type2.cshtml")
 }
