@@ -6,7 +6,7 @@
 }
 
 .Content {
-    padding: 35px 39px;
+    padding: 35px 69px;
     margin-top: 36px;
     border: 1px solid #e1e5eb;
     background: #fff;
@@ -44,7 +44,7 @@
         color: #333;
         float: left;
         display: table;
-        line-height: 17px;
+        line-height: 20px;
         text-align: center;
         box-sizing: border-box;
         min-width: 200px;
@@ -55,7 +55,7 @@
             display: block;
             width: 66px;
             height: 66px;
-            margin: 0 auto 9px auto;
+            margin: 0 auto 15px auto;
             background: url(../../image/commons/sp_resist.png) no-repeat;
             vertical-align: middle;
         }
@@ -95,7 +95,7 @@
     }
 
 .artRequestList {
-    margin-top: 55px;
+    margin-top: 75px;
 }
 
     .artRequestList .req_hd_3 {
@@ -234,7 +234,7 @@
         table-layout: fixed;
         width: 100%;
         height: 142px;
-        padding: 25px 0;
+        padding: 50px 0;
         border: 0;
     }
 
@@ -329,7 +329,7 @@
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .btnWrap {
@@ -337,8 +337,8 @@
     letter-spacing: 0px;
     font-weight: bold;
     width: 211px;
-    height: 64px;
-    line-height: 64px;
+    height: 60px;
+    line-height: 60px;
     border-radius: 4px;
     padding: 0 16px;
     background: #39f;

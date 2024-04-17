@@ -1,7 +1,7 @@
 ﻿.regist_notice {
-    width: 962px;
-    margin: 0 39px;
-    padding: 20px 15px;
+    width: 960px;
+    margin: 0 auto;
+    padding: 20px 0;
     box-sizing: border-box;
     font-size: 13px;
     letter-spacing: 0px;
@@ -10,7 +10,9 @@
 }
 
 .resist_content {
-    padding: 50px 40px 50px 40px;
+    padding: 50px 0;
+    width: 960px;
+    margin: 0 auto;
 }
 
     .resist_content .resist_hd_5 {

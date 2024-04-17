@@ -374,6 +374,9 @@
     <Content Include="Views\Data\ApiMng\AutoWeb.cshtml" />
     <Content Include="Views\Data\ApiMng\AutoWork.cshtml" />
     <Content Include="Views\Data\ApiMng\List.cshtml" />
+    <Content Include="Views\Offer\_PartialView\_ListItem.cshtml" />
+    <Content Include="Views\Auth\Policy\_Service.cshtml" />
+    <Content Include="Views\Auth\Policy\_Personal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

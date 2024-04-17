@@ -34,18 +34,16 @@
             </div>
             <div class="dvReqAuth">
                 <div class="btnWrap">
-                    <a href="/Offer/Terms" onclick="GA_Event('인적성검사_PC','신청하기','신청하기_인성역량검사');Job_DB_window_Scroll(this.href, '700', '650'); return false;" target="_self" title="새창 열림" class="btnType01">신청하기</a>
+                    <a href="/Offer/Terms?type=@ViewBag.type" onclick="GA_Event('인적성검사_PC','신청하기','신청하기_인성역량검사');Job_DB_window_Scroll(this.href, '700', '650'); return false;" target="_self" title="새창 열림" class="btnType01">신청하기</a>
                 </div>
             </div>
             <div class="artRequestList">
                 <h3 class="req_hd_3">의뢰 목록</h3>
                 <div class="mtcTplTab">
                     <ul class="tabItems">
-                        <li value="0" class="on"><a href="javascript:;">전체</a></li>
-                        <li value="1" class=""><a href="javascript:;">접수대기</a></li>
-                        <li value="2" class=""><a href="javascript:;">진행중</a></li>
-                        <li value="3" class=""><a href="javascript:;">마감</a></li>
-                        <li value="4" class=""><a href="javascript:;">종료</a></li>
+                        <li value="0" class="on"><a href="javascript:;">접수대기</a></li>
+                        <li value="1" class=""><a href="javascript:;">진행중</a></li>
+                        <li value="2" class=""><a href="javascript:;">완료</a></li>
                     </ul>
                 </div>
             </div>
@@ -67,29 +65,8 @@
                 </ul>
             </div>
             <div class="listWrap">
-                <ul>
-                    @for (int i = 0; i < 10; i++)
-                    {
-                        <li>
-                            <div class="coWrap">
-                                <p class="tit">인성역량검사</p>
-                            </div>
-                            <div class="titWrap">
-                                <p class="desc">성격, 흥미, 역량, 가치관, 진로성숙도를 심층 분석하여, 적합한 직업 및 적성을 선택할 수 있게 하는 검사</p>
-                                <div class="etc">
-                                    <span>153문항/20분</span><span>모바일 시행 가능</span><span class="highlight">잡코리아 입사지원 시 첨부 가능</span>
-                                </div>
-                            </div>
-                            <div class="priceWrap">
-                                <em>@(new Random().Next(0, 100) % 2 ==0 ? "접수대기":"진행중")</em>
-                            </div>
-                        </li>
-                    }
-                </ul>
+                @RenderPage("~/Views/Offer/_PartialView/_ListItem.cshtml")
             </div>
-            @*<div class="art-no-data">
-                    <p>리스트가 없습니다.</p>
-                </div>*@
         </div>
         <div class="testNotice">
             <h5 class="hdTit">검사 유의사항</h5>

@@ -5,7 +5,6 @@
 }
 
 #content {
-    width: 1040px;
     float: none;
     border: 1px solid #e1e5eb;
     background: #fff;
@@ -21,8 +20,8 @@
 }
 
 .resist_step {
-    width: 960px;
-    margin: 39px 39px;
+    width: 1120px;
+    margin: 60px auto;
 }
 
     .resist_step ol {
@@ -102,7 +101,7 @@
 }
 
 .resist_content {
-    padding: 50px 40px 50px 40px;
+    padding: 30px 40px 50px 40px;
 }
 
 .resist_terms {
@@ -122,8 +121,8 @@
         }
 
 .terms_box {
-    margin-top: 90px;
-    width: 764px;
+    margin-top: 120px;
+    width: 1120px;
     margin-left: auto;
     margin-right: auto;
 }
