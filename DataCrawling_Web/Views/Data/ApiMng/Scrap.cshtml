@@ -7,6 +7,8 @@
     @RenderPage("~/Views/Shared/_Header.cshtml", Model)
     <link href="~/Resource/Css/Help/Common.css" rel="stylesheet" />
     <link href="~/Resource/Css/Help/_Help.css" rel="stylesheet" />
+
+    <link href="~/Resource/Css/Data/ApiList.css" rel="stylesheet" />
 }
 
 @section Notice{
@@ -14,4 +16,119 @@
 }
 
 @section Content{
+    <div class="devUseTopBtn" id="container">
+        <div class="noticeContent">
+            <div class="topArea">
+                <h2 class="subTits">스크랩 데이터 관리</h2>
+            </div>
+            <div class="rowWrap">
+                @for (int i = 0; i < 10; i++)
+                {
+                    <div class="giListRow">
+                        <strong class="skip">채용공고 리스트</strong>
+                        <div class="giListItem">
+                            <div class="inner">
+                                <div class="rowWrap">
+                                    <div class="inner-left">
+                                        <span class="state skip">접수마감</span>
+                                        <a href="/Data/Info?A_No=46398107@(i)" class="tit">
+                                            [서비스점검] 스크랩 데이터. @(i+1)
+                                        </a>
+                                        <div class="apyStatusBoard">
+                                            <span>공고번호 44033323</span>
+                                            <span>테스트</span>
+                                            <span>2024.02.19 ~ 2024.03.20 (접수마감:2024.02.19 16시)</span>
+                                            <span>02.19 수정</span>
+                                        </div>
+                                        <div class="btnFunc">
+                                            <a href="/Recruit/GI_Read/44033323?Oem_Code=C1" class="btn_Tp_1" target="_blank"><span> 보기</span></a>
+                                            <a href="/Corp/Recruit/Copy/4/44033323" class="btn_Tp_1" onclick="go_copy(this); return false;"><span>복사</span></a>
+                                            <button onclick="go_del(44033323, 46398107, 0, 2,''); return false;" class="btn_Tp_1" type="button"><span>삭제</span></button>
+                                        </div>
+                                    </div>
+                                    <div class="inner-right">
+                                        <div class="process-state">
+                                            <span class="procItem">
+                                                <input type="checkbox" id="process1-44033323" name="process-44033323" value="1" checked disabled>
+                                                <label for="process1-44033323">
+                                                    <span class="chkIcn"></span>01 서류검토중
+                                                </label>
+                                            </span>
+                                            <span class="procItem">
+                                                <input type="checkbox" id="process2-44033323" name="process-44033323" value="2" disabled>
+                                                <label for="process2-44033323">
+                                                    <span class="chkIcn"></span>02 면접진행중
+                                                </label>
+                                            </span>
+                                            <span class="procItem">
+                                                <input type="checkbox" id="process3-44033323" name="process-44033323" value="3" disabled>
+                                                <label for="process3-44033323">
+                                                    <span class="chkIcn"></span>03 채용종료
+                                                </label>
+                                            </span>
+                                        </div>
+                                        <div class="tbCol tbStatus skip">
+                                            <ul class="boardItem">
+                                                <li>
+                                                    <strong class="stepTit">전체 지원자</strong>
+                                                    <a href="/Corp/Applicant/list?GI_No=46398107&amp;PageCode=YA" class="itemNum devLinkExpire none" data-pts="13">0</a>
+                                                </li>
+
+                                                <li class="apyStatusNotRead">
+                                                    <strong class="stepTit">미열람</strong>
+                                                    <a href="/Corp/Applicant/list?GI_No=46398107&amp;PageCode=YN" class="itemNum devLinkExpire none" data-pts="13">0</a>
+                                                </li>
+
+                                                <li>
+                                                    <strong class="stepTit">미심사</strong>
+                                                    <a href="/Corp/Applicant/list?GI_No=46398107&amp;PageCode=YE" class="itemNum devLinkExpire none" data-pts="13">0</a>
+                                                </li>
+
+                                                <li>
+                                                    <strong class="stepTit">서류합격</strong>
+                                                    <a href="/Corp/Applicant/list?GI_No=46398107&amp;PageCode=YO" class="itemNum devLinkExpire none" data-pts="13">0</a>
+                                                </li>
+
+                                                <li>
+                                                    <strong class="stepTit">최종합격</strong>
+                                                    <a href="/Corp/Applicant/list?GI_No=46398107&amp;PageCode=YL" class="itemNum devLinkExpire none" data-pts="13">0</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="statusBtm">
+                                    <div class="PaidSvc">
+                                        <dl>
+                                            <dt>
+                                                <strong class="blind">유료서비스</strong>
+                                                채용상품을 이용하지 않으셨습니다.
+                                            </dt>
+
+                                            <dd>
+                                                <ul>
+                                                </ul>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <ul class="btmLink">
+                                        <li>
+                                            <a href="/Corp/GIMng/IndamTalk/44033323" class="btnFeeInfo devLinkIndamtalk">
+                                                공고문의
+                                                <span class="null">0</span>
+                                                건
+                                            </a>
+                                        </li>
+                                        <li><a href="#bxReport" class="devLinkReportExpire" data-gno="44033323" data-pts="13" data-devalert="0">채용보고서</a></li>
+                                        <li><a href="#bxReport" class="devLinkReportExpire" data-gno="44033323" data-pts="13" data-devalert="0">조회수 <span>3</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
 }
