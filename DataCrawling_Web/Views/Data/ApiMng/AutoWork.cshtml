@@ -7,11 +7,21 @@
     @RenderPage("~/Views/Shared/_Header.cshtml", Model)
     <link href="~/Resource/Css/Help/Common.css" rel="stylesheet" />
     <link href="~/Resource/Css/Help/_Help.css" rel="stylesheet" />
-}
+   
+    <link href="~/Resource/Css/Data/ApiList.css" rel="stylesheet" />
+    }
 
-@section Notice{
-    @RenderPage("~/Views/Shared/_Notice.cshtml")
-}
+    @section Notice{
+        @RenderPage("~/Views/Shared/_Notice.cshtml")
+    }
 
-@section Content{
+    @section Content{
+        <div class="devUseTopBtn" id="container">
+            <div class="noticeContent">
+                <div class="topArea">
+                    <h2 class="subTits">업무 자동화 관리</h2>
+                </div>
+            </div>
+        </div>
+    }
 }
