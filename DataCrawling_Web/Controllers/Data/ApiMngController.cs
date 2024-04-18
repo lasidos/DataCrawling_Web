@@ -1,9 +1,19 @@
-﻿using System.Web.Mvc;
+﻿using DataCrawling_Web.Service.Api;
+using System.Web.Mvc;
+using System.Windows.Forms.Design;
 
 namespace DataCrawling_Web.Controllers.Data
 {
     public class ApiMngController : Controller
     {
+        ApiService service;
+
+        public ApiMngController()
+        {
+            service = new ApiService();
+        }
+
+
         [Route("Data/ApiMng/List")]
         public ActionResult List()
         {
@@ -13,7 +23,8 @@ namespace DataCrawling_Web.Controllers.Data
         [Route("Data/ApiMng/Scrap")]
         public ActionResult Scrap()
         {
-            return View("~/Views/Data/ApiMng/Scrap.cshtml");
+            var data=service.GenerateSampleData(100);
+            return View("~/Views/Data/ApiMng/Scrap.cshtml", data);
         }
 
         [Route("Data/ApiMng/AutoWeb")]
