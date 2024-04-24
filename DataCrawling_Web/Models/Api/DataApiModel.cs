@@ -5,33 +5,32 @@ using System.Linq;
 using System.Web;
 
 namespace DataCrawling_Web.Models.Api
-{
-
-    //데이터 API
+{// Data API Model
     public class DataApiModel : BaseModel
     {
-        public int No { get; set; }
-        // 공공 / 마이플랫폼
+        public int Id { get; set; }
+        // Public / My Platform
         [Required]
         public string Type { get; set; }
-        // 이름
+        // Name
         [Required]
         public string Name { get; set; }
-        // 설명
+        // Description
         public string Description { get; set; }
-        //유료/무료 
-        public Boolean IsFree { get; set; }
-        public string 담당자 { get; set; }
-        public string 프로토콜 { get; set; }
-        public string HTTP메서드 { get; set; }
+        // Paid/Free 
+        public bool IsFree { get; set; }
+        public string Manager { get; set; }
+        public string Protocol { get; set; }
+        public string HttpMethod { get; set; }
 
-        public string 요청URL { get; set; }
+        public string RequestUrl { get; set; }
         // json/xml/csv/text ...
-        public DataFormat[] 제공타입 { get; set; }
+        public DataFormat[] ProvidedTypes { get; set; }
 
-        public UrlQueryParameter[] Query { get; set; }
+        public UrlQueryParameter[] QueryParameters { get; set; }
 
     }
+
 
 
 }

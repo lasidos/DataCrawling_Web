@@ -175,7 +175,7 @@
     <Compile Include="Models\Api\ErrorCodes.cs" />
     <Compile Include="Models\Api\ErrorInfo.cs" />
     <Compile Include="Models\Api\UrlQueryParameter.cs" />
-    <Compile Include="Models\Api\데이터API요청.cs" />
+    <Compile Include="Models\Api\DataApiRequest.cs" />
     <Compile Include="Models\DSL\CertModel.cs" />
     <Compile Include="Models\Files\JKFileContentsFilterResult.cs" />
     <Compile Include="Models\Files\RegDbModel.cs" />
