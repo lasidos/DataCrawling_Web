@@ -171,6 +171,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Api\BaseModel.cs" />
+    <Compile Include="Models\Api\DataApiModel.cs" />
+    <Compile Include="Models\Api\DataFormat.cs" />
+    <Compile Include="Models\Api\ErrorCodes.cs" />
+    <Compile Include="Models\Api\ErrorInfo.cs" />
+    <Compile Include="Models\Api\UrlQueryParameter.cs" />
+    <Compile Include="Models\Api\DataApiRequest.cs" />
     <Compile Include="Models\DSL\CertModel.cs" />
     <Compile Include="Models\Files\JKFileContentsFilterResult.cs" />
     <Compile Include="Models\Files\RegDbModel.cs" />
@@ -180,6 +187,7 @@
     <Compile Include="Models\Param\USP_FileDownLoad_Error_Log_I_param.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Api\ApiService.cs" />
     <Compile Include="Service\CommonService.cs" />
     <Compile Include="Service\Ctx.cs" />
     <Compile Include="Service\JKWebContext.cs" />
