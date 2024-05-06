@@ -54,6 +54,17 @@
     padding-left: 10px;
 }
 
+.resist_request .request-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 0 15px;
+    align-items: center;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #333;
+    line-height: 1.7;
+}
+
 .resist_request .form_col:not(:nth-child(2)) .lyElBx {
     left: 10px;
     width: calc(100% - 10px);
@@ -87,7 +98,7 @@
     top: 100%;
     margin: -1px 0px;
     background-color: #fff;
-    z-index: 2;
+    z-index: 10;
     box-sizing: border-box;
 }
 
@@ -118,9 +129,9 @@
     transition: all 0.2s ease-out;
 }
 
-    .elWrap .selType .btnSelType .txCate .point {
-        color: #ff3333;
-    }
+.point {
+    color: #ff3333;
+}
 
 .elWrap.ok .selType .btnSelType .txCate {
     display: block;
@@ -225,6 +236,10 @@
         padding: 5px 7px;
     }
 
+    .errorBx.on {
+        display: block;
+    }
+
 .elWrap .selType .selTypeList a, .elWrap .selType .selTypeList button {
     display: block;
     padding: 8px 18px 8px;
@@ -273,11 +288,6 @@
 }
 
 .spec_add .virusCheck {
-    padding: 0px 0 15px;
-    font-size: 14px;
-    letter-spacing: 0px;
-    color: #333;
-    line-height: 1.7;
     word-break: keep-all;
 }
 
@@ -309,3 +319,274 @@
             margin-left: 4px;
             background: url(../../image/commons/sprite-icon.png) no-repeat 0 -367px;
         }
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    zoom: 1;
+    width: 160px;
+    height: 62px;
+    margin-right: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: top;
+    text-align: left;
+}
+
+    .dropdown.is-label div.label {
+        position: absolute;
+        left: 15px;
+        top: 9px;
+        color: #a8a8a8;
+        font-size: 11px;
+        letter-spacing: 0px;
+    }
+
+        .dropdown.is-label div.label.hidden {
+            display: none;
+        }
+
+    .dropdown.error .buttonChoose {
+        border: 3px solid #ff3232;
+    }
+
+    .dropdown .buttonChoose {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 1px solid #ddd;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        background-color: #fff;
+        position: relative;
+    }
+
+        .dropdown .buttonChoose > span {
+            overflow: hidden;
+            padding: 19px 15px 0;
+            color: #a8a8a8;
+            white-space: nowrap;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            font-size: 15px;
+            letter-spacing: 0px;
+            text-align: left;
+            display: block;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .dropdown .buttonChoose.on span:first-child:not(.point) {
+            display: flex;
+            top: 10px;
+            font-size: 11px;
+            letter-spacing: 0px;
+            color: #afb0b2;
+        }
+
+        .dropdown .buttonChoose.on .ChooseResult {
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #000;
+        }
+
+        .dropdown .buttonChoose:after {
+            content: '';
+            display: block;
+            position: absolute;
+            right: 10px;
+            top: 27px;
+            width: 11px;
+            height: 6px;
+            background: url(../../image/commons/sprite-icon.png) no-repeat 0 -307px;
+        }
+
+    .dropdown div.list {
+        z-index: 9300;
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 61px;
+        width: 100%;
+        border: 1px solid #666;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        background-color: #fff;
+        overflow-y: auto;
+        max-height: 228px;
+    }
+
+        .dropdown div.list.hidden {
+            display: none;
+        }
+
+        .dropdown div.list.is-scroll {
+            overflow-y: auto;
+            max-height: 228px;
+        }
+
+        .dropdown div.list ul {
+            overflow: hidden;
+            position: relative;
+            padding: 12px 0 13px;
+        }
+
+        .dropdown div.list button {
+            display: block;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+            .dropdown div.list button span {
+                padding: 6px 0 8px;
+                line-height: 1.42857;
+                color: #333;
+                font-size: 15px;
+                letter-spacing: 0px;
+                line-height: 1.42857;
+                display: block;
+                height: 100%;
+                text-align: left;
+                box-sizing: border-box;
+            }
+
+    .dropdown .validation {
+        display: block;
+        z-index: 9100;
+        position: absolute;
+        left: 0;
+        top: 67px;
+        width: 100%;
+        color: #ff3232;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        white-space: nowrap;
+        font-size: 12px;
+        letter-spacing: 0px;
+    }
+
+.portfolioList {
+    position: relative;
+    margin-top: 10px;
+}
+
+    .portfolioList ul {
+        position: relative;
+    }
+
+    .portfolioList li {
+        position: relative;
+        height: 61px;
+        margin-top: -1px;
+        border: 1px solid #ddd;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+        .portfolioList li:first-child {
+            margin-top: 0;
+        }
+
+        .portfolioList li .dropdown {
+            position: absolute;
+            left: -1px;
+            top: -1px;
+            height: 61px;
+        }
+
+            .portfolioList li .dropdown div.list {
+                top: 60px;
+            }
+
+                .portfolioList li .dropdown div.list li {
+                    height: auto;
+                    border: 0;
+                }
+
+        .portfolioList li:first-child {
+            margin-top: 0;
+        }
+
+    .portfolioList .filename {
+        overflow: hidden;
+        padding: 18px 70px 0 173px;
+        color: #333;
+        white-space: nowrap;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        font-size: 16px;
+        letter-spacing: 0px;
+        height: 100%;
+    }
+
+    .portfolioList .buttonDelete {
+        overflow: hidden;
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 61px;
+        height: 60px;
+        padding-top: 60px;
+        border-left: 1px solid #ddd;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+        .portfolioList .buttonDelete:before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 22px;
+            height: 22px;
+            background: url(../../image/commons/sprite-icon-x.png) no-repeat 0 -69px;
+            margin: -11px 0 0 -11px;
+        }
+
+.completed-con {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 21px;
+    letter-spacing: -0.5px;
+    line-height: 1.5;
+    color: #666;
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
+
+    .completed-con .title {
+        color: #333;
+        font-size: 39px;
+        margin-bottom: 20px;
+    }
+
+    .completed-con .col_blue {
+        color: #39f;
+        margin-left: 10px;
+    }
+
+    .completed-con > span {
+        text-align: center;
+    }
+
+.buttonViewWritten {
+    display: block;
+    width: 179px;
+    height: 50px;
+    padding-top: 14px;
+    margin: 0 auto;
+    background-color: #ff6600;
+    color: #fff;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 15px;
+    letter-spacing: 0px;
+    font-weight: bold;
+    margin-bottom: 150px;
+}

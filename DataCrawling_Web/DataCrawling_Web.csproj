@@ -166,6 +166,8 @@
     <Compile Include="Controllers\OfferController.cs" />
     <Compile Include="Controllers\TextUserController.cs" />
     <Compile Include="DSL\Files\GGRpSvc.cs" />
+    <Compile Include="DSL\Offer\OfferSvc.cs" />
+    <Compile Include="DSL\ResultSvc.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,6 +175,7 @@
     <Compile Include="Models\Files\JKFileContentsFilterResult.cs" />
     <Compile Include="Models\Files\RegDbModel.cs" />
     <Compile Include="Models\Files\TextUserRequestModel.cs" />
+    <Compile Include="Models\Offer\SelCode.cs" />
     <Compile Include="Models\Param\USP_AAA_WebServerErrorLog_I_param.cs" />
     <Compile Include="Models\Param\USP_FileDownLoad_Error_Log_I_param.cs" />
     <Compile Include="Models\UserInfo.cs" />
@@ -221,6 +224,7 @@
     <Content Include="Resource\Image\Account\kakaolink_btn_small.png" />
     <Content Include="Resource\Image\Account\login-img.png" />
     <Content Include="Resource\Image\Account\naver.png" />
+    <Content Include="Resource\Image\Commons\sprite-icon-x.png" />
     <Content Include="Resource\Image\Commons\userProfile.jpg" />
     <Content Include="Resource\Js\Account\create_account.js" />
     <Content Include="Resource\Js\Account\find_account.js" />
@@ -377,6 +381,8 @@
     <Content Include="Views\Offer\_PartialView\_ListItem.cshtml" />
     <Content Include="Views\Auth\Policy\_Service.cshtml" />
     <Content Include="Views\Auth\Policy\_Personal.cshtml" />
+    <Content Include="Views\Offer\_PartialView\_OrderItem.cshtml" />
+    <Content Include="Views\Offer\Completed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

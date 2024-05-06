@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web;
 
 namespace DataCrawling_Web.Models.Files
 {
@@ -104,6 +105,10 @@ namespace DataCrawling_Web.Models.Files
         /// 검출카운트
         /// </summary>
         public int InvalidCount { get; internal set; }
+        /// <summary>
+        /// 반환 Msg
+        /// </summary>
+        public string msg { get; set; }
     }
 
     public class TextUserResponseFileModel
@@ -158,6 +163,12 @@ namespace DataCrawling_Web.Models.Files
         /// 업로드 파일명
         /// </summary>
         public string Origin_FileName { get; set; }
+
+        /// <summary>
+        /// 전체경로
+        /// </summary>
+        public string FullFileNamePath { get; set; }
+        public HttpPostedFileBase FileBases { get; set; }
     }
 
     public class TextUserErrorModel

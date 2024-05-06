@@ -18,7 +18,7 @@
     $('.btn_regist.devRequest button').click(function () {
         if ($('.devCheckbox[name="lb_agree"]:checked').length == 2) {
 
-            $.post("/Offer/functionname", { Term: "agree" }, function (data) {
+            $.post("/Offer/functionname", { Term: "agree", type: $('#type').val() }, function (data) {
                 location.href = '/Offer/Request';
             });
         } else {

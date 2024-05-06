@@ -1,4 +1,5 @@
 ﻿using DataCrawling_Web.BSL.Extentions;
+using DataCrawling_Web.Models.Files;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,7 +43,7 @@ namespace DataCrawling_Web.BSL.Common
             //string path = @"D:\FileuploadTest\";
 
 #if DEBUG
-            path = @"C:\FileuploadTest\\file2\f\Job_Files\Resume\AttachFile\" + GetPath(strUserId);
+            path = @"C:\FileuploadTest\file2\f\Job_Files\Resume\AttachFile\" + GetPath(strUserId);
 #endif
 
             if (!Directory.Exists(path))
@@ -536,6 +537,16 @@ namespace DataCrawling_Web.BSL.Common
             }
 
             return PathDir;
+        }
+
+        private static List<TextUserResponseFileModel> _fileUploadList;
+        public static List<TextUserResponseFileModel> FileUploadList
+        {
+            get
+            {
+                if (_fileUploadList == null) _fileUploadList = new List<TextUserResponseFileModel>();
+                return _fileUploadList;
+            }
         }
     }
 }

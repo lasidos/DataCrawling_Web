@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    @RenderPage("~/Views/Shared/_Header.cshtml", Model)
+    <link href="~/Resource/Css/Offer/Request.css" rel="stylesheet" />
+    <link href="~/Resource/Css/Offer/Terms.css" rel="stylesheet" />
+}
+
+@section Notice{
+    @RenderPage("~/Views/Shared/_Notice.cshtml")
+}
+
+@section Content{
+    <div id="container">
+        <div id="content">
+            <div class="term_resist">
+                <h3 class="resist_hd_3 blind">신규 의뢰 등록</h3>
+                <div class="resist_step ">
+                    <ol>
+                        <li class="sp_resist_a"><span>1. 약관동의</span></li>
+                        <li class="sp_resist_m"><span>2. 의뢰서 작성</span></li>
+                        <li class="sp_resist_b is_active"><span>3. 접수 완료</span></li>
+                    </ol>
+                </div>
+                <div class="completed-con">
+                    <div class="title">의뢰서<span class="col_blue">등록완료</span></div>
+                    <span>빠른 시일내에 담당자가 확인 후<br /> 회신드리도록 하겠습니다.</span>
+                </div>
+                <a href="/Offer/List?menu=@(ViewBag.type == "S" ? "scrap" : "prs")" class="button buttonViewWritten">등록내역 보기</a>
+            </div>
+        </div>
+    </div>
+}

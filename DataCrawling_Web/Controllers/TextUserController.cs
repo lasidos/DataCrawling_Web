@@ -14,6 +14,9 @@ using DataCrawling_Web.Models.Files;
 using DataCrawling_Web.Service.Util;
 using DataCrawling_Web.BSL.Common;
 using DataCrawling_Web.Service;
+using System.Drawing.Drawing2D;
+using DataCrawling_Web.DSL.Files;
+using DataCrawling_Web.DSL.Offer;
 
 namespace DataCrawling_Web.Controllers
 {
@@ -22,7 +25,7 @@ namespace DataCrawling_Web.Controllers
         /// <summary>
         /// 업로드 최대 크기
         /// </summary>
-        public readonly int FileMaxFileSize = 100 * 1024 * 1024;
+        public readonly int FileMaxFileSize = 10 * 1024 * 1024;
         public readonly int CommonFileMaxFileSize = 10 * 1024 * 1024;
 
         /// <summary>
@@ -499,7 +502,7 @@ namespace DataCrawling_Web.Controllers
                 {
                     errorModel = new TextUserErrorModel()
                     {
-                        msg = "로그인 해주세요.",
+                        msg = "로그인이 필요합니다.\n로그인 후 다시 이용해주세요.",
                         rc = 1
                     };
 
@@ -509,7 +512,7 @@ namespace DataCrawling_Web.Controllers
                 // 1. 파일 삭제 확인
                 if (!string.IsNullOrEmpty(param.hiddFileName))
                 {
-                    string path = FilePathGenerate.GetUserFilePath(AuthUser.M_ID);
+                    string path = FilePathGenerate.GetUserFilePath(Utility.Decrypt_AES(AuthUser.M_ID).Split('@')[0]);
                     string delFileFullPath = string.Concat(path, @"\", param.hiddFileName);
 
                     System.IO.File.Delete(delFileFullPath);
@@ -537,7 +540,7 @@ namespace DataCrawling_Web.Controllers
                 {
                     HttpPostedFileBase file = Request.Files[0];
                     string requestFileName = MKCtx.CMSvc.ReplaceBadCharacter(file.FileName);
-                    string fileName = AuthUser.M_ID + "_" + Path.GetFileNameWithoutExtension(requestFileName);
+                    string fileName = Utility.Decrypt_AES(AuthUser.M_ID).Split('@')[0] + "_" + Path.GetFileNameWithoutExtension(requestFileName);
                     string originFileName = Path.GetFileName(requestFileName);
                     originFileName = originFileName.IsNormalized(NormalizationForm.FormD) ? originFileName.Normalize() : originFileName;
 
@@ -556,14 +559,14 @@ namespace DataCrawling_Web.Controllers
                     // DB 기록이 불가능한 파일명인 경우 파일명 변환
                     if (eucKr.GetString(eucKr.GetBytes(fileName)).IndexOf("?") > -1)
                     {
-                        fileName = string.Concat(AuthUser.M_ID, "_", DateTime.Now.ToString("yyyyMMdd"), Path.GetRandomFileName().Substring(0, 3).ToUpper());
+                        fileName = string.Concat(Utility.Decrypt_AES(AuthUser.M_ID).Split('@')[0], "_", DateTime.Now.ToString("yyyyMMdd"), Path.GetRandomFileName().Substring(0, 3).ToUpper());
                     }
 
                     string fileExt = Path.GetExtension(file.FileName);
                     string fileContentType = file.ContentType;
                     int fileContentLength = file.ContentLength;
-                    string folderName = string.Concat(FilePathGenerate.GetUserFilePath(AuthUser.M_ID));
-                    string fileSaveFullPath = FilePathGenerate.GetUserFilePath(AuthUser.M_ID);
+                    string folderName = string.Concat(FilePathGenerate.GetUserFilePath(Utility.Decrypt_AES(AuthUser.M_ID)).Split('@')[0]);
+                    string fileSaveFullPath = FilePathGenerate.GetUserFilePath(Utility.Decrypt_AES(AuthUser.M_ID).Split('@')[0]);
                     int fileDupeCnt = 0;
 
                     // 파일 사이즈 확인
@@ -638,7 +641,7 @@ namespace DataCrawling_Web.Controllers
                     */
 
                     //개인정보 발견시 종료
-                    //if (param.isCheckFileContent)
+                    if (param.isCheckFileContent)
                     {
                         var checkResult = MKCtx.CMSvc.CheckFileContents();
                         if (checkResult.InvalidCount > 0)
@@ -674,18 +677,20 @@ namespace DataCrawling_Web.Controllers
                         file.SaveAs(fullFileNamePath);
                     }
 
-                    List<TextUserResponseFileModel> fileModel = new List<TextUserResponseFileModel>();
-                    fileModel.Add(new TextUserResponseFileModel()
+                    List<TextUserResponseFileModel> fileModel = new List<TextUserResponseFileModel>
                     {
-                        File_Type = param.File_Type,
-                        dFileName = Path.GetFileName(fullFileNamePath),
-                        OldFileName = Path.GetFileName(fullFileNamePath).Replace(string.Concat(AuthUser.M_ID, "_"), ""),
-                        Origin_FileName = originFileName,
-                        File_Up_Stat = param.File_Up_Stat,
-                        hidFile_Up_Stat = param.hidFile_Up_Stat,
-                        FIle_Size = Convert.ToString(fileContentLength),
-                        Ext = fileExt
-                    });
+                        new TextUserResponseFileModel()
+                        {
+                            File_Type = param.File_Type,
+                            dFileName = Path.GetFileName(fullFileNamePath),
+                            OldFileName = Path.GetFileName(fullFileNamePath).Replace(string.Concat(AuthUser.M_ID, "_"), ""),
+                            Origin_FileName = originFileName,
+                            File_Up_Stat = param.File_Up_Stat,
+                            hidFile_Up_Stat = param.hidFile_Up_Stat,
+                            FIle_Size = Convert.ToString(fileContentLength),
+                            Ext = fileExt
+                        }
+                    };
 
                     // 파일 업로드 완료
                     TextUserResponseModel successModel = new TextUserResponseModel()
@@ -1032,7 +1037,7 @@ namespace DataCrawling_Web.Controllers
                 }
 
                 Bitmap bmp = new Bitmap(postfile.InputStream);
-                
+
                 //성공 여부
                 bool result = false;
                 string Ext = string.Empty;
@@ -1756,6 +1761,257 @@ namespace DataCrawling_Web.Controllers
             };
 
             return Content(ViewRendererHelper.RenderPartialView("~/Views/TextUser/Partial/FileExistCheck.cshtml", ResultModel, this.ControllerContext));
+        }
+
+        [HttpPost]
+        public JsonResult FileAppendAjax(TextUserRequestModel param)
+        {
+            TextUserErrorModel errorModel = null;
+
+            try
+            {
+                Encoding eucKr = Encoding.GetEncoding(51949);
+
+                if (string.IsNullOrEmpty(AuthUser.M_ID))
+                {
+                    errorModel = new TextUserErrorModel()
+                    {
+                        msg = "로그인이 필요합니다.\n로그인 후 다시 이용해주세요.",
+                        rc = 1
+                    };
+
+                    return Json(errorModel);
+                }
+
+                if (Request.Files == null || Request.Files.Count == 0)
+                {
+                    errorModel = new TextUserErrorModel()
+                    {
+                        msg = "파일을 선택해 주세요.",
+                        rc = 2
+                    };
+
+                    return Json(errorModel);
+                }
+                else if (Request.Files.Count == 1)
+                {
+                    HttpPostedFileBase file = Request.Files[0];
+                    string requestFileName = MKCtx.CMSvc.ReplaceBadCharacter(file.FileName);
+                    string fileName = Utility.Decrypt_AES(AuthUser.M_ID).Split('@')[0] + "_" + Path.GetFileNameWithoutExtension(requestFileName);
+                    string originFileName = Path.GetFileName(requestFileName);
+                    originFileName = originFileName.IsNormalized(NormalizationForm.FormD) ? originFileName.Normalize() : originFileName;
+
+                    // 특수문자 % Replace - 모바일 파일 다운로드 오류 수정 
+                    if (fileName.IndexOf("%") >= 0) fileName = fileName.Replace("%", "_");
+
+                    // Mac Unicode 오류 수정
+                    if (fileName.IsNormalized(NormalizationForm.FormD)) fileName = fileName.Normalize();
+
+                    // DB 기록이 불가능한 파일명인 경우 파일명 변환
+                    if (eucKr.GetString(eucKr.GetBytes(fileName)).IndexOf("?") > -1)
+                    {
+                        fileName = string.Concat(Utility.Decrypt_AES(AuthUser.M_ID).Split('@')[0], "_", DateTime.Now.ToString("yyyyMMdd"), Path.GetRandomFileName().Substring(0, 3).ToUpper());
+                    }
+
+                    string fileExt = Path.GetExtension(file.FileName);
+                    string fileContentType = file.ContentType;
+                    int fileContentLength = file.ContentLength;
+                    string folderName = string.Concat(FilePathGenerate.GetUserFilePath(Utility.Decrypt_AES(AuthUser.M_ID)).Split('@')[0]);
+                    string fileSaveFullPath = FilePathGenerate.GetUserFilePath(Utility.Decrypt_AES(AuthUser.M_ID).Split('@')[0]);
+                    int fileDupeCnt = 0;
+
+                    // 파일 사이즈 확인
+                    if (fileContentLength == 0)
+                    {
+                        errorModel = new TextUserErrorModel()
+                        {
+                            msg = "파일을 선택해 주세요.",
+                            rc = 2
+                        };
+
+                        return Json(errorModel);
+                    }
+
+                    // 확장자 확인
+                    if (Code.AcceptFileExt.IndexOf(fileExt.ToLower()) == -1)
+                    {
+                        errorModel = new TextUserErrorModel()
+                        {
+                            msg = "파일 형식이 올바르지 않습니다.\n\n문서파일, 이미지파일, 압축파일만 가능합니다.",
+                            rc = 3
+                        };
+
+                        return Json(errorModel);
+                    }
+
+                    // 형식 확인
+                    if (Code.AcceptTxt.IndexOf(fileContentType) == -1)
+                    {
+                        errorModel = new TextUserErrorModel()
+                        {
+                            msg = "파일 형식이 틀립니다.\n\n3MB 이내의 doc, docx, hwp, ppt, pptx, xls, xlsx, pdf, zip, jpg, gif 파일형식만 가능합니다.",
+                            rc = 3
+                        };
+
+                        return Json(errorModel);
+                    }
+
+                    // 크기 확인
+                    var total = FilePathGenerate.FileUploadList.Sum(s => Convert.ToInt32(s.FIle_Size));
+                    if (total + fileContentLength > FileMaxFileSize)
+                    {
+                        errorModel = new TextUserErrorModel()
+                        {
+                            msg = "업로드된 모든 파일의 용량이 10MB를 초과하였습니다.\n\n첨부파일 용량은 최대 10MB까지 가능합니다.",
+                            rc = 4
+                        };
+
+                        return Json(errorModel);
+                    }
+
+                    // 이미 등록된 파일인지 확인 (파일명 + 사이즈로 체크)
+                    string fullFileNamePath = string.Concat(fileSaveFullPath, fileName, fileExt);
+                    if (System.IO.File.Exists(fullFileNamePath))
+                    {
+                        bool exist = true;
+                        do
+                        {
+                            fileDupeCnt++;
+                            fullFileNamePath = string.Concat(fileSaveFullPath, fileName, "_", fileDupeCnt, fileExt);
+                            if (!System.IO.File.Exists(fullFileNamePath)) exist = false;
+                        } while (exist);
+                    }
+
+                    if (FilePathGenerate.FileUploadList.Where(s => s.FullFileNamePath == fullFileNamePath).Count() > 0)
+                    {
+                        errorModel = new TextUserErrorModel()
+                        {
+                            msg = "이미 등록된 파일입니다.\n\n파일을 다시 선택해주세요.",
+                            rc = 6
+                        };
+
+                        return Json(errorModel);
+                    }
+
+                    //개인정보 발견시 종료
+                    if (param.isCheckFileContent)
+                    {
+                        var checkResult = MKCtx.CMSvc.CheckFileContents();
+                        if (checkResult.InvalidCount > 0)
+                        {
+                            errorModel = new TextUserErrorModel()
+                            {
+                                msg = $"업로드 파일에서 주민번호로 의심되는 정보가 {checkResult.InvalidCount}건 검출되었습니다. 개인정보보호를 위해 개인정보가 포함된 파일은 등록할 수 없습니다. 개인정보 삭제 후 다시 업로드 해주세요.",
+                                rc = 5
+                            };
+                            return Json(new { msg = errorModel.msg, rc = errorModel.rc }, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+
+                    FilePathGenerate.FileUploadList.Add(new TextUserResponseFileModel()
+                    {
+                        File_Type = param.File_Type,
+                        dFileName = Path.GetFileName(fullFileNamePath),
+                        OldFileName = Path.GetFileName(fullFileNamePath).Replace(string.Concat(AuthUser.M_ID, "_"), ""),
+                        Origin_FileName = originFileName,
+                        File_Up_Stat = param.File_Up_Stat,
+                        hidFile_Up_Stat = param.hidFile_Up_Stat,
+                        FIle_Size = Convert.ToString(fileContentLength),
+                        Ext = fileExt,
+                        FullFileNamePath = fullFileNamePath,
+                        FileBases = file
+                    });
+
+                    TextUserResponseModel successModel = new TextUserResponseModel()
+                    {
+                        rc = 0,
+                        msg = FilePathGenerate.FileUploadList.Sum(s => Convert.ToInt32(s.FIle_Size)).ToString()
+                    };
+
+                    return Json(successModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(errorModel = new TextUserErrorModel()
+                {
+                    msg = ex.ToString(),
+                    rc = -1
+                });
+            }
+
+            return Json(errorModel);
+        }
+
+        [HttpPost]
+        public JsonResult RemoveFile(string fileName)
+        {
+            foreach (var item in FilePathGenerate.FileUploadList)
+            {
+                if (item.Origin_FileName == fileName)
+                {
+                    FilePathGenerate.FileUploadList.Remove(item);
+                    break;
+                }
+            }
+
+            TextUserResponseModel successModel = new TextUserResponseModel()
+            {
+                items = FilePathGenerate.FileUploadList,
+                rc = 0,
+                msg = FilePathGenerate.FileUploadList.Sum(s => Convert.ToInt32(s.FIle_Size)).ToString()
+            };
+            return Json(successModel);
+        }
+
+        [HttpPost]
+        public JsonResult RegistData(RegDbModel regDb)
+        {
+            TextUserErrorModel errorModel = null;
+
+            try
+            {
+                // 파일저장
+                foreach (var item in FilePathGenerate.FileUploadList)
+                {
+                    var docType = regDb.FileList.Where(p => item.Origin_FileName.Contains(p.Split(',')[1])).First().Split(',')[0];
+                    var idx = new GGRpSvc().USP_UserFileDB_I(Utility.Decrypt_AES(AuthUser.M_ID), docType, item.FullFileNamePath);
+                    if (regDb.FileIdx == null) regDb.FileIdx = new List<int>();
+                    regDb.FileIdx.Add(idx);
+                    item.FileBases.SaveAs(item.FullFileNamePath);
+                }
+
+                // 의뢰서 DB저장
+                var result = new OfferSvc().USP_RegistOffer_I(regDb);
+                if (result.First().ResutCode == 0)
+                {
+                    FilePathGenerate.FileUploadList.Clear();
+                    TextUserResponseModel successModel = new TextUserResponseModel()
+                    {
+                        items = null,
+                        rc = 0,
+                        msg = FilePathGenerate.FileUploadList.Sum(s => Convert.ToInt32(s.FIle_Size)).ToString()
+                    };
+                    return Json(successModel);
+                }
+                else
+                {
+                    return Json(errorModel = new TextUserErrorModel()
+                    {
+                        msg = result.First().ResultMsg,
+                        rc = -1
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(errorModel = new TextUserErrorModel()
+                {
+                    msg = ex.ToString(),
+                    rc = -1
+                });
+            }
+
         }
     }
 }

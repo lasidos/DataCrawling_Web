@@ -1,4 +1,6 @@
-﻿using DataCrawling_Web.Service.Util;
+﻿using DataCrawling_Web.Models.Files;
+using DataCrawling_Web.Service.Util;
+using System.Collections.Generic;
 
 namespace DataCrawling_Web.Service
 {

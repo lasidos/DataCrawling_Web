@@ -1,0 +1,30 @@
+﻿@model List<DataCrawling_Web.Models.Files.TextUserResponseFileModel>
+
+<ul>
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        <li data-cid="c499" class="someinfo">
+            <div class="dropdown dropdown-portfolio is-label">
+                <div class="label hidden" aria-hidden="true">구분</div>
+                <button type="button" class="button buttonChoose">
+                    <span>구분<span class="point">*</span></span>
+                    <span class="ChooseResult"></span>
+                </button>
+                <div class="list hidden is-scroll">
+                    <ul>
+                        <li><button type="button" class="button" data-value="1"><span>기획서</span></button></li>
+                        <li><button type="button" class="button" data-value="2"><span>화면설계서</span></button></li>
+                        <li><button type="button" class="button" data-value="3"><span>기능정의서</span></button></li>
+                        <li><button type="button" class="button" data-value="4"><span>정책정의서</span></button></li>
+                        <li><button type="button" class="button" data-value="5"><span>기타</span></button></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="File_Type" value="0">
+                <div class="validation hidden" aria-hidden="true"></div>
+            </div>
+            <div class="filename">@Model[i].Origin_FileName</div>
+            <input type="hidden" id="idx_c499" value="@Model[i].FIle_Size">
+            <button type="button" class="button buttonDelete">삭제</button>
+        </li>
+    }
+</ul>
