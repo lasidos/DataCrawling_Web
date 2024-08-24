@@ -188,6 +188,12 @@
             return;
         }
 
+        if ($('#txtaContent').val() == "") {
+            alert('상세정보가 입력되지 않았습니다.');
+            $('#txtaContent').focus();
+            return;
+        }
+
         if ($('.someinfo').length > 0) {
             var emptyIdx = -1;
             for (var i = 0; i < $('.someinfo').length; i++) {

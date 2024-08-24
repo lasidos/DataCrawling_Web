@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -312,6 +313,117 @@ namespace DataCrawling_Web.BSL.Common
 
             return handPhone;
         }
+        #endregion
+
+        #region 마스킹
+
+        public static string SetMask(string str, int len)
+        {
+            // str을 len을 제외하고 나머지 마스킹
+            string result = string.Empty;
+
+            if (string.IsNullOrEmpty(str) || str.Length <= len) return str;
+
+            else
+            {
+                result = str.Substring(0, len);
+                for (int i = 0; i < str.Length - len; i++)
+                {
+                    result = string.Concat(result, "*");
+                }
+            }
+
+            return result;
+        }
+
+        public static string SetDefaultAddrMask(string str)
+        {
+            string result = string.Empty;
+
+            try
+            {
+                str = str.Trim();
+                int blankIndex = str.LastIndexOf(' ');
+                if (string.IsNullOrEmpty(str) || blankIndex < 0)
+                {
+                    return str;
+                }
+                else
+                {
+                    bool isMaskingOrder = false;
+                    var splitSet = new string[] { "읍", "면", "동", "길", "로", "가" };
+                    string[] splitAddr = str.Split(new[] {" "},
+                    StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (String addr in splitAddr)
+                    {
+                        String lastChar = addr.Substring(addr.Length - 1);
+                        if (splitSet.Any(x => x == lastChar) && !isMaskingOrder)
+                        {
+                            isMaskingOrder = true;
+                            result += addr + " ";
+                        }
+                        else
+                        {
+                            if (!isMaskingOrder)
+                            {
+                                result += addr + " ";
+                            }
+                            else
+                            {
+                                for (int i = 0; i < addr.Length; i++)
+                                {
+                                    result = string.Concat(result, "*");
+                                }
+                            }
+                        }
+                    }
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                return result;
+            }
+        }
+
+        public static string SetPhoneNumMask(string str)
+        {
+            // '-', '-' 사이 숫자 마스킹, 010-***-1234
+            string result = string.Empty;
+            result = str;
+            try
+            {
+                str = str.Trim();
+                if (string.IsNullOrEmpty(str))
+                {
+                    return str;
+                }
+                else
+                {
+                    int startIndex = str.IndexOf('-') + 1;
+                    int lastIndex = str.LastIndexOf('-');
+                    string mask = "*";
+
+                    if (lastIndex > startIndex)
+                    {
+                        for (int i = 0; i < lastIndex - startIndex; i++)
+                        {
+                            str = str.Insert(startIndex + i, mask);
+                        }
+
+                        result = str;
+                        result = result.Remove(startIndex + (lastIndex - startIndex), lastIndex - startIndex);
+                    }
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                return result;
+            }
+        }
+
         #endregion
 
         #region Encrypt_SHA : SHA256Bit 암호화 함수

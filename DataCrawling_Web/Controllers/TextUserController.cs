@@ -1869,30 +1869,6 @@ namespace DataCrawling_Web.Controllers
                         return Json(errorModel);
                     }
 
-                    // 이미 등록된 파일인지 확인 (파일명 + 사이즈로 체크)
-                    string fullFileNamePath = string.Concat(fileSaveFullPath, fileName, fileExt);
-                    if (System.IO.File.Exists(fullFileNamePath))
-                    {
-                        bool exist = true;
-                        do
-                        {
-                            fileDupeCnt++;
-                            fullFileNamePath = string.Concat(fileSaveFullPath, fileName, "_", fileDupeCnt, fileExt);
-                            if (!System.IO.File.Exists(fullFileNamePath)) exist = false;
-                        } while (exist);
-                    }
-
-                    if (FilePathGenerate.FileUploadList.Where(s => s.FullFileNamePath == fullFileNamePath).Count() > 0)
-                    {
-                        errorModel = new TextUserErrorModel()
-                        {
-                            msg = "이미 등록된 파일입니다.\n\n파일을 다시 선택해주세요.",
-                            rc = 6
-                        };
-
-                        return Json(errorModel);
-                    }
-
                     //개인정보 발견시 종료
                     if (param.isCheckFileContent)
                     {
@@ -1908,18 +1884,41 @@ namespace DataCrawling_Web.Controllers
                         }
                     }
 
+                    // 중복 파일명 조회
+                    string fullFileNamePath = string.Concat(fileSaveFullPath, fileName, fileExt);
+                    if (!System.IO.File.Exists(fullFileNamePath))
+                    {
+                        file.SaveAs(fullFileNamePath);
+                    }
+                    else
+                    {
+                        bool exist = true;
+
+                        do
+                        {
+                            fileDupeCnt++;
+                            fullFileNamePath = string.Concat(fileSaveFullPath, fileName, "_", fileDupeCnt, fileExt);
+                            if (!System.IO.File.Exists(fullFileNamePath))
+                            {
+                                exist = false;
+                            }
+                        } while (exist);
+
+                        file.SaveAs(fullFileNamePath);
+                    }
+
                     FilePathGenerate.FileUploadList.Add(new TextUserResponseFileModel()
                     {
                         File_Type = param.File_Type,
                         dFileName = Path.GetFileName(fullFileNamePath),
+                        dFilePath = Path.GetDirectoryName(fullFileNamePath),
                         OldFileName = Path.GetFileName(fullFileNamePath).Replace(string.Concat(AuthUser.M_ID, "_"), ""),
                         Origin_FileName = originFileName,
                         File_Up_Stat = param.File_Up_Stat,
                         hidFile_Up_Stat = param.hidFile_Up_Stat,
                         FIle_Size = Convert.ToString(fileContentLength),
                         Ext = fileExt,
-                        FullFileNamePath = fullFileNamePath,
-                        FileBases = file
+                        FullFileNamePath = fullFileNamePath
                     });
 
                     TextUserResponseModel successModel = new TextUserResponseModel()
@@ -1971,18 +1970,17 @@ namespace DataCrawling_Web.Controllers
 
             try
             {
-                // 파일저장
+                // 파일정보 저장
                 foreach (var item in FilePathGenerate.FileUploadList)
                 {
                     var docType = regDb.FileList.Where(p => item.Origin_FileName.Contains(p.Split(',')[1])).First().Split(',')[0];
-                    var idx = new GGRpSvc().USP_UserFileDB_I(Utility.Decrypt_AES(AuthUser.M_ID), docType, item.FullFileNamePath);
+                    var idx = new GGRpSvc().USP_UserFileDB_I(AuthUser.M_ID, docType, item.FullFileNamePath);
                     if (regDb.FileIdx == null) regDb.FileIdx = new List<int>();
                     regDb.FileIdx.Add(idx);
-                    item.FileBases.SaveAs(item.FullFileNamePath);
                 }
 
                 // 의뢰서 DB저장
-                var result = new OfferSvc().USP_RegistOffer_I(regDb);
+                var result = new OfferSvc().USP_RegistOffer_I(AuthUser.M_ID, regDb);
                 if (result.First().ResutCode == 0)
                 {
                     FilePathGenerate.FileUploadList.Clear();

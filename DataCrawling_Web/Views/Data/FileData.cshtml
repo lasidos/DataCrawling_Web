@@ -1,0 +1,189 @@
+﻿@model DataCrawling_Web.Models.Data.DataInfoView_Model
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.BodyClass = "mtcSubNotice";
+}
+
+@section Header{
+    @RenderPage("~/Views/Shared/_Header.cshtml", Model)
+    <script src="~/Resource/Js/Data/FileData.js"></script>
+    <link href="~/Resource/Css/Data/FileData.css" rel="stylesheet" />
+}
+
+@section Notice{
+    @RenderPage("~/Views/Shared/_Notice.cshtml")
+}
+
+@section Content{
+    <div id="container">
+        <div id="content">
+            <div class="topArea">
+                <span class="cl3399ff">[ @Model.DataInfo.D_TYPE ]</span>
+                <h2 class="subTits">@Model.DataInfo.TITLE</h2>
+            </div>
+
+            <div class="DataSubject">
+                <span>@Model.DataInfo.SUMMARY.Replace("\\n", "\n")</span>
+            </div>
+
+            <div class="justify-content-space-between">
+                <div class="flex-tit">
+                    <h3 class="mb-2">
+                        파일데이터 정보
+                    </h3>
+                    <div class="dropdown ml-2">
+                        <button class="button h36 dropbtn">
+                            <i class="fa fa-tags" aria-hidden="true"></i> 메타데이터 다운로드
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="/catalog/15084730/fileData.json" target="_blank">schema.org</a>
+                            <a href="/dcat/metadata/15084730" target="_blank">DCAT</a>
+                        </div>
+                    </div>
+                    <button id="column-def-toggle-btn" class="button white h36 has-tooltip ml-2 dropbtn">
+                        데이터 항목(컬럼) 정보
+                    </button>
+                </div>
+                <div class="flex-tit align-items-center">
+                    <a href="javascript:fn_callDataImproveReportPopup('', 'F', '15084730','uddi:c88e1e02-807c-41ec-9620-b59260b8be96', '')" class="button error-btn" title="새 창으로 문의 열기">
+                        데이터 개선요청
+                    </a>
+                    <a href="javascript:fn_callErrorReportPopup('', 'F', '15084730','uddi:c88e1e02-807c-41ec-9620-b59260b8be96', '');" class="button error-btn ml-2" title="새 창으로 문의 열기">
+                        오류신고 및 문의
+                    </a>
+                </div>
+            </div>
+
+            <table class="dataset-table fileDataDetail" id="fileDetailTableArea-pc">
+                <caption>소상공인시장진흥공단_상가(상권)정보로 파일데이터 정보 표로 분류체계, 제공기관 등 정보를 나타냄</caption>
+                <tbody>
+                    @if (Model.DataInfo.D_TYPE != "API")
+                    {
+                        <tr class="bg-beige tr">
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">파일데이터명</th>
+                            <td class="td custom-cell-border-bottom" style="color: #39f; font-weight:500">
+                                <a href="/tcs/dss/selectDataSetList.do?dType=&amp;keyword=&amp;org=소상공인시장진흥공단&amp;orgFilter=소상공인시장진흥공단&amp;orgFullName=소상공인시장진흥공단&amp;conditionType=search">
+                                    소상공인시장진흥공단_상가(상권)정보_20240331
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr class="bg-beige tr">
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">서비스</th>
+                            <td class="td custom-cell-border-bottom">@Model.DataInfo.TITLE</td>
+                        </tr>
+                    }
+                    <tr class="bg-beige tr">
+                        <th class="th custom-cell-border-bottom custom-cell-border-right">분류</th>
+                        <td class="td custom-cell-border-bottom">@Model.DataInfo.SECTOR</td>
+                        <th class="th custom-cell-border-bottom custom-cell-border-right">제공타입</th>
+                        <td class="td custom-cell-border-bottom">@Model.DataInfo.D_TYPE</td>
+                    </tr>
+                    <tr class="bg-beige tr">
+                        <th class="th custom-cell-border-bottom custom-cell-border-right">업데이트 주기</th>
+                        <td class="td custom-cell-border-bottom">@(Model.DataInfo.UPDATE_CYCLE)일</td>
+                        <th class="th custom-cell-border-bottom custom-cell-border-right">차기 등록 예정일</th>
+                        <td class="td custom-cell-border-bottom">@(Model.DataInfo.LAST_UDT.AddDays(Model.DataInfo.UPDATE_CYCLE).ToString("yyyy.MM.dd"))</td>
+                    </tr>
+
+                    @if (Model.DataInfo.D_TYPE != "API")
+                    {
+                        <tr class="bg-skyblue tr">
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">매체유형</th>
+                            <td class="td custom-cell-border-bottom">텍스트</td>
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">전체 행</th>
+                            <td class="td custom-cell-border-bottom">1</td>
+                        </tr>
+                        <tr class="bg-skyblue tr">
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">확장자</th>
+                            <td class="td custom-cell-border-bottom">CSV</td>
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">키워드</th>
+                            <td class="td custom-cell-border-bottom">상가업소 ,소상공인 ,상권정보</td>
+                        </tr>
+                        <tr class="bg-skyblue tr">
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">
+                                누적 다운로드(바로가기)<br>
+                                <small>* 주기성 데이터 포함</small>
+                            </th>
+                            <td class="td custom-cell-border-bottom">214936</td>
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">다운로드(바로가기)</th>
+                            <td class="td custom-cell-border-bottom">2322</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr class="bg-skyblue tr">
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">API 유형</th>
+                            <td class="td custom-cell-border-bottom">REST</td>
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">데이터포맷</th>
+                            <td class="td custom-cell-border-bottom">JSON</td>
+                        </tr>
+                    }
+
+                    <tr class="bg-skyblue tr">
+                        <th class="th custom-cell-border-bottom custom-cell-border-right">등록일</th>
+                        <td class="td custom-cell-border-bottom">@Model.DataInfo.CREATE_DT.ToString("yyyy-MM-dd")</td>
+                        <th class="th custom-cell-border-bottom custom-cell-border-right">수정일</th>
+                        <td class="td custom-cell-border-bottom">@Model.DataInfo.EDIT_DT.ToString("yyyy-MM-dd")</td>
+                    </tr>
+
+                    <tr class="bg-skyblue tr">
+                        <th class="th custom-cell-border-bottom custom-cell-border-right">제공형태</th>
+                        @if (Model.DataInfo.D_TYPE != "API")
+                        {
+                            <td class="td custom-cell-border-bottom">공공데이터포털에서 다운로드(원문파일등록)</td>
+                        }
+                        else
+                        {
+                            <td class="td custom-cell-border-bottom">공공데이터포털에서 다운로드(원문파일등록)</td>
+                        }
+                    </tr>
+
+                    <tr class="bg-skyblue tr">
+                        <th class="th custom-cell-border-bottom custom-cell-border-right">설명</th>
+                        <td class="td custom-cell-border-bottom">영업 중인 전국 상가업소 데이터를 제공합니다.<br>(상호명, 업종코드, 업종명, 지번주소, 도로명주소, 경도, 위도 등)<br><br>[데이터 변경 안내]  <br><br>1. 상권업종분류  : 표준산업분류 기반 업종분류 개편(837개 -&gt; 247개)<br><br>2. 표준산업분류 :  9차→10차<br><br>3. 상가업소번호 : 상가업소번호를 새롭게 생성하여 과거 데이터와 연계 불가<br><br>자세한 사항은 상권정보시스템 공지사항에서 확인하시기 바랍니다.<br>https://sg.sbiz.or.kr/godo/noticeInfo/announcementView.sg?id=5158&amp;page=1</td>
+                    </tr>
+                    <tr class="bg-skyblue tr">
+                        <th class="th custom-cell-border-bottom custom-cell-border-right">기타 유의사항</th>
+                        <td class="td custom-cell-border-bottom"></td>
+                    </tr>
+                    <tr class="bg-green tr">
+                        <th class="th custom-cell-border-bottom custom-cell-border-right">비용</th>
+                        <td class="td custom-cell-border-bottom">@(Model.DataInfo.PRICE == 0 ? "무료": string.Format("월 {0:#,###}원", Model.DataInfo.PRICE))</td>
+                        <th class="th custom-cell-border-bottom custom-cell-border-right">비용부과기준 및 단위</th>
+                        <td class="td custom-cell-border-bottom">@(Model.DataInfo.PRICE == 0 ? "": string.Format("{0:#,###}", Model.DataInfo.PRICE_STANDARD))건 </td>
+                    </tr>
+                    <tr class="bg-green tr">
+                        <th class="th custom-cell-border-right">이용허락범위</th>
+                        <td class="td">
+                            <div class="img-copyright">
+                                <a href="/ugs/selectPortalPolicyView.do" target="_blank" title="새 창으로 공공데이터포털 정책 열기">
+                                    이용허락범위 제한 없음
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tab-wrap common-data-tab">
+                <nav class="tab-list tab-layer col-3">
+                    <ul>
+                        <li class="on" data-tab="tab_layer_detail_function"><a href="javascript:">상세기능</a></li>
+                        @*<li data-tab="tab_layer_prcuse_exam"><a href="javascript:">활용사례</a></li>
+                        <li data-tab="tab_layer_recommend_data"><a href="javascript:">추천데이터</a></li>*@
+                    </ul>
+                </nav>
+                <div id="tab_layer_detail_function">
+                    <div class="tab-cont"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Footer{
+    @RenderPage("~/Views/Shared/_Footer_Type2.cshtml")
+}

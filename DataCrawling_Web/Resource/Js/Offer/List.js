@@ -7,6 +7,7 @@
 
         $('.listWrap').load("/Offer/GetTabData",
             {
+                menu: $('#pageCode').val(),
                 Tab: $(this).val()
             });
     });

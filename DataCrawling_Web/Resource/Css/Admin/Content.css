@@ -1,0 +1,109 @@
+﻿/*img {
+    max-height: 400px;
+    background-size: auto;
+}
+
+.top-info {
+    display: flex;
+    margin-bottom: 40px;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 10px;
+    padding-bottom: 50px;
+}
+
+#input-file {
+    display: none;
+}
+
+.input-file-button, #btn-save {
+    display: flex;
+    width: 140px;
+    height: 40px;
+    border: 1px solid #0A2142;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    background-color: #0A2142;
+    color: #fff;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+#preview {
+    margin-right: 10px;
+}
+
+.r-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+    .r-top > * + * {
+        margin-left: 10px;
+    }
+
+.note-editor.note-frame {
+    margin-bottom: 30px;
+}
+
+.l-top {
+    font-size: 15px;
+    font-weight: 500;
+    color: #000;
+}
+
+    .l-top .stair-menu {
+        display: flex;
+    }
+
+    .l-top > .stair-menu + .stair-menu {
+        margin-top: 60px;
+    }
+
+    .l-top .stair-menu > .set-area + .set-area {
+        margin-left: 100px;
+    }
+
+.set-area {
+    display: flex;
+    min-height: 30px;
+    align-items: flex-start;
+}
+
+    .set-area .s-title {
+        margin-right: 15px;
+    }
+
+    .set-area select {
+        width: 140px;
+        height: 36px;
+        padding-left: 8px;
+        border: 1px solid #aaa;
+        border-radius: 0;
+        color: #646464;
+        font-size: 14px;
+        vertical-align: 1px;
+    }*/
+
+select {
+    outline: 0;
+}
+
+table.dataset-table {
+    margin: 0;
+}
+
+.set_box select {
+    width: 140px;
+    height: 36px;
+    padding-left: 8px;
+    border: 1px solid #aaa;
+    border-radius: 0;
+    color: #646464;
+    font-size: 14px;
+    vertical-align: 1px;
+}

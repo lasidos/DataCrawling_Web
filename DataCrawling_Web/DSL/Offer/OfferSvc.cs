@@ -31,9 +31,23 @@ namespace DataCrawling_Web.DSL.Offer
             }
         }
 
-        public IEnumerable<ResultSvc> USP_RegistOffer_I(RegDbModel regDb)
+        public IEnumerable<OfferDBModel> USP_RegistOffer_S(string pageCode, string tab, string uid)
         {
             var param = new DynamicParameters();
+            param.Add("@pageCode", pageCode);
+            param.Add("@tab", tab);
+            param.Add("@uid", uid);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                return conn.Query<OfferDBModel>(param: param, commandType: CommandType.StoredProcedure
+                    , sql: "DBO.USP_RegistOffer_S");
+            }
+        }
+
+        public IEnumerable<ResultSvc> USP_RegistOffer_I(string uid, RegDbModel regDb)
+        {
+            var param = new DynamicParameters();
+            param.Add("@uid", uid);
             param.Add("@offerType", regDb.offerType);
             param.Add("@hidStatType", regDb.hidStatType);
             param.Add("@hidPlanType", regDb.hidPlanType);
@@ -41,7 +55,7 @@ namespace DataCrawling_Web.DSL.Offer
             param.Add("@lb_Url", regDb.lb_Url);
             param.Add("@txtContent", regDb.txtContent);
             param.Add("@etcContent", regDb.etcContent);
-            param.Add("@FileIdx", string.Join(",", regDb.FileIdx));
+            param.Add("@FileIdx", regDb.FileIdx == null ? "" : string.Join(",", regDb.FileIdx));
             using (IDbConnection conn = new SqlConnection(CONN_STR))
             {
                 return conn.Query<ResultSvc>(param: param, commandType: CommandType.StoredProcedure

@@ -1,0 +1,82 @@
+﻿<link href="~/Resource/Css/Shared/Left/_PartialLeft_Admin.css" rel="stylesheet" />
+<script src="~/Resource/Js/Shared/Left/_PartialLeft_Admin.js"></script>
+
+@helper CHeckCurrent(string menu, string name)
+{
+    var url = Request.Url.PathAndQuery;
+    if (url.Contains(menu))
+    {
+        <li class="gCurrent"><a href="@menu">@name</a></li>
+    }
+    else
+    {
+        <li class=""><a href="@menu">@name</a></li>
+    }
+}
+
+<aside>
+    <nav>
+        <ul>
+            <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Code") ? "gCurrent" : "")">
+                <h3>메뉴 관리</h3>
+                <ul>
+                    @CHeckCurrent("/Admin/Code/CodeMng", "메뉴 관리")
+                </ul>
+            </li>
+            <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Member") ? "gCurrent" : "")">
+                <h3>회원관리</h3>
+                <ul>
+                    @CHeckCurrent("/Admin/Member/Management", "회원관리")
+                    @CHeckCurrent("/Admin/Member/Authority", "사용자권한")
+                    @CHeckCurrent("/Admin/Member/Groups", "권한그룹")
+                </ul>
+            </li>
+            <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Main") ? "gCurrent" : "")">
+                <h3>메인관리</h3>
+                <ul>
+                    @CHeckCurrent("/Admin/Main/item", "상단컨텐츠(module_ty)")
+                    @CHeckCurrent("/Admin/Main/service", "서비스 안내")
+                </ul>
+            </li>
+            <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Order") ? "gCurrent" : "")">
+                <h3>API/자동화 관리</h3>
+                <ul>
+                    <li><a href="/Admin/Order/lstAll">API</a></li>
+                    <li><a href="/Admin/Order/lstPending">자동화</a></li>
+                </ul>
+            </li>
+            <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Order") ? "gCurrent" : "")">
+                <h3>주문관리</h3>
+                <ul>
+                    <li><a href="/Admin/Order/lstAll">전체주문조회</a></li>
+                    <li><a href="/Admin/Order/lstPending">결제대기</a></li>
+                    <li><a href="/Admin/Order/lstInprocess">발주·발송</a></li>
+                    <li><a href="/Admin/Order/lstShipped">배송현황</a></li>
+                    <li><a href="/Admin/Order/lstConfirmed">구매확정</a></li>
+                </ul>
+            </li>
+            <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Notice") ? "gCurrent" : "")">
+                <h3>공지사항관리</h3>
+                <ul>
+                    <li><a href="/Admin/Member/lstAll">공지사항</a></li>
+                </ul>
+            </li>
+            @*<li class="@(Request.Url.AbsolutePath.Contains("/Admin/Member") ? "gCurrent" : "")">
+                <h3>회원관리</h3>
+                <ul>
+                    <li><a href="/Admin/Member/lstAll">회원검색</a></li>
+                    <li><a href="/Admin/Member/lstPending">결제대기</a></li>
+                    <li><a href="/Admin/Member/lstInprocess">발주·발송</a></li>
+                    <li><a href="/Admin/Member/lstShipped">배송현황</a></li>
+                    <li><a href="/Admin/Member/lstConfirmed">구매확정</a></li>
+                </ul>
+            </li>*@
+            <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Banner") ? "gCurrent" : "")">
+                <h3>배너관리</h3>
+                <ul>
+                    <li><a href="/Admin/Member/lstAll">배너관리</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</aside>

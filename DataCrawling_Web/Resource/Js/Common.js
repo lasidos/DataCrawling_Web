@@ -63,3 +63,19 @@ function phoneNumber(value) {
 
     return result.filter((val) => val).join("-");
 }
+
+function uploadSummernoteImageFile(file, el) {
+    data = new FormData();
+    data.append("file", file);
+    $.ajax({
+        data: data,
+        type: "POST",
+        url: "/Common/uploadSummernoteImageFile",
+        contentType: false,
+        enctype: 'multipart/form-data',
+        processData: false,
+        success: function (data) {
+            $(el).summernote('insertImage', data);
+        }
+    });
+}

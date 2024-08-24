@@ -1,22 +1,44 @@
-﻿<ul>
-    @for (int i = 0; i < 10; i++)
-    {
-        <li>
-            <div class="coWrap">
-                <p class="tit">인성역량검사</p>
-            </div>
-            <div class="titWrap">
-                <p class="desc">성격, 흥미, 역량, 가치관, 진로성숙도를 심층 분석하여, 적합한 직업 및 적성을 선택할 수 있게 하는 검사</p>
-                <div class="etc">
-                    <span>153문항/20분</span><span>모바일 시행 가능</span><span class="highlight">잡코리아 입사지원 시 첨부 가능</span>
+﻿@model List<DataCrawling_Web.Models.Files.OfferViewModel>
+@if (Model != null && Model.Count() > 0)
+{
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <div class="coWrap">
+                    <p class="tit">@(item.O_TYPE == "S" ? "스크랩핑" : "웹·업무 자동화")</p>
                 </div>
-            </div>
-            <div class="priceWrap">
-                <em>@ViewBag.State</em>
-            </div>
-        </li>
-    }
-</ul>
-@*<div class="art-no-data">
+                <div class="titWrap">
+                    <p class="desc">@(item.CONTENT != null ? item.CONTENT.Replace("\r\n", " ") : "")</p>
+                    <div class="etc">
+                        <span>@item.STAT_TYPE</span>
+                        <span>@item.PLAN_TYPE</span>
+                        <span>@item.PERIOD_TYPE</span>
+                        <span class="highlight">첨부파일 @(item.FileList.Count())개</span>
+                    </div>
+                </div>
+                <div class="priceWrap">
+                    <em>@item.PROGRESS_Stat</em>
+                </div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <div class="art-no-data">
         <p>리스트가 없습니다.</p>
-    </div>*@
+    </div>
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('.headerWrap .num').text(@Model.Count());
+
+        if ('@Model.Count()' == '0') {
+            $('.headerWrap').hide();
+        } else {
+            $('.headerWrap').show();
+        }
+    });
+</script>

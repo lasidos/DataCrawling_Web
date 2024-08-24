@@ -168,7 +168,6 @@ namespace DataCrawling_Web.Models.Files
         /// 전체경로
         /// </summary>
         public string FullFileNamePath { get; set; }
-        public HttpPostedFileBase FileBases { get; set; }
     }
 
     public class TextUserErrorModel

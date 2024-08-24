@@ -1,0 +1,106 @@
+﻿aside {
+    z-index: 998;
+    position: fixed;
+    top: 65px;
+    left: 0;
+    bottom: 0;
+    width: 217px;
+    height: 100%;
+    padding: 0;
+    color: #fff;
+    background-color: #434343;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+    aside nav {
+        width: 217px;
+        padding: 0;
+    }
+
+    aside::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    aside::-webkit-scrollbar-thumb {
+        background-color: #C1C1C1;
+        border-radius: 10px;
+        background-clip: padding-box;
+        border: 2px solid transparent;
+    }
+
+    aside nav #gNavEntire::after {
+        float: right;
+        width: 8px;
+        height: 14px;
+        padding-right: 20px;
+        background-image: url('../../../image/admin/img_menuarrow.png');
+        background-repeat: no-repeat;
+        content: "";
+    }
+
+    aside nav > ul > li h3 {
+        height: 16px;
+        margin: 0;
+        padding: 18px 0;
+        border-bottom: 1px solid #6d6d6d;
+        font-weight: normal;
+        font-size: 15px;
+        text-align: left;
+        text-indent: 28px;
+        line-height: 16px;
+        letter-spacing: -1px;
+        word-spacing: -2px;
+        cursor: pointer;
+    }
+
+    aside nav > ul > li.gCurrent h3 {
+        background-color: transparent;
+        font-weight: bold;
+    }
+
+    aside nav > ul > li h3::after {
+        float: right;
+        display: inline-block;
+        width: 8px;
+        height: 14px;
+        padding-right: 20px;
+        background-image: url('../../../image/admin/img_menuarrow.png');
+        background-repeat: no-repeat;
+        content: "";
+    }
+
+    aside nav > ul > li.gCurrent h3::after {
+        transform: rotate(90deg);
+        margin-top: 12px;
+        margin-right: 10px;
+    }
+
+    aside nav > ul > li > ul {
+        display: none;
+    }
+
+    aside nav > ul > li.gCurrent > ul {
+        display: block;
+        padding: 13px 0;
+        background: rgb(59 59 59);
+    }
+
+        aside nav > ul > li.gCurrent > ul > li a {
+            display: block;
+            height: 14px;
+            padding: 13px 0 13px 28px;
+            font-size: 14px;
+            text-align: left;
+            text-decoration: none;
+            line-height: 14px;
+            letter-spacing: -1px;
+        }
+
+            aside nav > ul > li.gCurrent > ul > li a:hover {
+                background-color: #6d6d6d;
+            }
+
+        aside nav > ul > li.gCurrent > ul > li.gCurrent {
+            background-color: #7b7979;
+        }

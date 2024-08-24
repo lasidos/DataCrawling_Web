@@ -1,0 +1,38 @@
+﻿@model DataCrawling_Web.Models.Admin.ContentInfoModel
+
+<script src="~/Resource/summernote-0.8.18-dist/summernote-lite.js"></script>
+<link href="~/Resource/summernote-0.8.18-dist/summernote-lite.css" rel="stylesheet" />
+<script src="~/Resource/summernote-0.8.18-dist/lang/summernote-ko-KR.js"></script>
+<script src="~/Resource/Js/Common.js"></script>
+<link href="~/Resource/Css/Shared/_Write.css" rel="stylesheet" />
+
+<form method="post" onsubmit="submitFunction(event)">
+    <div class="h-title">
+        <span>제목</span>
+        <input type="text" name="title" id="title" value="@Model.TITLE" placeholder="타이틀을 입력하세요 (공지사항일경우 '공지사항')" />
+    </div>
+    <textarea id="summernote" name="editordata">@Html.Raw(Model.CONTENT_BODY)</textarea>
+</form>
+
+<script>
+
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            height: 500,                 // 에디터 높이
+            minHeight: null,             // 최소 높이
+            maxHeight: null,             // 최대 높이
+            focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+            lang: "ko-KR",					// 한글 설정
+            placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
+            callbacks: {
+                onImageUpload: function (files, editor, welEditable) {
+                    // 파일 업로드(다중업로드를 위해 반복문 사용)
+                    for (var i = files.length - 1; i >= 0; i--) {
+                        uploadSummernoteImageFile(files[i],
+                            this);
+                    }
+                }
+            }
+        });
+    });
+</script>

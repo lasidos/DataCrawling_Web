@@ -1,0 +1,215 @@
+﻿.stat_type {
+    width: 220px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.elWrap {
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+    .elWrap .selType .btnSelType {
+        width: 100%;
+        height: 40px;
+        border: none;
+        background-color: #fff;
+        font-size: 14px;
+        letter-spacing: 0px;
+        color: #333;
+        text-align: left;
+        position: relative;
+    }
+
+        .elWrap .selType .btnSelType .txCate {
+            display: inline-block;
+            position: absolute;
+            left: 16px;
+            top: 13px;
+            -webkit-transition: all 0.2s ease-out;
+            -moz-transition: all 0.2s ease-out;
+            -o-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out;
+        }
+
+        .elWrap .selType .btnSelType:after {
+            content: "";
+            width: 11px;
+            height: 6px;
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            margin-top: -2px;
+            background: url(../../../image/commons/mtc_sp_btn.png) no-repeat;
+            background-position: -302px -50px;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
+    .elWrap .selType .selTypeList a, .elWrap .selType .selTypeList button {
+        display: block;
+        padding: 8px 18px 8px;
+        font-size: 14px;
+        letter-spacing: 0px;
+        color: #333;
+        width: 100%;
+        text-align: left;
+    }
+
+    .elWrap .selType .selTypeList li {
+        padding: 5px 0;
+    }
+
+        .elWrap .selType .selTypeList li:first-child {
+            padding-top: 10px;
+        }
+
+        .elWrap .selType .selTypeList li:last-child {
+            padding-bottom: 10px;
+        }
+
+        .elWrap .selType .selTypeList li:hover {
+            background: #f3f5f7;
+        }
+
+.lyElBx {
+    display: none;
+    width: 100%;
+    border: 1px solid #ddd;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin: -1px 0px;
+    background-color: #fff;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.elWrap.on .lyElBx {
+    display: block;
+}
+
+.pWrap a {
+    display: initial;
+}
+
+    .pWrap a:-webkit-any-link {
+        color: -webkit-link;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+.pWrap {
+    position: relative;
+    padding-bottom: 32px;
+}
+
+.pFrmSearch, .pWrap {
+    display: flex;
+    margin-bottom: 16px;
+    padding: 20px 32px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    flex-direction: column;
+}
+
+.list-section {
+    display: flex;
+}
+
+.m-list {
+    display: flex;
+    width: 100%;
+}
+
+    .m-list ul {
+        border: 1px solid #ddd;
+        padding: 10px 0;
+        width: 100%;
+        min-height: 300px;
+        background: #ebebeb30;
+    }
+
+        .m-list ul li {
+            line-height: 40px;
+            padding: 0 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+            .m-list ul li:hover {
+                cursor: pointer;
+            }
+
+            .m-list ul li.on {
+                background: #e3e3e3;
+                font-weight: bold;
+            }
+
+.col-table {
+    border-top: 2px solid #555;
+}
+
+    .col-table .tit-hide {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+        line-height: 0;
+        opacity: 0;
+    }
+
+table caption {
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+}
+
+.col-table table {
+    width: 100%;
+}
+
+    .col-table table colgroup {
+        display: table-column-group;
+    }
+
+.col-table colgroup col.just-pc {
+    display: table-column;
+}
+
+.col-table table thead tr th {
+    height: 45px;
+    text-align: center;
+    background-color: #f7f7f7;
+}
+
+.col-table.line table thead tr th, .col-table.line table tbody tr td {
+    border: 1px solid #e0e0e0;
+}
+
+.col-table table thead tr th, .col-table table tbody tr td {
+    height: 35px;
+    padding: 2px 10px;
+    text-align: center;
+    border: 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.btn {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background: #434343;
+    color: #fff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 80%;
+    margin: 0 auto;
+}

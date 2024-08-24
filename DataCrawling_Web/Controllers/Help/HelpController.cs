@@ -1,4 +1,8 @@
-﻿using System;
+﻿using DataCrawling_Web.BSL.Attributes;
+using DataCrawling_Web.BSL.Authentication;
+using DataCrawling_Web.BSL.Code;
+using DataCrawling_Web.BSL.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,19 +12,15 @@ namespace DataCrawling_Web.Controllers.Help
 {
     public class HelpController : Controller
     {
-        // GET: Help
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         [Route("Help/Notice")]
+        [LoginCheck(Url = "/Help/Notice")]
         public ActionResult Notice()
         {
             return View();
         }
 
         [Route("Help/Event")]
+        [LoginCheck(Url = "/Help/Event")]
         public ActionResult Event()
         {
             return View();
@@ -28,6 +28,7 @@ namespace DataCrawling_Web.Controllers.Help
 
         [HttpPost]
         [Route("Help/GetFaqData")]
+        [LoginCheck(Url = "/Help/GetFaqData")]
         public ActionResult GetFaqData(string tab)
         {
             int n;

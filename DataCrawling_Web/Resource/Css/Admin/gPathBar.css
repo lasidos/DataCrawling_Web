@@ -1,0 +1,58 @@
+﻿#gPathBar {
+    position: relative;
+    height: 60px;
+    min-width: 1360px;
+    margin-left: 217px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    z-index: 5;
+}
+
+    #gPathBar h2 {
+        height: 60px;
+        margin: 0;
+        padding: 0;
+        font-weight: normal;
+        color: #000000;
+        font-size: 21px;
+        line-height: 60px;
+        letter-spacing: -1.5px;
+        text-indent: 54px;
+    }
+
+    #gPathBar button {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 30px;
+        padding: 0;
+        border: 0;
+        border-right: 1px solid #ddd;
+        border-radius: 0;
+        background-color: #F8F9FB;
+        font-size: 0;
+        cursor: pointer;
+    }
+
+        #gPathBar button::after {
+            display: inline-block;
+            width: 30px;
+            height: 60px;
+            background-image: url('../../image/admin/img_folderarrow.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+            content: "";
+        }
+
+        #gPathBar button.gFolded::after {
+            transform: rotate(180deg);
+        }
+
+section {
+    min-width: 1300px;
+    min-height: 800px;
+    margin-left: 217px;
+    padding: 18px 30px;
+}

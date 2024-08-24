@@ -1,4 +1,6 @@
 ﻿@using DataCrawling_Web.BSL.Authentication
+@using DataCrawling_Web.BSL.Code
+
 @helper ActiveMenu(string href, string menuName)
 {
     if (HttpContext.Current.Request.Url.AbsolutePath.Contains(href))
@@ -16,32 +18,15 @@
         <span class="skip">고객센터 메뉴 - </span>
         <a class="lnbTit" href="/Help/Faq/Index">고객센터</a>
     </h1>
-    <div class="lnbGroup">
-        <ul>
-            <li>
-                @ActiveMenu("/Help/Faq/Index", "FAQ")
-            </li>
-        </ul>
-    </div>
-    <div class="lnbGroup">
-        <ul>
-            <li> @ActiveMenu("/Help/Inquiry/Index", "문의∙신고")</li>
-        </ul>
-    </div>
-    <div class="lnbGroup">
-        <ul>
-            <li>@ActiveMenu("/Help/Notice", "공지사항")</li>
-            <li>@ActiveMenu("/Help/Event", "이벤트∙혜택")</li>
-        </ul>
-    </div>
-    <div class="lnbGroup">
-        <ul>
-            @if (!string.IsNullOrEmpty(AuthUser.M_ID))
-            {
-                <li>@ActiveMenu("/Help/Purchase/History", "유료 이용내역")</li>
-            }
-            <li>@ActiveMenu("/Help/Purchase/Product", "서비스 상품안내")</li>
-        </ul>
-    </div>
+    @foreach (var item in W_Menu.GetMenuType(2, 1))
+    {
+        <div class="lnbGroup">
+            <ul>
+                <li>
+                    @ActiveMenu(item.Menu_URL, item.Menu_Name)
+                </li>
+            </ul>
+        </div>
+    }
 </section>
 

@@ -1,0 +1,266 @@
+﻿select {
+    outline: 0;
+}
+
+.pWrap a {
+    display: initial;
+}
+
+    .pWrap a:-webkit-any-link {
+        color: -webkit-link;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+.pWrap {
+    position: relative;
+    padding-bottom: 32px;
+}
+
+.pFrmSearch, .pWrap {
+    margin-bottom: 16px;
+    padding: 0 32px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+
+    .pWrap ul.pNoticeList {
+        margin: 24px 0;
+        color: #363636;
+        font-size: 14px;
+        line-height: 190%;
+        letter-spacing: -0.5px;
+        min-height: 100px;
+    }
+
+        .pWrap ul.pNoticeList li::before {
+            content: "\00b7";
+            margin-right: 4px;
+        }
+
+    .pWrap .pContorls {
+        padding-top: 20px;
+        margin: 20px 0;
+        border-top: 1px solid #ddd;
+    }
+
+    .pWrap .pHeader {
+        height: 66px;
+        margin: 0 -32px;
+        padding: 0 32px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .pWrap .pHeader h3 {
+            display: inline-block;
+            float: left;
+            height: 14px;
+            margin: 0;
+            padding: 26px 0;
+            color: #363636;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: -1px;
+            line-height: 14px;
+        }
+
+        .pWrap .pHeader .pTotal {
+            display: inline-block;
+            float: left;
+            height: 14px;
+            margin-left: 5px;
+            padding: 26px 0;
+            color: #363636;
+            font-size: 14px;
+            letter-spacing: -1px;
+            line-height: 14px;
+        }
+
+        .pWrap .pHeader .pTotal {
+            display: inline-block;
+            float: left;
+            height: 14px;
+            margin-left: 5px;
+            padding: 26px 0;
+            color: #363636;
+            font-size: 14px;
+            letter-spacing: -1px;
+            line-height: 14px;
+        }
+
+        .pWrap .pHeader .pContorls {
+            display: inline-block;
+            float: right;
+            padding: 15px 0;
+        }
+
+            .pWrap .pHeader .pContorls .pPgn {
+                display: inline-block;
+                height: 24px;
+                margin: 0 24px;
+                padding: 0 24px;
+            }
+
+                .pWrap .pHeader .pContorls .pPgn:last-child {
+                    margin-right: 0;
+                    padding-right: 0;
+                    border-right: 0;
+                }
+
+                .pWrap .pHeader .pContorls .pPgn button {
+                    width: 36px;
+                    height: 36px;
+                    padding: 0;
+                    border: 1px solid #aaa;
+                    border-radius: 0;
+                    background-color: #fff;
+                    background-image: url('../../../image/admin/img_pgnarrow.png');
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    font-size: 0;
+                    vertical-align: 7px;
+                    cursor: pointer;
+                }
+
+                .pWrap .pHeader .pContorls .pPgn input {
+                    width: 72px;
+                    height: 34px;
+                    margin-left: 8px;
+                    border: 1px solid #CCCCCC;
+                    border-radius: 0;
+                    background-color: #F8F9FB;
+                    font-size: 14px;
+                    text-align: center;
+                    vertical-align: 1px;
+                }
+
+                .pWrap .pHeader .pContorls .pPgn .pPgnTotal {
+                    margin-right: 8px;
+                    color: #646464;
+                    font-size: 14px;
+                    line-height: 14px;
+                    vertical-align: 2px;
+                }
+
+                    .pWrap .pHeader .pContorls .pPgn .pPgnTotal::before {
+                        content: "/";
+                        margin: 0 1px 0 4px;
+                    }
+
+                .pWrap .pHeader .pContorls .pPgn button.pPgnAfter {
+                    transform: rotate(180deg);
+                }
+
+        .pWrap .pHeader .right-menu-list input {
+            width: 140px;
+            height: 40px;
+            border: 1px solid #0A2142;
+            border-radius: 0;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: -1px;
+            background-color: #0A2142;
+            color: #fff;
+            cursor: pointer;
+        }
+
+    .pWrap .pContorls select {
+        width: 75px;
+        height: 36px;
+        margin: 0 15px;
+        padding-left: 8px;
+        border: 1px solid #aaa;
+        border-radius: 0;
+        color: #646464;
+        font-size: 14px;
+        vertical-align: 1px;
+    }
+
+.col-table {
+    width: 100%;
+    margin: 24px 0;
+}
+
+    .col-table .tit-hide {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+        line-height: 0;
+        opacity: 0;
+    }
+
+table caption {
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+}
+
+.col-table table {
+    width: 100%;
+}
+
+    .col-table table colgroup {
+        display: table-column-group;
+    }
+
+.col-table colgroup col.just-pc {
+    display: table-column;
+}
+
+.col-table table thead tr th {
+    height: 40px;
+    text-align: center;
+    background-color: #f7f7f7;
+}
+
+.col-table.line table thead tr th, .col-table.line table tbody tr td {
+    border: 1px solid #e0e0e0;
+}
+
+.col-table table thead tr th, .col-table table tbody tr td {
+    height: 40px;
+    padding: 2px 10px;
+    text-align: center;
+    border: 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.no-data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    font-size: 14px;
+    color: #ccc;
+    border: 1px solid #e0e0e0;
+    margin-top: 0px;
+    border-top: 0px;
+}
+
+tbody tr:hover {
+    background: #ebebeb;
+}
+
+tbody tr td:not(:nth-child(5)):not(:last-child) {
+    cursor: pointer;
+}
+
+tbody tr .edit {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a2142;
+    color: #fff;
+    line-height: 30px;
+    margin: 0 10px;
+    border-radius: 5px;
+}

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<DataCrawling_Web.Models.Files.OfferViewModel>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,6 +14,7 @@
 }
 
 @section Content{
+    <input type="hidden" id="pageCode" value="@ViewBag.type" />
     <div id="container">
         <div class="List Content">
             <div class="topHdWrap blind">
@@ -23,11 +25,11 @@
                     <h3 class="req_hd_3">@ViewBag.Subject 의뢰절차</h3>
                     <div class="jobProcess">
                         <ol>
-                            <li class="sp_resist_m step_1">의뢰서<br><em>작성</em> 및 <em>결제</em></li>
-                            <li class="sp_resist_m step_2">헤드헌팅 서비스 부서<br><em>검토</em> / <em>승인</em></li>
-                            <li class="sp_resist_m step_3">헤드헌팅 회사에서<br><em>후보자 추천</em></li>
-                            <li class="sp_resist_m step_4">추천받은 후보자<br><em>검토</em> / <em>면접</em></li>
-                            <li class="sp_resist_m step_5"><em>채용 확정</em><br>(수수료 정산)</li>
+                            <li class="sp_resist_m step_1">의뢰서<br><em>작성</em></li>
+                            <li class="sp_resist_m step_2">기획 부서<br><em>검토</em> / <em>승인</em></li>
+                            <li class="sp_resist_m step_3">개발범위 검토<br><em>견적서 발송</em></li>
+                            <li class="sp_resist_m step_4">클라이언트<br><em>승인</em> 및 <em>컨택</em></li>
+                            <li class="sp_resist_m step_5"><em>개발 확정</em><br>계약금 정산</li>
                         </ol>
                     </div>
                 </div>
@@ -38,7 +40,7 @@
                 </div>
             </div>
             <div class="artRequestList">
-                <h3 class="req_hd_3">의뢰 목록</h3>
+                <h3 class="req_hd_3">나의 의뢰 목록</h3>
                 <div class="mtcTplTab">
                     <ul class="tabItems">
                         <li value="0" class="on"><a href="javascript:;">접수대기</a></li>
@@ -54,18 +56,12 @@
                         <button type="button" class="sort-list-btn qnaSpB devBtnOrderType on" data-ordertype="1">최신순</button>
                     </li>
                     <li class="sort-list-item">
-                        <button type="button" class="sort-list-btn qnaSpB devBtnOrderType " data-ordertype="3">인기순</button>
-                    </li>
-                    <li class="sort-list-item">
-                        <button type="button" class="sort-list-btn qnaSpB devBtnOrderType " data-ordertype="2">좋아요</button>
-                    </li>
-                    <li class="sort-list-item">
-                        <button type="button" class="sort-list-btn qnaSpB devBtnOrderType " data-ordertype="4">댓글순</button>
+                        <button type="button" class="sort-list-btn qnaSpB devBtnOrderType" data-ordertype="2">진행순</button>
                     </li>
                 </ul>
             </div>
             <div class="listWrap">
-                @RenderPage("~/Views/Offer/_PartialView/_ListItem.cshtml")
+                @RenderPage("~/Views/Offer/_PartialView/_ListItem.cshtml", Model)
             </div>
         </div>
         <div class="testNotice">

@@ -1,0 +1,57 @@
+﻿.h-title {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    line-height: 30px;
+    font-size: 25px;
+    background: transparent;
+    padding: 5px 10px;
+    font-weight: 500;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+}
+
+    .h-title span {
+        width: 90px;
+        color: #ccc;
+    }
+
+#title {
+    border: none;
+    background: transparent;
+    width: 100%;
+}
+
+.radio_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .radio_box > input + input {
+        margin-left: 15px;
+    }
+
+/* 기본스타일 제거, 버튼 모양 재설정 */
+input[type='radio'] {
+    flex-shrink: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 13px;
+    height: 13px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+    /* 체크 시 버튼 모양 스타일*/
+    input[type='radio']:checked {
+        background-color: #0a2142; /*체크 시 내부 원 색상*/
+        border: 3px solid #fff; /*라인이 아닌, 라인과 원 사이 색상*/
+        box-shadow: 0 0 0 1px #0a2142; /*라인*/
+    }

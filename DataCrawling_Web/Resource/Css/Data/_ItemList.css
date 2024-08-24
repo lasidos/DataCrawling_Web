@@ -1,0 +1,309 @@
+﻿.giListRow {
+    border-bottom: 1px solid #ebebeb;
+}
+
+    .giListRow .inner {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+        .giListRow .inner .rowWrap {
+            display: flex;
+            justify-content: space-between;
+            padding: 40px 12px;
+        }
+
+    .giListRow .state {
+        display: block;
+        font-size: 16px;
+        letter-spacing: 0;
+        line-height: 24px;
+        padding-bottom: 9px;
+        color: #666;
+    }
+
+    .giListRow .tit {
+        font-weight: 700;
+        overflow: hidden;
+        display: inline-block;
+        font-size: 18px;
+        letter-spacing: -0.5px;
+        color: #000;
+        max-width: 606px;
+        padding-right: 2px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        letter-spacing: -1px;
+        margin-top: 20px;
+    }
+
+    .giListRow .apyStatusBoard {
+        margin-top: 20px;
+        display: block;
+        vertical-align: top;
+        color: #333;
+        padding: 0 20px 0 0;
+        vertical-align: top;
+        font-size: 13px;
+        letter-spacing: 0px;
+        max-width: 780px;
+        /*overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;*/
+    }
+
+        .giListRow .apyStatusBoard span {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 25px;
+            white-space: pre-wrap;
+        }
+
+            .giListRow .apyStatusBoard span:not(:first-child):before {
+                content: "";
+                display: inline-block;
+                font-size: 10px;
+                letter-spacing: 0px;
+                width: 1px;
+                height: 10px;
+                background-color: #ccc;
+                margin: -2px 9px 0 8px;
+                vertical-align: middle;
+            }
+
+    .giListRow .btnFunc {
+        position: static;
+        margin: 30px 0 0;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -moz-box-align: center;
+        align-items: center;
+    }
+
+        .giListRow .btnFunc ul {
+            display: flex;
+        }
+
+            .giListRow .btnFunc ul li {
+                border: 1px solid #ccc;
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+
+                .giListRow .btnFunc ul li + li {
+                    margin-left: 10px;
+                }
+
+        .giListRow .btnFunc .btn_Tp_1 {
+            vertical-align: top;
+            display: inline-block;
+            font-size: 13px;
+            letter-spacing: 0;
+            width: auto;
+            height: 32px;
+            padding: 6px 15px;
+            line-height: 20px;
+            border: 1px solid #d7d7d7;
+            color: #333;
+            text-align: center;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+            .giListRow .btnFunc .btn_Tp_1 + .btn_Tp_1 {
+                margin-left: 10px;
+            }
+
+    .giListRow .inner-right {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+        .giListRow .inner-right .process-state {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+    .giListRow .process-state .procItem {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: #424242;
+    }
+
+        .giListRow .process-state .procItem:not(:first-child):before {
+            content: "";
+            display: inline-block;
+            font-size: 10px;
+            letter-spacing: 0px;
+            width: 1px;
+            height: 15px;
+            background-color: #ccc;
+            margin: 2px 13px 0 13px;
+            vertical-align: middle;
+        }
+
+        .giListRow .process-state .procItem input {
+            display: none;
+        }
+
+        .giListRow .process-state .procItem span {
+            margin-right: 10px;
+            font-weight: 600;
+            color: #323743;
+        }
+
+        .giListRow .process-state .procItem input + label .chkIcn {
+            background-color: #d9d9d9;
+            border-color: #d9d9d9;
+            display: inline-block;
+            position: relative;
+            top: 3px;
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            box-sizing: border-box;
+            border: 1px solid #dcdcdc;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+            .giListRow .process-state .procItem input + label .chkIcn:before {
+                content: "";
+                width: 10px;
+                height: 7px;
+                display: inline-block;
+                position: absolute;
+                top: 5px;
+                left: 3px;
+                background: url(../../image/commons/mtc_sp_btn.png) no-repeat;
+                background-position: -207px -54px;
+            }
+
+        .giListRow .process-state .procItem input:checked + label .chkIcn {
+            border: 1px solid #333;
+            background-color: #333;
+            margin-right: 8px;
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            position: relative;
+            box-sizing: border-box;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+            .giListRow .process-state .procItem input:checked + label .chkIcn:before {
+                content: '';
+                width: 10px;
+                height: 7px;
+                display: inline-block;
+                position: absolute;
+                top: 5px;
+                left: 3px;
+                background: url(../../image/commons/mtc_sp_btn.png) no-repeat;
+                background-position: -207px -54px;
+            }
+
+        .giListRow .process-state .procItem label {
+            font-size: 14px;
+            letter-spacing: 0;
+            color: #424242;
+        }
+
+    .giListRow .tbStatus {
+        margin-top: 15px;
+        width: auto;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+        .giListRow .tbStatus .boardItem {
+            display: flex;
+            align-items: center;
+            margin-right: -22px;
+        }
+
+            .giListRow .tbStatus .boardItem li {
+                min-width: 95px;
+                text-align: center;
+                position: relative;
+            }
+
+                .giListRow .tbStatus .boardItem li:not(:first-child):before {
+                    background: #eee;
+                    content: "";
+                    display: block;
+                    width: 1px;
+                    height: 46px;
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    margin-top: -22px;
+                }
+
+                .giListRow .tbStatus .boardItem li .stepTit {
+                    font-size: 14px;
+                    letter-spacing: 0;
+                    color: #333;
+                    display: block;
+                    padding-bottom: 7px;
+                    font-weight: normal;
+                }
+
+                .giListRow .tbStatus .boardItem li .itemNum {
+                    font-size: 30px;
+                    letter-spacing: -.5px;
+                    line-height: 40px;
+                    color: #666;
+                }
+
+                    .giListRow .tbStatus .boardItem li .itemNum.none {
+                        color: #c3c3c3;
+                    }
+
+    .giListRow .statusBtm {
+        padding: 20px;
+        min-height: 22px;
+        max-height: 82px;
+        background-color: #f9fbfc;
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .giListRow .statusBtm .PaidSvc {
+        }
+
+        .giListRow .statusBtm .btmLink {
+            display: flex;
+            align-items: center;
+        }
+
+            .giListRow .statusBtm .btmLink li {
+                position: relative;
+                display: flex;
+            }
+
+                .giListRow .statusBtm .btmLink li + li:before {
+                    content: "";
+                    display: inline-block;
+                    width: 1px;
+                    height: 10px;
+                    background-color: #dfe0e0;
+                    margin: 0 9px 0 10px;
+                    vertical-align: middle;
+                    margin-top: 2px;
+                }
