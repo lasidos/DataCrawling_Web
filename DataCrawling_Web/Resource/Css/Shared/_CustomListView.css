@@ -1,0 +1,87 @@
+﻿.list-section {
+    position: relative;
+    min-width: 110px;
+}
+
+.listWrap {
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background-color: #fff;
+    width: 100%;
+}
+
+    .listWrap.on .layerBox {
+        display: block;
+    }
+
+.btnCustomSelect {
+    width: 100%;
+    border: none;
+    background-color: #fff;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #333;
+    text-align: left;
+    position: relative;
+}
+
+.textCategory {
+    display: inline-block;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+.btnCustomSelect:after {
+    content: "";
+    width: 11px;
+    height: 6px;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    margin-top: -2px;
+    background: url(../../image/commons/mtc_sp_btn.png) no-repeat;
+    background-position: -302px -50px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.layerBox {
+    display: none;
+    width: 100%;
+    border: 1px solid #ddd;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin: -1px 0px;
+    background-color: #fff;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.customSelectList li {
+    padding: 5px 0;
+}
+
+    .customSelectList li:first-child {
+        padding-top: 10px;
+    }
+
+    .customSelectList li:hover {
+        background: #f3f5f7;
+    }
+
+.customSelectList button {
+    display: block;
+    padding: 8px 18px 8px;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #333;
+    width: 100%;
+    text-align: left;
+}

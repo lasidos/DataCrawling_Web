@@ -1,0 +1,31 @@
+﻿@model DataCrawling_Web.Models.ListViewModel
+@{ 
+    int A = 0;
+}
+<div class="list-section" style="width: @(Model.Width == 0 ? "100%" : (Model.Width) + "px");">
+    <div id="@(Model.ID)Group" class="listWrap">
+        <div class="customSelect customCombo">
+            <button type="button" id="btn@(Model.ID)Type" class="btnCustomSelect btnCustom" style="height: @(Model.Height == 0 ? 40 : Model.Height)px;">
+                <span class="textCategory">@(Model.ShowAll ? "전체보기" : Model.GroupInfo.Where(s => s.Idx == Model.SelectID).FirstOrDefault().Name)</span>
+                <span id="sn@(Model.ID)Type" class="textResult"></span>
+            </button>
+            <input type="hidden" id="hid@(Model.ID)Type" class="hiddenResult" data-idx="@(Model.ShowAll ? -1:Model.GroupInfo.Where(s => s.Idx == Model.SelectID).FirstOrDefault().Idx)" name="hidStatType" value="@(Model.ShowAll ? "":Model.GroupInfo.Where(s => s.Idx == Model.SelectID).FirstOrDefault().Name)">
+            <div id="dvLyr@(Model.ID)Type" class="layerBox">
+                <ul class="customSelectList">
+                    @if (Model.ShowAll)
+                    {
+                        <li id="id@(Model.ID)Type" data-idx="-1" class="customTypeItem">
+                            <button type="button">전체보기</button>
+                        </li>
+                    }
+                    @foreach (var group in Model.GroupInfo)
+                    {
+                        <li id="id@(Model.ID)Type" data-idx="@group.Idx" class="customTypeItem">
+                            <button type="button">@group.Name</button>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

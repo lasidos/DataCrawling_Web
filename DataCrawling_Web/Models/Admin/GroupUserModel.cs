@@ -1,7 +1,16 @@
-﻿using System;
+﻿using DataCrawling_Web.Models.Commons;
+using System;
+using System.Collections.Generic;
 
 namespace DataCrawling_Web.Models.Admin
 {
+    public class GroupUserViewModel
+    {
+        public IEnumerable<GroupInfoModel> GroupInfo { get; set; }
+        public IEnumerable<GroupUserModel> GroupUsers { get; set; }
+        public PagingInfo PagingInfo { get; set; } = null;
+    }
+
     public class GroupInfoModel
     {
         public int GROUP_ID { get; set; }

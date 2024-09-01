@@ -1,0 +1,38 @@
+﻿@using DataCrawling_Web.BSL.Common;
+@model IEnumerable<DataCrawling_Web.Models.Admin.GroupInfoModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>그룹권한 설정</title>
+</head>
+<body>
+    <div id="dvStatType" class="elWrap devElWrap">
+        <div class="selType devCombo">
+            <button type="button" id="btnStatType" class="btnSelType mtcBtnA">
+                <span class="txCate">전체보기</span>
+                <span id="snStatType" class="txResult devTxResult"></span>
+            </button>
+            <input type="hidden" id="hidStatType" class="hidResult" data-idx="-1" name="hidStatType" value="">
+            <div id="dvLyrJobType" class="lyElBx devLyElBx">
+                <ul class="selTypeList">
+                    <li id="idStatType" data-idx="-1" class="devCoTypeItem">
+                        <button type="button">전체보기</button>
+                    </li>
+                    @foreach (var item in Model)
+                    {
+                        <li id="idStatType" data-idx="@item.GROUP_ID" class="devCoTypeItem">
+                            <button type="button">@item.GROUP_NAME</button>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

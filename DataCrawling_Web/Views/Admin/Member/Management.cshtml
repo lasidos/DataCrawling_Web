@@ -1,5 +1,5 @@
 ﻿@using DataCrawling_Web.BSL.Common;
-@model IEnumerable<DataCrawling_Web.Models.Admin.GroupInfoModel>
+@model DataCrawling_Web.Models.Admin.GroupUserViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BodyClass = "mtcSubNotice";
@@ -10,6 +10,7 @@
     @RenderPage("~/Views/Shared/Header/_HeaderAdmin.cshtml")
 
     <script src="~/Resource/Js/Admin/Member.js"></script>
+    <link href="~/Resource/Css/Shared/_CustomListView.css" rel="stylesheet" />
     <link href="~/Resource/Css/Admin/Member/Management.css" rel="stylesheet" />
 }
 
@@ -20,9 +21,10 @@
 @section Content{
     @RenderPage("~/Views/Admin/Shared/_gPathBar.cshtml")
 
-    <section style="position: relative;">
-        <div id="wItemBatchList">
-            <div class="pWrap" id="lNotice">
+<section style="position: relative;">
+    <div id="wItemBatchList">
+        <div class="pWrap" id="lNotice">
+            <div class="filter-area">
                 <div class="form_col stat_type">
                     <div id="dvStatType" class="elWrap devElWrap">
                         <div class="selType devCombo">
@@ -33,7 +35,10 @@
                             <input type="hidden" id="hidStatType" class="hidResult" data-idx="-1" name="hidStatType" value="">
                             <div id="dvLyrJobType" class="lyElBx devLyElBx">
                                 <ul class="selTypeList">
-                                    @foreach (var item in Model)
+                                    <li id="idStatType" data-idx="-1" class="devCoTypeItem">
+                                        <button type="button">전체보기</button>
+                                    </li>
+                                    @foreach (var item in Model.GroupInfo)
                                     {
                                         <li id="idStatType" data-idx="@item.GROUP_ID" class="devCoTypeItem">
                                             <button type="button">@item.GROUP_NAME</button>
@@ -44,61 +49,50 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-table left line">
-                    <p class="tit-hide">요청 URL</p>
-                    <table>
-                        <caption>요청 URL 입니다.</caption>
-                        <colgroup>
-                            <col style="width:5%">
-                            <col style="width:12.5%">
-                            <col style="width:7%">
-                            <col style="width:12.5%">
-                            <col style="width:7%">
-                            <col style="width:7.5%">
-                            <col style="width:7.5%">
-                            <col style="width:12.5%">
-                            <col style="width:12.5%">
-                            <col style="width:8%">
-                            <col style="width:8%">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">아이디</th>
-                                <th scope="col">이름</th>
-                                <th scope="col">전화번호</th>
-                                <th scope="col">성별</th>
-                                <th scope="col">그룹명</th>
-                                <th scope="col">그룹설명</th>
-                                <th scope="col">마지막로그인일시</th>
-                                <th scope="col">등록일</th>
-                                <th scope="col">권한</th>
-                                <th scope="col">비밀번호 초기화</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @*@foreach (var item in Model)
-                                {
-                                    <tr class="paramtrCls" data-idx="@item.IDX">
-                                        <td>@item.OrderNo</td>
-                                        <td>@Utility.Decrypt_AES(item.User_ID)</td>
-                                        <td>@Utility.SetMask(Utility.Decrypt_AES(item.User_Name), 1)</td>
-                                        <td>@Utility.SetPhoneNumMask(Utility.Decrypt_AES(item.Phone))</td>
-                                        <td>@(Utility.Decrypt_AES(item.Gender) == "Male" ? "남" : "여")</td>
-                                        <td>@item.GROUP_NAME</td>
-                                        <td>@item.DESCRIPTION</td>
-                                        <td>@item.LastLoginDate.ToString("yyyy년 MM월 dd일")</td>
-                                        <td>@item.RegistDate.ToString("yyyy년 MM월 dd일")</td>
-                                        <td><span class="btn-edit">수정</span></td>
-                                    </tr>
-                                }*@
-                        </tbody>
-                    </table>
+                <div class="sch-area">
+                    <input type="text" id="searchTxt" name="name" value="" placeholder="검색어를 입력하세요" />
+                    <span class="btn-sch">검색</span>
                 </div>
+            </div>            
+            <div class="col-table left line">
+                <p class="tit-hide">요청 URL</p>
+                <table>
+                    <caption>요청 URL 입니다.</caption>
+                    <colgroup>
+                        <col style="width:5%">
+                        <col style="width:12.5%">
+                        <col style="width:7%">
+                        <col style="width:12.5%">
+                        <col style="width:7%">
+                        <col style="width:7.5%">
+                        <col style="width:7.5%">
+                        <col style="width:12.5%">
+                        <col style="width:12.5%">
+                        <col style="width:8%">
+                        <col style="width:8%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">아이디</th>
+                            <th scope="col">이름</th>
+                            <th scope="col">전화번호</th>
+                            <th scope="col">성별</th>
+                            <th scope="col">그룹명</th>
+                            <th scope="col">그룹설명</th>
+                            <th scope="col">마지막로그인일</th>
+                            <th scope="col">회원가입일</th>
+                            <th scope="col">권한변경</th>
+                            <th scope="col">비밀번호 초기화</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
-    @RenderPage("~/Views/Admin/Member/_UserInfoEdit.cshtml")
+    </div>
+</section>
 
     <script>
         $(function () {

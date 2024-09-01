@@ -1,0 +1,85 @@
+﻿.elWrap {
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+    .elWrap .selType .btnSelType {
+        width: 100%;
+        height: 40px;
+        border: none;
+        background-color: #fff;
+        font-size: 14px;
+        letter-spacing: 0px;
+        color: #333;
+        text-align: left;
+        position: relative;
+    }
+
+        .elWrap .selType .btnSelType .txCate {
+            display: inline-block;
+            position: absolute;
+            left: 16px;
+            top: 13px;
+            -webkit-transition: all 0.2s ease-out;
+            -moz-transition: all 0.2s ease-out;
+            -o-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out;
+        }
+
+        .elWrap .selType .btnSelType:after {
+            content: "";
+            width: 11px;
+            height: 6px;
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            margin-top: -2px;
+            background: url(../../../resource/image/commons/mtc_sp_btn.png) no-repeat;
+            background-position: -302px -50px;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
+    .elWrap .selType .selTypeList a, .elWrap .selType .selTypeList button {
+        display: block;
+        padding: 8px 18px 8px;
+        font-size: 14px;
+        letter-spacing: 0px;
+        color: #333;
+        width: 100%;
+        text-align: left;
+    }
+
+    .elWrap .selType .selTypeList li {
+        padding: 5px 0;
+    }
+
+        .elWrap .selType .selTypeList li:first-child {
+            padding-top: 10px;
+        }
+
+        .elWrap .selType .selTypeList li:last-child {
+            padding-bottom: 10px;
+        }
+
+        .elWrap .selType .selTypeList li:hover {
+            background: #f3f5f7;
+        }
+
+.lyElBx {
+    display: none;
+    width: 100%;
+    border: 1px solid #ddd;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin: -1px 0px;
+    background-color: #fff;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.elWrap.on .lyElBx {
+    display: block;
+}

@@ -206,11 +206,13 @@
     <Compile Include="Models\Api\ErrorInfo.cs" />
     <Compile Include="Models\Api\UrlQueryParameter.cs" />
     <Compile Include="Models\Api\DataApiRequest.cs" />
+    <Compile Include="Models\Commons\PagingInfo.cs" />
     <Compile Include="Models\Data\DataInfoModel.cs" />
     <Compile Include="Models\DSL\CertModel.cs" />
     <Compile Include="Models\Files\JKFileContentsFilterResult.cs" />
     <Compile Include="Models\Files\RegDbModel.cs" />
     <Compile Include="Models\Files\TextUserRequestModel.cs" />
+    <Compile Include="Models\ListViewModel.cs" />
     <Compile Include="Models\Offer\SelCode.cs" />
     <Compile Include="Models\Param\USP_AAA_WebServerErrorLog_I_param.cs" />
     <Compile Include="Models\Param\USP_FileDownLoad_Error_Log_I_param.cs" />
@@ -261,6 +263,8 @@
     <Content Include="Resource\Css\Offer\Terms.css" />
     <Content Include="Resource\Css\Shared\Header\_HeaderAdmin.css" />
     <Content Include="Resource\Css\Shared\Left\_PartialLeft_Admin.css" />
+    <Content Include="Resource\Css\Shared\_CustomListView.css" />
+    <Content Include="Resource\Css\Shared\_ListView.css" />
     <Content Include="Resource\Css\Shared\_Write.css" />
     <Content Include="Resource\Css\_CommonModal.css" />
     <Content Include="Resource\Css\_CommonStyle.css" />
@@ -624,13 +628,16 @@
     <Content Include="Views\Admin\Member\Authority.cshtml" />
     <Content Include="Views\Admin\Member\Groups.cshtml" />
     <Content Include="Views\Admin\Member\_UserInfoEdit.cshtml" />
+    <Content Include="Views\Admin\Member\GroupSet.cshtml" />
+    <Content Include="Views\Shared\_ListView.cshtml" />
+    <Content Include="Views\Admin\Shared\_UserList.cshtml" />
+    <Content Include="Views\Shared\_Paging.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\Main\_PartialView\" />
     <Folder Include="Views\Common\" />
     <Folder Include="Views\Corp\" />
-    <Folder Include="Views\Member\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

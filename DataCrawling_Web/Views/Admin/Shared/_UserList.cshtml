@@ -1,0 +1,92 @@
+﻿@model DataCrawling_Web.Models.Admin.GroupUserViewModel
+@{
+    string Name = "Group";
+}
+@foreach (var item in Model.GroupUsers)
+{
+    <tr class="paramtrCls" data-idx="@item.IDX">
+        <td>@item.OrderNo</td>
+        <td>@item.User_ID</td>
+        <td>@item.User_Name</td>
+        <td>@item.Phone</td>
+        <td>@item.Gender</td>
+        <td>@item.GROUP_NAME</td>
+        <td>@item.DESCRIPTION</td>
+        <td>@item.LastLoginDateST</td>
+        <td>@item.RegistDateST</td>
+        <td>
+            @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+            {
+                ID = Name,
+                ShowAll = false,
+                Height = 35,
+                SelectID = item.GROUP_ID,
+                GroupInfo = Model.GroupInfo.Select(s => new DataCrawling_Web.Models.ListViewItem
+                {
+                    Idx = s.GROUP_ID,
+                    Name = s.GROUP_NAME
+                })
+            })
+        </td>
+        <td><span class="btn-edit">초기화</span></td>
+    </tr>
+}
+
+@if (Model.GroupUsers.Count() > 0)
+{
+    <tr class="page-tr">
+        <td colspan="11">
+            <div>
+                @Html.Partial("~/Views/Shared/_Paging.cshtml", Model.PagingInfo)
+            </div>
+        </td>
+    </tr>
+}
+else
+{
+    <tr class="empty">
+        <td colspan="11" class="text-center">
+            <span>목록이 없습니다.</span>
+        </td>
+    </tr>
+}
+<input type="hidden" id="idx" value="" />
+<input type="hidden" id="isPage" value="@Model.PagingInfo.CurrentPage" />
+<script>
+    $(function () {
+        $(document).off().on("click", "#@(Name)Group", function (e) {
+            $(this).toggleClass('on');
+        });
+
+        $('#dvLyr@(Name)Type li').click(function () {
+            var txt = $(this).find('button').text();
+            var idx = $(this).data('idx');
+            var m_idx = $(this).parents('.paramtrCls').data('idx');
+
+            if ($('#hid@(Name)Type').val() != txt) {
+                var ele = $(this).parents('.customSelect').find('.textCategory');
+                var result = confirm('[권한변경] ' + $('#hid@(Name)Type').val() +'에서 ' + txt + '로 변경하시겠습니까?');
+                if (result) {
+                    $.ajax({
+                        type: "post",
+                        url: '@Url.Action("SetAuthority", "Member")',
+                        dataType: "json",
+                        data: {
+                            IDX: $('#hid@(Name)Type').data('idx'),
+                            GROUP_ID: idx,
+                            M_IDX: m_idx
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                location.reload();
+                            }
+                        },
+                        error: function (response) {
+                            alert(response);
+                        }
+                    });
+                }
+            }
+        });
+    })
+</script>
