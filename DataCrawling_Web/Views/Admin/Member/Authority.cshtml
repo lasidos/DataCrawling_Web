@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<DataCrawling_Web.DSL.Admin.GroupInfoModel>
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BodyClass = "mtcSubNotice";
 }
@@ -21,14 +23,42 @@
     <section style="position: relative;">
         <div id="wItemBatchList">
             <div class="pWrap" id="lNotice">
+                <h2>그룹 목록</h2>
+                <p>
+                    @Html.ActionLink("새 그룹 추가", "Create", null, new { @class = "btn btn-primary" })
+                </p>
 
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>그룹 ID</th>
+                            <th>그룹 이름</th>
+                            <th>설명</th>
+                            <th>작업</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.GroupId</td>
+                                <td>@item.GroupName</td>
+                                <td>@item.Description</td>
+                                <td>
+                                    @Html.ActionLink("수정", "Edit", new { id = item.GroupId }, new { @class = "btn btn-warning" }) |
+                                    @Html.ActionLink("삭제", "Delete", new { id = item.GroupId }, new { @class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
 
     <script>
         $(function () {
-            $('#gPathBar h2').text('사용자 권한');
+            $('#gPathBar h2').text('사용자 개별권한');
         });
     </script>
 }

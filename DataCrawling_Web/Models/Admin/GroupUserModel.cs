@@ -34,4 +34,10 @@ namespace DataCrawling_Web.Models.Admin
         public string GROUP_NAME { get; set; }
         public string DESCRIPTION { get; set; }
     }
+
+    #region 그룹권한
+
+
+
+    #endregion
 }

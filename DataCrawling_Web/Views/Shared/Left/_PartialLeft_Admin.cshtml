@@ -27,8 +27,8 @@
                 <h3>회원관리</h3>
                 <ul>
                     @CHeckCurrent("/Admin/Member/Management", "회원관리")
-                    @CHeckCurrent("/Admin/Member/Authority", "사용자권한")
                     @CHeckCurrent("/Admin/Member/Groups", "권한그룹")
+                    @CHeckCurrent("/Admin/Member/Authority", "사용자권한")
                 </ul>
             </li>
             <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Main") ? "gCurrent" : "")">

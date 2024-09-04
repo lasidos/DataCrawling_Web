@@ -19,10 +19,6 @@
         }
     });
 
-    $(".common-modal .close-button").on("click", function (e) {
-        e.preventDefault();
-    });
-
     $(document).on("click", ".btn-edit", function (e) {
         e.preventDefault();
 
@@ -51,8 +47,14 @@
         /*openCenteredWindow('/Admin/Member/GroupSet?GROUP_ID=' + idx, '새창', 600, 400);*/
     });
 
-    $(document).on("click", ".page-item li.active a", function () {
+    $('.filter-area .btn-sch').click(function () {
+        SearchTxt();
+    });
 
+    $('#searchTxt').keypress(function (e) {
+        if (e.which == 13) {
+            SearchTxt();
+        }
     });
 
     $(document).on("click", ".reset", function (e) {
@@ -63,10 +65,19 @@
     });
 });
 
+function SearchTxt() {
+    if ($('#searchTxt').val() == '') {
+        alert('검색어가 입력되지 않았습니다.');
+        return;
+    }
+    GetGroupUser($('#isPage').val());
+}
+
 function GetGroupUser(page) {
     $('.col-table tbody').load('/Member/GetGroupUser', {
         GROUP_ID: $('#hidStatType').attr('data-idx'),
-        Page: page
+        Page: page,
+        SearchTxt: $('#searchTxt').val()
     });
 }
 

@@ -24,19 +24,20 @@ namespace DataCrawling_Web.Controllers.Admin
             return View("~/Views/Admin/Member/Management.cshtml", vm);
         }
 
+        public ActionResult Groups()
+        {
+            var vm = new Member().USP_GROUP_INFO_S();
+            return View("~/Views/Admin/Member/Groups.cshtml", vm);
+        }
+
         public ActionResult Authority()
         {
             return View("~/Views/Admin/Member/Authority.cshtml");
         }
 
-        public ActionResult Groups()
-        {
-            return View("~/Views/Admin/Member/Groups.cshtml");
-        }
-
         [HttpPost]
         [Route("Member/GetGroupUser")]
-        public ActionResult GetGroupUser(int GROUP_ID, int Page = 1)
+        public ActionResult GetGroupUser(int GROUP_ID, int Page = 1, string SearchTxt = "")
         {
             GroupUserViewModel groupUser = new GroupUserViewModel();
             groupUser.GroupInfo = (IEnumerable<GroupInfoModel>)Session["GroupInfo"];
@@ -61,6 +62,7 @@ namespace DataCrawling_Web.Controllers.Admin
             int pageSize = 50;
             var totalItems = groupUser.GroupUsers.Count(); // 예시: 총 아이템 수
             groupUser.GroupUsers = groupUser.GroupUsers
+                .Where(i => i.User_Name.Contains(SearchTxt) || i.User_ID.Contains(SearchTxt) || i.Phone.Contains(SearchTxt))
                           .OrderBy(i => i.GROUP_ID).ThenBy(i => i.IDX)
                           .Skip((Page - 1) * pageSize)
                           .Take(pageSize)
@@ -99,6 +101,11 @@ namespace DataCrawling_Web.Controllers.Admin
             ViewBag.GROUP_ID = GROUP_ID;
             var vm = new Member().USP_GROUP_INFO_S();
             return View("~/Views/Admin/Member/GroupSet.cshtml", vm);
+        }
+
+        public ActionResult AuthorityGroup()
+        {
+            return View("~/Views/Admin/Member/AuthorityGroup.cshtml");
         }
     }
 }

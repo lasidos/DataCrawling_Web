@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<DataCrawling_Web.Models.Admin.GroupInfoModel>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BodyClass = "mtcSubNotice";
 }
@@ -8,7 +9,7 @@
     @RenderPage("~/Views/Shared/Header/_HeaderAdmin.cshtml")
 
     <script src="~/Resource/Js/Admin/Member.js"></script>
-    <link href="~/Resource/Css/Admin/Code/CodeMng.css" rel="stylesheet" />
+    <link href="~/Resource/Css/Admin/Member/Management.css" rel="stylesheet" />
 }
 
 @section Left{
@@ -21,7 +22,36 @@
     <section style="position: relative;">
         <div id="wItemBatchList">
             <div class="pWrap" id="lNotice">
-
+                <h2>그룹 목록</h2>
+                <p>
+                    @Html.ActionLink("새 그룹 추가", "Create", null, new { @class = "btn btn-primary" })
+                </p>
+                <div class="col-table line">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>그룹 ID</th>
+                                <th>그룹 이름</th>
+                                <th>설명</th>
+                                <th>작업</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.GROUP_ID</td>
+                                    <td>@item.GROUP_NAME</td>
+                                    <td>@item.DESCRIPTION</td>
+                                    <td>
+                                        @Html.ActionLink("수정", "Edit", new { id = item.GROUP_ID }, new { @class = "btn btn-warning" }) |
+                                        @Html.ActionLink("삭제", "Delete", new { id = item.GROUP_ID }, new { @class = "btn btn-danger" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
