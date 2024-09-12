@@ -246,6 +246,7 @@
     <Content Include="Resource\Css\Admin\gPathBar.css" />
     <Content Include="Resource\Css\Admin\Main\Item.css" />
     <Content Include="Resource\Css\Admin\Main\service.css" />
+    <Content Include="Resource\Css\Admin\Member\Groups.css" />
     <Content Include="Resource\Css\Admin\Member\Management.css" />
     <Content Include="Resource\Css\Admin\Member\Modal.css" />
     <Content Include="Resource\Css\Common.css" />

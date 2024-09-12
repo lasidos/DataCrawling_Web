@@ -13,6 +13,7 @@ namespace DataCrawling_Web.Models.Admin
 
     public class GroupInfoModel
     {
+        public int OrderNo { get; set; }
         public int GROUP_ID { get; set; }
         public string GROUP_NAME { get; set; }
         public string DESCRIPTION { get; set; }

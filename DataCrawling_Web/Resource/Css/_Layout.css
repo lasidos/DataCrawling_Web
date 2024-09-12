@@ -1,2 +1,66 @@
-﻿body {
+﻿.pWrap {
+    position: relative;
+    padding-bottom: 32px;
+}
+
+.pFrmSearch, .pWrap {
+    display: flex;
+    margin-bottom: 16px;
+    padding: 20px 32px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    flex-direction: column;
+}
+
+.col-table {
+    border-top: 2px solid #555;
+}
+
+    .col-table .tit-hide {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+        line-height: 0;
+        opacity: 0;
+    }
+
+table caption {
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+}
+
+.col-table table {
+    width: 100%;
+}
+
+    .col-table table colgroup {
+        display: table-column-group;
+    }
+
+.col-table colgroup col.just-pc {
+    display: table-column;
+}
+
+.col-table table thead tr th {
+    height: 45px;
+    text-align: center;
+    background-color: #f7f7f7;
+}
+
+.col-table.line table thead tr th, .col-table.line table tbody tr td {
+    border: 1px solid #e0e0e0;
+}
+
+.col-table table thead tr th, .col-table table tbody tr td {
+    height: 35px;
+    padding: 2px 10px;
+    text-align: center;
+    border: 0;
+    border-bottom: 1px solid #e0e0e0;
 }

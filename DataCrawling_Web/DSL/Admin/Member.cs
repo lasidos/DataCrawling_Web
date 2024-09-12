@@ -25,6 +25,30 @@ namespace DataCrawling_Web.DSL.Admin
             }
         }
 
+        public IEnumerable<GroupInfoModel> USP_GROUP_INFO_IU(string G_NAME, string G_DESC, int G_IDX = -1)
+        {
+            var param = new DynamicParameters();
+            param.Add("@G_IDX", G_IDX);
+            param.Add("@G_NAME", G_NAME);
+            param.Add("@G_DESC", G_DESC);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                return conn.Query<GroupInfoModel>(param: param, commandType: CommandType.StoredProcedure
+                    , sql: "DBO.USP_GROUP_INFO_IU");
+            }
+        }
+
+        public IEnumerable<GroupInfoModel> USP_GROUP_INFO_D(int G_IDX)
+        {
+            var param = new DynamicParameters();
+            param.Add("@G_IDX", G_IDX);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                return conn.Query<GroupInfoModel>(param: param, commandType: CommandType.StoredProcedure
+                    , sql: "DBO.USP_GROUP_INFO_D");
+            }
+        }
+
         public int USP_USER_GROUP_INFO_S(string M_ID)
         {
             var param = new DynamicParameters();
