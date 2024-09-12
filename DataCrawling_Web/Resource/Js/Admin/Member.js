@@ -1,21 +1,53 @@
 ﻿$(function () {
     GetGroupUser($('#isPage').val());
 
-    $('#dvStatType').click(function () {
+    $(document).on("click", ".listWrap", function (e) {
         $(this).toggleClass('on');
     });
 
-    $('#dvLyrJobType li').click(function () {
+    $('#dvLyrManagementType li').click(function () {
         var txt = $(this).find('button').text();
         var idx = $(this).data('idx');
 
-        if ($('#hidStatType').val() != txt) {
-            $('.txCate').text($(this).find('button').text());
+        if ($('#hidManagementType').val() != txt) {
+            $('.textCategory').text($(this).find('button').text());
 
-            $('#hidStatType').val(txt);
-            $('#hidStatType').attr('data-idx', idx);
+            $('#hidManagementType').val(txt);
+            $('#hidManagementType').attr('data-idx', idx);
 
             GetGroupUser($('#isPage').val());
+        }
+    });
+
+    $(document).on("click", "#dvLyrGroupType li", function (e) {
+        var txt = $(this).find('button').text();
+        var idx = $(this).data('idx');
+        var m_idx = $(this).parents('.paramtrCls').data('idx');
+        var id = $(this).parents('.layerBox').siblings('.hiddenResult').attr('id');
+
+        if ($('#' + id).val() != txt) {
+            var ele = $(this).parents('.customSelect').find('.textCategory');
+            var result = confirm('[권한변경] ' + $('#' + id).val() + '에서 ' + txt + '로 변경하시겠습니까?');
+            if (result) {
+                $.ajax({
+                    type: "post",
+                    url: '/Member/SetAuthority',
+                    dataType: "json",
+                    data: {
+                        IDX: $('#' + id).data('idx'),
+                        GROUP_ID: idx,
+                        M_IDX: m_idx
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        }
+                    },
+                    error: function (response) {
+                        alert(response);
+                    }
+                });
+            }
         }
     });
 
@@ -25,7 +57,6 @@
         var idx = $(this).closest('tr').attr('data-idx');
         var result = confirm('[초기화] 비밀번호는 초기번호 "qwer1234!"로 설정됩니다.');
         if (result) {
-            alert(idx);
             $.ajax({
                 type: "post",
                 url: '/Member/ReSetPW',
@@ -43,8 +74,6 @@
                 }
             });
         }
-
-        /*openCenteredWindow('/Admin/Member/GroupSet?GROUP_ID=' + idx, '새창', 600, 400);*/
     });
 
     $('.filter-area .btn-sch').click(function () {
@@ -75,23 +104,8 @@ function SearchTxt() {
 
 function GetGroupUser(page) {
     $('.col-table tbody').load('/Member/GetGroupUser', {
-        GROUP_ID: $('#hidStatType').attr('data-idx'),
+        GROUP_ID: $('#hidManagementType').attr('data-idx'),
         Page: page,
         SearchTxt: $('#searchTxt').val()
     });
-}
-
-function openCenteredWindow(url, title, width, height) {
-    const screenWidth = window.screen.width;
-    const screenHeight = window.screen.height;
-
-    // 새 창의 위치 계산
-    const left = (screenWidth - width) / 2;
-    const top = (screenHeight - height) / 2;
-
-    // 창 옵션 설정
-    const options = `width=${width},height=${height},left=${left},top=${top},status=no,resizable=no,fullscreen=no`;
-
-    // 새 창 열기
-    window.open(url, title, options);
 }

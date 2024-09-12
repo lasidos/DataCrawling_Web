@@ -8,8 +8,8 @@
 @section Header{
     @RenderPage("~/Views/Shared/Header/_HeaderAdmin.cshtml")
 
-    <script src="~/Resource/Js/Admin/Member.js"></script>
-    <link href="~/Resource/Css/Admin/Member/Management.css" rel="stylesheet" />
+    <link href="~/Resource/Css/_CommonModal.css" rel="stylesheet" />
+    <link href="~/Resource/Css/Admin/Member/Groups.css" rel="stylesheet" />
 }
 
 @section Left{
@@ -22,12 +22,21 @@
     <section style="position: relative;">
         <div id="wItemBatchList">
             <div class="pWrap" id="lNotice">
-                <h2>그룹 목록</h2>
-                <p>
-                    @Html.ActionLink("새 그룹 추가", "Create", null, new { @class = "btn btn-primary" })
-                </p>
+                <div class="h-title">
+                    <h2>그룹 목록</h2>
+                    <p>
+                        <a class="btn btn-create" href="javascript:;">새 그룹 추가</a>
+                    </p>
+                </div>
                 <div class="col-table line">
                     <table class="table table-striped">
+                        <caption>요청 URL 입니다.</caption>
+                        <colgroup>
+                            <col style="width:5%">
+                            <col style="width:20%">
+                            <col style="width:50%">
+                            <col style="width:15%">
+                        </colgroup>
                         <thead>
                             <tr>
                                 <th>그룹 ID</th>
@@ -39,13 +48,15 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>@item.GROUP_ID</td>
+                                <tr data-group-name="@item.GROUP_NAME" data-description="@item.DESCRIPTION">
+                                    <td>@item.OrderNo</td>
                                     <td>@item.GROUP_NAME</td>
                                     <td>@item.DESCRIPTION</td>
                                     <td>
-                                        @Html.ActionLink("수정", "Edit", new { id = item.GROUP_ID }, new { @class = "btn btn-warning" }) |
-                                        @Html.ActionLink("삭제", "Delete", new { id = item.GROUP_ID }, new { @class = "btn btn-danger" })
+                                        <div class="edit">
+                                            <a class="btn btn-edit" href="javascript:;" data-idx="@item.GROUP_ID">수정</a>
+                                            <a class="btn btn-delete" href="javascript:;" data-idx="@item.GROUP_ID">삭제</a>
+                                        </div>
                                     </td>
                                 </tr>
                             }
@@ -56,9 +67,131 @@
         </div>
     </section>
 
+    <div class="common-modal service-modal">
+        <div class="modal-dimmed"></div>
+        <div class="modal-contents">
+            <button class="close-button"></button>
+            <div class="swiper-container swiper-container-horizontal">
+                <div>
+                    <span id="g-title"></span>
+                </div>
+                <div class="g-name g-info">
+                    <span>그룹명</span>
+                    <input type="text" id="group-id" name="name" value="" placeholder="그룹명을 입력하세요." />
+                </div>
+                <div class="g-desc g-info">
+                    <span>설명</span>
+                    <input type="text" id="group-desc" name="name" value="" placeholder="그룹 설명을 입력하세요." />
+                </div>
+                <div class="edit-new">
+                    <span class="btn-group-edit">수정</span>
+                    <span class="btn-group-create">생성</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="sg" value="" />
+
     <script>
         $(function () {
             $('#gPathBar h2').text('권한 그룹');
+
+            $('.btn-create').click(function () {
+                showModal('그룹생성', true, false);
+            });
+
+            $('.btn-edit').click(function () {
+                var idx = $(this).attr('data-idx');
+                var row = $(this).closest('tr');
+                var groupName = row.data('group-name');
+                var description = row.data('description');
+                $('#sg').val(idx);
+                $('#group-id').val(groupName);
+                $('#group-desc').val(description);
+
+                showModal('그룹수정', false, true);
+            });
+
+            $('.close-button').click(function () {
+                hideModal();
+            });
+
+            // 그룹 삭제
+            $('.btn-delete').click(function () {
+                var idx = $(this).attr('data-idx');
+                manageGroup('Delete', idx);
+            });
+
+            // 그룹 생성
+            $('.btn-group-create').click(function () {
+                var groupId = $('#group-id').val().trim();
+                var groupDesc = $('#group-desc').val().trim();
+
+                if (groupId === '') {
+                    alert('그룹명을 입력하세요.');
+                    $('#group-id').focus();
+                    return;
+                }
+                if (groupDesc === '') {
+                    alert('그룹 설명을 입력하세요.');
+                    $('#group-desc').focus();
+                    return;
+                }
+
+                manageGroup('Add', null, groupId, groupDesc);
+            });
+
+            // 그룹 수정
+            $('.btn-group-edit').click(function () {
+                var groupId = $('#group-id').val().trim();
+                var groupDesc = $('#group-desc').val().trim();
+
+                if (groupId === '') {
+                    alert('그룹명을 입력하세요.');
+                    $('#group-id').focus();
+                    return;
+                }
+                if (groupDesc === '') {
+                    alert('그룹 설명을 입력하세요.');
+                    $('#group-desc').focus();
+                    return;
+                }
+
+                manageGroup('Edit', $('#sg').val(), groupId, groupDesc);
+            });
+
+            function showModal(title, showCreateButton, showEditButton) {
+                $('#g-title').text(title);
+                $('.btn-group-create').toggle(showCreateButton);
+                $('.btn-group-edit').toggle(showEditButton);
+                $('.common-modal').show();
+            }
+
+            function hideModal() {
+                $('.common-modal').hide();
+            }
+
+            function manageGroup(action, idx, groupId, groupDesc) {
+                $.ajax({
+                    type: "post",
+                    url: '/Member/ManageGroup',
+                    dataType: "json",
+                    data: {
+                        Action: action,
+                        G_IDX: idx,
+                        G_NAME: groupId,
+                        G_DESC: groupDesc
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        }
+                    },
+                    error: function (response) {
+                        alert(response);
+                    }
+                });
+            }
         });
     </script>
 }

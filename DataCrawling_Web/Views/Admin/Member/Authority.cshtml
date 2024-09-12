@@ -1,16 +1,17 @@
-﻿@model IEnumerable<DataCrawling_Web.DSL.Admin.GroupInfoModel>
-
+﻿@using DataCrawling_Web.BSL.Common;
+@model DataCrawling_Web.Models.Admin.GroupUserViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BodyClass = "mtcSubNotice";
+    string Name = "Authority";
 }
 
 
 @section Header{
     @RenderPage("~/Views/Shared/Header/_HeaderAdmin.cshtml")
 
-    <script src="~/Resource/Js/Admin/Member.js"></script>
-    <link href="~/Resource/Css/Admin/Code/CodeMng.css" rel="stylesheet" />
+    <link href="~/Resource/Css/Admin/Member/Authority.css" rel="stylesheet" />
+    <link href="~/Resource/Css/Shared/_CustomListView.css" rel="stylesheet" />
 }
 
 @section Left{
@@ -23,35 +24,41 @@
     <section style="position: relative;">
         <div id="wItemBatchList">
             <div class="pWrap" id="lNotice">
-                <h2>그룹 목록</h2>
-                <p>
-                    @Html.ActionLink("새 그룹 추가", "Create", null, new { @class = "btn btn-primary" })
-                </p>
-
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>그룹 ID</th>
-                            <th>그룹 이름</th>
-                            <th>설명</th>
-                            <th>작업</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
+                <div class="filter-area">
+                    <div class="form_col stat_type">
+                        
+                    </div>
+                    <div class="sch-area">
+                        <input type="text" id="searchTxt" name="name" value="" placeholder="검색어를 입력하세요 (이름, 아이디, 전화번호)" />
+                        <span class="btn-sch">검색</span>
+                    </div>
+                </div>
+                <div class="col-table left line">
+                    <p class="tit-hide">요청 URL</p>
+                    <table>
+                        <caption>요청 URL 입니다.</caption>
+                        <colgroup>
+                            <col style="width:5%">
+                            <col style="width:12.5%">
+                            <col style="width:7%">
+                            <col style="width:12.5%">
+                            <col style="width:7%">
+                            <col style="width:16%">
+                        </colgroup>
+                        <thead>
                             <tr>
-                                <td>@item.GroupId</td>
-                                <td>@item.GroupName</td>
-                                <td>@item.Description</td>
-                                <td>
-                                    @Html.ActionLink("수정", "Edit", new { id = item.GroupId }, new { @class = "btn btn-warning" }) |
-                                    @Html.ActionLink("삭제", "Delete", new { id = item.GroupId }, new { @class = "btn btn-danger" })
-                                </td>
+                                <th scope="col">No</th>
+                                <th scope="col">아이디</th>
+                                <th scope="col">VIEW</th>
+                                <th scope="col">SELECT</th>
+                                <th scope="col">EIDT</th>
+                                <th scope="col">권한삭제</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
@@ -59,6 +66,49 @@
     <script>
         $(function () {
             $('#gPathBar h2').text('사용자 개별권한');
+
+            $('.layerBox li').click(function () {
+                var id = $(this).attr('id');
+                if (id == 'Group') {
+                    return;
+                }
+                var txt = $(this).find('button').text();
+                var idx = $(this).data('idx');
+                var m_idx = $(this).parents('.paramtrCls').data('idx');
+
+                if ($('#hidVisibleType').val() != txt) {
+                    var ele = $(this).parents('.customSelect').find('.textCategory');
+                    var result = confirm('[권한변경] ' + $('#hid@(Name)Type').val() +'에서 ' + txt + '로 변경하시겠습니까?');
+                    if (result) {
+                        $.ajax({
+                            type: "post",
+                            url: '@Url.Action("SetAuthority", "Member")',
+                            dataType: "json",
+                            data: {
+                                IDX: $('#hid@(Name)Type').data('idx'),
+                                GROUP_ID: idx,
+                                M_IDX: m_idx
+                            },
+                            success: function (data) {
+                                if (data.success) {
+                                    location.reload();
+                                }
+                            },
+                            error: function (response) {
+                                alert(response);
+                            }
+                        });
+                    }
+                }
+            });
         });
+
+        function GetGroupUser(page) {
+            $('.col-table tbody').load('/Member/GetGroupPersonAuthority', {
+                GROUP_ID: $('#hid@(Name)Type').attr('data-idx'),
+                Page: page,
+                SearchTxt: $('#searchTxt').val()
+            });
+        }
     </script>
 }

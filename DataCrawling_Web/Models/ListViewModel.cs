@@ -5,6 +5,7 @@ namespace DataCrawling_Web.Models
     public class ListViewModel
     {
         public string ID { get; set; }
+        public int ItemIdx { get; set; }
 
         public bool ShowAll { get; set; } // 전체보기 텍스트 표시 여부
 

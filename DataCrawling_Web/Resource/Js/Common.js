@@ -79,3 +79,18 @@ function uploadSummernoteImageFile(file, el) {
         }
     });
 }
+
+function openCenteredWindow(url, title, width, height) {
+    const screenWidth = window.screen.width;
+    const screenHeight = window.screen.height;
+
+    // 새 창의 위치 계산
+    const left = (screenWidth - width) / 2;
+    const top = (screenHeight - height) / 2;
+
+    // 창 옵션 설정
+    const options = `width=${width},height=${height},left=${left},top=${top},status=no,resizable=no,fullscreen=no`;
+
+    // 새 창 열기
+    window.open(url, title, options);
+}

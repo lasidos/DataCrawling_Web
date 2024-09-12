@@ -1,0 +1,32 @@
+﻿.filter-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .filter-area .sch-area {
+        display: flex;
+        align-items: center;
+    }
+
+    .filter-area #searchTxt {
+        border: 1px solid #bdbdbd;
+        padding: 6px 10px;
+        border-radius: 5px;
+        width: 250px;
+    }
+
+    .filter-area .btn-sch {
+        padding: 10px 30px;
+        background: #434343;
+        color: #fff;
+        border-radius: 5px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+.stat_type {
+    width: 220px;
+    margin-bottom: 20px;
+    position: relative;
+}

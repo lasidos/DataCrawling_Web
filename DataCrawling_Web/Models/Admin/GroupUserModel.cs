@@ -8,14 +8,20 @@ namespace DataCrawling_Web.Models.Admin
     {
         public IEnumerable<GroupInfoModel> GroupInfo { get; set; }
         public IEnumerable<GroupUserModel> GroupUsers { get; set; }
+        public IEnumerable<IndividualAuthorityModel> Individuals { get; set; }
         public PagingInfo PagingInfo { get; set; } = null;
     }
 
     public class GroupInfoModel
     {
+        public int OrderNo { get; set; }
         public int GROUP_ID { get; set; }
         public string GROUP_NAME { get; set; }
         public string DESCRIPTION { get; set; }
+        public int ROLE_ID { get; set; }
+        public int Visible_Stat { get; set; }
+        public int Select_Stat { get; set; }
+        public int Edit_Authority { get; set; }
     }
 
     public class GroupUserModel
@@ -35,9 +41,13 @@ namespace DataCrawling_Web.Models.Admin
         public string DESCRIPTION { get; set; }
     }
 
-    #region 그룹권한
-
-
-
-    #endregion
+    public class IndividualAuthorityModel
+    {
+        public int OrderNo { get; set; }
+        public string User_ID { get; set; }
+        public int ROLE_ID { get; set; }
+        public int Visible_Stat { get; set; }
+        public int Select_Stat { get; set; }
+        public int Edit_Authority { get; set; }
+    }
 }
