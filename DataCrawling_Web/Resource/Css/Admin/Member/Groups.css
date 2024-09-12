@@ -1,0 +1,97 @@
+﻿.h-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    height: 40px;
+    font-size: 14px;
+}
+
+    .h-title p {
+        display: flex;
+        padding: 10px 30px;
+        background: #434343;
+        color: #fff;
+        border-radius: 5px;
+    }
+
+.edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+    .edit a + a {
+        margin-left: 15px;
+    }
+
+    .edit a {
+        background: #434343;
+        color: #fff;
+        height: 30px;
+        border-radius: 5px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+.swiper-container {
+    height: 100%;
+}
+
+.common-modal.service-modal .modal-contents {
+    width: 600px;
+    height: 320px;
+}
+
+.common-modal.service-modal .modal_msg {
+    width: 300px;
+    height: 150px;
+}
+
+#g-title {
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px;
+    display: flex;
+    border-bottom: 1px solid;
+}
+
+.g-info {
+    display: flex;
+    margin-top: 35px;
+    align-items: center;
+    padding-right: 10px;
+}
+
+    .g-info span {
+        min-width: 50px;
+        display: inline-block;
+        text-align: end;
+    }
+
+    .g-info input {
+        margin-left: 25px;
+        padding: 5px;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #ccc;
+    }
+
+.edit-new {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+    .edit-new span {
+        padding: 10px 45px;
+        background: #212121;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+    }

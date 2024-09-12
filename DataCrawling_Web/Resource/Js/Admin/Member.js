@@ -25,7 +25,6 @@
         var idx = $(this).closest('tr').attr('data-idx');
         var result = confirm('[초기화] 비밀번호는 초기번호 "qwer1234!"로 설정됩니다.');
         if (result) {
-            alert(idx);
             $.ajax({
                 type: "post",
                 url: '/Member/ReSetPW',
@@ -44,7 +43,7 @@
             });
         }
 
-        /*openCenteredWindow('/Admin/Member/GroupSet?GROUP_ID=' + idx, '새창', 600, 400);*/
+        
     });
 
     $('.filter-area .btn-sch').click(function () {
@@ -79,19 +78,4 @@ function GetGroupUser(page) {
         Page: page,
         SearchTxt: $('#searchTxt').val()
     });
-}
-
-function openCenteredWindow(url, title, width, height) {
-    const screenWidth = window.screen.width;
-    const screenHeight = window.screen.height;
-
-    // 새 창의 위치 계산
-    const left = (screenWidth - width) / 2;
-    const top = (screenHeight - height) / 2;
-
-    // 창 옵션 설정
-    const options = `width=${width},height=${height},left=${left},top=${top},status=no,resizable=no,fullscreen=no`;
-
-    // 새 창 열기
-    window.open(url, title, options);
 }

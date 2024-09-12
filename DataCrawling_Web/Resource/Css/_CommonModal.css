@@ -33,7 +33,7 @@
         height: 420px;
     }
 
-    .common-modal .modal-contents {
+    .common-modal .modal-contents, .common-modal .modal_msg {
         position: fixed;
         top: 50%;
         left: 50%;
@@ -45,6 +45,16 @@
         background: #fff;
         padding: 30px 35px;
     }
+
+        .common-modal .modal_msg h2 {
+            color: #001dff;
+        }
+
+        .common-modal .modal_msg p {
+            margin-top: 30px;
+            font-size: 17px;
+            font-weight: bold;
+        }
 
     .common-modal .close-button {
         cursor: pointer;

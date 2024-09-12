@@ -5,10 +5,9 @@ namespace DataCrawling_Web.Models.Admin
 {
     public class ContentInfoModel
     {
+        public string SECTOR { get; set; }
+        public string CODE { get; set; }
         public int IDX { get; set; }
-        public string PAGE_NAME { get; set; }
-        public string SECTION_NAME { get; set; }
-        public string CATE_NAME { get; set; }
         public string PORT_IMG { get; set; }
         public string TITLE { get; set; }
         public string CONTENT_BODY { get; set; }
