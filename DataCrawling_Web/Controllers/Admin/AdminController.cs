@@ -28,7 +28,7 @@ namespace DataCrawling_Web.Controllers.Admin
             }
             if (vm == null)
             {
-                vm = new Contents().GetContents().OrderByDescending(s => s.E_DATE);
+                vm = new Contents().GetContents();
                 Session["ContentInfoModel"] = JsonConvert.SerializeObject(vm);
             }
             ContentInfoModel item = vm.Where(p => p.IDX.ToString() == idx).FirstOrDefault();

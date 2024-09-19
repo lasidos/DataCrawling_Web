@@ -5,6 +5,7 @@ namespace DataCrawling_Web.Models.Admin
 {
     public class ContentInfoModel
     {
+        public int OrderNo { get; set; }
         public string SECTOR { get; set; }
         public string CODE { get; set; }
         public int IDX { get; set; }

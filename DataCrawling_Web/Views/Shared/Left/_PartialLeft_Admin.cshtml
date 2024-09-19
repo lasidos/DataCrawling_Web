@@ -32,10 +32,10 @@
                 </ul>
             </li>
             <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Main") ? "gCurrent" : "")">
-                <h3>메인관리</h3>
+                <h3>컨텐츠관리</h3>
                 <ul>
+                    @CHeckCurrent("/Admin/Main/service", "영역 관리")
                     @CHeckCurrent("/Admin/Main/item", "상단컨텐츠(module_ty)")
-                    @CHeckCurrent("/Admin/Main/service", "서비스 안내")
                 </ul>
             </li>
             <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Order") ? "gCurrent" : "")">
