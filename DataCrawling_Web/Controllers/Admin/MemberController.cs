@@ -218,5 +218,29 @@ namespace DataCrawling_Web.Controllers.Admin
 
             return groupUser;
         }
+
+        [HttpPost]
+        [Route("Member/ManageGroup")]
+        public JsonResult ManageGroup(string Action, string G_NAME, string G_DESC, int G_IDX = 0)
+        {
+            string msg = string.Empty;
+            switch (Action)
+            {
+                case "Add":
+                    new Member().USP_GROUP_INFO_IU(G_NAME, G_DESC);
+                    msg = "그룹이 생성되었습니다.";
+                    break;
+                case "Edit":
+                    new Member().USP_GROUP_INFO_IU(G_NAME, G_DESC, G_IDX);
+                    msg = "그룹이 수정되었습니다.";
+                    break;
+                case "Delete":
+                    new Member().USP_GROUP_INFO_D(G_IDX);
+                    msg = "그룹이 삭제되었습니다.";
+                    break;
+            }
+
+            return Json(new { success = true, msg });
+        }
     }
 }
