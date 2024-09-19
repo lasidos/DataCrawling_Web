@@ -27,14 +27,16 @@
 
     <section style="position: relative;">
         <div id="wItemBatchList">
-            @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-            {
-               ID = "Sector",
-               ShowAll = true,
-               Height = 35,
-               SelectID = -1,
-               GroupInfo = items
-            })
+            <div class="menu-list">
+                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                {
+                    ID = "Sector",
+                    ShowAll = true,
+                    Height = 35,
+                    SelectID = -1,
+                    GroupInfo = items
+                })
+            </div>
 
             <!-- 목록 영역 -->
             <div class="pWrap" id="lList">
