@@ -31,10 +31,5 @@ namespace DataCrawling_Web.Controllers.Admin
 
             return View("~/Views/Admin/Main/item.cshtml", vm);
         }
-
-        public ActionResult service()
-        {
-            return View("~/Views/Admin/Main/service.cshtml");
-        }
     }
 }
