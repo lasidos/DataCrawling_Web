@@ -3,6 +3,12 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BodyClass = "mtcSubNotice";
+
+    IEnumerable<DataCrawling_Web.Models.ListViewItem> items = new List<DataCrawling_Web.Models.ListViewItem>
+{
+        new DataCrawling_Web.Models.ListViewItem { Idx = 1, Name = "상단컨텐츠(module_ty)" },
+        new DataCrawling_Web.Models.ListViewItem { Idx = 2, Name = "서비스 안내" }
+    };
 }
 
 @section Header{
@@ -21,33 +27,21 @@
 
     <section style="position: relative;">
         <div id="wItemBatchList">
-            <!-- 안내 영역 -->
-            <div class="pWrap" id="lNotice">
-                <ul class="pNoticeList">
-                    <li>메인 영역 상단컨텐츠(module_ty) 설정을 할 수 있습니다.</li>
-                </ul>
-                <form class="pContorls">
-                    <div class="pPgn">
-                        <span>컨텐츠 노출수량(최근순)</span>
-                        <select name="sz">
-                            <option value="" selected="selected">개</option>
-                            <option value="4">4개</option>
-                            <option value="6">6개</option>
-                            <option value="8">8개</option>
-                            <option value="10">10개</option>
-                            <option value="12">12개</option>
-                        </select>
-                        <span>(짝수로 설정하여야 합니다.)</span>
-                    </div>
-                </form>
-            </div>
+            @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+            {
+               ID = "Sector",
+               ShowAll = true,
+               Height = 35,
+               SelectID = -1,
+               GroupInfo = items
+            })
 
             <!-- 목록 영역 -->
             <div class="pWrap" id="lList">
                 <div class="pHeader">
                     <div class="left-menu-list">
                         <h3>컨텐츠 등록 내역</h3>
-                        <div class="pTotal">(총 <span id="lCnt"></span>건)</div>
+                        <div class="pTotal">(총 <span id="lCnt">@(Model.Count())</span>건)</div>
                     </div>
                     <div class="right-menu-list">
                         <input id="regist" type="submit" value="컨텐츠 신규등록">
@@ -55,51 +49,53 @@
                 </div>
                 <div class="col-table left line">
                     <p class="tit-hide">요청변수(Request Parameter)</p>
-                    <table>
-                        <caption>항목명(국문),항목명(영문),항목크기,항목구분,샘플데이터,항목설명 항목을 가진 요청변수(Request Parameter)표 입니다.</caption>
-                        <colgroup>
-                            <col style="width:5%">
-                            <col style="width:10%">
-                            <col style="width:45%">
-                            <col style="width:10%">
-                            <col style="width:10%">
-                            <col style="width:10%">
-                            <col style="width:10%">
-                            <col>
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th scope="col">NO</th>
-                                <th scope="col">카테고리</th>
-                                <th scope="col">타이틀</th>
-                                <th scope="col">등록자</th>
-                                <th scope="col">노출</th>
-                                <th scope="col">최근 수정일시</th>
-                                <th scope="col">수정</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{
-                                int idx = 1;
-                            }
-                            @foreach (var item in Model)
-                            {
-                                <tr class="paramtrCls" data-idx="@(item.IDX)">
-                                    <td data-paramtr-nm="serviceKey">@(idx)</td>
-                                    <td class="just-pc">@*@(item.SECTOR)*@</td>
-                                    <td data-paramtr-size="100">@(item.TITLE)</td>
-                                    <td>@(item.Get_UserName)</td>
-                                    <td>@(item.VISIBLE == 0 ? "비노출" : "노출")</td>
-                                    <td>@(DateTime.Now.ToString("yyyy.MM.dd") == item.E_DATE.ToString("yyyy.MM.dd") ? item.E_DATE.ToString("HH:MM") : item.E_DATE.ToString("yyyy.MM.dd"))</td>
-                                    <td><span class="edit">수정</span></td>
+                    @if (Model.Count() > 0)
+                    {
+                        <table>
+                            <caption>항목명(국문),항목명(영문),항목크기,항목구분,샘플데이터,항목설명 항목을 가진 요청변수(Request Parameter)표 입니다.</caption>
+                            <colgroup>
+                                <col style="width:5%">
+                                <col style="width:10%">
+                                <col style="width:45%">
+                                <col style="width:10%">
+                                <col style="width:10%">
+                                <col style="width:10%">
+                                <col style="width:10%">
+                                <col>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope="col">NO</th>
+                                    <th scope="col">카테고리</th>
+                                    <th scope="col">타이틀</th>
+                                    <th scope="col">등록자</th>
+                                    <th scope="col">노출</th>
+                                    <th scope="col">최근 수정일시</th>
+                                    <th scope="col">수정</th>
                                 </tr>
-                                idx++;
-                            }
-                        </tbody>
-                    </table>
-                    <div class="no-data">
-                        <span>No data.</span>
-                    </div>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="paramtrCls" data-idx="@(item.IDX)">
+                                        <td data-paramtr-nm="serviceKey">@(item.OrderNo)</td>
+                                        <td class="just-pc">@(item.SECTOR)</td>
+                                        <td data-paramtr-size="100">@(item.TITLE)</td>
+                                        <td>@(item.Get_UserName)</td>
+                                        <td>@(item.VISIBLE == 0 ? "비노출" : "노출")</td>
+                                        <td>@(DateTime.Now.ToString("yyyy.MM.dd") == item.E_DATE.ToString("yyyy.MM.dd") ? item.E_DATE.ToString("HH:MM") : item.E_DATE.ToString("yyyy.MM.dd"))</td>
+                                        <td><span class="edit">수정</span></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="no-data">
+                            <span>No data.</span>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
