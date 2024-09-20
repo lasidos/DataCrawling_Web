@@ -95,13 +95,12 @@ namespace DataCrawling_Web.DSL.Admin
             }
         }
 
-        public IEnumerable<IndividualAuthorityModel> USP_Individual_Authority_S(int GROUP_ID)
+        public IEnumerable<IndividualAuthorityModel> USP_Individual_Authority_S()
         {
             var param = new DynamicParameters();
-            param.Add("@GROUP_ID", GROUP_ID);
             using (IDbConnection conn = new SqlConnection(CONN_STR))
             {
-                return conn.Query<IndividualAuthorityModel>(param: param, commandType: CommandType.StoredProcedure
+                return conn.Query<IndividualAuthorityModel>(commandType: CommandType.StoredProcedure
                     , sql: "DBO.USP_Individual_Authority_S");
             }
         }
