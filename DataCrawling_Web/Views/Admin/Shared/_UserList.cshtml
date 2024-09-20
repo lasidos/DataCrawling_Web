@@ -27,7 +27,6 @@
             <td>@item.Phone</td>
             <td>@item.Gender</td>
             <td>@item.GROUP_NAME</td>
-            <td>@item.DESCRIPTION</td>
             <td>@item.LastLoginDateST</td>
             <td>@item.RegistDateST</td>
             <td>
@@ -77,33 +76,36 @@ else if (ViewBag.TypePage == "Authority")
             <td>@item.User_ID</td>
             <td>
                 @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-               {
-                   ID = "Visible",
-                   ShowAll = false,
-                   Height = 35,
-                   SelectID = item.Visible_Stat,
-                   GroupInfo = items
-               })
+           {
+               ID = "Visible",
+               ItemIdx = item.OrderNo,
+               ShowAll = false,
+               Height = 35,
+               SelectID = item.Visible_Stat,
+               GroupInfo = items
+           })
             </td>
             <td>
                 @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-               {
-                   ID = "Select",
-                   ShowAll = false,
-                   Height = 35,
-                   SelectID = item.Select_Stat,
-                   GroupInfo = items
-               })
+           {
+               ID = "Select",
+               ItemIdx = item.OrderNo,
+               ShowAll = false,
+               Height = 35,
+               SelectID = item.Select_Stat,
+               GroupInfo = items
+           })
             </td>
             <td>
                 @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-               {
-                   ID = "Edit",
-                   ShowAll = false,
-                   Height = 35,
-                   SelectID = item.Edit_Authority,
-                   GroupInfo = items
-               })
+           {
+               ID = "Edit",
+               ItemIdx = item.OrderNo,
+               ShowAll = false,
+               Height = 35,
+               SelectID = item.Edit_Authority,
+               GroupInfo = items
+           })
             </td>
             <td><span class="btn-delete">삭제</span></td>
         </tr>
@@ -131,45 +133,3 @@ else if (ViewBag.TypePage == "Authority")
 
 <input type="hidden" id="idx" value="" />
 <input type="hidden" id="isPage" value="@Model.PagingInfo.CurrentPage" />
-<script>
-    $(function () {
-
-
-        @*$('.layerBox li').click(function () {
-            var txt = $(this).find('button').text();
-            var idx = $(this).data('idx');
-            var m_idx = $(this).parents('.paramtrCls').data('idx');
-
-            var name = '';
-            @if (ViewBag.TypePage == "Management")
-            {
-                name =
-            }
-            if ($('#hid@(Name)Type').val() != txt) {
-                var ele = $(this).parents('.customSelect').find('.textCategory');
-                var result = confirm('[권한변경] ' + $('#hid@(Name)Type').val() +'에서 ' + txt + '로 변경하시겠습니까?');
-                if (result) {
-                $.ajax({
-                    type: "post",
-                    url: '@Url.Action("SetAuthority", "Member")',
-                    dataType: "json",
-                    data: {
-                        IDX: $('#hid@(Name)Type').data('idx'),
-                        GROUP_ID: idx,
-                        M_IDX: m_idx
-                    },
-                    success: function (data) {
-                            if (data.success) {
-                                location.reload();
-                            }
-                        },
-                    error: function (response) {
-                            alert(response);
-                        }
-                    });
-                }
-            }
-
-        });*@
-    })
-</script>

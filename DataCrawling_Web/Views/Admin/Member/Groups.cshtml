@@ -2,6 +2,21 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BodyClass = "mtcSubNotice";
+
+    string name = string.Empty;
+    IEnumerable<DataCrawling_Web.Models.ListViewItem> items = new List<DataCrawling_Web.Models.ListViewItem>()
+{
+        new DataCrawling_Web.Models.ListViewItem()
+        {
+            Idx = 0,
+            Name = "Inaccessible"
+        },
+        new DataCrawling_Web.Models.ListViewItem()
+        {
+            Idx = 1,
+            Name = "Accessible"
+        }
+    };
 }
 
 
@@ -33,8 +48,11 @@
                         <caption>요청 URL 입니다.</caption>
                         <colgroup>
                             <col style="width:5%">
-                            <col style="width:20%">
-                            <col style="width:50%">
+                            <col style="width:10%">
+                            <col style="width:30%">
+                            <col style="width:5%">
+                            <col style="width:5%">
+                            <col style="width:5%">
                             <col style="width:15%">
                         </colgroup>
                         <thead>
@@ -42,6 +60,9 @@
                                 <th>그룹 ID</th>
                                 <th>그룹 이름</th>
                                 <th>설명</th>
+                                <th>VIEW</th>
+                                <th>SELECT</th>
+                                <th>EIDT</th>
                                 <th>작업</th>
                             </tr>
                         </thead>
@@ -52,6 +73,39 @@
                                     <td>@item.OrderNo</td>
                                     <td>@item.GROUP_NAME</td>
                                     <td>@item.DESCRIPTION</td>
+                                    <td>
+                                        @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                                   {
+                                       ID = "Visible",
+                                       ItemIdx = item.OrderNo,
+                                       ShowAll = false,
+                                       Height = 35,
+                                       SelectID = item.Visible_Stat,
+                                       GroupInfo = items
+                                   })
+                                    </td>
+                                    <td>
+                                        @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                                   {
+                                       ID = "Select",
+                                       ItemIdx = item.OrderNo,
+                                       ShowAll = false,
+                                       Height = 35,
+                                       SelectID = item.Select_Stat,
+                                       GroupInfo = items
+                                   })
+                                    </td>
+                                    <td>
+                                        @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                                   {
+                                       ID = "Edit",
+                                       ItemIdx = item.OrderNo,
+                                       ShowAll = false,
+                                       Height = 35,
+                                       SelectID = item.Edit_Authority,
+                                       GroupInfo = items
+                                   })
+                                    </td>
                                     <td>
                                         <div class="edit">
                                             <a class="btn btn-edit" href="javascript:;" data-idx="@item.GROUP_ID">수정</a>
@@ -160,38 +214,53 @@
                 manageGroup('Edit', $('#sg').val(), groupId, groupDesc);
             });
 
-            function showModal(title, showCreateButton, showEditButton) {
-                $('#g-title').text(title);
-                $('.btn-group-create').toggle(showCreateButton);
-                $('.btn-group-edit').toggle(showEditButton);
-                $('.common-modal').show();
-            }
+            $(document).on("click", ".listWrap", function (e) {
+                $(this).toggleClass('on');
+            });
 
-            function hideModal() {
-                $('.common-modal').hide();
-            }
+            $(document).on("click", ".layerBox li", function (e) {
+                var txt = $(this).find('button').text();
+                var idx = $(this).data('idx');
+                var m_idx = $(this).parents('.paramtrCls').data('idx');
+                var id = $(this).parents('.layerBox').siblings('.hiddenResult').attr('id');
 
-            function manageGroup(action, idx, groupId, groupDesc) {
-                $.ajax({
-                    type: "post",
-                    url: '/Member/ManageGroup',
-                    dataType: "json",
-                    data: {
-                        Action: action,
-                        G_IDX: idx,
-                        G_NAME: groupId,
-                        G_DESC: groupDesc
-                    },
-                    success: function (data) {
-                        if (data.success) {
-                            location.reload();
-                        }
-                    },
-                    error: function (response) {
-                        alert(response);
-                    }
-                });
-            }
+                if ($('#' + id).val() != txt) {
+                    alert('변경되었습니다.');
+                }
+            });
         });
+
+        function showModal(title, showCreateButton, showEditButton) {
+            $('#g-title').text(title);
+            $('.btn-group-create').toggle(showCreateButton);
+            $('.btn-group-edit').toggle(showEditButton);
+            $('.common-modal').show();
+        }
+
+        function hideModal() {
+            $('.common-modal').hide();
+        }
+
+        function manageGroup(action, idx, groupId, groupDesc) {
+            $.ajax({
+                type: "post",
+                url: '/Member/ManageGroup',
+                dataType: "json",
+                data: {
+                    Action: action,
+                    G_IDX: idx,
+                    G_NAME: groupId,
+                    G_DESC: groupDesc
+                },
+                success: function (data) {
+                    if (data.success) {
+                        location.reload();
+                    }
+                },
+                error: function (response) {
+                    alert(response);
+                }
+            });
+        }
     </script>
 }

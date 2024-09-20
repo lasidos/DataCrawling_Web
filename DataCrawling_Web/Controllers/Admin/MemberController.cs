@@ -123,10 +123,10 @@ namespace DataCrawling_Web.Controllers.Admin
 
         [HttpPost]
         [Route("Member/GetGroupPersonAuthority")]
-        public ActionResult GetGroupPersonAuthority(int GROUP_ID, int Page = 1, string SearchTxt = "")
+        public ActionResult GetGroupPersonAuthority(int Page = 1, string SearchTxt = "")
         {
             ViewBag.TypePage = "Authority";
-            GroupUserViewModel groupUser = Individual_Authority_ViewModel(GROUP_ID, Page, SearchTxt);
+            GroupUserViewModel groupUser = Individual_Authority_ViewModel(Page, SearchTxt);
 
             return PartialView("~/Views/Admin/Shared/_UserList.cshtml", groupUser);
         }
@@ -179,16 +179,17 @@ namespace DataCrawling_Web.Controllers.Admin
             return groupUser;
         }
 
-        private GroupUserViewModel Individual_Authority_ViewModel(int GROUP_ID, int Page = 1, string SearchTxt = "")
+        private GroupUserViewModel Individual_Authority_ViewModel(int Page = 1, string SearchTxt = "")
         {
             GroupUserViewModel groupUser = new GroupUserViewModel
             {
                 GroupInfo = this.GetGroupInfo()
             };
 
-            IEnumerable<IndividualAuthorityModel> vm = new Member().USP_Individual_Authority_S(GROUP_ID);
+            IEnumerable<IndividualAuthorityModel> vm = new Member().USP_Individual_Authority_S();
             groupUser.Individuals = vm.Select(s => new IndividualAuthorityModel()
             {
+                OrderNo = s.OrderNo,
                 User_ID = Utility.Decrypt_AES(s.User_ID),
                 ROLE_ID = s.ROLE_ID,
                 Visible_Stat = s.Visible_Stat,

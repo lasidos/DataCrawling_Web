@@ -25,7 +25,7 @@
             <div class="pWrap" id="lNotice">
                 <div class="filter-area">
                     <div class="form_col stat_type">
-                        
+
                     </div>
                     <div class="sch-area">
                         <input type="text" id="searchTxt" name="name" value="" placeholder="검색어를 입력하세요 (이름, 아이디, 전화번호)" />
@@ -66,38 +66,20 @@
         $(function () {
             $('#gPathBar h2').text('사용자 개별권한');
 
-            $('.layerBox li').click(function () {
-                var id = $(this).attr('id');
-                if (id == 'Group') {
-                    return;
-                }
+            GetGroupUser($('#isPage').val());
+
+            $(document).on("click", ".listWrap", function (e) {
+                $(this).toggleClass('on');
+            });
+
+            $(document).on("click", ".layerBox li", function (e) {
                 var txt = $(this).find('button').text();
                 var idx = $(this).data('idx');
                 var m_idx = $(this).parents('.paramtrCls').data('idx');
+                var id = $(this).parents('.layerBox').siblings('.hiddenResult').attr('id');
 
-                if ($('#hidVisibleType').val() != txt) {
-                    var ele = $(this).parents('.customSelect').find('.textCategory');
-                    var result = confirm('[권한변경] ' + $('#hid@(Name)Type').val() +'에서 ' + txt + '로 변경하시겠습니까?');
-                    if (result) {
-                        $.ajax({
-                            type: "post",
-                            url: '@Url.Action("SetAuthority", "Member")',
-                            dataType: "json",
-                            data: {
-                                IDX: $('#hid@(Name)Type').data('idx'),
-                                GROUP_ID: idx,
-                                M_IDX: m_idx
-                            },
-                            success: function (data) {
-                                if (data.success) {
-                                    location.reload();
-                                }
-                            },
-                            error: function (response) {
-                                alert(response);
-                            }
-                        });
-                    }
+                if ($('#' + id).val() != txt) {
+                    alert('변경되었습니다.');
                 }
             });
         });
