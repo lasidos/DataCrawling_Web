@@ -69,7 +69,7 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr data-group-name="@item.GROUP_NAME" data-description="@item.DESCRIPTION">
+                                <tr data-group-name="@item.GROUP_NAME" data-description="@item.DESCRIPTION" class="paramtrCls" data-idx="@item.GROUP_ID">
                                     <td>@item.OrderNo</td>
                                     <td>@item.GROUP_NAME</td>
                                     <td>@item.DESCRIPTION</td>
@@ -219,13 +219,24 @@
             });
 
             $(document).on("click", ".layerBox li", function (e) {
-                var txt = $(this).find('button').text();
                 var idx = $(this).data('idx');
-                var m_idx = $(this).parents('.paramtrCls').data('idx');
+                var txt = $(this).find('button').text(); // 선택 text
                 var id = $(this).parents('.layerBox').siblings('.hiddenResult').attr('id');
-
                 if ($('#' + id).val() != txt) {
-                    alert('변경되었습니다.');
+                    console.log(id);
+                    var order = $(this).parents('.listWrap').data('order');
+                    $('#' + id).val(txt);
+                    $('#' + id).attr('data-idx', idx);
+                    $(this).parents('.customCombo').find('.textCategory').text(txt);
+                    
+                    var visible = $('#hidVisibleType' + order).data('idx');
+                    var select = $('#hidSelectType' + order).data('idx');
+                    var edit = $('#hidEditType' + order).data('idx');
+
+                    alert(visible + ' / ' + select + ' / ' + edit);
+                    //var visible = $('#VisibleGroup').find('.listWrap').attr('id');
+                    //var select = $('#SelectGroup').find('.listWrap').attr('id');
+                    //var edit = $('#EditGroup').find('.listWrap').attr('id');
                 }
             });
         });

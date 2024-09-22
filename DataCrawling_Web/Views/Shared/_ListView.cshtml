@@ -4,9 +4,9 @@
     string order = Model.ItemIdx == -1 ? "" : Model.ItemIdx.ToString();
 }
 <div class="list-section" style="width: @(Model.Width == 0 ? "100%" : (Model.Width) + "px");">
-    <div id="@(Model.ID)Group" class="listWrap">
+    <div id="@(Model.ID)Group@(order)" class="listWrap" data-order="@order">
         <div class="customSelect customCombo">
-            <button type="button" id="btn@(Model.ID)Type" class="btnCustomSelect btnCustom" style="height: @(Model.Height == 0 ? 40 : Model.Height)px;">
+            <button type="button" id="btn@(Model.ID)Type@(order)" class="btnCustomSelect btnCustom" style="height: @(Model.Height == 0 ? 40 : Model.Height)px;">
                 <span class="textCategory">@(Model.ShowAll ? "전체보기" : Model.GroupInfo.Where(s => s.Idx == idx).FirstOrDefault().Name)</span>
                 <span id="sn@(Model.ID)Type" class="textResult"></span>
             </button>
