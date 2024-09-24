@@ -93,6 +93,17 @@ namespace DataCrawling_Web.Controllers.Admin
             return Json(new { success = true, msg });
         }
 
+        [HttpPost]
+        [Route("Member/GroupAuthorityUpdate")]
+        public JsonResult GroupAuthorityUpdate(string Order, string Visible, string Select, int Edit)
+        {
+            string msg = string.Empty;
+
+            msg = string.Format("{0}:{1} / {2} / {3}", Order, Visible, Select, Edit);
+
+            return Json(new { success = true, msg });
+        }
+
         private IEnumerable<GroupInfoModel> GetGroupInfo()
         {
             IEnumerable<GroupInfoModel> groupInfos;
