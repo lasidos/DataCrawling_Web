@@ -35,6 +35,19 @@ namespace DataCrawling_Web.BSL.Code
         /// 사이트 코드 목록 조회
         /// </summary>
         /// <returns></returns>
+        public static IEnumerable<W_MenuModel> GetAll_Menu(bool cacheUse = false)
+        {
+            string key = "CodeCoDBTalent";
+            IEnumerable<W_MenuModel> entity = GetSiteW_MenuDB();
+            cacheManager.AddEx(key, entity, defaultCacheExpire);
+
+            return entity;
+        }
+
+        /// <summary>
+        /// 사이트 코드 목록 조회
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<W_MenuModel> GetSiteW_Menu(bool cacheUse = false)
         {
             string key = "CodeCoDBTalent";

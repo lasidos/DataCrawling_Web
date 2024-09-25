@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using DataCrawling_Web.BSL.Common;
 using DataCrawling_Web.Models.Admin;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -16,11 +17,13 @@ namespace DataCrawling_Web.DSL.Admin
             CONN_STR = "Data Source=211.233.51.65;Initial Catalog=mkapi_godohosting_com;User ID=mkapi;Password=akvmfzh1!@;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         }
 
-        public IEnumerable<GroupInfoModel> USP_GROUP_INFO_S(int GROUP_ID = -1)
+        public IEnumerable<GroupInfoModel> USP_GROUP_INFO_S(int M_Idx = -1)
         {
+            var param = new DynamicParameters();
+            param.Add("@M_Idx", M_Idx);
             using (IDbConnection conn = new SqlConnection(CONN_STR))
             {
-                return conn.Query<GroupInfoModel>(commandType: CommandType.StoredProcedure
+                return conn.Query<GroupInfoModel>(param: param, commandType: CommandType.StoredProcedure
                     , sql: "DBO.USP_GROUP_INFO_S");
             }
         }

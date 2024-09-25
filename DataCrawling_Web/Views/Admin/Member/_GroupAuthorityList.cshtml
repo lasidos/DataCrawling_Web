@@ -1,0 +1,108 @@
+﻿@model IEnumerable <DataCrawling_Web.Models.Admin.GroupInfoModel>
+@{
+    string name = string.Empty;
+    IEnumerable<DataCrawling_Web.Models.ListViewItem> items = new List<DataCrawling_Web.Models.ListViewItem>()
+{
+        new DataCrawling_Web.Models.ListViewItem()
+        {
+            Idx = 0,
+            Name = "Inaccessible"
+        },
+        new DataCrawling_Web.Models.ListViewItem()
+        {
+            Idx = 1,
+            Name = "Accessible"
+        }
+    };
+}
+
+@foreach (var item in Model)
+{
+    <tr data-group-name="@item.GROUP_NAME" data-description="@item.DESCRIPTION" class="paramtrCls" data-idx="@item.GROUP_ID">
+        <td>@item.OrderNo</td>
+        <td>@item.Menu_Name</td>
+        <td>@item.GROUP_NAME</td>
+        <td>@item.DESCRIPTION</td>
+        <td>
+            @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+        {
+            ID = "Visible",
+            ItemIdx = item.OrderNo,
+            ShowAll = false,
+            Height = 35,
+            SelectID = item.Visible_Stat,
+            GroupInfo = items
+        })
+        </td>
+        <td>
+            @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+        {
+            ID = "Select",
+            ItemIdx = item.OrderNo,
+            ShowAll = false,
+            Height = 35,
+            SelectID = item.Select_Stat,
+            GroupInfo = items
+        })
+        </td>
+        <td>
+            @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+        {
+            ID = "Edit",
+            ItemIdx = item.OrderNo,
+            ShowAll = false,
+            Height = 35,
+            SelectID = item.Edit_Authority,
+            GroupInfo = items
+        })
+        </td>
+        <td>
+            <div class="edit">
+                <a class="btn btn-edit" href="javascript:;" data-idx="@item.GROUP_ID">수정</a>
+                <a class="btn btn-delete" href="javascript:;" data-idx="@item.GROUP_ID">삭제</a>
+            </div>
+        </td>
+    </tr>
+}
+
+<script>
+    $(function () {
+        // 그룹 수정 
+        $('.btn-edit').click(function () {
+            var idx = $(this).attr('data-idx');
+            var row = $(this).closest('tr');
+            var groupName = row.data('group-name');
+            var description = row.data('description');
+            $('#sg').val(idx);
+            $('#group-id').val(groupName);
+            $('#group-desc').val(description);
+
+            showModal('그룹수정', false, true);
+        });
+
+        // 그룹 삭제
+        $('.btn-delete').click(function () {
+            var idx = $(this).attr('data-idx');
+            manageGroup('Delete', idx);
+        });
+
+        // 그룹 수정 (모달)
+        $('.btn-group-edit').click(function () {
+            var groupId = $('#group-id').val().trim();
+            var groupDesc = $('#group-desc').val().trim();
+
+            if (groupId === '') {
+                alert('그룹명을 입력하세요.');
+                $('#group-id').focus();
+                return;
+            }
+            if (groupDesc === '') {
+                alert('그룹 설명을 입력하세요.');
+                $('#group-desc').focus();
+                return;
+            }
+
+            manageGroup('Edit', $('#sg').val(), groupId, groupDesc);
+        });
+    });
+</script>

@@ -15,6 +15,10 @@
         border-radius: 5px;
     }
 
+    .h-title .form_col {
+        width: 200px;
+    }
+
 .edit {
     display: flex;
     align-items: center;

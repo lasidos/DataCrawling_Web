@@ -1,4 +1,5 @@
 ﻿using DataCrawling_Web.BSL.Authentication;
+using DataCrawling_Web.BSL.Code;
 using DataCrawling_Web.BSL.Common;
 using DataCrawling_Web.DSL.Admin;
 using DataCrawling_Web.Models.Admin;
@@ -58,7 +59,8 @@ namespace DataCrawling_Web.Controllers.Admin
 
         public ActionResult Groups()
         {
-            var vm = this.GetGroupInfo();
+            var vm = W_Menu.GetAll_Menu();
+            //var vm = this.GetGroupInfo();
             return View("~/Views/Admin/Member/Groups.cshtml", vm);
         }
 
@@ -67,6 +69,16 @@ namespace DataCrawling_Web.Controllers.Admin
             ViewBag.GROUP_ID = GROUP_ID;
             var vm = new Member().USP_GROUP_INFO_S();
             return View("~/Views/Admin/Member/GroupSet.cshtml", vm);
+        }
+
+        [HttpPost]
+        [Route("Member/GetMenuGroupInfo")]
+        public ActionResult GetMenuGroupInfo(int MenuIdx)
+        {
+            ViewBag.TypePage = "Authority";
+            var vm = new Member().USP_GROUP_INFO_S(MenuIdx);
+
+            return PartialView("~/Views/Admin/Member/_GroupAuthorityList.cshtml", vm);
         }
 
         [HttpPost]

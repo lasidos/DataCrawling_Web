@@ -1,5 +1,5 @@
 ﻿@model DataCrawling_Web.Models.ListViewModel
-@{ 
+@{
     int idx = Model.SelectID == -1 ? Model.GroupInfo.FirstOrDefault().Idx : Model.SelectID;
     string order = Model.ItemIdx == -1 ? "" : Model.ItemIdx.ToString();
 }
@@ -10,7 +10,9 @@
                 <span class="textCategory">@(Model.ShowAll ? "전체보기" : Model.GroupInfo.Where(s => s.Idx == idx).FirstOrDefault().Name)</span>
                 <span id="sn@(Model.ID)Type" class="textResult"></span>
             </button>
-            <input type="hidden" id="hid@(Model.ID)Type@(order)" class="hiddenResult" data-idx="@(Model.ShowAll ? -1:Model.GroupInfo.Where(s => s.Idx == idx).FirstOrDefault().Idx)" name="hidStatType" value="@(Model.ShowAll ? "":Model.GroupInfo.Where(s => s.Idx == idx).FirstOrDefault().Name)">
+            <input type="hidden" id="hid@(Model.ID)Type@(order)" class="hiddenResult"
+                   data-idx="@(Model.ShowAll ? -1:Model.GroupInfo.Where(s => s.Idx == idx).FirstOrDefault().Idx)"
+                   name="hidStatType" value="@(Model.ShowAll ? "-1" : Model.GroupInfo.Where(s => s.Idx == idx).FirstOrDefault().Name)">
             <div id="dvLyr@(Model.ID)Type" class="layerBox">
                 <ul class="customSelectList">
                     @if (Model.ShowAll)

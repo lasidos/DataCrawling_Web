@@ -1,11 +1,10 @@
-﻿@model IEnumerable<DataCrawling_Web.Models.Admin.GroupInfoModel>
+﻿@model IEnumerable<DataCrawling_Web.Models.Admin.W_MenuModel>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BodyClass = "mtcSubNotice";
 
-    string name = string.Empty;
     IEnumerable<DataCrawling_Web.Models.ListViewItem> items = new List<DataCrawling_Web.Models.ListViewItem>()
-{
+    {
         new DataCrawling_Web.Models.ListViewItem()
         {
             Idx = 0,
@@ -38,7 +37,21 @@
         <div id="wItemBatchList">
             <div class="pWrap" id="lNotice">
                 <div class="h-title">
-                    <h2>그룹 목록</h2>
+                    <div class="form_col stat_type">
+                        @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                        {
+                            ID = "Menu",
+                            ItemIdx = -1,
+                            ShowAll = true,
+                            Height = 35,
+                            SelectID = -1,
+                            GroupInfo = Model.Select(s => new DataCrawling_Web.Models.ListViewItem
+                            {
+                                Idx = s.Menu_Idx,
+                                Name = s.Menu_Name
+                            })
+                        })
+                    </div>
                     <p>
                         <a class="btn btn-create" href="javascript:;">새 그룹 추가</a>
                     </p>
@@ -49,6 +62,7 @@
                         <colgroup>
                             <col style="width:5%">
                             <col style="width:10%">
+                            <col style="width:10%">
                             <col style="width:30%">
                             <col style="width:5%">
                             <col style="width:5%">
@@ -58,6 +72,7 @@
                         <thead>
                             <tr>
                                 <th>그룹 ID</th>
+                                <th>메뉴 이름</th>
                                 <th>그룹 이름</th>
                                 <th>설명</th>
                                 <th>VIEW</th>
@@ -66,55 +81,7 @@
                                 <th>작업</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr data-group-name="@item.GROUP_NAME" data-description="@item.DESCRIPTION" class="paramtrCls" data-idx="@item.GROUP_ID">
-                                    <td>@item.OrderNo</td>
-                                    <td>@item.GROUP_NAME</td>
-                                    <td>@item.DESCRIPTION</td>
-                                    <td>
-                                        @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-                                   {
-                                       ID = "Visible",
-                                       ItemIdx = item.OrderNo,
-                                       ShowAll = false,
-                                       Height = 35,
-                                       SelectID = item.Visible_Stat,
-                                       GroupInfo = items
-                                   })
-                                    </td>
-                                    <td>
-                                        @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-                                   {
-                                       ID = "Select",
-                                       ItemIdx = item.OrderNo,
-                                       ShowAll = false,
-                                       Height = 35,
-                                       SelectID = item.Select_Stat,
-                                       GroupInfo = items
-                                   })
-                                    </td>
-                                    <td>
-                                        @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-                                   {
-                                       ID = "Edit",
-                                       ItemIdx = item.OrderNo,
-                                       ShowAll = false,
-                                       Height = 35,
-                                       SelectID = item.Edit_Authority,
-                                       GroupInfo = items
-                                   })
-                                    </td>
-                                    <td>
-                                        <div class="edit">
-                                            <a class="btn btn-edit" href="javascript:;" data-idx="@item.GROUP_ID">수정</a>
-                                            <a class="btn btn-delete" href="javascript:;" data-idx="@item.GROUP_ID">삭제</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
@@ -148,35 +115,65 @@
 
     <script>
         $(function () {
-            $('#gPathBar h2').text('권한 그룹');
+            $('#gPathBar h2').text('그룹 관리');
+
+            GetGroupUser();
+
+            $(document).on("click", ".layerBox li", function (e) {
+                var idx = $(this).data('idx');
+                var txt = $(this).find('button').text();
+                if ($('.hiddenResult').val() != idx) {
+                    $('.hiddenResult').val(idx);
+                    $('.hiddenResult').attr('data-idx', idx);
+                    $(this).parents('.customCombo').find('.textCategory').text(txt);
+
+                    console.log()
+                    GetGroupUser();
+                }
+                //GetGroupUser();
+                //var idx = $(this).data('idx');
+                //var txt = $(this).find('button').text(); // 선택 text
+                //var id = $(this).parents('.layerBox').siblings('.hiddenResult').attr('id');
+                //if ($('#' + id).val() != txt) {
+                //    var order = $(this).parents('.listWrap').data('order');
+                //    $('#' + id).val(txt);
+                //    $('#' + id).attr('data-idx', idx);
+                //    $(this).parents('.customCombo').find('.textCategory').text(txt);
+
+                //    var visible = $('#hidVisibleType' + order).attr('data-idx');
+                //    var select = $('#hidSelectType' + order).attr('data-idx');
+                //    var edit = $('#hidEditType' + order).attr('data-idx');
+
+                //    $.ajax({
+                //        type: "post",
+                //        url: '/Member/GroupAuthorityUpdate',
+                //        dataType: "json",
+                //        data: {
+                //            Order: order,
+                //            Visible: visible,
+                //            Select: select,
+                //            Edit: edit
+                //        },
+                //        success: function (data) {
+                //            if (data.success) {
+                //                alert(data.msg);
+                //                location.reload();
+                //            }
+                //        },
+                //        error: function (response) {
+                //            alert(response);
+                //        }
+                //    });
+                //    //var visible = $('#VisibleGroup').find('.listWrap').attr('id');
+                //    //var select = $('#SelectGroup').find('.listWrap').attr('id');
+                //    //var edit = $('#EditGroup').find('.listWrap').attr('id');
+                //}
+            });
 
             $('.btn-create').click(function () {
                 showModal('그룹생성', true, false);
             });
 
-            $('.btn-edit').click(function () {
-                var idx = $(this).attr('data-idx');
-                var row = $(this).closest('tr');
-                var groupName = row.data('group-name');
-                var description = row.data('description');
-                $('#sg').val(idx);
-                $('#group-id').val(groupName);
-                $('#group-desc').val(description);
-
-                showModal('그룹수정', false, true);
-            });
-
-            $('.close-button').click(function () {
-                hideModal();
-            });
-
-            // 그룹 삭제
-            $('.btn-delete').click(function () {
-                var idx = $(this).attr('data-idx');
-                manageGroup('Delete', idx);
-            });
-
-            // 그룹 생성
             $('.btn-group-create').click(function () {
                 var groupId = $('#group-id').val().trim();
                 var groupDesc = $('#group-desc').val().trim();
@@ -195,67 +192,12 @@
                 manageGroup('Add', null, groupId, groupDesc);
             });
 
-            // 그룹 수정
-            $('.btn-group-edit').click(function () {
-                var groupId = $('#group-id').val().trim();
-                var groupDesc = $('#group-desc').val().trim();
-
-                if (groupId === '') {
-                    alert('그룹명을 입력하세요.');
-                    $('#group-id').focus();
-                    return;
-                }
-                if (groupDesc === '') {
-                    alert('그룹 설명을 입력하세요.');
-                    $('#group-desc').focus();
-                    return;
-                }
-
-                manageGroup('Edit', $('#sg').val(), groupId, groupDesc);
+            $('.close-button').click(function () {
+                hideModal();
             });
 
             $(document).on("click", ".listWrap", function (e) {
                 $(this).toggleClass('on');
-            });
-
-            $(document).on("click", ".layerBox li", function (e) {
-                var idx = $(this).data('idx');
-                var txt = $(this).find('button').text(); // 선택 text
-                var id = $(this).parents('.layerBox').siblings('.hiddenResult').attr('id');
-                if ($('#' + id).val() != txt) {
-                    var order = $(this).parents('.listWrap').data('order');
-                    $('#' + id).val(txt);
-                    $('#' + id).attr('data-idx', idx);
-                    $(this).parents('.customCombo').find('.textCategory').text(txt);
-                    
-                    var visible = $('#hidVisibleType' + order).attr('data-idx');
-                    var select = $('#hidSelectType' + order).attr('data-idx');
-                    var edit = $('#hidEditType' + order).attr('data-idx');
-
-                    $.ajax({
-                        type: "post",
-                        url: '/Member/GroupAuthorityUpdate',
-                        dataType: "json",
-                        data: {
-                            Order: order,
-                            Visible: visible,
-                            Select: select,
-                            Edit: edit
-                        },
-                        success: function (data) {
-                            if (data.success) {
-                                alert(data.msg);
-                                location.reload();
-                            }
-                        },
-                        error: function (response) {
-                            alert(response);
-                        }
-                    });
-                    //var visible = $('#VisibleGroup').find('.listWrap').attr('id');
-                    //var select = $('#SelectGroup').find('.listWrap').attr('id');
-                    //var edit = $('#EditGroup').find('.listWrap').attr('id');
-                }
             });
         });
 
@@ -289,6 +231,12 @@
                 error: function (response) {
                     alert(response);
                 }
+            });
+        }
+
+        function GetGroupUser() {
+            $('.col-table tbody').load('/Member/GetMenuGroupInfo', {
+                MenuIdx: $('#hidMenuType').val(),
             });
         }
     </script>
