@@ -73,13 +73,41 @@
             });
 
             $(document).on("click", ".layerBox li", function (e) {
-                var txt = $(this).find('button').text();
                 var idx = $(this).data('idx');
-                var m_idx = $(this).parents('.paramtrCls').data('idx');
+                var txt = $(this).find('button').text();
                 var id = $(this).parents('.layerBox').siblings('.hiddenResult').attr('id');
 
+                // 권한수정
                 if ($('#' + id).val() != txt) {
-                    alert('변경되었습니다.');
+                    var order = $(this).parents('.listWrap').data('order');
+                    $('#' + id).val(txt);
+                    $('#' + id).attr('data-idx', idx);
+                    $(this).parents('.customCombo').find('.textCategory').text(txt);
+
+                    var qid = $(this).parents('.paramtrCls').attr('data-role');
+                    var visible = $('#hidVisibleType' + order).attr('data-idx');
+                    var select = $('#hidSelectType' + order).attr('data-idx');
+                    var edit = $('#hidEditType' + order).attr('data-idx');
+
+                    $.ajax({
+                        type: "post",
+                        url: '/Member/GroupAuthorityUpdate',
+                        dataType: "json",
+                        data: {
+                            Order: qid,
+                            Visible: visible,
+                            Select: select,
+                            Edit: edit
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                location.reload();
+                            }
+                        },
+                        error: function (response) {
+                            alert(response);
+                        }
+                    });
                 }
             });
         });

@@ -71,7 +71,7 @@ else if (ViewBag.TypePage == "Authority")
 {
     foreach (var item in Model.Individuals)
     {
-        <tr class="paramtrCls" data-idx="@item.ROLE_ID">
+        <tr class="paramtrCls" data-role="@item.ROLE_ID">
             <td>@item.OrderNo</td>
             <td>@item.User_ID</td>
             <td>

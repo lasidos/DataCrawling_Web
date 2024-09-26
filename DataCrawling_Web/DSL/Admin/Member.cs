@@ -107,5 +107,18 @@ namespace DataCrawling_Web.DSL.Admin
                     , sql: "DBO.USP_Individual_Authority_S");
             }
         }
+
+        public void USP_Authority_IU(int ROLE_ID, int Visible_Stat, int Select_Stat, int Edit_Authority)
+        {
+            var param = new DynamicParameters();
+            param.Add("@ROLE_ID", ROLE_ID);
+            param.Add("@Visible_Stat", Visible_Stat);
+            param.Add("@Select_Stat", Select_Stat);
+            param.Add("@Edit_Authority", Edit_Authority);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                conn.Execute(param: param, commandType: CommandType.StoredProcedure, sql: "DBO.USP_Authority_IU");
+            }
+        }
     }
 }

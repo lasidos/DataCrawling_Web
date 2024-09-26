@@ -107,11 +107,10 @@ namespace DataCrawling_Web.Controllers.Admin
 
         [HttpPost]
         [Route("Member/GroupAuthorityUpdate")]
-        public JsonResult GroupAuthorityUpdate(string Order, string Visible, string Select, int Edit)
+        public JsonResult GroupAuthorityUpdate(int Order, int Visible, int Select, int Edit)
         {
-            string msg = string.Empty;
-
-            msg = string.Format("{0}:{1} / {2} / {3}", Order, Visible, Select, Edit);
+            string msg = "success";
+            new Member().USP_Authority_IU(Order, Visible, Select, Edit);
 
             return Json(new { success = true, msg });
         }

@@ -18,7 +18,7 @@
 
 @foreach (var item in Model)
 {
-    <tr data-group-name="@item.GROUP_NAME" data-description="@item.DESCRIPTION" class="paramtrCls" data-idx="@item.GROUP_ID">
+    <tr data-group-name="@item.GROUP_NAME" data-description="@item.DESCRIPTION" class="paramtrCls" data-idx="@item.GROUP_ID" data-role="@item.ROLE_ID">
         <td>@item.OrderNo</td>
         <td>@item.Menu_Name</td>
         <td>@item.GROUP_NAME</td>
