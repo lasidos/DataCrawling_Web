@@ -17,6 +17,17 @@ namespace DataCrawling_Web.DSL.Admin
             CONN_STR = "Data Source=211.233.51.65;Initial Catalog=mkapi_godohosting_com;User ID=mkapi;Password=akvmfzh1!@;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         }
 
+        public IEnumerable<GroupInfoModel> USP_GROUP_S(int M_Idx = -1)
+        {
+            var param = new DynamicParameters();
+            param.Add("@M_Idx", M_Idx);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                return conn.Query<GroupInfoModel>(param: param, commandType: CommandType.StoredProcedure
+                    , sql: "DBO.USP_GROUP_S");
+            }
+        }
+
         public IEnumerable<GroupInfoModel> USP_GROUP_INFO_S(int M_Idx = -1)
         {
             var param = new DynamicParameters();
@@ -118,6 +129,16 @@ namespace DataCrawling_Web.DSL.Admin
             using (IDbConnection conn = new SqlConnection(CONN_STR))
             {
                 conn.Execute(param: param, commandType: CommandType.StoredProcedure, sql: "DBO.USP_Authority_IU");
+            }
+        }
+
+        public void USP_AuthorityDelete(int ROLE_ID)
+        {
+            var param = new DynamicParameters();
+            param.Add("@ROLE_ID", ROLE_ID);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                conn.Execute(param: param, commandType: CommandType.StoredProcedure, sql: "DBO.USP_AuthorityDelete");
             }
         }
     }

@@ -2,6 +2,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 15px;
+    height: 40px;
+    font-size: 14px;
 }
 
     .filter-area .sch-area {
@@ -32,3 +35,60 @@
     margin-bottom: 20px;
     position: relative;
 }
+
+.btn-delete {
+    background: #00427d;
+    color: #fff;
+    height: 30px;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filter-area p {
+    display: flex;
+    padding: 10px 30px;
+    background: #434343;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.common-modal.service-modal .modal-contents {
+    width: 1000px;
+    height: 500px;
+}
+
+.swiper-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.common-modal .col-table {
+    width: 60%;
+}
+
+.permission-list {
+    width: 30%;
+    margin-left: 30px;
+    height: 100%;
+}
+
+    .permission-list ul {
+        border: 1px solid #ddd;
+        padding: 10px 0;
+        min-width: 220px;
+        min-height: 300px;
+        background: #ebebeb30;
+        height: 100%;
+    }
+
+        .permission-list ul li {
+            line-height: 40px;
+            padding: 0 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }

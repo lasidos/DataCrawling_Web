@@ -115,6 +115,16 @@ namespace DataCrawling_Web.Controllers.Admin
             return Json(new { success = true, msg });
         }
 
+        [HttpPost]
+        [Route("Member/AuthorityDelete")]
+        public JsonResult AuthorityDelete(int Order)
+        {
+            string msg = "success";
+            new Member().USP_AuthorityDelete(Order);
+
+            return Json(new { success = true, msg });
+        }
+
         private IEnumerable<GroupInfoModel> GetGroupInfo()
         {
             IEnumerable<GroupInfoModel> groupInfos;
@@ -134,11 +144,7 @@ namespace DataCrawling_Web.Controllers.Admin
 
         public ActionResult Authority()
         {
-            GroupUserViewModel vm = new GroupUserViewModel
-            {
-                GroupInfo = this.GetGroupInfo(),
-                PagingInfo = new PagingInfo()
-            };
+            GroupUserViewModel vm = GroupUserViewModel(-1);
 
             return View("~/Views/Admin/Member/Authority.cshtml", vm);
         }

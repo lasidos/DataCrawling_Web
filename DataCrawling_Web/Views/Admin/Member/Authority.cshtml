@@ -10,6 +10,7 @@
 @section Header{
     @RenderPage("~/Views/Shared/Header/_HeaderAdmin.cshtml")
 
+    <link href="~/Resource/Css/_CommonModal.css" rel="stylesheet" />
     <link href="~/Resource/Css/Admin/Member/Authority.css" rel="stylesheet" />
 }
 
@@ -27,22 +28,21 @@
                     <div class="form_col stat_type">
 
                     </div>
-                    <div class="sch-area">
-                        <input type="text" id="searchTxt" name="name" value="" placeholder="검색어를 입력하세요 (이름, 아이디, 전화번호)" />
-                        <span class="btn-sch">검색</span>
-                    </div>
+                    <p>
+                        <a class="btn btn-create" href="javascript:;">개별권한 추가</a>
+                    </p>
                 </div>
-                <div class="col-table left line">
+                <div class="col-table left line user-list">
                     <p class="tit-hide">요청 URL</p>
                     <table>
                         <caption>요청 URL 입니다.</caption>
                         <colgroup>
                             <col style="width:5%">
-                            <col style="width:12.5%">
-                            <col style="width:7%">
-                            <col style="width:12.5%">
-                            <col style="width:7%">
-                            <col style="width:16%">
+                            <col style="width:40%">
+                            <col style="width:15%">
+                            <col style="width:15%">
+                            <col style="width:15%">
+                            <col style="width:10%">
                         </colgroup>
                         <thead>
                             <tr>
@@ -62,11 +62,61 @@
         </div>
     </section>
 
+    <div class="common-modal service-modal">
+        <div class="modal-dimmed"></div>
+        <div class="modal-contents">
+            <button class="close-button"></button>
+            <div class="swiper-container swiper-container-horizontal">
+                <div class="col-table left line">
+                    <p class="tit-hide">요청 URL</p>
+                    <table>
+                        <colgroup>
+                            <col style="width:10%">
+                            <col style="width:50%">
+                            <col style="width:40%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">아이디</th>
+                                <th scope="col">이름</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.GroupUsers)
+                            {
+                                <tr class="paramtrCls" data-idx="@item.IDX">
+                                    <td>@item.OrderNo</td>
+                                    <td>@item.User_ID</td>
+                                    <td>@item.User_Name</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="permission-list">
+                    <ul>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="sg" value="" />
+
     <script>
         $(function () {
             $('#gPathBar h2').text('사용자 개별권한');
 
             GetGroupUser($('#isPage').val());
+
+            $(document).on("click", ".btn-create", function (e) {
+                showModal('그룹생성', true, false);
+            });
+
+            $('.close-button').click(function () {
+                hideModal();
+            });
 
             $(document).on("click", ".listWrap", function (e) {
                 $(this).toggleClass('on');
@@ -110,10 +160,41 @@
                     });
                 }
             });
+
+            $(document).on("click", ".btn-delete", function (e) {
+                var qid = $(this).parents('.paramtrCls').attr('data-role');
+                $.ajax({
+                    type: "post",
+                    url: '/Member/AuthorityDelete',
+                    dataType: "json",
+                    data: {
+                        Order: qid
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            location.reload();
+                        }
+                    },
+                    error: function (response) {
+                        alert(response);
+                    }
+                });
+            });
         });
 
+        function showModal(title, showCreateButton, showEditButton) {
+            $('#g-title').text(title);
+            $('.btn-group-create').toggle(showCreateButton);
+            $('.btn-group-edit').toggle(showEditButton);
+            $('.common-modal').show();
+        }
+
+        function hideModal() {
+            $('.common-modal').hide();
+        }
+
         function GetGroupUser(page) {
-            $('.col-table tbody').load('/Member/GetGroupPersonAuthority', {
+            $('.col-table.user-list tbody').load('/Member/GetGroupPersonAuthority', {
                 GROUP_ID: $('#hid@(Name)Type').attr('data-idx'),
                 Page: page,
                 SearchTxt: $('#searchTxt').val()
