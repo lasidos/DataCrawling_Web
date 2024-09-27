@@ -119,6 +119,17 @@ namespace DataCrawling_Web.DSL.Admin
             }
         }
 
+        public void USP_Individual_Authority_I(string Users)
+        {
+            var param = new DynamicParameters();
+            param.Add("@Users", Users);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                conn.Execute(param: param, commandType: CommandType.StoredProcedure
+                    , sql: "DBO.USP_Individual_Authority_I");
+            }
+        }
+
         public void USP_Authority_IU(int ROLE_ID, int Visible_Stat, int Select_Stat, int Edit_Authority)
         {
             var param = new DynamicParameters();
@@ -128,7 +139,8 @@ namespace DataCrawling_Web.DSL.Admin
             param.Add("@Edit_Authority", Edit_Authority);
             using (IDbConnection conn = new SqlConnection(CONN_STR))
             {
-                conn.Execute(param: param, commandType: CommandType.StoredProcedure, sql: "DBO.USP_Authority_IU");
+                conn.Execute(param: param, commandType: CommandType.StoredProcedure
+                    , sql: "DBO.USP_Authority_IU");
             }
         }
 

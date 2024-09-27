@@ -217,8 +217,11 @@ namespace DataCrawling_Web.Controllers.Admin
             IEnumerable<IndividualAuthorityModel> vm = new Member().USP_Individual_Authority_S();
             groupUser.Individuals = vm.Select(s => new IndividualAuthorityModel()
             {
+                IDX = s.IDX,
                 OrderNo = s.OrderNo,
+                Menu_Name = s.Menu_Name,
                 User_ID = Utility.Decrypt_AES(s.User_ID),
+                User_Name = Utility.SetMask(Utility.Decrypt_AES(s.User_Name), 1),
                 ROLE_ID = s.ROLE_ID,
                 Visible_Stat = s.Visible_Stat,
                 Select_Stat = s.Select_Stat, 
@@ -231,7 +234,6 @@ namespace DataCrawling_Web.Controllers.Admin
             var totalItems = groupUser.Individuals.Count(); // 예시: 총 아이템 수
             groupUser.Individuals = groupUser.Individuals
                 .Where(i => i.User_ID.Contains(SearchTxt))
-                          .OrderBy(i => i.ROLE_ID)
                           .Skip((Page - 1) * pageSize)
                           .Take(pageSize)
                           .ToList();
@@ -246,6 +248,17 @@ namespace DataCrawling_Web.Controllers.Admin
             #endregion
 
             return groupUser;
+        }
+        [HttpPost]
+        [Route("Member/SaveUsers")]
+        public JsonResult SaveUsers(string[] users)
+        {
+            string msg = "success";
+
+            string userInfo = string.Join(",", users);
+            new Member().USP_Individual_Authority_I(userInfo);
+
+            return Json(new { success = true, msg });
         }
     }
 }

@@ -2,7 +2,7 @@
 @{
     string name = string.Empty;
     IEnumerable<DataCrawling_Web.Models.ListViewItem> items = new List<DataCrawling_Web.Models.ListViewItem>()
-{
+    {
         new DataCrawling_Web.Models.ListViewItem()
         {
             Idx = 0,
@@ -71,9 +71,11 @@ else if (ViewBag.TypePage == "Authority")
 {
     foreach (var item in Model.Individuals)
     {
-        <tr class="paramtrCls" data-role="@item.ROLE_ID">
-            <td>@item.OrderNo</td>
+        <tr class="paramtrCls" data-role="@item.ROLE_ID" data-idx="@item.IDX">
+            <td class="pa-order" data-order="@item.OrderNo">@item.OrderNo</td>
+            <td>@item.Menu_Name</td>
             <td>@item.User_ID</td>
+            <td>@item.User_Name</td>
             <td>
                 @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
            {

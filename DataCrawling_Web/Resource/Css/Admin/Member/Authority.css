@@ -59,16 +59,23 @@
 .common-modal.service-modal .modal-contents {
     width: 1000px;
     height: 500px;
+    display: flex;
+    flex-direction: column;
 }
 
 .swiper-container {
     display: flex;
     flex-direction: row;
     height: 100%;
+    width: 100%;
 }
 
 .common-modal .col-table {
-    width: 60%;
+    width: 70%;
+}
+
+.new-user .paramtrCls {
+    cursor: pointer;
 }
 
 .permission-list {
@@ -92,3 +99,34 @@
             font-size: 13px;
             font-weight: 500;
         }
+
+.active-fixed {
+    height: 40px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+    .active-fixed span {
+        padding: 10px 30px;
+        background: #434343;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .active-fixed .cancel {
+        background: #00427d;
+    }
+
+    .active-fixed span + span {
+        margin-left: 10px;
+    }
+
+.common-modal .close-button {
+    display: none;
+}

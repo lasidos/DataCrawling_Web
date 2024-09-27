@@ -45,8 +45,11 @@ namespace DataCrawling_Web.Models.Admin
 
     public class IndividualAuthorityModel
     {
+        public int IDX { get; set; }
         public int OrderNo { get; set; }
+        public string Menu_Name { get; set; }
         public string User_ID { get; set; }
+        public string User_Name { get; set; }
         public int ROLE_ID { get; set; }
         public int Visible_Stat { get; set; }
         public int Select_Stat { get; set; }

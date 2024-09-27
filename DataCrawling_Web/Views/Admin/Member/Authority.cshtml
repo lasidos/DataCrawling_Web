@@ -4,6 +4,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BodyClass = "mtcSubNotice";
     string Name = "Authority";
+
+    IEnumerable<DataCrawling_Web.Models.ListViewItem> items = new List<DataCrawling_Web.Models.ListViewItem>()
+{
+        new DataCrawling_Web.Models.ListViewItem()
+        {
+            Idx = 0,
+            Name = "상단메뉴"
+        },
+        new DataCrawling_Web.Models.ListViewItem()
+        {
+            Idx = 1,
+            Name = "좌측메뉴"
+        }
+    };
 }
 
 
@@ -26,7 +40,30 @@
             <div class="pWrap" id="lNotice">
                 <div class="filter-area">
                     <div class="form_col stat_type">
-
+                        <div>
+                            <div>
+                                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                                {
+                                   ID = Name,
+                                   ItemIdx = -1,
+                                   ShowAll = false,
+                                   Height = 35,
+                                   SelectID = -1,
+                                   GroupInfo = items
+                                })
+                            </div>
+                            <div>
+                                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                                {
+                                    ID = Name,
+                                    ItemIdx = -1,
+                                    ShowAll = false,
+                                    Height = 35,
+                                    SelectID = -1,
+                                    GroupInfo = items
+                                })
+                            </div>
+                        </div>
                     </div>
                     <p>
                         <a class="btn btn-create" href="javascript:;">개별권한 추가</a>
@@ -34,11 +71,13 @@
                 </div>
                 <div class="col-table left line user-list">
                     <p class="tit-hide">요청 URL</p>
-                    <table>
+                    <table class="authority-user">
                         <caption>요청 URL 입니다.</caption>
                         <colgroup>
                             <col style="width:5%">
-                            <col style="width:40%">
+                            <col style="width:15%">
+                            <col style="width:15%">
+                            <col style="width:10%">
                             <col style="width:15%">
                             <col style="width:15%">
                             <col style="width:15%">
@@ -47,7 +86,9 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
+                                <th scope="col">메뉴명</th>
                                 <th scope="col">아이디</th>
+                                <th scope="col">이름</th>
                                 <th scope="col">VIEW</th>
                                 <th scope="col">SELECT</th>
                                 <th scope="col">EIDT</th>
@@ -66,7 +107,7 @@
         <div class="modal-dimmed"></div>
         <div class="modal-contents">
             <button class="close-button"></button>
-            <div class="swiper-container swiper-container-horizontal">
+            <div class="swiper-container swiper-container-horizontal new-user">
                 <div class="col-table left line">
                     <p class="tit-hide">요청 URL</p>
                     <table>
@@ -82,12 +123,12 @@
                                 <th scope="col">이름</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="">
                             @foreach (var item in Model.GroupUsers)
                             {
-                                <tr class="paramtrCls" data-idx="@item.IDX">
-                                    <td>@item.OrderNo</td>
-                                    <td>@item.User_ID</td>
+                                <tr class="paramtrCls" data-role="@item.IDX">
+                                    <td class="par-order">@item.OrderNo</td>
+                                    <td class="par-id">@item.User_ID</td>
                                     <td>@item.User_Name</td>
                                 </tr>
                             }
@@ -96,9 +137,12 @@
                 </div>
                 <div class="permission-list">
                     <ul>
-                        <li></li>
                     </ul>
                 </div>
+            </div>
+            <div class="active-fixed">
+                <span class="cancel">취소</span>
+                <span class="confirm">등록</span>
             </div>
         </div>
     </div>
@@ -110,12 +154,63 @@
 
             GetGroupUser($('#isPage').val());
 
-            $(document).on("click", ".btn-create", function (e) {
-                showModal('그룹생성', true, false);
+            $('.new-user .paramtrCls').click(function () {
+                var isDuplicate = false;
+
+                var role = $(this).attr('data-role');
+                var order = $(this).attr('data-role');
+                var uid = $(this).find('.par-id').text();
+                // 기존 리스트 체크
+                $('.authority-user .paramtrCls').each(function () {
+                    if ($(this).attr('data-idx') == role) {
+                        isDuplicate = true;
+                        return false;
+                    }
+                });
+
+                // 등록 대기리스트 체크
+                $('.new-user .permission-list ul li').each(function () {
+                    if ($(this).attr('data-idx') == order) {
+                        isDuplicate = true;
+                        return false;
+                    }
+                });
+
+                if (!isDuplicate) {
+                    $('.permission-list ul').append('<li data-idx=' + order + '>' + uid + '</li>');
+                } else {
+                    alert('이미 추가된 사용자입니다.');
+                }
             });
 
-            $('.close-button').click(function () {
+            $('.cancel').click(function () {
                 hideModal();
+            });
+
+            $('.active-fixed .confirm').click(function () {
+                var users = [];
+                $('.new-user .permission-list ul li').each(function () {
+                    users.push($(this).attr('data-idx'));
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Member/SaveUsers",
+                    data: { users: users },
+                    success: function (response) {
+                        if (response.success) {
+                            location.reload();
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+            $(document).on("click", ".btn-create", function (e) {
+                showModal('그룹생성', true, false);
+                $('.permission-list ul').empty();
             });
 
             $(document).on("click", ".listWrap", function (e) {
