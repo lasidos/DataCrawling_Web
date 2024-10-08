@@ -35,10 +35,10 @@ namespace DataCrawling_Web.BSL.Code
         /// 사이트 코드 목록 조회
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<W_MenuModel> GetAll_Menu(bool cacheUse = false)
+        public static IEnumerable<W_MenuModel> GetAll_Menu(int MenuType = -1)
         {
             string key = "CodeCoDBTalent";
-            IEnumerable<W_MenuModel> entity = GetSiteW_MenuDB();
+            IEnumerable<W_MenuModel> entity = GetSiteW_MenuDB(MenuType);
             cacheManager.AddEx(key, entity, defaultCacheExpire);
 
             return entity;
@@ -48,21 +48,21 @@ namespace DataCrawling_Web.BSL.Code
         /// 사이트 코드 목록 조회
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<W_MenuModel> GetSiteW_Menu(bool cacheUse = false)
+        public static IEnumerable<W_MenuModel> GetSiteW_Menu(bool cacheUse = false, int MenuType = -1)
         {
             string key = "CodeCoDBTalent";
             IEnumerable<W_MenuModel> entity;
 
             if (!cacheUse || !cacheManager.TryGetValue(key, out entity))
             {
-                entity = GetSiteW_MenuDB();
+                entity = GetSiteW_MenuDB(MenuType);
                 cacheManager.AddEx(key, entity, defaultCacheExpire);
             }
 
             return entity;
         }
 
-        public static IEnumerable<W_MenuModel> GetSiteW_MenuDB()
+        public static IEnumerable<W_MenuModel> GetSiteW_MenuDB(int MenuType = -1)
         {
             IEnumerable<W_MenuModel> entity;
             using (IDbConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["mkapi"].ConnectionString))

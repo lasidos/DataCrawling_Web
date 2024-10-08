@@ -31,10 +31,20 @@
     }
 
 .stat_type {
-    width: 220px;
-    margin-bottom: 20px;
     position: relative;
 }
+
+.btn_ty {
+    display: flex;
+}
+
+    .btn_ty div {
+        width: 200px;
+    }
+
+        .btn_ty div + div {
+            margin-left: 5px;
+        }
 
 .btn-delete {
     background: #00427d;

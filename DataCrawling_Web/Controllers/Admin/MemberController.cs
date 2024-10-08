@@ -106,6 +106,16 @@ namespace DataCrawling_Web.Controllers.Admin
         }
 
         [HttpPost]
+        [Route("Member/Get_Category")]
+        public JsonResult Get_Category(int Order)
+        {
+            string msg = string.Empty;
+            var vm = W_Menu.GetSiteW_Menu(false, Order);
+
+            return Json(new { success = true, msg });
+        }
+
+        [HttpPost]
         [Route("Member/GroupAuthorityUpdate")]
         public JsonResult GroupAuthorityUpdate(int Order, int Visible, int Select, int Edit)
         {

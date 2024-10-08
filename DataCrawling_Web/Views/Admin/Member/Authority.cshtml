@@ -40,11 +40,11 @@
             <div class="pWrap" id="lNotice">
                 <div class="filter-area">
                     <div class="form_col stat_type">
-                        <div>
-                            <div>
+                        <div class="btn_ty">
+                            <div class="btn_ty1">
                                 @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
                                 {
-                                   ID = Name,
+                                   ID = "Cate_1",
                                    ItemIdx = -1,
                                    ShowAll = false,
                                    Height = 35,
@@ -52,10 +52,10 @@
                                    GroupInfo = items
                                 })
                             </div>
-                            <div>
+                            <div class="btn_ty2">
                                 @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
                                 {
-                                    ID = Name,
+                                    ID = "Cate_2",
                                     ItemIdx = -1,
                                     ShowAll = false,
                                     Height = 35,
@@ -152,14 +152,15 @@
         $(function () {
             $('#gPathBar h2').text('사용자 개별권한');
 
-            GetGroupUser($('#isPage').val());
+            Get_btn_ty(1);
+           /* GetGroupUser($('#isPage').val());*/
 
             $('.new-user .paramtrCls').click(function () {
                 var isDuplicate = false;
-
                 var role = $(this).attr('data-role');
                 var order = $(this).attr('data-role');
                 var uid = $(this).find('.par-id').text();
+
                 // 기존 리스트 체크
                 $('.authority-user .paramtrCls').each(function () {
                     if ($(this).attr('data-idx') == role) {
@@ -222,37 +223,49 @@
                 var txt = $(this).find('button').text();
                 var id = $(this).parents('.layerBox').siblings('.hiddenResult').attr('id');
 
-                // 권한수정
                 if ($('#' + id).val() != txt) {
                     var order = $(this).parents('.listWrap').data('order');
                     $('#' + id).val(txt);
                     $('#' + id).attr('data-idx', idx);
                     $(this).parents('.customCombo').find('.textCategory').text(txt);
 
-                    var qid = $(this).parents('.paramtrCls').attr('data-role');
-                    var visible = $('#hidVisibleType' + order).attr('data-idx');
-                    var select = $('#hidSelectType' + order).attr('data-idx');
-                    var edit = $('#hidEditType' + order).attr('data-idx');
+                    if (id == 'hidCate_1Type') {
+                        // 대분류
+                        Get_btn_ty(idx);
+                    } else if (id == 'hidCate_2Type') {
+                        // 중분류
+                        $('.col-table tbody').load('/Member/GetGroupUser', {
+                            GROUP_ID: $('#hidManagementType').attr('data-idx'),
+                            Page: page,
+                            SearchTxt: $('#searchTxt').val()
+                        });
+                    } else {
+                        // 권한수정
+                        var qid = $(this).parents('.paramtrCls').attr('data-role');
+                        var visible = $('#hidVisibleType' + order).attr('data-idx');
+                        var select = $('#hidSelectType' + order).attr('data-idx');
+                        var edit = $('#hidEditType' + order).attr('data-idx');
 
-                    $.ajax({
-                        type: "post",
-                        url: '/Member/GroupAuthorityUpdate',
-                        dataType: "json",
-                        data: {
-                            Order: qid,
-                            Visible: visible,
-                            Select: select,
-                            Edit: edit
-                        },
-                        success: function (data) {
-                            if (data.success) {
-                                location.reload();
+                        $.ajax({
+                            type: "post",
+                            url: '/Member/GroupAuthorityUpdate',
+                            dataType: "json",
+                            data: {
+                                Order: qid,
+                                Visible: visible,
+                                Select: select,
+                                Edit: edit
+                            },
+                            success: function (data) {
+                                if (data.success) {
+                                    location.reload();
+                                }
+                            },
+                            error: function (response) {
+                                alert(response);
                             }
-                        },
-                        error: function (response) {
-                            alert(response);
-                        }
-                    });
+                        });
+                    }
                 }
             });
 
@@ -276,6 +289,25 @@
                 });
             });
         });
+
+        function Get_btn_ty(idx) {
+            $.ajax({
+                type: "post",
+                url: '/Member/Get_Category',
+                dataType: "json",
+                data: {
+                    Order: idx
+                },
+                success: function (data) {
+                    if (data.success) {
+                        location.reload();
+                    }
+                },
+                error: function (response) {
+                    alert(response);
+                }
+            });
+        }
 
         function showModal(title, showCreateButton, showEditButton) {
             $('#g-title').text(title);
