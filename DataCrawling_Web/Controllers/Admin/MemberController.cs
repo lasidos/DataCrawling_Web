@@ -111,8 +111,8 @@ namespace DataCrawling_Web.Controllers.Admin
         {
             string msg = string.Empty;
             var vm = W_Menu.GetSiteW_Menu(false, Order);
-
-            return Json(new { success = true, msg });
+            var vmJson = JsonConvert.SerializeObject(vm);
+            return Json(new { success = true, msg  = vmJson });
         }
 
         [HttpPost]

@@ -64,15 +64,13 @@ namespace DataCrawling_Web.BSL.Code
 
         public static IEnumerable<W_MenuModel> GetSiteW_MenuDB(int MenuType = -1)
         {
-            IEnumerable<W_MenuModel> entity;
             using (IDbConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["mkapi"].ConnectionString))
             {
-                var p = new DynamicParameters();
-                entity = conn.Query<W_MenuModel>("USP_MENU_S",
-                                            commandType: CommandType.StoredProcedure);
+                var param = new DynamicParameters();
+                param.Add("@MenuType", MenuType);
+                return conn.Query<W_MenuModel>(param: param, commandType: CommandType.StoredProcedure
+                    , sql: "DBO.USP_MENU_S");
             }
-
-            return entity;
         }
 
         public static IEnumerable<W_MenuModel> GetMenu(int Parent_Id = -1, int Menu_Type = 1, bool cacheUse = false)

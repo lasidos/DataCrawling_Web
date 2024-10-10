@@ -236,8 +236,8 @@
                         // 중분류
                         $('.col-table tbody').load('/Member/GetGroupUser', {
                             GROUP_ID: $('#hidManagementType').attr('data-idx'),
-                            Page: page,
-                            SearchTxt: $('#searchTxt').val()
+                            Page: 1,
+                            SearchTxt: ''
                         });
                     } else {
                         // 권한수정
@@ -300,7 +300,12 @@
                 },
                 success: function (data) {
                     if (data.success) {
-                        location.reload();
+                        var temp = JSON.parse(data.msg);
+                        var html = '';
+                        $.each(temp, function (i, v) {
+                            html += '<li data-idx="' + v.Menu_Idx + '"><button type="button">' + v.Menu_Name + '</button></li>';
+                        });
+                        $('.layerBox ul').html(html);
                     }
                 },
                 error: function (response) {
