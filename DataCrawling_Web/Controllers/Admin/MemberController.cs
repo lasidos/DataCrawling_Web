@@ -38,6 +38,16 @@ namespace DataCrawling_Web.Controllers.Admin
         }
 
         [HttpPost]
+        [Route("Member/GetGroupUserAuthority")]
+        public ActionResult GetGroupUserAuthority(int Category, int GROUP_ID, int Page = 1, string SearchTxt = "")
+        {
+            ViewBag.TypePage = "Management";
+            GroupUserViewModel groupUser = GroupUserAuthorityViewModel(Category, GROUP_ID, Page, SearchTxt);
+
+            return PartialView("~/Views/Admin/Shared/_UserList.cshtml", groupUser);
+        }
+
+        [HttpPost]
         [Route("Member/SetAuthority")]
         public JsonResult SetAuthority(string IDX, string GROUP_ID, string M_IDX)
         {
@@ -170,6 +180,51 @@ namespace DataCrawling_Web.Controllers.Admin
         }
 
         #endregion
+
+        private GroupUserViewModel GroupUserAuthorityViewModel(int Category, int MenuIdx, int Page = 1, string SearchTxt = "")
+        {
+            GroupUserViewModel groupUser = new GroupUserViewModel
+            {
+                GroupInfo = this.GetGroupInfo()
+            };
+
+            IEnumerable<GroupAuthorityUserModel> vm = new Member().USP_GROUP_USER_Authority_S(MenuIdx);
+            groupUser.GroupAuthorityUsers = vm.Select(s => new GroupAuthorityUserModel()
+            {
+                OrderNo = s.OrderNo,
+                User_ID = Utility.Decrypt_AES(s.User_ID),
+                User_Name = Utility.SetMask(Utility.Decrypt_AES(s.User_Name), 1),
+                ROLE_ID = s.ROLE_ID,
+                Menu_Idx = s.Menu_Idx,
+                Menu_Name = s.Menu_Name,
+                Visible_Stat = s.Visible_Stat,
+                Select_Stat = s.Select_Stat,
+                Edit_Authority = s.Edit_Authority,
+                Menu_Type = s.Menu_Type
+            }).Where(w => w.Menu_Type == Category);
+
+            #region 페이징 필수
+
+            int pageSize = 50;
+            var totalItems = groupUser.GroupAuthorityUsers.Count(); // 예시: 총 아이템 수
+            groupUser.GroupAuthorityUsers = groupUser.GroupAuthorityUsers
+                .Where(i => i.User_Name.Contains(SearchTxt) || i.User_ID.Contains(SearchTxt))
+                          .OrderBy(i => i.Menu_Idx)
+                          .Skip((Page - 1) * pageSize)
+                          .Take(pageSize)
+                          .ToList();
+
+            groupUser.PagingInfo = new PagingInfo
+            {
+                CurrentPage = Page,
+                ItemsPerPage = pageSize,
+                TotalItems = totalItems
+            };
+
+            #endregion
+
+            return groupUser;
+        }
 
         private GroupUserViewModel GroupUserViewModel(int GROUP_ID, int Page = 1, string SearchTxt = "")
         {

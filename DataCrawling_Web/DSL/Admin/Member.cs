@@ -85,6 +85,17 @@ namespace DataCrawling_Web.DSL.Admin
             }
         }
 
+        public IEnumerable<GroupAuthorityUserModel> USP_GROUP_USER_Authority_S(int M_Idx = -1)
+        {
+            var param = new DynamicParameters();
+            param.Add("@M_Idx", M_Idx);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                return conn.Query<GroupAuthorityUserModel>(param: param, commandType: CommandType.StoredProcedure
+                    , sql: "DBO.USP_GROUP_USER_Authority_S");
+            }
+        }
+
         public int USP_GROUP_USER_IU(string IDX, string GROUP_ID, string M_IDX)
         {
             var param = new DynamicParameters();

@@ -9,12 +9,12 @@
 {
         new DataCrawling_Web.Models.ListViewItem()
         {
-            Idx = 0,
+            Idx = 1,
             Name = "상단메뉴"
         },
         new DataCrawling_Web.Models.ListViewItem()
         {
-            Idx = 1,
+            Idx = 2,
             Name = "좌측메뉴"
         }
     };
@@ -60,7 +60,7 @@
                                     ShowAll = false,
                                     Height = 35,
                                     SelectID = -1,
-                                    GroupInfo = items
+                                    GroupInfo = null
                                 })
                             </div>
                         </div>
@@ -234,8 +234,9 @@
                         Get_btn_ty(idx);
                     } else if (id == 'hidCate_2Type') {
                         // 중분류
-                        $('.col-table tbody').load('/Member/GetGroupUser', {
-                            GROUP_ID: $('#hidManagementType').attr('data-idx'),
+                        $('.col-table tbody').load('/Member/GetGroupUserAuthority', {
+                            Category: $('#hidCate_1Type').attr('data-idx'),
+                            GROUP_ID: $('#hidCate_2Type').attr('data-idx'),
                             Page: 1,
                             SearchTxt: ''
                         });
@@ -250,7 +251,7 @@
                             type: "post",
                             url: '/Member/GroupAuthorityUpdate',
                             dataType: "json",
-                            data: {
+                            data: { 
                                 Order: qid,
                                 Visible: visible,
                                 Select: select,
@@ -301,12 +302,19 @@
                 success: function (data) {
                     if (data.success) {
                         var temp = JSON.parse(data.msg);
-                        var html = '';
+                        var html = '<li data-idx="-1"><button type="button">전체보기</button></li>';
                         $.each(temp, function (i, v) {
                             html += '<li data-idx="' + v.Menu_Idx + '"><button type="button">' + v.Menu_Name + '</button></li>';
                         });
-                        $('.layerBox ul').html(html);
+                        $('#Cate_2Group .layerBox ul').html(html);
                     }
+
+                    $('.col-table tbody').load('/Member/GetGroupUserAuthority', {
+                        Category: $('#hidCate_1Type').attr('data-idx'),
+                        GROUP_ID: -1,
+                        Page: 1,
+                        SearchTxt: ''
+                    });
                 },
                 error: function (response) {
                     alert(response);

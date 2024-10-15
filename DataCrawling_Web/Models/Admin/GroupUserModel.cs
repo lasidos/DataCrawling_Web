@@ -8,6 +8,7 @@ namespace DataCrawling_Web.Models.Admin
     {
         public IEnumerable<GroupInfoModel> GroupInfo { get; set; }
         public IEnumerable<GroupUserModel> GroupUsers { get; set; }
+        public IEnumerable<GroupAuthorityUserModel> GroupAuthorityUsers { get; set; }
         public IEnumerable<IndividualAuthorityModel> Individuals { get; set; }
         public PagingInfo PagingInfo { get; set; } = null;
     }
@@ -24,6 +25,20 @@ namespace DataCrawling_Web.Models.Admin
         public int Visible_Stat { get; set; }
         public int Select_Stat { get; set; }
         public int Edit_Authority { get; set; }
+    }
+
+    public class GroupAuthorityUserModel
+    {
+        public int OrderNo { get; set; }
+        public string User_ID { get; set; }
+        public string User_Name { get; set; }
+        public int ROLE_ID { get; set; }
+        public int Menu_Idx { get; set; }
+        public string Menu_Name { get; set; }
+        public int Visible_Stat { get; set; }
+        public int Select_Stat { get; set; }
+        public int Edit_Authority { get; set; }
+        public int Menu_Type { get; set; }
     }
 
     public class GroupUserModel

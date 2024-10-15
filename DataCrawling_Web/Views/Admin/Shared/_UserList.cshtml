@@ -18,37 +18,51 @@
 
 @if (ViewBag.TypePage == "Management")
 {
-    foreach (var item in Model.GroupUsers)
+    foreach (var item in Model.GroupAuthorityUsers)
     {
-        <tr class="paramtrCls" data-idx="@item.IDX">
+        <tr class="paramtrCls" data-idx="@item.OrderNo">
             <td>@item.OrderNo</td>
+            <td>@item.Menu_Name</td>
             <td>@item.User_ID</td>
             <td>@item.User_Name</td>
-            <td>@item.Phone</td>
-            <td>@item.Gender</td>
-            <td>@item.GROUP_NAME</td>
-            <td>@item.LastLoginDateST</td>
-            <td>@item.RegistDateST</td>
             <td>
                 @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-                {
-                    ID = "Group",
-                    ItemIdx = item.OrderNo,
-                    ShowAll = false,
-                    Height = 35,
-                    SelectID = -1,
-                    GroupInfo = Model.GroupInfo.Select(s => new DataCrawling_Web.Models.ListViewItem
-                    {
-                       Idx = s.GROUP_ID,
-                       Name = s.GROUP_NAME
-                    })
-                })
+           {
+               ID = "Visible",
+               ItemIdx = item.OrderNo,
+               ShowAll = false,
+               Height = 35,
+               SelectID = item.Visible_Stat,
+               GroupInfo = items
+           })
             </td>
-            <td><span class="btn-edit">초기화</span></td>
+            <td>
+                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+           {
+               ID = "Select",
+               ItemIdx = item.OrderNo,
+               ShowAll = false,
+               Height = 35,
+               SelectID = item.Select_Stat,
+               GroupInfo = items
+           })
+            </td>
+            <td>
+                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+           {
+               ID = "Edit",
+               ItemIdx = item.OrderNo,
+               ShowAll = false,
+               Height = 35,
+               SelectID = item.Edit_Authority,
+               GroupInfo = items
+           })
+            </td>
+            <td><span class="btn-delete">삭제</span></td>
         </tr>
     }
 
-    if (Model.GroupUsers.Count() > 0)
+    if (Model.GroupAuthorityUsers.Count() > 0)
     {
         <tr class="page-tr">
             <td colspan="11">
