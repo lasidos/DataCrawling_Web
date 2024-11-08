@@ -25,6 +25,9 @@ namespace DataCrawling_Web.Models.Admin
         public int Visible_Stat { get; set; }
         public int Select_Stat { get; set; }
         public int Edit_Authority { get; set; }
+        public DateTime REG_DT { get; set; }
+        public DateTime EDIT_DT { get; set; }
+        public string REGISTER { get; set; }
     }
 
     public class GroupAuthorityUserModel

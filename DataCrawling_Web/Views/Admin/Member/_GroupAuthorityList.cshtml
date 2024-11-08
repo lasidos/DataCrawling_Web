@@ -20,10 +20,10 @@
 {
     <tr data-group-name="@item.GROUP_NAME" data-description="@item.DESCRIPTION" class="paramtrCls" data-idx="@item.GROUP_ID" data-role="@item.ROLE_ID">
         <td>@item.OrderNo</td>
-        <td>@item.Menu_Name</td>
+        @*<td>@item.Menu_Name</td>*@
         <td>@item.GROUP_NAME</td>
         <td>@item.DESCRIPTION</td>
-        <td>
+        @*<td>
             @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
         {
             ID = "Visible",
@@ -55,7 +55,7 @@
             SelectID = item.Edit_Authority,
             GroupInfo = items
         })
-        </td>
+        </td>*@
         <td>
             <div class="edit">
                 <a class="btn btn-edit" href="javascript:;" data-idx="@item.GROUP_ID">수정</a>

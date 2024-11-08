@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DataCrawling_Web.Models.Admin.W_MenuModel>
+﻿@model IEnumerable<DataCrawling_Web.Models.Admin.GroupInfoModel>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BodyClass = "mtcSubNotice";
@@ -38,19 +38,6 @@
             <div class="pWrap" id="lNotice">
                 <div class="h-title">
                     <div class="form_col stat_type">
-                        @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-                        {
-                            ID = "Menu",
-                            ItemIdx = -1,
-                            ShowAll = true,
-                            Height = 35,
-                            SelectID = -1,
-                            GroupInfo = Model.Select(s => new DataCrawling_Web.Models.ListViewItem
-                            {
-                                Idx = s.Menu_Idx,
-                                Name = s.Menu_Name
-                            })
-                        })
                     </div>
                     <p>
                         <a class="btn btn-create" href="javascript:;">새 그룹 추가</a>
@@ -62,26 +49,46 @@
                         <colgroup>
                             <col style="width:5%">
                             <col style="width:10%">
-                            <col style="width:10%">
                             <col style="width:30%">
-                            <col style="width:5%">
-                            <col style="width:5%">
-                            <col style="width:5%">
-                            <col style="width:15%">
+                            <col style="width:10%">
+                            <col style="width:10%">
+                            <col style="width:10%">
+                            <col style="width:20%">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th>그룹 ID</th>
-                                <th>메뉴 이름</th>
                                 <th>그룹 이름</th>
                                 <th>설명</th>
-                                <th>VIEW</th>
-                                <th>SELECT</th>
-                                <th>EIDT</th>
-                                <th>작업</th>
+                                <th>수정일</th>
+                                <th>등록자</th>
+                                <th>권한변경</th>
+                                <th>그룹명변경 및 삭제</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr data-group-name="@item.GROUP_NAME" data-description="@item.DESCRIPTION" class="paramtrCls" data-idx="@item.GROUP_ID" data-role="@item.ROLE_ID">
+                                    <td>@item.OrderNo</td>
+                                    <td>@item.GROUP_NAME</td>
+                                    <td>@item.DESCRIPTION</td>
+                                    <td>@item.EDIT_DT.ToString("yyyy년 MM월 dd일")</td>
+                                    <td>@(string.IsNullOrEmpty(item.REGISTER) ? "-" : item.REGISTER)</td>
+                                    <td>
+                                        <div class="edit">
+                                            <a class="btn btn-auth" href="javascript:;" data-idx="@item.GROUP_ID">권한변경</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="edit">
+                                            <a class="btn btn-edit" href="javascript:;" data-idx="@item.GROUP_ID">수정</a>
+                                            <a class="btn btn-delete" href="javascript:;" data-idx="@item.GROUP_ID">삭제</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -117,7 +124,15 @@
         $(function () {
             $('#gPathBar h2').text('그룹 관리');
 
-            GetGroupUser();
+            $('.btn-auth').click(function () {
+                var idx = $(this).attr('data-idx');
+
+                var windowW = 770;  // 창의 가로 길이
+                var windowH = 650;  // 창의 세로 길이
+                var left = Math.ceil((window.screen.width - windowW) / 2);
+                var top = Math.ceil((window.screen.height - windowH) / 2);
+                window.open('/Member/GroupAuthority?idx=' + idx, "SuggestPopup", "toolbar=no,scrollbars=no,directories=no,menubar=no,width=770,height=650,top=" + top + ",left=" + left);
+            });
 
             $(document).on("click", ".layerBox li", function (e) {
                 var idx = $(this).data('idx');

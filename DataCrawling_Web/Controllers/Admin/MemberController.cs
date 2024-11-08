@@ -38,16 +38,6 @@ namespace DataCrawling_Web.Controllers.Admin
         }
 
         [HttpPost]
-        [Route("Member/GetGroupUserAuthority")]
-        public ActionResult GetGroupUserAuthority(int Category, int GROUP_ID, int Page = 1, string SearchTxt = "")
-        {
-            ViewBag.TypePage = "Management";
-            GroupUserViewModel groupUser = GroupUserAuthorityViewModel(Category, GROUP_ID, Page, SearchTxt);
-
-            return PartialView("~/Views/Admin/Shared/_UserList.cshtml", groupUser);
-        }
-
-        [HttpPost]
         [Route("Member/SetAuthority")]
         public JsonResult SetAuthority(string IDX, string GROUP_ID, string M_IDX)
         {
@@ -69,8 +59,7 @@ namespace DataCrawling_Web.Controllers.Admin
 
         public ActionResult Groups()
         {
-            var vm = W_Menu.GetAll_Menu();
-            //var vm = this.GetGroupInfo();
+            IEnumerable<GroupInfoModel> vm = new Member().USP_GROUP_S();
             return View("~/Views/Admin/Member/Groups.cshtml", vm);
         }
 
@@ -81,13 +70,21 @@ namespace DataCrawling_Web.Controllers.Admin
             return View("~/Views/Admin/Member/GroupSet.cshtml", vm);
         }
 
+        public ActionResult GroupAuthority(int idx)
+        {
+            ViewBag.idx = idx;
+            var vm = new Member().USP_GROUP_INFO_S().Where(s => s.GROUP_ID == idx);
+            return View("~/Views/Admin/Member/GroupAuthority.cshtml", vm);
+        }
+
         [HttpPost]
         [Route("Member/GetMenuGroupInfo")]
         public ActionResult GetMenuGroupInfo(int MenuIdx)
         {
             ViewBag.TypePage = "Authority";
-            var vm = new Member().USP_GROUP_INFO_S(MenuIdx);
-
+            //var vm = new Member().USP_GROUP_INFO_S(MenuIdx);
+            //vm = vm.GroupBy(g => g.GROUP_ID).Select(s => s.First());
+            IEnumerable<GroupInfoModel> vm = new Member().USP_GROUP_S();
             return PartialView("~/Views/Admin/Member/_GroupAuthorityList.cshtml", vm);
         }
 
@@ -173,8 +170,18 @@ namespace DataCrawling_Web.Controllers.Admin
         [Route("Member/GetGroupPersonAuthority")]
         public ActionResult GetGroupPersonAuthority(int Page = 1, string SearchTxt = "")
         {
-            ViewBag.TypePage = "Authority";
+            ViewBag.TypePage = "Group";
             GroupUserViewModel groupUser = Individual_Authority_ViewModel(Page, SearchTxt);
+
+            return PartialView("~/Views/Admin/Shared/_UserList.cshtml", groupUser);
+        }
+
+        [HttpPost]
+        [Route("Member/GetGroupUserAuthority")]
+        public ActionResult GetGroupUserAuthority(int Category, int GROUP_ID, int Page = 1, string SearchTxt = "")
+        {
+            ViewBag.TypePage = "Authority";
+            GroupUserViewModel groupUser = GroupUserAuthorityViewModel(Category, GROUP_ID, Page, SearchTxt);
 
             return PartialView("~/Views/Admin/Shared/_UserList.cshtml", groupUser);
         }

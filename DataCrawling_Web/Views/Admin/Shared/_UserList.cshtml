@@ -2,7 +2,7 @@
 @{
     string name = string.Empty;
     IEnumerable<DataCrawling_Web.Models.ListViewItem> items = new List<DataCrawling_Web.Models.ListViewItem>()
-    {
+{
         new DataCrawling_Web.Models.ListViewItem()
         {
             Idx = 0,
@@ -18,9 +18,60 @@
 
 @if (ViewBag.TypePage == "Management")
 {
+    foreach (var item in Model.GroupUsers)
+    {
+        <tr class="paramtrCls" data-idx="@item.IDX">
+            <td>@item.OrderNo</td>
+            <td>@item.User_ID</td>
+            <td>@item.User_Name</td>
+            <td>@item.Phone</td>
+            <td>@item.Gender</td>
+            <td>@item.GROUP_NAME</td>
+            <td>@item.LastLoginDateST</td>
+            <td>@item.RegistDateST</td>
+            <td>
+                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                {
+                    ID = "Group",
+                    ItemIdx = item.OrderNo,
+                    ShowAll = false,
+                    Height = 35,
+                    SelectID = -1,
+                    GroupInfo = Model.GroupInfo.Select(s => new DataCrawling_Web.Models.ListViewItem
+                    {
+                       Idx = s.GROUP_ID,
+                       Name = s.GROUP_NAME
+                    })
+                })
+            </td>
+            <td><span class="btn-edit">초기화</span></td>
+        </tr>
+    }
+
+    if (Model.GroupUsers.Count() > 0)
+    {
+        <tr class="page-tr">
+            <td colspan="11">
+                <div>
+                    @Html.Partial("~/Views/Shared/_Paging.cshtml", Model.PagingInfo)
+                </div>
+            </td>
+        </tr>
+    }
+    else
+    {
+        <tr class="empty">
+            <td colspan="11" class="text-center">
+                <span>목록이 없습니다.</span>
+            </td>
+        </tr>
+    }
+}
+else if(ViewBag.TypePage == "Authority")
+{
     foreach (var item in Model.GroupAuthorityUsers)
     {
-        <tr class="paramtrCls" data-idx="@item.OrderNo">
+        <tr class="paramtrCls" data-role="@item.ROLE_ID" data-idx="@item.OrderNo">
             <td>@item.OrderNo</td>
             <td>@item.Menu_Name</td>
             <td>@item.User_ID</td>
@@ -81,7 +132,7 @@
         </tr>
     }
 }
-else if (ViewBag.TypePage == "Authority")
+else if (ViewBag.TypePage == "Group")
 {
     foreach (var item in Model.Individuals)
     {
