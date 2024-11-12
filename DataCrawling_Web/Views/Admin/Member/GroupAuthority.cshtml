@@ -1,8 +1,170 @@
-﻿
+﻿@using DataCrawling_Web.Models.Admin;
+@model DataCrawling_Web.Models.Admin.GroupUserViewModel
+
 @{
-    ViewBag.Title = "GroupAuthority";
     Layout = null;
 }
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=euc-kr">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>주소검색 : 잡코리아 - 좋은 일이 생긴다</title>
 
-<h2>@ViewBag.idx</h2>
+    <link href="~/Resource/Css/Admin/Member/GroupAuthority.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+</head>
+
+<body class="popMk">
+    <div class="popContainer">
+        <div class="ScForm">
+            <ul>
+                @if (ViewBag.TypePage == "Group")
+                {
+                    foreach (var item in Model.GroupInfo)
+                    {
+                        <li data-idx="@item.ROLE_ID">
+                            <div class="itemName">
+                                <span>@item.Menu_Name</span>
+                            </div>
+                            <div class="tbCell">
+                                <p class="agree_check">
+                                    <span class="mtcChkBx">
+                                        <input type="checkbox" class="view devCheckbox" id="Visible_Stat@(item.Menu_Idx)" @(item.Visible_Stat == 1 ? "checked" : "")>
+                                        <label for="Visible_Stat@(item.Menu_Idx)" class="bxIpt new_small">VIEW</label>
+                                    </span>
+                                </p>
+                                <p class="agree_check">
+                                    <span class="mtcChkBx">
+                                        <input type="checkbox" class="sel devCheckbox" id="Select_Stat@(item.Menu_Idx)" @(item.Select_Stat == 1 ? "checked" : "")>
+                                        <label for="Select_Stat@(item.Menu_Idx)" class="bxIpt new_small">SELECT</label>
+                                    </span>
+                                </p>
+                                <p class="agree_check">
+                                    <span class="mtcChkBx">
+                                        <input type="checkbox" class="edit devCheckbox" id="Edit_Authority@(item.Menu_Idx)" @(item.Edit_Authority == 1 ? "checked" : "")>
+                                        <label for="Edit_Authority@(item.Menu_Idx)" class="bxIpt new_small">EDIT</label>
+                                    </span>
+                                </p>
+                            </div>
+                        </li>
+                    }
+                }
+                else
+                {
+                    foreach (var item in Model.Individuals)
+                    {
+                        <li data-idx="@item.IDX">
+                            <div class="itemName">
+                                <span>@item.Menu_Name</span>
+                            </div>
+                            <div class="tbCell">
+                                <p class="agree_check">
+                                    <span class="mtcChkBx">
+                                        <input type="checkbox" class="view devCheckbox" id="Visible_Stat@(item.IDX)" @(item.Visible_Stat == 1 ? "checked" : "")>
+                                        <label for="Visible_Stat@(item.IDX)" class="bxIpt new_small">VIEW</label>
+                                    </span>
+                                </p>
+                                <p class="agree_check">
+                                    <span class="mtcChkBx">
+                                        <input type="checkbox" class="sel devCheckbox" id="Select_Stat@(item.IDX)" @(item.Select_Stat == 1 ? "checked" : "")>
+                                        <label for="Select_Stat@(item.IDX)" class="bxIpt new_small">SELECT</label>
+                                    </span>
+                                </p>
+                                <p class="agree_check">
+                                    <span class="mtcChkBx">
+                                        <input type="checkbox" class="edit devCheckbox" id="Edit_Authority@(item.IDX)" @(item.Edit_Authority == 1 ? "checked" : "")>
+                                        <label for="Edit_Authority@(item.IDX)" class="bxIpt new_small">EDIT</label>
+                                    </span>
+                                </p>
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="dvReqAuth">
+            <div class="selType">
+                <span class="btn sel-all">전체선택</span>
+            </div>
+            <a class="btn btn-edit" href="javascript:;" data-idx="1">수정</a>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        $(function () {
+            chkStatView();
+
+            $('.ScForm input').change(function () {
+                chkStatView();
+            });
+
+            $('.sel-all').click(function () {
+                if ($(this).hasClass('on')) {
+                    $("input").prop("checked", false);
+                    $(this).removeClass('on');
+                } else {
+                    $("input").prop("checked", true);
+                    $(this).addClass('on');
+                }
+            });
+
+            $('.sel-uall').click(function () {
+                $("input").prop("checked", false);
+            });
+
+            $('.btn-edit').click(function () {
+                var data = [];
+                $('.ScForm li').each(function (index, value) {
+                    data.push({
+                        role: $(value).attr('data-idx'),
+                        view: $(value).find('.view').prop('checked') ? 1 : 0,
+                        sel: $(value).find('.sel').prop('checked') ? 1 : 0,
+                        edit: $(value).find('.edit').prop('checked') ? 1 : 0
+                    });
+                });
+
+                $.ajax({
+                    url: '/Member/GroupAuthorityJsonUpdate',
+                    type: 'POST',
+                    data: {
+                        data: JSON.stringify(data)
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            alert('수정되었습니다.');
+                        } else {
+                            alert('수정에 실패하였습니다.');
+                        }
+                    }
+                });
+
+            })
+        });
+
+        function chkStatView() {
+            if (chkAll()) {
+                $('.sel-all').addClass('on');
+            } else {
+                $('.sel-all').removeClass('on');
+            }
+        }
+
+        function chkAll() {
+            var inputs = $("input");
+            var allChecked = true;
+
+            $.each(inputs, function (index, value) {
+                if (!$(value).prop("checked")) {
+                    allChecked = false;
+                    return false;
+                }
+            });
+
+            return allChecked;
+        }
+    </script>
+</body>
+</html>
 

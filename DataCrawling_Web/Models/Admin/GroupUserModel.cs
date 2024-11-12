@@ -73,4 +73,12 @@ namespace DataCrawling_Web.Models.Admin
         public int Select_Stat { get; set; }
         public int Edit_Authority { get; set; }
     }
+
+    public class RoleModel
+    {
+        public string role { get; set; }
+        public string view { get; set; }
+        public string sel { get; set; }
+        public string edit { get; set; }
+    }
 }

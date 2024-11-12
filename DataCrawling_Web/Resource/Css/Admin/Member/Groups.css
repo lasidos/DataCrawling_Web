@@ -31,14 +31,19 @@
     }
 
     .edit a {
-        background: #00427d;
-        color: #fff;
+        border: 1px solid #d7d7d7;
+        color: #333;
+        font-weight: 500;
         height: 30px;
         border-radius: 5px;
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .edit a:hover{
+        border:1px solid #000;
     }
 
 .swiper-container {

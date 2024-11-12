@@ -66,14 +66,27 @@ namespace DataCrawling_Web.Controllers.Admin
         public ActionResult GroupSet(int GROUP_ID)
         {
             ViewBag.GROUP_ID = GROUP_ID;
-            var vm = new Member().USP_GROUP_INFO_S();
+            IEnumerable<GroupInfoModel> vm = new Member().USP_GROUP_INFO_S();
             return View("~/Views/Admin/Member/GroupSet.cshtml", vm);
         }
 
-        public ActionResult GroupAuthority(int idx)
+        public ActionResult GroupAuthority(string m_type, int idx)
         {
+            GroupUserViewModel vm = new GroupUserViewModel();
+
             ViewBag.idx = idx;
-            var vm = new Member().USP_GROUP_INFO_S().Where(s => s.GROUP_ID == idx);
+            switch (m_type)
+            {
+                case "group":
+                    ViewBag.TypePage = "Group";
+                    vm.GroupInfo = new Member().USP_GROUP_INFO_S().Where(s => s.GROUP_ID == idx);
+                    break;
+                case "auth":
+                    ViewBag.TypePage = "Authority";
+                    vm.Individuals = new Member().USP_Individual_Authority_S(idx);
+                    break;
+            }
+
             return View("~/Views/Admin/Member/GroupAuthority.cshtml", vm);
         }
 
@@ -96,11 +109,11 @@ namespace DataCrawling_Web.Controllers.Admin
             switch (Action)
             {
                 case "Add":
-                    new Member().USP_GROUP_INFO_IU(G_NAME, G_DESC);
+                    new Member().USP_GROUP_INFO_IU(G_NAME, G_DESC, AuthUser.M_ID);
                     msg = "그룹이 생성되었습니다.";
                     break;
                 case "Edit":
-                    new Member().USP_GROUP_INFO_IU(G_NAME, G_DESC, G_IDX);
+                    new Member().USP_GROUP_INFO_IU(G_NAME, G_DESC, AuthUser.M_ID, G_IDX);
                     msg = "그룹이 수정되었습니다.";
                     break;
                 case "Delete":
@@ -120,6 +133,18 @@ namespace DataCrawling_Web.Controllers.Admin
             var vm = W_Menu.GetSiteW_Menu(false, Order);
             var vmJson = JsonConvert.SerializeObject(vm);
             return Json(new { success = true, msg  = vmJson });
+        }
+
+        // ...
+
+        [HttpPost]
+        [Route("Member/GroupAuthorityJsonUpdate")]
+        public JsonResult GroupAuthorityJsonUpdate(string data)
+        {
+            string mid = AuthUser.M_ID;
+            string msg = "success";
+            new Member().USP_GroupAuthorityUpdate(data);
+            return Json(new { success = true, msg });
         }
 
         [HttpPost]
@@ -235,26 +260,24 @@ namespace DataCrawling_Web.Controllers.Admin
 
         private GroupUserViewModel GroupUserViewModel(int GROUP_ID, int Page = 1, string SearchTxt = "")
         {
+            IEnumerable<GroupUserModel> vm = new Member().USP_GROUP_USER_S(GROUP_ID);
             GroupUserViewModel groupUser = new GroupUserViewModel
             {
-                GroupInfo = this.GetGroupInfo()
+                GroupUsers = vm.Select(s => new GroupUserModel()
+                {
+                    OrderNo = s.OrderNo,
+                    IDX = s.IDX,
+                    User_ID = Utility.Decrypt_AES(s.User_ID),
+                    User_Name = Utility.SetMask(Utility.Decrypt_AES(s.User_Name), 1),
+                    Phone = Utility.SetPhoneNumMask(Utility.Decrypt_AES(s.Phone)),
+                    Gender = Utility.Decrypt_AES(s.Gender) == "Male" ? "남" : "여",
+                    GROUP_ID = s.GROUP_ID,
+                    GROUP_NAME = s.GROUP_NAME,
+                    DESCRIPTION = s.DESCRIPTION,
+                    LastLoginDateST = s.LastLoginDate.ToString("yyyy년 MM월 dd일"),
+                    RegistDateST = s.RegistDate.ToString("yyyy년 MM월 dd일")
+                })
             };
-
-            IEnumerable<GroupUserModel> vm = new Member().USP_GROUP_USER_S(GROUP_ID);
-            groupUser.GroupUsers = vm.Select(s => new GroupUserModel()
-            {
-                OrderNo = s.OrderNo,
-                IDX = s.IDX,
-                User_ID = Utility.Decrypt_AES(s.User_ID),
-                User_Name = Utility.SetMask(Utility.Decrypt_AES(s.User_Name), 1),
-                Phone = Utility.SetPhoneNumMask(Utility.Decrypt_AES(s.Phone)),
-                Gender = Utility.Decrypt_AES(s.Gender) == "Male" ? "남" : "여",
-                GROUP_ID = s.GROUP_ID,
-                GROUP_NAME = s.GROUP_NAME,
-                DESCRIPTION = s.DESCRIPTION,
-                LastLoginDateST = s.LastLoginDate.ToString("yyyy년 MM월 dd일"),
-                RegistDateST = s.RegistDate.ToString("yyyy년 MM월 dd일")
-            });
 
             #region 페이징 필수
 
@@ -286,7 +309,7 @@ namespace DataCrawling_Web.Controllers.Admin
                 GroupInfo = this.GetGroupInfo()
             };
 
-            IEnumerable<IndividualAuthorityModel> vm = new Member().USP_Individual_Authority_S();
+            IEnumerable<IndividualAuthorityModel> vm = new Member().USP_Individual_Authority_S(-1);
             groupUser.Individuals = vm.Select(s => new IndividualAuthorityModel()
             {
                 IDX = s.IDX,

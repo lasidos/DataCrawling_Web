@@ -39,32 +39,7 @@
         <div id="wItemBatchList">
             <div class="pWrap" id="lNotice">
                 <div class="filter-area">
-                    <div class="form_col stat_type">
-                        <div class="btn_ty">
-                            <div class="btn_ty1">
-                                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-                                {
-                                   ID = "Cate_1",
-                                   ItemIdx = -1,
-                                   ShowAll = false,
-                                   Height = 35,
-                                   SelectID = -1,
-                                   GroupInfo = items
-                                })
-                            </div>
-                            <div class="btn_ty2">
-                                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-                                {
-                                    ID = "Cate_2",
-                                    ItemIdx = -1,
-                                    ShowAll = false,
-                                    Height = 35,
-                                    SelectID = -1,
-                                    GroupInfo = null
-                                })
-                            </div>
-                        </div>
-                    </div>
+                    <div class="form_col stat_type"></div>
                     <p>
                         <a class="btn btn-create" href="javascript:;">개별권한 추가</a>
                     </p>
@@ -76,26 +51,61 @@
                         <colgroup>
                             <col style="width:5%">
                             <col style="width:15%">
-                            <col style="width:15%">
                             <col style="width:10%">
                             <col style="width:15%">
                             <col style="width:15%">
-                            <col style="width:15%">
-                            <col style="width:10%">
+                            <col style="width:20%">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">메뉴명</th>
                                 <th scope="col">아이디</th>
                                 <th scope="col">이름</th>
-                                <th scope="col">VIEW</th>
-                                <th scope="col">SELECT</th>
-                                <th scope="col">EIDT</th>
-                                <th scope="col">권한삭제</th>
+                                <th scope="col">그룹명</th>
+                                <th>권한변경</th>
+                                <th>그룹명변경 및 삭제</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach (var item in Model.GroupUsers)
+                            {
+                                <tr class="paramtrCls" data-role="@item.IDX">
+                                    <td>@item.OrderNo</td>
+                                    <td>@item.User_ID</td>
+                                    <td>@item.User_Name</td>
+                                    <td>@item.GROUP_NAME</td>
+                                    <td>
+                                        <div class="edit">
+                                            <a class="btn btn-auth" href="javascript:;" data-idx="@item.IDX">권한변경</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="edit">
+                                            <a class="btn btn-edit" href="javascript:;" data-idx="@item.IDX">수정</a>
+                                            <a class="btn btn-delete" href="javascript:;" data-idx="@item.IDX">삭제</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                            @if (Model.GroupUsers.Count() > 0)
+                            {
+                                <tr class="page-tr">
+                                    <td colspan="11">
+                                        <div>
+                                            @Html.Partial("~/Views/Shared/_Paging.cshtml", Model.PagingInfo)
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr class="empty">
+                                    <td colspan="11" class="text-center">
+                                        <span>목록이 없습니다.</span>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -151,6 +161,18 @@
     <script>
         $(function () {
             $('#gPathBar h2').text('사용자 개별권한');
+
+            // 권한변경
+            $('.btn-auth').click(function () {
+                var idx = $(this).attr('data-idx');
+
+                var height = 630;
+                var width = 650;
+                var top = Math.ceil((window.screen.height - height) / 2);
+                var left = Math.ceil((window.screen.width - width) / 2);
+                var post_win = window.open('/Member/GroupAuthority?m_type=auth&idx=' + idx, "address_pop", "width=" + width + ",height=" + height + ",status=0,scrollbars=1,top=" + 0 + ",left=" + 0);
+                post_win.focus();
+            });
 
             Get_btn_ty(1);
            /* GetGroupUser($('#isPage').val());*/
@@ -251,7 +273,7 @@
                             type: "post",
                             url: '/Member/GroupAuthorityUpdate',
                             dataType: "json",
-                            data: { 
+                            data: {
                                 Order: qid,
                                 Visible: visible,
                                 Select: select,

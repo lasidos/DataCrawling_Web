@@ -2,6 +2,7 @@
 using DataCrawling_Web.BSL.Common;
 using DataCrawling_Web.Models.Admin;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -39,12 +40,13 @@ namespace DataCrawling_Web.DSL.Admin
             }
         }
 
-        public IEnumerable<GroupInfoModel> USP_GROUP_INFO_IU(string G_NAME, string G_DESC, int G_IDX = -1)
+        public IEnumerable<GroupInfoModel> USP_GROUP_INFO_IU(string G_NAME, string G_DESC, string M_ID, int G_IDX = -1)
         {
             var param = new DynamicParameters();
             param.Add("@G_IDX", G_IDX);
             param.Add("@G_NAME", G_NAME);
             param.Add("@G_DESC", G_DESC);
+            param.Add("@M_ID", M_ID);
             using (IDbConnection conn = new SqlConnection(CONN_STR))
             {
                 return conn.Query<GroupInfoModel>(param: param, commandType: CommandType.StoredProcedure
@@ -120,12 +122,13 @@ namespace DataCrawling_Web.DSL.Admin
             }
         }
 
-        public IEnumerable<IndividualAuthorityModel> USP_Individual_Authority_S()
+        public IEnumerable<IndividualAuthorityModel> USP_Individual_Authority_S(int IDX)
         {
             var param = new DynamicParameters();
+            param.Add("@IDX", IDX);
             using (IDbConnection conn = new SqlConnection(CONN_STR))
             {
-                return conn.Query<IndividualAuthorityModel>(commandType: CommandType.StoredProcedure
+                return conn.Query<IndividualAuthorityModel>(param: param, commandType: CommandType.StoredProcedure
                     , sql: "DBO.USP_Individual_Authority_S");
             }
         }
@@ -138,6 +141,17 @@ namespace DataCrawling_Web.DSL.Admin
             {
                 conn.Execute(param: param, commandType: CommandType.StoredProcedure
                     , sql: "DBO.USP_Individual_Authority_I");
+            }
+        }
+
+        public IEnumerable<IndividualAuthorityModel> USP_GroupAuthorityUpdate(string json)
+        {
+            var param = new DynamicParameters();
+            param.Add("@json", json);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                return conn.Query<IndividualAuthorityModel>(param: param, commandType: CommandType.StoredProcedure
+                                       , sql: "DBO.USP_GroupAuthorityUpdate");
             }
         }
 

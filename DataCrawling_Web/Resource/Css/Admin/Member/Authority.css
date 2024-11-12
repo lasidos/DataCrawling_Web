@@ -46,18 +46,6 @@
             margin-left: 5px;
         }
 
-.btn-delete {
-    background: #00427d;
-    color: #fff;
-    height: 30px;
-    border-radius: 5px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
 .filter-area p {
     display: flex;
     padding: 10px 30px;
@@ -140,3 +128,26 @@
 .common-modal .close-button {
     display: none;
 }
+
+.edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+    .edit a {
+        border: 1px solid #d7d7d7;
+        color: #333;
+        font-weight: 500;
+        height: 30px;
+        border-radius: 5px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .edit a:hover {
+            border: 1px solid #000;
+        }

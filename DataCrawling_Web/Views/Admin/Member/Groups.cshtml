@@ -1,4 +1,6 @@
-﻿@model IEnumerable<DataCrawling_Web.Models.Admin.GroupInfoModel>
+﻿@using DataCrawling_Web.BSL.Common;
+
+@model IEnumerable<DataCrawling_Web.Models.Admin.GroupInfoModel>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BodyClass = "mtcSubNotice";
@@ -74,7 +76,7 @@
                                     <td>@item.GROUP_NAME</td>
                                     <td>@item.DESCRIPTION</td>
                                     <td>@item.EDIT_DT.ToString("yyyy년 MM월 dd일")</td>
-                                    <td>@(string.IsNullOrEmpty(item.REGISTER) ? "-" : item.REGISTER)</td>
+                                    <td>@(string.IsNullOrEmpty(item.REGISTER) ? "-" : Utility.Decrypt_AES(item.REGISTER))</td>
                                     <td>
                                         <div class="edit">
                                             <a class="btn btn-auth" href="javascript:;" data-idx="@item.GROUP_ID">권한변경</a>
@@ -124,66 +126,7 @@
         $(function () {
             $('#gPathBar h2').text('그룹 관리');
 
-            $('.btn-auth').click(function () {
-                var idx = $(this).attr('data-idx');
-
-                var windowW = 770;  // 창의 가로 길이
-                var windowH = 650;  // 창의 세로 길이
-                var left = Math.ceil((window.screen.width - windowW) / 2);
-                var top = Math.ceil((window.screen.height - windowH) / 2);
-                window.open('/Member/GroupAuthority?idx=' + idx, "SuggestPopup", "toolbar=no,scrollbars=no,directories=no,menubar=no,width=770,height=650,top=" + top + ",left=" + left);
-            });
-
-            $(document).on("click", ".layerBox li", function (e) {
-                var idx = $(this).data('idx');
-                var txt = $(this).find('button').text();
-                var id = $(this).parents('.layerBox').siblings('.hiddenResult').attr('id');
-
-                if (id == 'hidMenuType') {
-                    if ($('.hiddenResult').val() != idx) {
-                        $('.hiddenResult').val(idx);
-                        $('.hiddenResult').attr('data-idx', idx);
-                        $(this).parents('.customCombo').find('.textCategory').text(txt);
-
-                        GetGroupUser();
-                    }
-                } else {
-                    // 권한수정
-                    if ($('#' + id).val() != txt) {
-                        var order = $(this).parents('.listWrap').data('order');
-                        $('#' + id).val(txt);
-                        $('#' + id).attr('data-idx', idx);
-                        $(this).parents('.customCombo').find('.textCategory').text(txt);
-
-                        var qid = $(this).parents('.paramtrCls').attr('data-role');
-                        var visible = $('#hidVisibleType' + order).attr('data-idx');
-                        var select = $('#hidSelectType' + order).attr('data-idx');
-                        var edit = $('#hidEditType' + order).attr('data-idx');
-
-                        $.ajax({
-                            type: "post",
-                            url: '/Member/GroupAuthorityUpdate',
-                            dataType: "json",
-                            data: {
-                                Order: qid,
-                                Visible: visible,
-                                Select: select,
-                                Edit: edit
-                            },
-                            success: function (data) {
-                                if (data.success) {
-                                    location.reload();
-                                }
-                            },
-                            error: function (response) {
-                                alert(response);
-                            }
-                        });
-                    }
-
-                }
-            });
-
+            // 그룹생성
             $('.btn-create').click(function () {
                 showModal('그룹생성', true, false);
             });
@@ -210,8 +153,45 @@
                 hideModal();
             });
 
-            $(document).on("click", ".listWrap", function (e) {
-                $(this).toggleClass('on');
+            // 권한변경
+            $('.btn-auth').click(function () {
+                var idx = $(this).attr('data-idx');
+
+                var height = 630;
+                var width = 650;
+                var top = Math.ceil((window.screen.height - height) / 2);
+                var left = Math.ceil((window.screen.width - width) / 2);
+                var post_win = window.open('/Member/GroupAuthority?m_type=group&idx=' + idx, "address_pop", "width=" + width + ",height=" + height + ",status=0,scrollbars=1,top=" + 0 + ",left=" + 0);
+                post_win.focus();
+            });
+
+            // 그룹정보 수정
+            $('.btn-edit').click(function () {
+                var idx = $(this).attr('data-idx');
+                var groupName = $(this).closest('tr').attr('data-group-name');
+                var groupDesc = $(this).closest('tr').attr('data-description');
+
+                $('#group-id').val(groupName);
+                $('#group-desc').val(groupDesc);
+
+                showModal('그룹정보 수정', false, true);
+                $('#sg').val(idx);
+            });
+
+            $('.btn-group-edit').click(function () {
+                var groupId = $('#group-id').val().trim();
+                var groupDesc = $('#group-desc').val().trim();
+                manageGroup('Edit', $('#sg').val(), groupId, groupDesc);
+            });
+
+            $('.btn-delete').click(function () {
+                var idx = $(this).attr('data-idx');
+                var groupName = $(this).closest('tr').attr('data-group-name');
+                var groupDesc = $(this).closest('tr').attr('data-description');
+
+                if (confirm('그룹명 : ' + groupName + '\n그룹설명 : ' + groupDesc + '\n\n정말 삭제하시겠습니까?')) {
+                    manageGroup('Delete', idx, null, null);
+                }
             });
         });
 
