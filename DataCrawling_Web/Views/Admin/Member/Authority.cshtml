@@ -173,9 +173,7 @@
                 post_win.focus();
             });
 
-            Get_btn_ty(1);
-           /* GetGroupUser($('#isPage').val());*/
-
+            // 개별권한 리스트업 (모달창)
             $('.new-user .paramtrCls').click(function () {
                 var isDuplicate = false;
                 var role = $(this).attr('data-role');
@@ -205,10 +203,12 @@
                 }
             });
 
+            // 개별권한 모달창 닫기
             $('.cancel').click(function () {
                 hideModal();
             });
 
+            // 개별권한 추가 (모달창)
             $('.active-fixed .confirm').click(function () {
                 var users = [];
                 $('.new-user .permission-list ul li').each(function () {
@@ -230,67 +230,13 @@
                 });
             });
 
+            // 개별권한 추가
             $(document).on("click", ".btn-create", function (e) {
-                showModal('그룹생성', true, false);
+                showModal('개별권한 추가', true, false);
                 $('.permission-list ul').empty();
             });
 
-            $(document).on("click", ".listWrap", function (e) {
-                $(this).toggleClass('on');
-            });
-
-            $(document).on("click", ".layerBox li", function (e) {
-                var idx = $(this).data('idx');
-                var txt = $(this).find('button').text();
-                var id = $(this).parents('.layerBox').siblings('.hiddenResult').attr('id');
-
-                if ($('#' + id).val() != txt) {
-                    var order = $(this).parents('.listWrap').data('order');
-                    $('#' + id).val(txt);
-                    $('#' + id).attr('data-idx', idx);
-                    $(this).parents('.customCombo').find('.textCategory').text(txt);
-
-                    if (id == 'hidCate_1Type') {
-                        // 대분류
-                        Get_btn_ty(idx);
-                    } else if (id == 'hidCate_2Type') {
-                        // 중분류
-                        $('.col-table tbody').load('/Member/GetGroupUserAuthority', {
-                            Category: $('#hidCate_1Type').attr('data-idx'),
-                            GROUP_ID: $('#hidCate_2Type').attr('data-idx'),
-                            Page: 1,
-                            SearchTxt: ''
-                        });
-                    } else {
-                        // 권한수정
-                        var qid = $(this).parents('.paramtrCls').attr('data-role');
-                        var visible = $('#hidVisibleType' + order).attr('data-idx');
-                        var select = $('#hidSelectType' + order).attr('data-idx');
-                        var edit = $('#hidEditType' + order).attr('data-idx');
-
-                        $.ajax({
-                            type: "post",
-                            url: '/Member/GroupAuthorityUpdate',
-                            dataType: "json",
-                            data: {
-                                Order: qid,
-                                Visible: visible,
-                                Select: select,
-                                Edit: edit
-                            },
-                            success: function (data) {
-                                if (data.success) {
-                                    location.reload();
-                                }
-                            },
-                            error: function (response) {
-                                alert(response);
-                            }
-                        });
-                    }
-                }
-            });
-
+            // 권한삭제
             $(document).on("click", ".btn-delete", function (e) {
                 var qid = $(this).parents('.paramtrCls').attr('data-role');
                 $.ajax({
@@ -312,37 +258,6 @@
             });
         });
 
-        function Get_btn_ty(idx) {
-            $.ajax({
-                type: "post",
-                url: '/Member/Get_Category',
-                dataType: "json",
-                data: {
-                    Order: idx
-                },
-                success: function (data) {
-                    if (data.success) {
-                        var temp = JSON.parse(data.msg);
-                        var html = '<li data-idx="-1"><button type="button">전체보기</button></li>';
-                        $.each(temp, function (i, v) {
-                            html += '<li data-idx="' + v.Menu_Idx + '"><button type="button">' + v.Menu_Name + '</button></li>';
-                        });
-                        $('#Cate_2Group .layerBox ul').html(html);
-                    }
-
-                    $('.col-table tbody').load('/Member/GetGroupUserAuthority', {
-                        Category: $('#hidCate_1Type').attr('data-idx'),
-                        GROUP_ID: -1,
-                        Page: 1,
-                        SearchTxt: ''
-                    });
-                },
-                error: function (response) {
-                    alert(response);
-                }
-            });
-        }
-
         function showModal(title, showCreateButton, showEditButton) {
             $('#g-title').text(title);
             $('.btn-group-create').toggle(showCreateButton);
@@ -352,14 +267,6 @@
 
         function hideModal() {
             $('.common-modal').hide();
-        }
-
-        function GetGroupUser(page) {
-            $('.col-table.user-list tbody').load('/Member/GetGroupPersonAuthority', {
-                GROUP_ID: $('#hid@(Name)Type').attr('data-idx'),
-                Page: page,
-                SearchTxt: $('#searchTxt').val()
-            });
         }
     </script>
 }

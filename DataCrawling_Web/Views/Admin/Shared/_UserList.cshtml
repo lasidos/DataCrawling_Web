@@ -1,201 +1,53 @@
-﻿@model DataCrawling_Web.Models.Admin.GroupUserViewModel
-@{
-    string name = string.Empty;
-    IEnumerable<DataCrawling_Web.Models.ListViewItem> items = new List<DataCrawling_Web.Models.ListViewItem>()
-{
-        new DataCrawling_Web.Models.ListViewItem()
-        {
-            Idx = 0,
-            Name = "Inaccessible"
-        },
-        new DataCrawling_Web.Models.ListViewItem()
-        {
-            Idx = 1,
-            Name = "Accessible"
-        }
-    };
-}
+﻿@using DataCrawling_Web.BSL.Common;
+@model DataCrawling_Web.Models.Admin.GroupUserViewModel
 
-@if (ViewBag.TypePage == "Management")
+@foreach (var item in Model.GroupUsers)
 {
-    foreach (var item in Model.GroupUsers)
-    {
-        <tr class="paramtrCls" data-idx="@item.IDX">
-            <td>@item.OrderNo</td>
-            <td>@item.User_ID</td>
-            <td>@item.User_Name</td>
-            <td>@item.Phone</td>
-            <td>@item.Gender</td>
-            <td>@item.GROUP_NAME</td>
-            <td>@item.LastLoginDateST</td>
-            <td>@item.RegistDateST</td>
-            <td>
-                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+    <tr class="paramtrCls" data-idx="@item.IDX">
+        <td>@item.OrderNo</td>
+        <td>@item.User_ID</td>
+        <td>@(Utility.SetMask(item.User_Name, 1))</td>
+        <td>@Utility.SetPhoneNumMask(item.Phone)</td>
+        <td>@item.Gender</td>
+        <td>@item.GROUP_NAME</td>
+        <td>@item.LastLoginDateST</td>
+        <td>@item.RegistDateST</td>
+        <td>
+            @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+            {
+                ID = "Group",
+                ItemIdx = item.OrderNo,
+                ShowAll = false,
+                Height = 35,
+                SelectID = item.GROUP_ID,
+                GroupInfo = Model.GroupInfo.Select(s => new DataCrawling_Web.Models.ListViewItem
                 {
-                    ID = "Group",
-                    ItemIdx = item.OrderNo,
-                    ShowAll = false,
-                    Height = 35,
-                    SelectID = -1,
-                    GroupInfo = Model.GroupInfo.Select(s => new DataCrawling_Web.Models.ListViewItem
-                    {
-                       Idx = s.GROUP_ID,
-                       Name = s.GROUP_NAME
-                    })
+                   Idx = s.GROUP_ID,
+                   Name = s.GROUP_NAME
                 })
-            </td>
-            <td><span class="btn-edit">초기화</span></td>
-        </tr>
-    }
-
-    if (Model.GroupUsers.Count() > 0)
-    {
-        <tr class="page-tr">
-            <td colspan="11">
-                <div>
-                    @Html.Partial("~/Views/Shared/_Paging.cshtml", Model.PagingInfo)
-                </div>
-            </td>
-        </tr>
-    }
-    else
-    {
-        <tr class="empty">
-            <td colspan="11" class="text-center">
-                <span>목록이 없습니다.</span>
-            </td>
-        </tr>
-    }
+            })
+        </td>
+        <td><span class="btn-edit">초기화</span></td>
+    </tr>
 }
-else if(ViewBag.TypePage == "Authority")
-{
-    foreach (var item in Model.GroupAuthorityUsers)
-    {
-        <tr class="paramtrCls" data-role="@item.ROLE_ID" data-idx="@item.OrderNo">
-            <td>@item.OrderNo</td>
-            <td>@item.Menu_Name</td>
-            <td>@item.User_ID</td>
-            <td>@item.User_Name</td>
-            <td>
-                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-           {
-               ID = "Visible",
-               ItemIdx = item.OrderNo,
-               ShowAll = false,
-               Height = 35,
-               SelectID = item.Visible_Stat,
-               GroupInfo = items
-           })
-            </td>
-            <td>
-                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-           {
-               ID = "Select",
-               ItemIdx = item.OrderNo,
-               ShowAll = false,
-               Height = 35,
-               SelectID = item.Select_Stat,
-               GroupInfo = items
-           })
-            </td>
-            <td>
-                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-           {
-               ID = "Edit",
-               ItemIdx = item.OrderNo,
-               ShowAll = false,
-               Height = 35,
-               SelectID = item.Edit_Authority,
-               GroupInfo = items
-           })
-            </td>
-            <td><span class="btn-delete">삭제</span></td>
-        </tr>
-    }
 
-    if (Model.GroupAuthorityUsers.Count() > 0)
-    {
-        <tr class="page-tr">
-            <td colspan="11">
-                <div>
-                    @Html.Partial("~/Views/Shared/_Paging.cshtml", Model.PagingInfo)
-                </div>
-            </td>
-        </tr>
-    }
-    else
-    {
-        <tr class="empty">
-            <td colspan="11" class="text-center">
-                <span>목록이 없습니다.</span>
-            </td>
-        </tr>
-    }
+@if (Model.GroupUsers.Count() > 0)
+{
+    <tr class="page-tr">
+        <td colspan="11">
+            <div>
+                @Html.Partial("~/Views/Shared/_Paging.cshtml", Model.PagingInfo)
+            </div>
+        </td>
+    </tr>
 }
-else if (ViewBag.TypePage == "Group")
+else
 {
-    foreach (var item in Model.Individuals)
-    {
-        <tr class="paramtrCls Authority-IU" data-role="@item.ROLE_ID" data-idx="@item.IDX">
-            <td class="pa-order" data-order="@item.OrderNo">@item.OrderNo</td>
-            <td>@item.Menu_Name</td>
-            <td>@item.User_ID</td>
-            <td>@item.User_Name</td>
-            <td>
-                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-           {
-               ID = "Visible",
-               ItemIdx = item.OrderNo,
-               ShowAll = false,
-               Height = 35,
-               SelectID = item.Visible_Stat,
-               GroupInfo = items
-           })
-            </td>
-            <td>
-                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-           {
-               ID = "Select",
-               ItemIdx = item.OrderNo,
-               ShowAll = false,
-               Height = 35,
-               SelectID = item.Select_Stat,
-               GroupInfo = items
-           })
-            </td>
-            <td>
-                @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
-           {
-               ID = "Edit",
-               ItemIdx = item.OrderNo,
-               ShowAll = false,
-               Height = 35,
-               SelectID = item.Edit_Authority,
-               GroupInfo = items
-           })
-            </td>
-            <td><span class="btn-delete">삭제</span></td>
-        </tr>
-    }
-
-    if (Model.Individuals.Count() > 0)
-    {
-        <tr class="page-tr">
-            <td colspan="11">
-                <div>
-                    @Html.Partial("~/Views/Shared/_Paging.cshtml", Model.PagingInfo)
-                </div>
-            </td>
-        </tr>
-    }
-    else
-    {
-        <tr class="empty">
-            <td colspan="11" class="text-center">
-                <span>목록이 없습니다.</span>
-            </td>
-        </tr>
-    }
+    <tr class="empty">
+        <td colspan="11" class="text-center">
+            <span>목록이 없습니다.</span>
+        </td>
+    </tr>
 }
 
 <input type="hidden" id="idx" value="" />

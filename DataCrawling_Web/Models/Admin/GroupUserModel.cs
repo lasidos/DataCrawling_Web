@@ -6,7 +6,10 @@ namespace DataCrawling_Web.Models.Admin
 {
     public class GroupUserViewModel
     {
+        // 그룹정보
         public IEnumerable<GroupInfoModel> GroupInfo { get; set; }
+
+        // 그룹 사용자
         public IEnumerable<GroupUserModel> GroupUsers { get; set; }
         public IEnumerable<GroupAuthorityUserModel> GroupAuthorityUsers { get; set; }
         public IEnumerable<IndividualAuthorityModel> Individuals { get; set; }

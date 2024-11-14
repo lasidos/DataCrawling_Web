@@ -1,25 +1,10 @@
 ﻿@using DataCrawling_Web.BSL.Common;
 
-@model IEnumerable<DataCrawling_Web.Models.Admin.GroupInfoModel>
+@model DataCrawling_Web.Models.Admin.GroupUserViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BodyClass = "mtcSubNotice";
-
-    IEnumerable<DataCrawling_Web.Models.ListViewItem> items = new List<DataCrawling_Web.Models.ListViewItem>()
-{
-        new DataCrawling_Web.Models.ListViewItem()
-        {
-            Idx = 0,
-            Name = "Inaccessible"
-        },
-        new DataCrawling_Web.Models.ListViewItem()
-        {
-            Idx = 1,
-            Name = "Accessible"
-        }
-    };
 }
-
 
 @section Header{
     @RenderPage("~/Views/Shared/Header/_HeaderAdmin.cshtml")
@@ -69,7 +54,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.GroupInfo)
                             {
                                 <tr data-group-name="@item.GROUP_NAME" data-description="@item.DESCRIPTION" class="paramtrCls" data-idx="@item.GROUP_ID" data-role="@item.ROLE_ID">
                                     <td>@item.OrderNo</td>
@@ -131,28 +116,6 @@
                 showModal('그룹생성', true, false);
             });
 
-            $('.btn-group-create').click(function () {
-                var groupId = $('#group-id').val().trim();
-                var groupDesc = $('#group-desc').val().trim();
-
-                if (groupId === '') {
-                    alert('그룹명을 입력하세요.');
-                    $('#group-id').focus();
-                    return;
-                }
-                if (groupDesc === '') {
-                    alert('그룹 설명을 입력하세요.');
-                    $('#group-desc').focus();
-                    return;
-                }
-
-                manageGroup('Add', null, groupId, groupDesc);
-            });
-
-            $('.close-button').click(function () {
-                hideModal();
-            });
-
             // 권한변경
             $('.btn-auth').click(function () {
                 var idx = $(this).attr('data-idx');
@@ -178,12 +141,7 @@
                 $('#sg').val(idx);
             });
 
-            $('.btn-group-edit').click(function () {
-                var groupId = $('#group-id').val().trim();
-                var groupDesc = $('#group-desc').val().trim();
-                manageGroup('Edit', $('#sg').val(), groupId, groupDesc);
-            });
-
+            // 그룹삭제
             $('.btn-delete').click(function () {
                 var idx = $(this).attr('data-idx');
                 var groupName = $(this).closest('tr').attr('data-group-name');
@@ -192,6 +150,36 @@
                 if (confirm('그룹명 : ' + groupName + '\n그룹설명 : ' + groupDesc + '\n\n정말 삭제하시겠습니까?')) {
                     manageGroup('Delete', idx, null, null);
                 }
+            });
+
+            // 그룹생성 (팝업)
+            $('.btn-group-create').click(function () {
+                var groupId = $('#group-id').val().trim();
+                var groupDesc = $('#group-desc').val().trim();
+
+                if (groupId === '') {
+                    alert('그룹명을 입력하세요.');
+                    $('#group-id').focus();
+                    return;
+                }
+                if (groupDesc === '') {
+                    alert('그룹 설명을 입력하세요.');
+                    $('#group-desc').focus();
+                    return;
+                }
+                manageGroup('Add', null, groupId, groupDesc);
+            });
+
+            // 그룹정보 수정 (팝업)
+            $('.btn-group-edit').click(function () {
+                var groupId = $('#group-id').val().trim();
+                var groupDesc = $('#group-desc').val().trim();
+                manageGroup('Edit', $('#sg').val(), groupId, groupDesc);
+            });
+
+            // 팝업창 닫기
+            $('.close-button').click(function () {
+                hideModal();
             });
         });
 
@@ -225,12 +213,6 @@
                 error: function (response) {
                     alert(response);
                 }
-            });
-        }
-
-        function GetGroupUser() {
-            $('.col-table tbody').load('/Member/GetMenuGroupInfo', {
-                MenuIdx: $('#hidMenuType').val(),
             });
         }
     </script>

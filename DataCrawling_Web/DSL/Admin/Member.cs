@@ -18,16 +18,25 @@ namespace DataCrawling_Web.DSL.Admin
             CONN_STR = "Data Source=211.233.51.65;Initial Catalog=mkapi_godohosting_com;User ID=mkapi;Password=akvmfzh1!@;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         }
 
-        public IEnumerable<GroupInfoModel> USP_GROUP_S(int M_Idx = -1)
+        /// <summary>
+        /// 그룹정보 가져오기
+        /// </summary>
+        /// <param name="All">1 = 비회원 포함 가져오기</param>
+        /// <returns></returns>
+        public IEnumerable<GroupInfoModel> ADMIN_GROUP_S(int All = -1)
         {
             var param = new DynamicParameters();
-            param.Add("@M_Idx", M_Idx);
+            param.Add("@@All", All);
             using (IDbConnection conn = new SqlConnection(CONN_STR))
             {
                 return conn.Query<GroupInfoModel>(param: param, commandType: CommandType.StoredProcedure
-                    , sql: "DBO.USP_GROUP_S");
+                    , sql: "DBO.ADMIN_GROUP_S");
             }
         }
+
+
+
+
 
         public IEnumerable<GroupInfoModel> USP_GROUP_INFO_S(int M_Idx = -1)
         {
@@ -152,20 +161,6 @@ namespace DataCrawling_Web.DSL.Admin
             {
                 return conn.Query<IndividualAuthorityModel>(param: param, commandType: CommandType.StoredProcedure
                                        , sql: "DBO.USP_GroupAuthorityUpdate");
-            }
-        }
-
-        public void USP_Authority_IU(int ROLE_ID, int Visible_Stat, int Select_Stat, int Edit_Authority)
-        {
-            var param = new DynamicParameters();
-            param.Add("@ROLE_ID", ROLE_ID);
-            param.Add("@Visible_Stat", Visible_Stat);
-            param.Add("@Select_Stat", Select_Stat);
-            param.Add("@Edit_Authority", Edit_Authority);
-            using (IDbConnection conn = new SqlConnection(CONN_STR))
-            {
-                conn.Execute(param: param, commandType: CommandType.StoredProcedure
-                    , sql: "DBO.USP_Authority_IU");
             }
         }
 

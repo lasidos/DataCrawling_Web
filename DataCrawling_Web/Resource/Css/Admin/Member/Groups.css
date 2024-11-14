@@ -42,9 +42,10 @@
         align-items: center;
     }
 
-    .edit a:hover{
-        border:1px solid #000;
-    }
+        .edit a:hover {
+            border: 1px solid #000;
+            color: #000;
+        }
 
 .swiper-container {
     height: 100%;
