@@ -1,28 +1,58 @@
 ﻿@model DataCrawling_Web.Models.Admin.ContentInfoModel
-
+@{ 
+    string Name = "NewWrite";
+    IEnumerable<DataCrawling_Web.Models.ListViewItem> items = new List<DataCrawling_Web.Models.ListViewItem>()
+    {
+        new DataCrawling_Web.Models.ListViewItem()
+        {
+            Idx = 1,
+            Name = "공지사항"
+        },
+        new DataCrawling_Web.Models.ListViewItem()
+        {
+            Idx = 2,
+            Name = "컨텐츠등록"
+        }
+    };
+}
 <script src="~/Resource/summernote-0.8.18-dist/summernote-lite.js"></script>
 <link href="~/Resource/summernote-0.8.18-dist/summernote-lite.css" rel="stylesheet" />
 <script src="~/Resource/summernote-0.8.18-dist/lang/summernote-ko-KR.js"></script>
 <script src="~/Resource/Js/Common.js"></script>
 <link href="~/Resource/Css/Shared/_Write.css" rel="stylesheet" />
 
-<form method="post" onsubmit="submitFunction(event)">
+<div>
     <div class="h-title">
-        <span>제목</span>
-        <input type="text" name="title" id="title" value="@Model.TITLE" placeholder="타이틀을 입력하세요 (공지사항일경우 '공지사항')" />
+        <div class="category">
+            @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+            {
+                ID = Name,
+                ItemIdx = -1,
+                ShowAll = false,
+                Height = 35,
+                Width = 130,
+                SelectID = -1,
+                GroupInfo = items
+            })
+        </div>
+        <input type="text" name="title" id="title" value="@(Model == null ? "" : Model.TITLE)" placeholder="타이틀을 입력하세요" />
     </div>
-    <textarea id="summernote" name="editordata">@Html.Raw(Model.CONTENT_BODY)</textarea>
-</form>
+    <textarea id="summernote" name="editordata">@(Model == null ? "" : Html.Raw(Model.CONTENT_BODY).ToHtmlString())</textarea>
+    <div class="cont_agree">
+        <span class="btn-reg">등록</span>
+    </div>
+</div>
 
 <script>
 
-    $(document).ready(function () {
+    $(function () {
         $('#summernote').summernote({
             height: 500,                 // 에디터 높이
             minHeight: null,             // 최소 높이
             maxHeight: null,             // 최대 높이
             focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
             lang: "ko-KR",					// 한글 설정
+            disableResizeImage: true,        // 리사이즈 이미지 기능 사용 여부
             placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
             callbacks: {
                 onImageUpload: function (files, editor, welEditable) {
@@ -33,6 +63,55 @@
                     }
                 }
             }
+        });
+        $('.note-statusbar').hide();
+
+        $(document).on("click", ".listWrap", function (e) {
+            e.preventDefault();
+            $(this).toggleClass('on');
+        });
+
+        $('#dvLyrNewWriteType li').click(function () {
+            var txt = $(this).find('button').text();
+            var idx = $(this).data('idx');
+
+            if ($('#hidNewWriteType').val() != txt) {
+                $('.textCategory').text($(this).find('button').text());
+
+                $('#hidNewWriteType').val(txt);
+                $('#hidNewWriteType').attr('data-idx', idx);
+            }
+        });
+
+        $('.btn-reg').click(function () {
+            var title = $('#title').val();
+            var content = $('.note-editable').text();
+            if (title == "") {
+                alert("제목을 입력해주세요.");
+                return;
+            }
+            if (content == "") {
+                alert("내용을 입력해주세요.");
+                return;
+            }
+            var data = {
+                cate: $('#hidNewWriteType').val(),
+                title: title,
+                content: content
+            };
+            $.ajax({
+                url: "/Admin/Reg",
+                type: "POST",
+                data: data,
+                success: function (result) {
+                    if (result.success) {
+                        alert("등록되었습니다.");
+                        location.href = "/Admin/Main/item";
+                    } else {
+                        alert("등록에 실패했습니다.");
+                    }
+                }
+            });
         });
     });
 </script>

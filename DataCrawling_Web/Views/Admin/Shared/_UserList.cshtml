@@ -3,6 +3,11 @@
 
 @foreach (var item in Model.GroupUsers)
 {
+    DateTime now = DateTime.Now;
+    DateTime LastLogin = item.LastLoginDate;
+    TimeSpan ts = now.Subtract(LastLogin);
+    var diff = Math.Ceiling(ts.TotalDays);
+
     <tr class="paramtrCls" data-idx="@item.IDX">
         <td>@item.OrderNo</td>
         <td>@item.User_ID</td>
@@ -10,7 +15,7 @@
         <td>@Utility.SetPhoneNumMask(item.Phone)</td>
         <td>@item.Gender</td>
         <td>@item.GROUP_NAME</td>
-        <td>@item.LastLoginDateST</td>
+        <td>@(diff < 7 ? string.Format("{0}일전", diff) : item.LastLoginDateST)</td>
         <td>@item.RegistDateST</td>
         <td>
             @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel

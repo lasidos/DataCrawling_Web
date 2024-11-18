@@ -26,5 +26,35 @@ namespace DataCrawling_Web.DSL.Admin
                     , sql: "DBO.USP_ADMIN_CONTENTS_S");
             }
         }
+
+        /// <summary>
+        /// 컨텐츠 등록/수정
+        /// </summary>
+        /// <param name="IDX"></param>
+        /// <param name="AREA_CODE"></param>
+        /// <param name="SECTOR_CODE"></param>
+        /// <param name="PORT_IMG"></param>
+        /// <param name="TITLE"></param>
+        /// <param name="CONTENT_BODY"></param>
+        /// <param name="VISIBLE"></param>
+        /// <param name="M_ID"></param>
+        public void USP_ADMIN_CONTENTS_IU(int IDX, int AREA_CODE, int SECTOR_CODE, string PORT_IMG, 
+            string TITLE, string CONTENT_BODY, int VISIBLE, string M_ID)
+        {
+            var param = new DynamicParameters();
+            param.Add("@IDX", IDX);
+            param.Add("@AREA_CODE", AREA_CODE);
+            param.Add("@SECTOR_CODE", SECTOR_CODE);
+            param.Add("@PORT_IMG", PORT_IMG);
+            param.Add("@TITLE", TITLE);
+            param.Add("@CONTENT_BODY", CONTENT_BODY);
+            param.Add("@VISIBLE", VISIBLE);
+            param.Add("@M_ID", M_ID);
+            using (IDbConnection conn = new SqlConnection(CONN_STR))
+            {
+                conn.Execute(param: param, commandType: CommandType.StoredProcedure
+                                       , sql: "DBO.USP_ADMIN_CONTENTS_IU");
+            }
+        }
     }
 }
