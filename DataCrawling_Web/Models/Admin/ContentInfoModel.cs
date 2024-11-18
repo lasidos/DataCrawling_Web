@@ -3,6 +3,14 @@ using System;
 
 namespace DataCrawling_Web.Models.Admin
 {
+    public class MenuModel
+    {
+        public int Menu_Idx { get; set; }
+        public string Menu_Name { get; set; }
+        public int CODE { get; set; }
+        public string SECTOR { get; set; }
+    }
+
     public class ContentInfoModel
     {
         public int OrderNo { get; set; }

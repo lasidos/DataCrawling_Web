@@ -6,7 +6,7 @@
     line-height: 30px;
     font-size: 25px;
     background: transparent;
-    padding: 5px 10px;
+    padding: 10px 0px;
     font-weight: 500;
     box-sizing: border-box;
     border: none;
@@ -14,9 +14,9 @@
     align-items: center;
 }
 
-    .h-title span {
-        width: 90px;
-        color: #ccc;
+    .h-title .category {
+        margin-right: 15px;
+        border-radius: 5px;
     }
 
 #title {
@@ -54,4 +54,19 @@ input[type='radio'] {
         background-color: #0a2142; /*체크 시 내부 원 색상*/
         border: 3px solid #fff; /*라인이 아닌, 라인과 원 사이 색상*/
         box-shadow: 0 0 0 1px #0a2142; /*라인*/
+    }
+
+.cont_agree {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+    .cont_agree .btn-reg {
+        padding: 15px 50px;
+        background: #202123;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
     }

@@ -20,12 +20,6 @@ namespace DataCrawling_Web.Controllers.Admin
             return View("~/Views/Admin/Code/CodeMng.cshtml", vm);
         }
 
-        public ActionResult Sector(int MenuLvl = 0)
-        {
-            var vm = new Code().USP_MENU_CODE_S();
-            return View("~/Views/Admin/Code/Sector.cshtml", vm);
-        }
-
         [HttpPost]
         [Route("Code/GetMenu")]
         public string GetMenu(int Menu_Type, int Parent_Id)

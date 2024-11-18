@@ -74,17 +74,6 @@ namespace DataCrawling_Web.DSL.Admin
             }
         }
 
-        public int USP_USER_GROUP_INFO_S(string M_ID)
-        {
-            var param = new DynamicParameters();
-            param.Add("@M_ID", M_ID);
-            using (IDbConnection conn = new SqlConnection(CONN_STR))
-            {
-                return conn.QuerySingle<int>(param: param, commandType: CommandType.StoredProcedure
-                    , sql: "DBO.USP_USER_GROUP_INFO_S");
-            }
-        }
-
         public IEnumerable<GroupUserModel> USP_GROUP_USER_S(int GROUP_ID = -1)
         {
             var param = new DynamicParameters();

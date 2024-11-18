@@ -1,5 +1,7 @@
 ﻿using DataCrawling_Web.BSL.Attributes;
+using DataCrawling_Web.BSL.Authentication;
 using DataCrawling_Web.DSL.Admin;
+using DataCrawling_Web.Models;
 using DataCrawling_Web.Models.Admin;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -33,21 +35,30 @@ namespace DataCrawling_Web.Controllers.Admin
             }
             ContentInfoModel item = vm.Where(p => p.IDX.ToString() == idx).FirstOrDefault();
 
-            string state = "";
+            string title = "";
             switch (status.ToLower())
             {
                 case "view":
-                    state = "상단컨텐츠(module_ty) - 미리보기";
+                    title = "상단컨텐츠(module_ty) - 미리보기";
                     break;
                 case "new":
-                    state = "상단컨텐츠(module_ty) - 신규등록";
+                    title = "상단컨텐츠(module_ty) - 신규등록";
                     break;
                 case "edit":
-                    state = "상단컨텐츠(module_ty) - 수정";
+                    title = "상단컨텐츠(module_ty) - 수정";
                     break;
             }
-            ViewBag.State = state;
+            ViewBag.Status = status;
+            ViewBag.Title = title;
             return View(item);
+        }
+
+        [Route("Admin/Reg")]
+        [HttpPost]
+        public JsonResult Reg(string cate, string title, string content)
+        {
+            new Contents().USP_ADMIN_CONTENTS_IU(-1, 0, 0, "", title, content, 1, AuthUser.M_ID);
+            return Json(new { success = true });
         }
     }
 }

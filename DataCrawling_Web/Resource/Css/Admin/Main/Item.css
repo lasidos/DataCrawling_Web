@@ -3,10 +3,15 @@
 }
 
 .menu-list {
-    width: 220px;
     margin-bottom: 20px;
     position: relative;
+    display: flex;
+    max-width: 30%;
 }
+
+    .menu-list .list-section + .list-section {
+        margin-left: 10px;
+    }
 
 .pWrap a {
     display: initial;

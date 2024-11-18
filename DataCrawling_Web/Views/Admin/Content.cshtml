@@ -21,112 +21,118 @@
     @RenderPage("~/Views/Admin/Shared/_gPathBar.cshtml")
 
     <section style="position: relative;">
-        <div class="set-option">
-            @*<div class="l-top">
-                    <div class="stair-menu">
-                        <div class="set-area">
-                            <span class="s-title">노출 설정 : </span>
-                            <div class="radio_box">
-                                <input type="radio" name="chk_info@(Model.IDX)" value="invisible" @(Model.VISIBLE == 1 ? "checked=\"checked\"" : "")>노출
-                                <input type="radio" name="chk_info@(Model.IDX)" value="visible" @(Model.VISIBLE == 0 ? "checked=\"checked\"" : "")>비노출
-                            </div>
-                        </div>
-                        <div class="set-area">
-                            <span class="s-title">노출영역 설정 : </span>
-                            <div class="set_box">
-                                <select name="sz">
-                                    <option value="" selected="selected">개</option>
-                                    <option value="4">4개</option>
-                                    <option value="6">6개</option>
-                                    <option value="8">8개</option>
-                                    <option value="10">10개</option>
-                                    <option value="12">12개</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="set-area">
-                            <span class="s-title">카테고리 설정 : </span>
-                            <div class="set_box">
-                                <select name="sz">
-                                    <option value="" selected="selected">개</option>
-                                    <option value="4">4개</option>
-                                    <option value="6">6개</option>
-                                    <option value="8">8개</option>
-                                    <option value="10">10개</option>
-                                    <option value="12">12개</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stair-menu">
-                        @if (Model.AREA != "Notice")
-                        {
+        @if (ViewBag.Status == "new")
+        {
+            @RenderPage("~/Views/Shared/Board/_Write.cshtml", null)
+        }
+        else
+        {
+            <div class="set-option">
+                @*<div class="l-top">
+                        <div class="stair-menu">
                             <div class="set-area">
-                                <span class="s-title">대표이미지 설정 : </span>
-                                <div>
-                                    <img id="preview" src="@Model.PORT_IMG" />
-                                    <input type="file" id="input-file" accept="image/*" onchange="readURL(this);">
+                                <span class="s-title">노출 설정 : </span>
+                                <div class="radio_box">
+                                    <input type="radio" name="chk_info@(Model.IDX)" value="invisible" @(Model.VISIBLE == 1 ? "checked=\"checked\"" : "")>노출
+                                    <input type="radio" name="chk_info@(Model.IDX)" value="visible" @(Model.VISIBLE == 0 ? "checked=\"checked\"" : "")>비노출
                                 </div>
-                                <label class="input-file-button" for="input-file">대표이미지 @(Model == null ? "업로드" : "수정")</label>
                             </div>
-                        }
+                            <div class="set-area">
+                                <span class="s-title">노출영역 설정 : </span>
+                                <div class="set_box">
+                                    <select name="sz">
+                                        <option value="" selected="selected">개</option>
+                                        <option value="4">4개</option>
+                                        <option value="6">6개</option>
+                                        <option value="8">8개</option>
+                                        <option value="10">10개</option>
+                                        <option value="12">12개</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="set-area">
+                                <span class="s-title">카테고리 설정 : </span>
+                                <div class="set_box">
+                                    <select name="sz">
+                                        <option value="" selected="selected">개</option>
+                                        <option value="4">4개</option>
+                                        <option value="6">6개</option>
+                                        <option value="8">8개</option>
+                                        <option value="10">10개</option>
+                                        <option value="12">12개</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stair-menu">
+                            @if (Model.AREA != "Notice")
+                            {
+                                <div class="set-area">
+                                    <span class="s-title">대표이미지 설정 : </span>
+                                    <div>
+                                        <img id="preview" src="@Model.PORT_IMG" />
+                                        <input type="file" id="input-file" accept="image/*" onchange="readURL(this);">
+                                    </div>
+                                    <label class="input-file-button" for="input-file">대표이미지 @(Model == null ? "업로드" : "수정")</label>
+                                </div>
+                            }
+                        </div>
                     </div>
-                </div>
-                <div class="r-top">
-                    <span id="btn-save">저장</span>
-                </div>*@
-            <table class="dataset-table fileDataDetail" id="fileDetailTableArea-pc">
-                <caption>소상공인시장진흥공단_상가(상권)정보로 파일데이터 정보 표로 분류체계, 제공기관 등 정보를 나타냄</caption>
-                <tbody>
-                    <tr class="bg-beige tr">
-                        <th class="th custom-cell-border-bottom custom-cell-border-right">노출 설정</th>
-                        <td class="td custom-cell-border-bottom">
-                            <div class="radio_box">
-                                <input type="radio" name="chk_info@(Model.IDX)" value="invisible" @(Model.VISIBLE == 1 ? "checked=\"checked\"" : "")>노출
-                                <input type="radio" name="chk_info@(Model.IDX)" value="visible" @(Model.VISIBLE == 0 ? "checked=\"checked\"" : "")>비노출
-                            </div>
-                        </td>
-                        <th class="th custom-cell-border-bottom custom-cell-border-right">노출영역 설정</th>
-                        <td class="td custom-cell-border-bottom">
-                            <div class="set_box">
-                                <select name="sz">
-                                    <option value="" selected="selected">개</option>
-                                    <option value="4">4개</option>
-                                    <option value="6">6개</option>
-                                    <option value="8">8개</option>
-                                    <option value="10">10개</option>
-                                    <option value="12">12개</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="bg-skyblue tr">
-                        <th class="th custom-cell-border-bottom custom-cell-border-right">설명</th>
-                        <td class="td custom-cell-border-bottom">영업 중인 전국 상가업소 데이터를 제공합니다.<br>(상호명, 업종코드, 업종명, 지번주소, 도로명주소, 경도, 위도 등)<br><br>[데이터 변경 안내]  <br><br>1. 상권업종분류  : 표준산업분류 기반 업종분류 개편(837개 -&gt; 247개)<br><br>2. 표준산업분류 :  9차→10차<br><br>3. 상가업소번호 : 상가업소번호를 새롭게 생성하여 과거 데이터와 연계 불가<br><br>자세한 사항은 상권정보시스템 공지사항에서 확인하시기 바랍니다.<br>https://sg.sbiz.or.kr/godo/noticeInfo/announcementView.sg?id=5158&amp;page=1</td>
-                    </tr>
-                    <tr class="bg-skyblue tr">
-                        <th class="th custom-cell-border-bottom custom-cell-border-right">기타 유의사항</th>
-                        <td class="td custom-cell-border-bottom"></td>
-                    </tr>
-                    <tr class="bg-green tr">
-                        <th class="th custom-cell-border-right">이용허락범위</th>
-                        <td class="td">
-                            <div class="img-copyright">
-                                <a href="/ugs/selectPortalPolicyView.do" target="_blank" title="새 창으로 공공데이터포털 정책 열기">
-                                    이용허락범위 제한 없음
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        @*@RenderPage("~/Views/Shared/Board/_Write.cshtml", Model)*@
+                    <div class="r-top">
+                        <span id="btn-save">저장</span>
+                    </div>*@
+                <table class="dataset-table fileDataDetail" id="fileDetailTableArea-pc">
+                    <caption>소상공인시장진흥공단_상가(상권)정보로 파일데이터 정보 표로 분류체계, 제공기관 등 정보를 나타냄</caption>
+                    <tbody>
+                        <tr class="bg-beige tr">
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">노출 설정</th>
+                            <td class="td custom-cell-border-bottom">
+                                <div class="radio_box">
+                                    <input type="radio" name="chk_info@(Model.IDX)" value="invisible" @(Model.VISIBLE == 1 ? "checked=\"checked\"" : "")>노출
+                                    <input type="radio" name="chk_info@(Model.IDX)" value="visible" @(Model.VISIBLE == 0 ? "checked=\"checked\"" : "")>비노출
+                                </div>
+                            </td>
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">노출영역 설정</th>
+                            <td class="td custom-cell-border-bottom">
+                                <div class="set_box">
+                                    <select name="sz">
+                                        <option value="" selected="selected">개</option>
+                                        <option value="4">4개</option>
+                                        <option value="6">6개</option>
+                                        <option value="8">8개</option>
+                                        <option value="10">10개</option>
+                                        <option value="12">12개</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="bg-skyblue tr">
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">설명</th>
+                            <td class="td custom-cell-border-bottom">영업 중인 전국 상가업소 데이터를 제공합니다.<br>(상호명, 업종코드, 업종명, 지번주소, 도로명주소, 경도, 위도 등)<br><br>[데이터 변경 안내]  <br><br>1. 상권업종분류  : 표준산업분류 기반 업종분류 개편(837개 -&gt; 247개)<br><br>2. 표준산업분류 :  9차→10차<br><br>3. 상가업소번호 : 상가업소번호를 새롭게 생성하여 과거 데이터와 연계 불가<br><br>자세한 사항은 상권정보시스템 공지사항에서 확인하시기 바랍니다.<br>https://sg.sbiz.or.kr/godo/noticeInfo/announcementView.sg?id=5158&amp;page=1</td>
+                        </tr>
+                        <tr class="bg-skyblue tr">
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">기타 유의사항</th>
+                            <td class="td custom-cell-border-bottom"></td>
+                        </tr>
+                        <tr class="bg-green tr">
+                            <th class="th custom-cell-border-right">이용허락범위</th>
+                            <td class="td">
+                                <div class="img-copyright">
+                                    <a href="/ugs/selectPortalPolicyView.do" target="_blank" title="새 창으로 공공데이터포털 정책 열기">
+                                        이용허락범위 제한 없음
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
     </section>
 
     <script>
         $(function () {
-             $('#gPathBar h2').text('@ViewBag.State');
+             $('#gPathBar h2').text('@ViewBag.Title');
         });
     </script>
 }

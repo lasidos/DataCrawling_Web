@@ -21,7 +21,6 @@
                 <h3>메뉴 관리</h3>
                 <ul>
                     @CHeckCurrent("/Admin/Code/CodeMng", "메뉴 관리")
-                    @CHeckCurrent("/Admin/Code/Sector", "영역 관리")
                 </ul>
             </li>
             <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Member") ? "gCurrent" : "")">

@@ -131,139 +131,6 @@ namespace DataCrawling_Web.Controllers.Admin
 
         #endregion
 
-        private GroupUserViewModel GroupUserAuthorityViewModel(int Category, int MenuIdx, int Page = 1, string SearchTxt = "")
-        {
-            GroupUserViewModel groupUser = new GroupUserViewModel
-            {
-                GroupInfo = this.GetGroupInfo()
-            };
-
-            IEnumerable<GroupAuthorityUserModel> vm = new Member().USP_GROUP_USER_Authority_S(MenuIdx);
-            groupUser.GroupAuthorityUsers = vm.Select(s => new GroupAuthorityUserModel()
-            {
-                OrderNo = s.OrderNo,
-                User_ID = Utility.Decrypt_AES(s.User_ID),
-                User_Name = Utility.SetMask(Utility.Decrypt_AES(s.User_Name), 1),
-                ROLE_ID = s.ROLE_ID,
-                Menu_Idx = s.Menu_Idx,
-                Menu_Name = s.Menu_Name,
-                Visible_Stat = s.Visible_Stat,
-                Select_Stat = s.Select_Stat,
-                Edit_Authority = s.Edit_Authority,
-                Menu_Type = s.Menu_Type
-            }).Where(w => w.Menu_Type == Category);
-
-            #region 페이징 필수
-
-            int pageSize = 50;
-            var totalItems = groupUser.GroupAuthorityUsers.Count(); // 예시: 총 아이템 수
-            groupUser.GroupAuthorityUsers = groupUser.GroupAuthorityUsers
-                .Where(i => i.User_Name.Contains(SearchTxt) || i.User_ID.Contains(SearchTxt))
-                          .OrderBy(i => i.Menu_Idx)
-                          .Skip((Page - 1) * pageSize)
-                          .Take(pageSize)
-                          .ToList();
-
-            groupUser.PagingInfo = new PagingInfo
-            {
-                CurrentPage = Page,
-                ItemsPerPage = pageSize,
-                TotalItems = totalItems
-            };
-
-            #endregion
-
-            return groupUser;
-        }
-
-        private GroupUserViewModel GroupUserViewModel(int GROUP_ID, int Page = 1, string SearchTxt = "")
-        {
-            IEnumerable<GroupUserModel> vm = new Member().USP_GROUP_USER_S(GROUP_ID);
-            GroupUserViewModel groupUser = new GroupUserViewModel
-            {
-                GroupUsers = vm.Select(s => new GroupUserModel()
-                {
-                    OrderNo = s.OrderNo,
-                    IDX = s.IDX,
-                    User_ID = Utility.Decrypt_AES(s.User_ID),
-                    User_Name = Utility.Decrypt_AES(s.User_Name),
-                    Phone = Utility.Decrypt_AES(s.Phone),
-                    Gender = Utility.Decrypt_AES(s.Gender) == "Male" ? "남" : "여",
-                    GROUP_ID = s.GROUP_ID,
-                    GROUP_NAME = s.GROUP_NAME,
-                    DESCRIPTION = s.DESCRIPTION,
-                    LastLoginDateST = s.LastLoginDate.ToString("yyyy년 MM월 dd일"),
-                    RegistDateST = s.RegistDate.ToString("yyyy년 MM월 dd일")
-                }),
-                GroupInfo = new Member().ADMIN_GROUP_S()
-            };
-
-            #region 페이징 필수
-
-            int pageSize = 50;
-            var totalItems = groupUser.GroupUsers.Count(); // 예시: 총 아이템 수
-            groupUser.GroupUsers = groupUser.GroupUsers
-                .Where(i => i.User_Name.Contains(SearchTxt) || i.User_ID.Contains(SearchTxt) || i.Phone.Contains(SearchTxt))
-                          .OrderBy(i => i.GROUP_ID).ThenBy(i => i.IDX)
-                          .Skip((Page - 1) * pageSize)
-                          .Take(pageSize)
-                          .ToList();
-
-            groupUser.PagingInfo = new PagingInfo
-            {
-                CurrentPage = Page,
-                ItemsPerPage = pageSize,
-                TotalItems = totalItems
-            };
-
-            #endregion
-
-            return groupUser;
-        }
-
-        private GroupUserViewModel Individual_Authority_ViewModel(int Page = 1, string SearchTxt = "")
-        {
-            GroupUserViewModel groupUser = new GroupUserViewModel
-            {
-                GroupInfo = this.GetGroupInfo()
-            };
-
-            IEnumerable<IndividualAuthorityModel> vm = new Member().USP_Individual_Authority_S(-1);
-            groupUser.Individuals = vm.Select(s => new IndividualAuthorityModel()
-            {
-                IDX = s.IDX,
-                OrderNo = s.OrderNo,
-                Menu_Name = s.Menu_Name,
-                User_ID = Utility.Decrypt_AES(s.User_ID),
-                User_Name = Utility.SetMask(Utility.Decrypt_AES(s.User_Name), 1),
-                ROLE_ID = s.ROLE_ID,
-                Visible_Stat = s.Visible_Stat,
-                Select_Stat = s.Select_Stat,
-                Edit_Authority = s.Edit_Authority
-            });
-
-            #region 페이징 필수
-
-            int pageSize = 50;
-            var totalItems = groupUser.Individuals.Count(); // 예시: 총 아이템 수
-            groupUser.Individuals = groupUser.Individuals
-                .Where(i => i.User_ID.Contains(SearchTxt))
-                          .Skip((Page - 1) * pageSize)
-                          .Take(pageSize)
-                          .ToList();
-
-            groupUser.PagingInfo = new PagingInfo
-            {
-                CurrentPage = Page,
-                ItemsPerPage = pageSize,
-                TotalItems = totalItems
-            };
-
-            #endregion
-
-            return groupUser;
-        }
-
         #region 그룹 / 사용자 권한 변경
 
         public ActionResult GroupAuthority(string m_type, int idx)
@@ -313,6 +180,52 @@ namespace DataCrawling_Web.Controllers.Admin
 
         // 그룹 정보와 사용자 정보 가져오기
         private GroupUserViewModel GetGroupAndUser(int GROUP_ID, int Page = 1, string SearchTxt = "")
+        {
+            IEnumerable<GroupUserModel> vm = new Member().USP_GROUP_USER_S(GROUP_ID);
+            GroupUserViewModel groupUser = new GroupUserViewModel
+            {
+                GroupUsers = vm.Select(s => new GroupUserModel()
+                {
+                    OrderNo = s.OrderNo,
+                    IDX = s.IDX,
+                    User_ID = Utility.Decrypt_AES(s.User_ID),
+                    User_Name = Utility.Decrypt_AES(s.User_Name),
+                    Phone = Utility.Decrypt_AES(s.Phone),
+                    Gender = Utility.Decrypt_AES(s.Gender) == "Male" ? "남" : "여",
+                    GROUP_ID = s.GROUP_ID,
+                    GROUP_NAME = s.GROUP_NAME,
+                    DESCRIPTION = s.DESCRIPTION,
+                    LastLoginDate = s.LastLoginDate,
+                    LastLoginDateST = s.LastLoginDate.ToString("yyyy년 MM월 dd일"),
+                    RegistDateST = s.RegistDate.ToString("yyyy년 MM월 dd일")
+                }),
+                GroupInfo = new Member().ADMIN_GROUP_S()
+            };
+
+            #region 페이징 필수
+
+            int pageSize = 50;
+            var totalItems = groupUser.GroupUsers.Count(); // 예시: 총 아이템 수
+            groupUser.GroupUsers = groupUser.GroupUsers
+                .Where(i => i.User_Name.Contains(SearchTxt) || i.User_ID.Contains(SearchTxt) || i.Phone.Contains(SearchTxt))
+                          .OrderBy(i => i.GROUP_ID).ThenBy(i => i.IDX)
+                          .Skip((Page - 1) * pageSize)
+                          .Take(pageSize)
+                          .ToList();
+
+            groupUser.PagingInfo = new PagingInfo
+            {
+                CurrentPage = Page,
+                ItemsPerPage = pageSize,
+                TotalItems = totalItems
+            };
+
+            #endregion
+
+            return groupUser;
+        }
+
+        private GroupUserViewModel GroupUserViewModel(int GROUP_ID, int Page = 1, string SearchTxt = "")
         {
             IEnumerable<GroupUserModel> vm = new Member().USP_GROUP_USER_S(GROUP_ID);
             GroupUserViewModel groupUser = new GroupUserViewModel
