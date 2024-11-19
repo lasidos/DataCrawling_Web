@@ -75,6 +75,8 @@ function GetSector(idx) {
 
                 $('#SectorGroup0 .customSelectList').append(temp);
             });
+
+            GetContent();
         },
         error: function (response) {
             alert(response);

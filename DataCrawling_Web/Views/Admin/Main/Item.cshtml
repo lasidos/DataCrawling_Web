@@ -81,18 +81,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in Model)
-                                {
-                                    <tr class="paramtrCls" data-idx="@(item.IDX)">
-                                        <td data-paramtr-nm="serviceKey">@(item.OrderNo)</td>
-                                        <td class="just-pc">@(item.SECTOR)</td>
-                                        <td data-paramtr-size="100">@(item.TITLE)</td>
-                                        <td>@(item.Get_UserName)</td>
-                                        <td>@(item.VISIBLE == 0 ? "비노출" : "노출")</td>
-                                        <td>@(DateTime.Now.ToString("yyyy.MM.dd") == item.E_DATE.ToString("yyyy.MM.dd") ? item.E_DATE.ToString("HH:MM") : item.E_DATE.ToString("yyyy.MM.dd"))</td>
-                                        <td><span class="edit">수정</span></td>
-                                    </tr>
-                                }*@
                         </tbody>
                     </table>
                     <div class="no-data">
