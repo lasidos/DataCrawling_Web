@@ -1,19 +1,29 @@
 ﻿@model DataCrawling_Web.Models.Admin.ContentInfoModel
-@{ 
+@{
     string Name = "NewWrite";
     IEnumerable<DataCrawling_Web.Models.ListViewItem> items = new List<DataCrawling_Web.Models.ListViewItem>()
-    {
+{
         new DataCrawling_Web.Models.ListViewItem()
         {
             Idx = 1,
-            Name = "공지사항"
+            Name = "노출"
         },
         new DataCrawling_Web.Models.ListViewItem()
         {
-            Idx = 2,
-            Name = "컨텐츠등록"
+            Idx = 0,
+            Name = "미노출"
         }
     };
+
+    List<DataCrawling_Web.Models.ListViewItem> orders = new List<DataCrawling_Web.Models.ListViewItem>();
+    for (int i = 0; i < Model.TOTAL; i++)
+    {
+        orders.Add(new DataCrawling_Web.Models.ListViewItem()
+        {
+            Idx = 1,
+            Name = string.Format("노출순서 {0}", i + 1)
+        });
+    }
 }
 <script src="~/Resource/summernote-0.8.18-dist/summernote-lite.js"></script>
 <link href="~/Resource/summernote-0.8.18-dist/summernote-lite.css" rel="stylesheet" />
@@ -31,9 +41,21 @@
                 ShowAll = false,
                 Height = 35,
                 Width = 130,
-                SelectID = -1,
+                SelectID = Model.VISIBLE,
                 GroupInfo = items
             })
+        </div>
+        <div class="order">
+            @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+           {
+               ID = "Sector",
+               ItemIdx = -1,
+               ShowAll = false,
+               Height = 35,
+               Width = 150,
+               SelectID = -1,
+               GroupInfo = orders
+           })
         </div>
         <input type="text" name="title" id="title" value="@(Model == null ? "" : Model.TITLE)" placeholder="타이틀을 입력하세요" />
     </div>
@@ -71,15 +93,30 @@
             $(this).toggleClass('on');
         });
 
+        // 노출, 미노출
         $('#dvLyrNewWriteType li').click(function () {
             var txt = $(this).find('button').text();
             var idx = $(this).data('idx');
 
             if ($('#hidNewWriteType').val() != txt) {
-                $('.textCategory').text($(this).find('button').text());
+                $('#NewWriteGroup .textCategory').text($(this).find('button').text());
 
                 $('#hidNewWriteType').val(txt);
                 $('#hidNewWriteType').attr('data-idx', idx);
+            }
+        });
+
+        // 노출순서
+        $('#dvLyrSectorType li').click(function () {
+            console.log('asd');
+            var txt = $(this).find('button').text();
+            var idx = $(this).data('idx');
+
+            if ($('#hidSectorType').val() != txt) {
+                $('#SectorGroup .textCategory').text($(this).find('button').text());
+
+                $('#hidSectorType').val(txt);
+                $('#hidSectorType').attr('data-idx', idx);
             }
         });
 
@@ -95,7 +132,8 @@
                 return;
             }
             var data = {
-                cate: $('#hidNewWriteType').val(),
+                visible: $('#NewWriteGroup .textCategory').text() == "노출" ? 1 : 0,
+                order: $('#SectorGroup .textCategory').text().replace("노출순서 ", ""),
                 title: title,
                 content: content
             };

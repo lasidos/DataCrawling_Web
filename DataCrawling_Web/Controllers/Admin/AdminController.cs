@@ -55,7 +55,7 @@ namespace DataCrawling_Web.Controllers.Admin
 
         [Route("Admin/Reg")]
         [HttpPost]
-        public JsonResult Reg(string cate, string title, string content)
+        public JsonResult Reg(string visible, string order, string title, string content)
         {
             new Contents().USP_ADMIN_CONTENTS_IU(-1, 0, 0, "", title, content, 1, AuthUser.M_ID);
             return Json(new { success = true });

@@ -59,7 +59,7 @@ namespace DataCrawling_Web.Controllers.Admin
         [Route("Main/GetContent")]
         public ActionResult GetContent(int m_idx, int code)
         {
-            var vm = new Contents().GetContents(m_idx, code).OrderByDescending(s => s.E_DATE);
+            var vm = new Contents().GetContents(m_idx, code);
             Session["ContentInfoModel"] = JsonConvert.SerializeObject(vm);
 
             return PartialView("~/Views/Admin/Main/_PartialView/_Item.cshtml", vm);

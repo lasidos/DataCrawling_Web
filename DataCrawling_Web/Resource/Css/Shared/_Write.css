@@ -15,7 +15,12 @@
 }
 
     .h-title .category {
-        margin-right: 15px;
+        margin-right: 10px;
+        border-radius: 5px;
+    }
+
+    .h-title .order {
+        margin-right: 20px;
         border-radius: 5px;
     }
 

@@ -13,7 +13,7 @@ namespace DataCrawling_Web.Models.Admin
 
     public class ContentInfoModel
     {
-        public int OrderNo { get; set; }
+        public int NO { get; set; }
         public string SECTOR { get; set; }
         public string CODE { get; set; }
         public int IDX { get; set; }
@@ -25,7 +25,8 @@ namespace DataCrawling_Web.Models.Admin
         public string User_Name { get; set; }
         public DateTime E_DATE { get; set; }
         public int READ_CNT { get; set; }
-
+        public int ORDER { get; set; }
+        public int TOTAL { get; set; }
         public string Get_UserName
         {
             get
