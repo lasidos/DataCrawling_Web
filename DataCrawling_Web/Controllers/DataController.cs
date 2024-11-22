@@ -59,7 +59,7 @@ namespace DataCrawling_Web.Controllers
                     P_IDX = p.Key.P_IDX,
                     P_NAME_E = p.Key.P_NAME_E,
                     P_TYPE = p.Key.P_TYPE,
-                    P_NEED = p.Key.P_NEED,
+                    P_NEED = p.Key.P_NEED,          
                     SAMPLE_TXT = p.Key.SAMPLE_TXT,
                     P_EXPLANE = p.Key.P_EXPLANE
                 }).ToList();

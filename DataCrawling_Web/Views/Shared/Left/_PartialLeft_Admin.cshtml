@@ -37,11 +37,11 @@
                     @CHeckCurrent("/Admin/Main/item", "상단컨텐츠(module_ty)")
                 </ul>
             </li>
-            <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Order") ? "gCurrent" : "")">
+            <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Service") ? "gCurrent" : "")">
                 <h3>API/자동화 관리</h3>
                 <ul>
-                    <li><a href="/Admin/Order/lstAll">API</a></li>
-                    <li><a href="/Admin/Order/lstPending">자동화</a></li>
+                    @CHeckCurrent("/Admin/Service/API", "API")
+                    @CHeckCurrent("/Admin/Service/Automation", "자동화")
                 </ul>
             </li>
             <li class="@(Request.Url.AbsolutePath.Contains("/Admin/Order") ? "gCurrent" : "")">

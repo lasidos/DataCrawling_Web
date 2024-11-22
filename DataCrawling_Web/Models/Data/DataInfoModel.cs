@@ -18,6 +18,7 @@ namespace DataCrawling_Web.Models.Data
 
     public class DataInfoModel
     {
+        public int OrderNo { get; set; }
         public int DATA_IDX { get; set; }
         public string D_TYPE { get; set; }
         public string SECTOR { get; set; }
@@ -33,8 +34,6 @@ namespace DataCrawling_Web.Models.Data
         public string KEYWORD { get; set; }
         public string D_LINK { get; set; }
         public string R_TYPE { get; set; }
-        public int PRICE { get; set; }
-        public int PRICE_STANDARD { get; set; }
         public DateTime CREATE_DT { get; set; }
         public DateTime EDIT_DT { get; set; }
         public int READ_CNT { get; set; }

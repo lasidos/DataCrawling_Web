@@ -1,0 +1,83 @@
+﻿@model IEnumerable<DataCrawling_Web.Models.Data.DataInfoModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.BodyClass = "mtcSubNotice";
+}
+
+@section Header{
+    @RenderPage("~/Views/Shared/Header/_HeaderAdmin.cshtml")
+
+    <script src="~/Resource/Js/Admin/Content.js"></script>
+    <link href="~/Resource/Css/Admin/Member/Management.css" rel="stylesheet" />
+}
+
+@section Left{
+    @RenderPage("~/Views/Shared/Left/_PartialLeft_Admin.cshtml")
+}
+
+@section Content{
+    @RenderPage("~/Views/Admin/Shared/_gPathBar.cshtml")
+
+    <section style="position: relative;">
+        <div id="wItemBatchList">
+            <div class="pWrap" id="lNotice">
+                <div class="filter-area">
+                    <div class="form_col stat_type">
+
+                    </div>
+                    <div class="sch-area">
+                        <input type="text" id="searchTxt" name="name" value="" placeholder="검색어를 입력하세요 (이름, 아이디, 전화번호)" />
+                        <span class="btn-sch">검색</span>
+                    </div>
+                </div>
+                <div class="col-table left line">
+                    <p class="tit-hide">요청 URL</p>
+                    <table>
+                        <caption>요청 URL 입니다.</caption>
+                        <colgroup>
+                            <col style="width:5%">
+                            <col style="width:12.5%">
+                            <col style="width:7%">
+                            <col style="width:12.5%">
+                            <col style="width:7%">
+                            <col style="width:7.5%">
+                            <col style="width:12.5%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">타입</th>
+                                <th scope="col">요약</th>
+                                <th scope="col">설명</th>
+                                <th scope="col">링크</th>
+                                <th scope="col">수정일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr data-idx="@item.DATA_IDX">
+                                    <td>@item.OrderNo</td>
+                                    <td>@item.TITLE</td>
+                                    <td>@item.D_TYPE</td>
+                                    <td>@item.SUMMARY</td>
+                                    <td>@item.EXPLANE</td>
+                                    <td>@item.D_LINK</td>
+                                    <td>@item.EDIT_DT.ToString("yyyy년 MM월 dd일")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        $(function () {
+            $('#gPathBar h2').text('회원 관리');
+        });
+    </script>
+}
