@@ -28,21 +28,7 @@
 
             <div class="justify-content-space-between">
                 <div class="flex-tit">
-                    <h3 class="mb-2">
-                        파일데이터 정보
-                    </h3>
-                    <div class="dropdown ml-2">
-                        <button class="button h36 dropbtn">
-                            <i class="fa fa-tags" aria-hidden="true"></i> 메타데이터 다운로드
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="/catalog/15084730/fileData.json" target="_blank">schema.org</a>
-                            <a href="/dcat/metadata/15084730" target="_blank">DCAT</a>
-                        </div>
-                    </div>
-                    <button id="column-def-toggle-btn" class="button white h36 has-tooltip ml-2 dropbtn">
-                        데이터 항목(컬럼) 정보
-                    </button>
+                   
                 </div>
                 <div class="flex-tit align-items-center">
                     <a href="javascript:fn_callDataImproveReportPopup('', 'F', '15084730','uddi:c88e1e02-807c-41ec-9620-b59260b8be96', '')" class="button error-btn" title="새 창으로 문의 열기">
@@ -130,13 +116,9 @@
                     </tr>
 
                     <tr class="bg-skyblue tr">
-                        <th class="th custom-cell-border-bottom custom-cell-border-right">제공형태</th>
                         @if (Model.DataInfo.D_TYPE != "API")
                         {
-                            <td class="td custom-cell-border-bottom">공공데이터포털에서 다운로드(원문파일등록)</td>
-                        }
-                        else
-                        {
+                            <th class="th custom-cell-border-bottom custom-cell-border-right">제공형태</th>
                             <td class="td custom-cell-border-bottom">공공데이터포털에서 다운로드(원문파일등록)</td>
                         }
                     </tr>
@@ -148,12 +130,6 @@
                     <tr class="bg-skyblue tr">
                         <th class="th custom-cell-border-bottom custom-cell-border-right">기타 유의사항</th>
                         <td class="td custom-cell-border-bottom"></td>
-                    </tr>
-                    <tr class="bg-green tr">
-                        <th class="th custom-cell-border-bottom custom-cell-border-right">비용</th>
-                        <td class="td custom-cell-border-bottom">@(Model.DataInfo.PRICE == 0 ? "무료": string.Format("월 {0:#,###}원", Model.DataInfo.PRICE))</td>
-                        <th class="th custom-cell-border-bottom custom-cell-border-right">비용부과기준 및 단위</th>
-                        <td class="td custom-cell-border-bottom">@(Model.DataInfo.PRICE == 0 ? "": string.Format("{0:#,###}", Model.DataInfo.PRICE_STANDARD))건 </td>
                     </tr>
                     <tr class="bg-green tr">
                         <th class="th custom-cell-border-right">이용허락범위</th>

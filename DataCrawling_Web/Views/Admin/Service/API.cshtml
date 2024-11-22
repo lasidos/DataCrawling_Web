@@ -1,0 +1,23 @@
+﻿@model DataCrawling_Web.Models.Admin.ContentInfoModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.BodyClass = "mtcSubNotice";
+}
+
+@section Header{
+    @RenderPage("~/Views/Shared/Header/_HeaderAdmin.cshtml")
+
+    <script src="~/Resource/Js/Admin/Content.js"></script>
+    <link href="~/Resource/Css/Data/FileData.css" rel="stylesheet" />
+    <link href="~/Resource/Css/Admin/Content.css" rel="stylesheet" />
+}
+
+@section Left{
+    @RenderPage("~/Views/Shared/Left/_PartialLeft_Admin.cshtml")
+}
+
+@section Content{
+
+
+}

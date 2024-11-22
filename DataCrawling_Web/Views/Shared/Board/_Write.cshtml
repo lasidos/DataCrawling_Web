@@ -135,7 +135,7 @@
                 visible: $('#NewWriteGroup .textCategory').text() == "노출" ? 1 : 0,
                 order: $('#SectorGroup .textCategory').text().replace("노출순서 ", ""),
                 title: title,
-                content: content
+                content: encodeURIComponent($('.note-editable').html())
             };
             $.ajax({
                 url: "/Admin/Reg",
