@@ -1,0 +1,19 @@
+﻿#content input {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+#content textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+#content #explane {
+    min-height: 200px;
+}
+
+#d_link {
+    text-align: center;
+}

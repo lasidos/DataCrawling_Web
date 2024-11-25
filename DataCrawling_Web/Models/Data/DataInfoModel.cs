@@ -10,6 +10,26 @@ namespace DataCrawling_Web.Models.Data
         public IEnumerable<DataInfoModel> DataInfo { get; set; }
     }
 
+    public class DataInfoEditView
+    {
+        public IEnumerable<DataInfoModel> DataInfo { get; set; }
+        public DataInfoModel SelInfo { get; set; }
+        public List<comboboxMpdel> Item_Sector { get; set; }
+        public int Item_Sector_Idx { get; set; }
+        public List<comboboxMpdel> Item_D_TYPE { get; set; }
+        public int Item_D_TYPE_Idx { get; set; }
+        public List<comboboxMpdel> Item_R_TYPE { get; set; }
+        public int Item_R_TYPE_Idx { get; set; }
+        public List<RequestParameter_Model> RequestList { get; set; }
+        public List<ResponseElement_Model> ResponseList { get; set; }
+    }
+
+    public class comboboxMpdel
+    {
+        public int Idx { get; set; }
+        public string Name { get; set; }
+    }
+
     public class Authentication_Key_Model
     {
         public string AccessTb { get; set; }

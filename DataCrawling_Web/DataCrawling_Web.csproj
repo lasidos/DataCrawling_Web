@@ -252,6 +252,8 @@
     <Content Include="Resource\Css\Admin\Member\Groups.css" />
     <Content Include="Resource\Css\Admin\Member\Management.css" />
     <Content Include="Resource\Css\Admin\Member\Modal.css" />
+    <Content Include="Resource\Css\Admin\Service\API.css" />
+    <Content Include="Resource\Css\Admin\Service\item.css" />
     <Content Include="Resource\Css\Common.css" />
     <Content Include="Resource\Css\Data\ApiList.css" />
     <Content Include="Resource\Css\Data\FileData.css" />
@@ -299,6 +301,8 @@
     <Content Include="Resource\Js\Admin\Main\Item.js" />
     <Content Include="Resource\Js\Admin\Main\service.js" />
     <Content Include="Resource\Js\Admin\Member.js" />
+    <Content Include="Resource\Js\Admin\Service\API.js" />
+    <Content Include="Resource\Js\Admin\Service\item.js" />
     <Content Include="Resource\Js\Data\FileData.js" />
     <Content Include="Resource\Js\Shared\Left\_PartialLeft_Admin.js" />
     <Content Include="Resource\summernote-0.8.18-dist\lang\summernote-ar-AR.js" />
@@ -639,6 +643,7 @@
     <Content Include="Views\Admin\Main\_PartialView\_Item.cshtml" />
     <Content Include="Views\Admin\Service\API.cshtml" />
     <Content Include="Views\Admin\Service\Automation.cshtml" />
+    <Content Include="Views\Admin\Service\item.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

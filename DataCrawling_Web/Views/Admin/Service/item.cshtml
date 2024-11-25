@@ -1,0 +1,370 @@
+﻿@model DataCrawling_Web.Models.Data.DataInfoEditView
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.BodyClass = "mtcSubNotice";
+}
+
+@section Header{
+    <link href="~/Resource/Css/Data/FileData.css" rel="stylesheet" />
+    <link href="~/Resource/Css/Admin/Service/item.css" rel="stylesheet" />
+}
+
+@section Content{
+    <section style="position: relative;">
+        <div id="wItemBatchList">
+            <div id="container">
+                <div id="content">
+                    <div class="topArea">
+                        <span class="cl3399ff">[ @Model.SelInfo.D_TYPE ]</span>
+                        @if (ViewBag.View == "sel")
+                        {
+                            <h2 class="subTits">@Model.SelInfo.TITLE</h2>
+                        }
+                        else
+                        {
+                            <input type="text" id="title" value="@Model.SelInfo.TITLE" class="subTits" />
+                        }
+                    </div>
+
+                    <div class="DataSubject">
+                        @if (ViewBag.View == "sel")
+                        {
+                            <span>@Model.SelInfo.SUMMARY.Replace("\\n", "\n")</span>
+                        }
+                        else
+                        {
+                            <textarea id="summary">@Model.SelInfo.SUMMARY.Replace("\\n", "\n")</textarea>
+                        }
+                    </div>
+
+                    @if (ViewBag.View == "sel")
+                    {
+                        <div class="justify-content-space-between">
+                            <div class="flex-tit">
+
+                            </div>
+                            <div class="flex-tit align-items-center">
+                                <a href="javascript:fn_callDataImproveReportPopup('', 'F', '15084730','uddi:c88e1e02-807c-41ec-9620-b59260b8be96', '')" class="button error-btn" title="새 창으로 문의 열기">
+                                    데이터 개선요청
+                                </a>
+                                <a href="javascript:fn_callErrorReportPopup('', 'F', '15084730','uddi:c88e1e02-807c-41ec-9620-b59260b8be96', '');" class="button error-btn ml-2" title="새 창으로 문의 열기">
+                                    오류신고 및 문의
+                                </a>
+                            </div>
+                        </div>
+                    }
+
+                    <table class="dataset-table fileDataDetail" id="fileDetailTableArea-pc">
+                        <caption>소상공인시장진흥공단_상가(상권)정보로 파일데이터 정보 표로 분류체계, 제공기관 등 정보를 나타냄</caption>
+                        <tbody>
+                            @if (Model.SelInfo.D_TYPE != "API")
+                            {
+                                <tr class="bg-beige tr">
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">파일데이터명</th>
+                                    <td class="td custom-cell-border-bottom" style="color: #39f; font-weight:500">
+                                        <a href="/tcs/dss/selectDataSetList.do?dType=&amp;keyword=&amp;org=소상공인시장진흥공단&amp;orgFilter=소상공인시장진흥공단&amp;orgFullName=소상공인시장진흥공단&amp;conditionType=search">
+                                            소상공인시장진흥공단_상가(상권)정보_20240331
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr class="bg-beige tr">
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">서비스</th>
+                                    <td class="td custom-cell-border-bottom">
+                                        @if (ViewBag.View == "sel")
+                                        {
+                                            @Model.SelInfo.TITLE
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="subTits" value="@Model.SelInfo.TITLE" class="subTits" />
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                            <tr class="bg-beige tr">
+                                <th class="th custom-cell-border-bottom custom-cell-border-right">분류</th>
+                                <td class="td custom-cell-border-bottom">
+                                    @if (ViewBag.View == "sel")
+                                    {
+                                        @Model.SelInfo.SECTOR
+                                    }
+                                    else
+                                    {
+                                        @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                                        {
+                                            ID = "Item_Sector",
+                                            ItemIdx = Model.Item_Sector_Idx,
+                                            ShowAll = false,
+                                            Height = 35,
+                                            SelectID = -1,
+                                            GroupInfo = Model.Item_Sector.Select(s => new DataCrawling_Web.Models.ListViewItem
+                                            {
+                                                Idx = s.Idx,
+                                                Name = s.Name
+                                            })
+                                        })
+                                    }
+                                </td>
+                                <th class="th custom-cell-border-bottom custom-cell-border-right">제공타입</th>
+                                <td class="td custom-cell-border-bottom">
+                                    @if (ViewBag.View == "sel")
+                                    {
+                                        @Model.SelInfo.D_TYPE
+                                    }
+                                    else
+                                    {
+                                        @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                                        {
+                                            ID = "Item_D_TYPE",
+                                            ItemIdx = -1,
+                                            ShowAll = false,
+                                            Height = 35,
+                                            SelectID = -1,
+                                            GroupInfo = Model.Item_D_TYPE.Select(s => new DataCrawling_Web.Models.ListViewItem
+                                            {
+                                                Idx = s.Idx,
+                                                Name = s.Name
+                                            })
+                                        })
+                                    }
+                                </td>
+                            </tr>
+                            <tr class="bg-beige tr">
+                                <th class="th custom-cell-border-bottom custom-cell-border-right">업데이트 주기</th>
+                                <td class="td custom-cell-border-bottom">
+                                    @if (ViewBag.View == "sel")
+                                    {
+                                        <span>@(Model.SelInfo.UPDATE_CYCLE) 일</span>
+                                    }
+                                    else
+                                    {
+                                        <label for="updateCycle"></label>
+                                        <input type="number" id="updateCycle" nin="1" max="365" value="@Model.SelInfo.UPDATE_CYCLE">
+                                    }
+                                </td>
+                                @if (ViewBag.View == "sel")
+                                {
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">차기 등록 예정일</th>
+                                    <td class="td custom-cell-border-bottom">@(Model.SelInfo.LAST_UDT.AddDays(Model.SelInfo.UPDATE_CYCLE).ToString("yyyy.MM.dd"))</td>
+                                }
+                            </tr>
+
+                            @if (Model.SelInfo.D_TYPE != "API")
+                            {
+                                <tr class="bg-skyblue tr">
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">매체유형</th>
+                                    <td class="td custom-cell-border-bottom">텍스트</td>
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">전체 행</th>
+                                    <td class="td custom-cell-border-bottom">1</td>
+                                </tr>
+                                <tr class="bg-skyblue tr">
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">확장자</th>
+                                    <td class="td custom-cell-border-bottom">CSV</td>
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">키워드</th>
+                                    <td class="td custom-cell-border-bottom">상가업소 ,소상공인 ,상권정보</td>
+                                </tr>
+                                <tr class="bg-skyblue tr">
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">
+                                        누적 다운로드(바로가기)<br>
+                                        <small>* 주기성 데이터 포함</small>
+                                    </th>
+                                    <td class="td custom-cell-border-bottom">214936</td>
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">다운로드(바로가기)</th>
+                                    <td class="td custom-cell-border-bottom">2322</td>
+                                </tr>
+                            }
+                            else if (ViewBag.View == "sel")
+                            {
+                                <tr class="bg-skyblue tr">
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">API 유형</th>
+                                    <td class="td custom-cell-border-bottom">REST</td>
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">데이터포맷</th>
+                                    <td class="td custom-cell-border-bottom">JSON</td>
+                                </tr>
+                            }
+
+                            @if (ViewBag.View == "sel")
+                            {
+                                <tr class="bg-skyblue tr">
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">등록일</th>
+                                    <td class="td custom-cell-border-bottom">@Model.SelInfo.CREATE_DT.ToString("yyyy-MM-dd")</td>
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">수정일</th>
+                                    <td class="td custom-cell-border-bottom">@Model.SelInfo.EDIT_DT.ToString("yyyy-MM-dd")</td>
+                                </tr>
+                            }
+
+                            <tr class="bg-skyblue tr">
+                                @if (Model.SelInfo.D_TYPE != "API")
+                                {
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">제공형태</th>
+                                    <td class="td custom-cell-border-bottom">공공데이터포털에서 다운로드(원문파일등록)</td>
+                                }
+                            </tr>
+
+                            <tr class="bg-skyblue tr">
+                                <th class="th custom-cell-border-bottom custom-cell-border-right">설명</th>
+                                <td class="td custom-cell-border-bottom">
+                                    @if (ViewBag.View == "sel")
+                                    {
+                                        @(Html.Raw(Model.SelInfo.EXPLANE.Replace("\\n", "<br>")))
+                                    }
+                                    else
+                                    {
+                                        <textarea id="explane">@(Html.Raw(Model.SelInfo.EXPLANE.Replace("\\n", "\r\n")))</textarea>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="tab-wrap common-data-tab">
+                        <nav class="tab-list tab-layer col-3">
+                            <ul>
+                                <li class="on" data-tab="tab_layer_detail_function"><a href="javascript:">상세기능</a></li>
+                                @*<li data-tab="tab_layer_prcuse_exam"><a href="javascript:">활용사례</a></li>
+                                    <li data-tab="tab_layer_recommend_data"><a href="javascript:">추천데이터</a></li>*@
+                            </ul>
+                        </nav>
+                        <div id="tab_layer_detail_function">
+                            <div class="tab-cont">
+                                <div class="top-info">
+                                    <h4 class="tit">요청 URL</h4>
+                                </div>
+                                <div class="col-table left line">
+                                    <p class="tit-hide">요청 URL</p>
+                                    <table>
+                                        <caption>요청 URL 입니다.</caption>
+                                        <colgroup>
+                                            <col style="width:80%">
+                                            <col style="width:20%">
+                                            <col>
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">요청 URL</th>
+                                                <th scope="col">결괏값 반환 형식</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="paramtrCls">
+                                                <td data-paramtr-nm="serviceKey">
+                                                    @if (ViewBag.View == "sel")
+                                                    {
+                                                        @Model.SelInfo.D_LINK
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="text" id="d_link" value="@Model.SelInfo.D_LINK"/>
+                                                    }
+                                                </td>
+                                                <td class="just-pc">
+                                                    @if(ViewBag.View == "sel")
+                                                    {
+                                                        @Model.SelInfo.R_TYPE
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                                                        {
+                                                            ID = "Item_R_TYPE",
+                                                            ItemIdx = -1,
+                                                            ShowAll = false,
+                                                            Height = 35,
+                                                            SelectID = -1,
+                                                            GroupInfo = Model.Item_R_TYPE.Select(s => new DataCrawling_Web.Models.ListViewItem
+                                                            {
+                                                                Idx = s.Idx,
+                                                                Name = s.Name
+                                                            })
+                                                        })
+                                                    }
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="top-info">
+                                    <h4 class="tit">요청변수(Request Parameter)</h4>
+                                    <span class="detail-info">* 파라미터를 쿼리 스트링 형식으로 전달합니다.</span>
+                                </div>
+                                <div class="col-table left line">
+                                    <p class="tit-hide">요청변수(Request Parameter)</p>
+                                    <table>
+                                        <caption>항목명(국문),항목명(영문),항목크기,항목구분,샘플데이터,항목설명 항목을 가진 요청변수(Request Parameter)표 입니다.</caption>
+                                        <colgroup>
+                                            <col style="width:30%">
+                                            <col style="width:10%">
+                                            <col style="width:10%">
+                                            <col style="width:50%">
+                                            <col>
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">파라미터</th>
+                                                <th scope="col" class="just-pc">타입</th>
+                                                <th scope="col" class="just-pc">필수항목</th>
+                                                <th scope="col">항목설명</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.RequestList)
+                                            {
+                                                <tr class="paramtrCls">
+                                                    <td data-paramtr-nm="serviceKey">@(item.P_NAME_E)</td>
+                                                    <td class="just-pc">@item.P_TYPE</td>
+                                                    <td data-paramtr-size="100" class="just-pc">@(item.P_NEED == 0 ? "X": "O")</td>
+                                                    <td data-paramtr-dc="공공데이터포털에서 받은 인증키">@item.P_EXPLANE</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="top-info">
+                                    <h4 class="tit">출력결과(Response Element)</h4>
+                                </div>
+                                <div class="col-table left line">
+                                    <p class="tit-hide">출력결과(Response Element)</p>
+                                    <table>
+                                        <caption>항목명(국문),항목명(영문),항목크기,항목구분,샘플데이터,항목설명 항목을 가진 출력결과(Response Element)표 입니다.</caption>
+                                        <colgroup>
+                                            <col style="width:40%;">
+                                            <col style="width:10%">
+                                            <col style="width:50%">
+                                            <col>
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">요소</th>
+                                                <th scope="col">타입</th>
+                                                <th scope="col">항목설명</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.ResponseList)
+                                            {
+                                                <tr class="paramtrCls">
+                                                    <td data-paramtr-nm="serviceKey">@(item.R_NAME_E) (@item.R_NAME_K)</td>
+                                                    <td data-paramtr-bass-value="-" class="just-pc">@(string.IsNullOrEmpty(item.R_TYPE) ? "-" : item.R_TYPE)</td>
+                                                    <td data-paramtr-dc="공공데이터포털에서 받은 인증키">@item.R_EXPLANE</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@section Footer{
+    @RenderPage("~/Views/Shared/_Footer_Type2.cshtml")
+}

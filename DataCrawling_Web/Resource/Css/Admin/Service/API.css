@@ -1,0 +1,189 @@
+﻿.filter-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .filter-area .sch-area {
+        display: flex;
+        align-items: center;
+    }
+
+    .filter-area #searchTxt {
+        border: 1px solid #bdbdbd;
+        padding: 6px 10px;
+        border-radius: 5px;
+        width: 250px;
+    }
+
+    .filter-area .btn-sch {
+        padding: 10px 30px;
+        background: #434343;
+        color: #fff;
+        border-radius: 5px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+.stat_type {
+    width: 220px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.elWrap {
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+    .elWrap .selType .btnSelType {
+        width: 100%;
+        height: 40px;
+        border: none;
+        background-color: #fff;
+        font-size: 14px;
+        letter-spacing: 0px;
+        color: #333;
+        text-align: left;
+        position: relative;
+    }
+
+        .elWrap .selType .btnSelType .txCate {
+            display: inline-block;
+            position: absolute;
+            left: 16px;
+            top: 13px;
+            -webkit-transition: all 0.2s ease-out;
+            -moz-transition: all 0.2s ease-out;
+            -o-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out;
+        }
+
+        .elWrap .selType .btnSelType:after {
+            content: "";
+            width: 11px;
+            height: 6px;
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            margin-top: -2px;
+            background: url(../../../image/commons/mtc_sp_btn.png) no-repeat;
+            background-position: -302px -50px;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
+    .elWrap .selType .selTypeList a, .elWrap .selType .selTypeList button {
+        display: block;
+        padding: 8px 18px 8px;
+        font-size: 14px;
+        letter-spacing: 0px;
+        color: #333;
+        width: 100%;
+        text-align: left;
+    }
+
+    .elWrap .selType .selTypeList li {
+        padding: 5px 0;
+    }
+
+        .elWrap .selType .selTypeList li:first-child {
+            padding-top: 10px;
+        }
+
+        .elWrap .selType .selTypeList li:last-child {
+            padding-bottom: 10px;
+        }
+
+        .elWrap .selType .selTypeList li:hover {
+            background: #f3f5f7;
+        }
+
+.lyElBx {
+    display: none;
+    width: 100%;
+    border: 1px solid #ddd;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin: -1px 0px;
+    background-color: #fff;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.elWrap.on .lyElBx {
+    display: block;
+}
+
+.pWrap a {
+    display: initial;
+}
+
+    .pWrap a:-webkit-any-link {
+        color: -webkit-link;
+        cursor: pointer;
+        text-decoration: none;
+        color: #9d9d9d;
+    }
+
+.btn {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background: #434343;
+    color: #fff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 80%;
+    margin: 0 auto;
+}
+
+.btn-edit {
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background: #00427d;
+    color: #ffffff;
+}
+
+.empty span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+tbody td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+tbody tr {
+    cursor: pointer;
+}
+
+    tbody tr .edit {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0a2142;
+        color: #fff;
+        line-height: 30px;
+        margin: 0 10px;
+        border-radius: 5px;
+    }
