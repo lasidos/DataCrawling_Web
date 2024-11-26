@@ -7,6 +7,7 @@
 @section Header{
     <link href="~/Resource/Css/Data/FileData.css" rel="stylesheet" />
     <link href="~/Resource/Css/Admin/Service/item.css" rel="stylesheet" />
+    <script src="~/Resource/Js/Admin/Service/item.js"></script>
 }
 
 @section Content{
@@ -71,7 +72,7 @@
                             else
                             {
                                 <tr class="bg-beige tr">
-                                    <th class="th custom-cell-border-bottom custom-cell-border-right">서비스</th>
+                                    <th class="th custom-cell-border-bottom custom-cell-border-right">서비스명</th>
                                     <td class="td custom-cell-border-bottom">
                                         @if (ViewBag.View == "sel")
                                         {
@@ -205,8 +206,8 @@
                             </tr>
 
                             <tr class="bg-skyblue tr">
-                                <th class="th custom-cell-border-bottom custom-cell-border-right">설명</th>
-                                <td class="td custom-cell-border-bottom">
+                                <th class="th custom-cell-border-right">설명</th>
+                                <td class="td">
                                     @if (ViewBag.View == "sel")
                                     {
                                         @(Html.Raw(Model.SelInfo.EXPLANE.Replace("\\n", "<br>")))
@@ -257,11 +258,11 @@
                                                     }
                                                     else
                                                     {
-                                                        <input type="text" id="d_link" value="@Model.SelInfo.D_LINK"/>
+                                                        <input type="text" id="d_link" value="@Model.SelInfo.D_LINK" />
                                                     }
                                                 </td>
                                                 <td class="just-pc">
-                                                    @if(ViewBag.View == "sel")
+                                                    @if (ViewBag.View == "sel")
                                                     {
                                                         @Model.SelInfo.R_TYPE
                                                     }
@@ -289,17 +290,20 @@
 
                                 <div class="top-info">
                                     <h4 class="tit">요청변수(Request Parameter)</h4>
-                                    <span class="detail-info">* 파라미터를 쿼리 스트링 형식으로 전달합니다.</span>
+                                    <div class="detail-info">
+                                        <span class="add-request">항목추가</span>
+                                    </div>
                                 </div>
                                 <div class="col-table left line">
                                     <p class="tit-hide">요청변수(Request Parameter)</p>
-                                    <table>
+                                    <table class="request">
                                         <caption>항목명(국문),항목명(영문),항목크기,항목구분,샘플데이터,항목설명 항목을 가진 요청변수(Request Parameter)표 입니다.</caption>
                                         <colgroup>
-                                            <col style="width:30%">
+                                            <col style="width:20%">
                                             <col style="width:10%">
                                             <col style="width:10%">
-                                            <col style="width:50%">
+                                            <col style="width:40%">
+                                            <col style="width:10%">
                                             <col>
                                         </colgroup>
                                         <thead>
@@ -308,17 +312,64 @@
                                                 <th scope="col" class="just-pc">타입</th>
                                                 <th scope="col" class="just-pc">필수항목</th>
                                                 <th scope="col">항목설명</th>
+                                                <th scope="col">수정</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach (var item in Model.RequestList)
                                             {
-                                                <tr class="paramtrCls">
-                                                    <td data-paramtr-nm="serviceKey">@(item.P_NAME_E)</td>
-                                                    <td class="just-pc">@item.P_TYPE</td>
-                                                    <td data-paramtr-size="100" class="just-pc">@(item.P_NEED == 0 ? "X": "O")</td>
-                                                    <td data-paramtr-dc="공공데이터포털에서 받은 인증키">@item.P_EXPLANE</td>
-                                                </tr>
+                                                if (ViewBag.View == "sel")
+                                                {
+                                                    <tr class="paramtrCls">
+                                                        <td data-paramtr-nm="serviceKey">@(item.P_NAME_E)</td>
+                                                        <td class="just-pc">@item.P_TYPE</td>
+                                                        <td data-paramtr-size="100" class="just-pc">@(item.P_NEED == 0 ? "X": "O")</td>
+                                                        <td data-paramtr-dc="공공데이터포털에서 받은 인증키">@item.P_EXPLANE</td>
+                                                        <td class="del-request">삭제</td>
+                                                    </tr>
+                                                }
+                                                else
+                                                {
+                                                    <tr class="paramtrCls">
+                                                        <td data-paramtr-nm="serviceKey">
+                                                            <input type="text" id="p-name" value="@item.P_NAME_E" />
+                                                        </td>
+                                                        <td class="just-pc">
+                                                            @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                                                            {
+                                                                ID = "P_TYPE",
+                                                                ItemIdx = -1,
+                                                                ShowAll = false,
+                                                                Height = 35,
+                                                                SelectID = Model.Item_Data_TYPE.FindIndex(s => s.Name == item.P_TYPE) + 1,
+                                                                GroupInfo = Model.Item_Data_TYPE.Select(s => new DataCrawling_Web.Models.ListViewItem
+                                                                {
+                                                                    Idx = s.Idx,
+                                                                    Name = s.Name
+                                                                })
+                                                            })
+                                                        </td>
+                                                        <td data-paramtr-size="100" class="just-pc">
+                                                            @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                                                           {
+                                                               ID = "P_NEED",
+                                                               ItemIdx = -1,
+                                                               ShowAll = false,
+                                                               Height = 35,
+                                                               SelectID = Model.Item_Currect_TYPE.FindIndex(s => s.Name == (item.P_NEED == 0 ? "N" : "Y")) + 1,
+                                                                GroupInfo = Model.Item_Currect_TYPE.Select(s => new DataCrawling_Web.Models.ListViewItem
+                                                                {
+                                                                    Idx = s.Idx,
+                                                                    Name = s.Name
+                                                                })
+                                                            })
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" id="p-explane" value="@item.P_EXPLANE" />
+                                                        </td>
+                                                        <td class="del-request">삭제</td>
+                                                    </tr>
+                                                }
                                             }
                                         </tbody>
                                     </table>
@@ -326,15 +377,19 @@
 
                                 <div class="top-info">
                                     <h4 class="tit">출력결과(Response Element)</h4>
+                                    <div class="detail-info">
+                                        <span class="add-response">항목추가</span>
+                                    </div>
                                 </div>
                                 <div class="col-table left line">
                                     <p class="tit-hide">출력결과(Response Element)</p>
-                                    <table>
+                                    <table class="response">
                                         <caption>항목명(국문),항목명(영문),항목크기,항목구분,샘플데이터,항목설명 항목을 가진 출력결과(Response Element)표 입니다.</caption>
                                         <colgroup>
-                                            <col style="width:40%;">
+                                            <col style="width:30%;">
                                             <col style="width:10%">
                                             <col style="width:50%">
+                                            <col style="width:10%">
                                             <col>
                                         </colgroup>
                                         <thead>
@@ -342,20 +397,59 @@
                                                 <th scope="col">요소</th>
                                                 <th scope="col">타입</th>
                                                 <th scope="col">항목설명</th>
+                                                <th scope="col">수정</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach (var item in Model.ResponseList)
                                             {
-                                                <tr class="paramtrCls">
-                                                    <td data-paramtr-nm="serviceKey">@(item.R_NAME_E) (@item.R_NAME_K)</td>
-                                                    <td data-paramtr-bass-value="-" class="just-pc">@(string.IsNullOrEmpty(item.R_TYPE) ? "-" : item.R_TYPE)</td>
-                                                    <td data-paramtr-dc="공공데이터포털에서 받은 인증키">@item.R_EXPLANE</td>
-                                                </tr>
+                                                if (ViewBag.View == "sel")
+                                                {
+                                                    <tr class="paramtrCls">
+                                                        <td data-paramtr-nm="serviceKey">@(item.R_NAME_E) (@item.R_NAME_K)</td>
+                                                        <td data-paramtr-bass-value="-" class="just-pc">@(string.IsNullOrEmpty(item.R_TYPE) ? "-" : item.R_TYPE)</td>
+                                                        <td data-paramtr-dc="공공데이터포털에서 받은 인증키">@item.R_EXPLANE</td>
+                                                        <td class="del-response">삭제</td>
+                                                    </tr>
+                                                }
+                                                else
+                                                {
+                                                    <tr class="paramtrCls">
+                                                        <td data-paramtr-nm="serviceKey">
+                                                            <input type="text" id="p-name-e" value="@item.R_NAME_E" />
+                                                        </td>
+                                                        <td class="just-pc">
+                                                            @Html.Partial("~/Views/Shared/_ListView.cshtml", new DataCrawling_Web.Models.ListViewModel
+                                                            {
+                                                                ID = "R_TYPE",
+                                                                ItemIdx = -1,
+                                                                ShowAll = false,
+                                                                Height = 35,
+                                                                SelectID = Model.Item_Data_TYPE.FindIndex(s => s.Name == (string.IsNullOrEmpty(item.R_TYPE) ? "-" : item.R_TYPE)) + 1,
+                                                                GroupInfo = Model.Item_Data_TYPE.Select(s => new DataCrawling_Web.Models.ListViewItem
+                                                                {
+                                                                    Idx = s.Idx,
+                                                                    Name = s.Name
+                                                                })
+                                                            })
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" id="r-explane" value="@item.R_EXPLANE" />
+                                                        </td>
+                                                        <td class="del-request">삭제</td>
+                                                    </tr>
+                                                }
                                             }
                                         </tbody>
                                     </table>
                                 </div>
+                                @if (ViewBag.View != "sel")
+                                {
+                                    <div class="edit-area">
+                                        <span class="confirm">수정</span>
+                                        <span class="cancel">취소</span>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>

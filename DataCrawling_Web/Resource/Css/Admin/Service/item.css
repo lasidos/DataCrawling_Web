@@ -2,6 +2,10 @@
     width: 100%;
     border: none;
     outline: none;
+    border-bottom: 1px solid #e1e1e1;
+    line-height: 40px;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
 
 #content textarea {
@@ -17,3 +21,26 @@
 #d_link {
     text-align: center;
 }
+
+.add-request, .add-response, .del-request, .del-response {
+    cursor: pointer;
+}
+
+.edit-area {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .edit-area span {
+        padding: 15px 50px;
+        border-radius: 5px;
+        background: #515050;
+        color: #fff;
+        cursor: pointer;
+    }
+
+        .edit-area span + span {
+            margin-left: 10px;
+        }

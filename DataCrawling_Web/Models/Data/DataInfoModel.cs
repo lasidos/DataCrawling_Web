@@ -19,6 +19,9 @@ namespace DataCrawling_Web.Models.Data
         public List<comboboxMpdel> Item_D_TYPE { get; set; }
         public int Item_D_TYPE_Idx { get; set; }
         public List<comboboxMpdel> Item_R_TYPE { get; set; }
+        public List<comboboxMpdel> Item_Data_TYPE { get; set; }
+        public List<comboboxMpdel> Item_Currect_TYPE { get; set; }
+        public int Item_Data_TYPE_Idx { get; set; }
         public int Item_R_TYPE_Idx { get; set; }
         public List<RequestParameter_Model> RequestList { get; set; }
         public List<ResponseElement_Model> ResponseList { get; set; }

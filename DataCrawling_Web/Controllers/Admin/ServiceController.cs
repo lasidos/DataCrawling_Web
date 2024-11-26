@@ -46,6 +46,19 @@ namespace DataCrawling_Web.Controllers.Admin
                 new comboboxMpdel { Idx = 1, Name = "JSON" },
                 new comboboxMpdel { Idx = 2, Name = "XML" }
             };
+            vm.Item_Data_TYPE = new List<comboboxMpdel>()
+            {
+                new comboboxMpdel { Idx = 1, Name = "-" },
+                new comboboxMpdel { Idx = 2, Name = "String" },
+                new comboboxMpdel { Idx = 3, Name = "Integer" },
+                new comboboxMpdel { Idx = 4, Name = "Bool" },
+                new comboboxMpdel { Idx = 5, Name = "DateTime" }
+            };
+            vm.Item_Currect_TYPE = new List<comboboxMpdel>()
+            {
+                new comboboxMpdel { Idx = 1, Name = "Y" },
+                new comboboxMpdel { Idx = 2, Name = "N" }
+            };
 
             if (Session["DataInfoView_Model"] != null && Session["DataInfoView_Model"].ToString() != "")
             {
