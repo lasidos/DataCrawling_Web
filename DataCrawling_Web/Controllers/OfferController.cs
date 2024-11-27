@@ -164,7 +164,7 @@ namespace DataCrawling_Web.Controllers
             return View();
         }
 
-        public new ActionResult RequestOffer()
+        public ActionResult RequestOffer()
         {
             FilePathGenerate.FileUploadList.Clear();
 

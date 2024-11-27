@@ -291,7 +291,10 @@
                                 <div class="top-info">
                                     <h4 class="tit">요청변수(Request Parameter)</h4>
                                     <div class="detail-info">
-                                        <span class="add-request">항목추가</span>
+                                        @if (ViewBag.View != "sel")
+                                        {
+                                            <span class="add-request">항목추가</span>
+                                        }
                                     </div>
                                 </div>
                                 <div class="col-table left line">
@@ -303,8 +306,10 @@
                                             <col style="width:10%">
                                             <col style="width:10%">
                                             <col style="width:40%">
-                                            <col style="width:10%">
-                                            <col>
+                                            @if (ViewBag.View != "sel")
+                                            {
+                                                <col style="width:10%">
+                                            }
                                         </colgroup>
                                         <thead>
                                             <tr>
@@ -312,7 +317,10 @@
                                                 <th scope="col" class="just-pc">타입</th>
                                                 <th scope="col" class="just-pc">필수항목</th>
                                                 <th scope="col">항목설명</th>
-                                                <th scope="col">수정</th>
+                                                @if (ViewBag.View != "sel")
+                                                {
+                                                    <th scope="col">수정</th>
+                                                }
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -325,7 +333,6 @@
                                                         <td class="just-pc">@item.P_TYPE</td>
                                                         <td data-paramtr-size="100" class="just-pc">@(item.P_NEED == 0 ? "X": "O")</td>
                                                         <td data-paramtr-dc="공공데이터포털에서 받은 인증키">@item.P_EXPLANE</td>
-                                                        <td class="del-request">삭제</td>
                                                     </tr>
                                                 }
                                                 else
@@ -378,7 +385,10 @@
                                 <div class="top-info">
                                     <h4 class="tit">출력결과(Response Element)</h4>
                                     <div class="detail-info">
-                                        <span class="add-response">항목추가</span>
+                                        @if (ViewBag.View != "sel")
+                                        {
+                                            <span class="add-response">항목추가</span>
+                                        }
                                     </div>
                                 </div>
                                 <div class="col-table left line">
@@ -389,7 +399,10 @@
                                             <col style="width:30%;">
                                             <col style="width:10%">
                                             <col style="width:50%">
-                                            <col style="width:10%">
+                                            @if (ViewBag.View != "sel")
+                                            {
+                                                <col style="width:10%">
+                                            }
                                             <col>
                                         </colgroup>
                                         <thead>
@@ -397,7 +410,10 @@
                                                 <th scope="col">요소</th>
                                                 <th scope="col">타입</th>
                                                 <th scope="col">항목설명</th>
-                                                <th scope="col">수정</th>
+                                                @if (ViewBag.View != "sel")
+                                                {
+                                                    <th scope="col">수정</th>
+                                                }
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -409,7 +425,6 @@
                                                         <td data-paramtr-nm="serviceKey">@(item.R_NAME_E) (@item.R_NAME_K)</td>
                                                         <td data-paramtr-bass-value="-" class="just-pc">@(string.IsNullOrEmpty(item.R_TYPE) ? "-" : item.R_TYPE)</td>
                                                         <td data-paramtr-dc="공공데이터포털에서 받은 인증키">@item.R_EXPLANE</td>
-                                                        <td class="del-response">삭제</td>
                                                     </tr>
                                                 }
                                                 else

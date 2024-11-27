@@ -1,4 +1,5 @@
-﻿using DataCrawling_Web.BSL.Common;
+﻿using DataCrawling_Web.BSL.Authentication;
+using DataCrawling_Web.BSL.Common;
 using DataCrawling_Web.BSL.Extentions;
 using DataCrawling_Web.DSL.Data;
 using DataCrawling_Web.Models.Data;
@@ -103,6 +104,16 @@ namespace DataCrawling_Web.Controllers.Admin
                 }).ToList();
 
             return View("~/Views/Admin/Service/item.cshtml", vm);
+        }
+
+        [HttpPost]
+        [Route("Service/ServiceDataUpdate")]
+        public JsonResult ServiceDataUpdate(string data)
+        {
+            string mid = AuthUser.M_ID;
+            string msg = "success";
+            //new Member().USP_GroupAuthorityUpdate(data);
+            return Json(new { success = true, msg });
         }
     }
 }
