@@ -201,6 +201,7 @@
     <Compile Include="Models\Admin\ContentInfoModel.cs" />
     <Compile Include="Models\Admin\W_MenuModel.cs" />
     <Compile Include="Models\Api\BaseModel.cs" />
+    <Compile Include="Models\Api\CoupangRequestModel.cs" />
     <Compile Include="Models\Api\DataApiModel.cs" />
     <Compile Include="Models\Api\DataFormat.cs" />
     <Compile Include="Models\Api\ErrorCodes.cs" />
