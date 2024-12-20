@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Web.UI.WebControls;
 
 namespace DataCrawling_Web.Models.Api
 {
@@ -261,7 +265,7 @@ namespace DataCrawling_Web.Models.Api
         public ExtraProperties()
         {
             Keys = new List<KeyValuePair<string, string>>();
-        }
+    }
 
         public void AddKeyValue(string key, string value)
         {
