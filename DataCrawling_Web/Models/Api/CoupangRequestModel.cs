@@ -261,7 +261,7 @@ namespace DataCrawling_Web.Models.Api
         public ExtraProperties()
         {
             Keys = new List<KeyValuePair<string, string>>();
-        }
+    }
 
         public void AddKeyValue(string key, string value)
         {
