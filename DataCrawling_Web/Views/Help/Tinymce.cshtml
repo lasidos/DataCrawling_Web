@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Form Editors";
+    ViewBag.pTitle = "Form Editors";
+    ViewBag.pageTitle = "Forms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/oo44fxjpatu25d46i1z71xvsov4gvjufgh9oqog25sxcvuu0/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<style>
+    .tox-statusbar {
+        display: none !important;
+    }
+</style>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Tinymce wysihtml5</h4>
+                <p class="card-title-desc">
+                    Bootstrap-wysihtml5 is a javascript
+                    plugin that makes it easy to create simple, beautiful wysiwyg editors
+                    with the help of wysihtml5 and Twitter Bootstrap.
+                </p>
+
+                <form method="post">
+                    <textarea id="editor">@ViewBag.html</textarea>
+                    <button type="button" id="save">게시글 저장</button>
+                </form>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+@section scripts{
+
+
+    <script src="~/assets/js/app.js"></script>
+
+    <script>
+        $(function () {
+            var plugins = [
+                "advlist", "autolink", "lists", "link", "image", "charmap", "print", "preview", "anchor",
+                "searchreplace", "visualblocks", "code", "fullscreen", "insertdatetime", "media", "table",
+                "paste", "code", "help", "wordcount", "save"
+            ];
+            var edit_toolbar = 'formatselect fontselect fontsizeselect |'
+                + ' forecolor backcolor |'
+                + ' bold italic underline strikethrough |'
+                + ' alignjustify alignleft aligncenter alignright |'
+                + ' bullist numlist |'
+                + ' table tabledelete |'
+                + ' link image';
+
+            tinymce.init({
+                language: "ko_KR", //한글판으로 변경
+                selector: '#editor',
+                height: 500,
+                menubar: false,
+                plugins: plugins,
+                toolbar: edit_toolbar,
+                image_title: true,
+                automatic_uploads: true,
+                file_picker_types: 'image',
+                file_picker_callback: function (cb, value, meta) {
+                    var input = document.createElement('input');
+                    input.setAttribute('type', 'file');
+                    input.setAttribute('accept', 'image/*');
+
+                    input.onchange = function () {
+                        var file = this.files[0];
+
+                        var reader = new FileReader();
+                        reader.onload = function () {
+                            var id = 'blobid' + (new Date()).getTime();
+                            var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                            var base64 = reader.result.split(',')[1];
+                            var blobInfo = blobCache.create(id, file, base64);
+                            blobCache.add(blobInfo);
+
+                            cb(blobInfo.blobUri(), { title: file.name });
+                        };
+                        reader.readAsDataURL(file);
+                    };
+                    input.click();
+                },
+
+                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+            });
+
+            $("#save").on("click", function () {
+                var content = tinymce.activeEditor.getContent();
+                console.log(content);
+            });
+
+        });
+    </script>
+}
